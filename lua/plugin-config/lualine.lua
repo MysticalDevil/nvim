@@ -10,6 +10,7 @@ lualine.setup({
     component_separators = { left = '|', right = '|' },
     -- https://github.com/ryanoasis/powerline-extra-symbols
     section_separators = { left = '', right = '' },
+    globalstatus = true,
   },
   extensions = { 'nvim-tree', 'toggleterm' },
   sections = {
@@ -17,7 +18,7 @@ lualine.setup({
       'filename',
       {
         'lsp_progress',
-        spinner_symbols = { '', '', '','', '', '' }
+        spinner_symbols = { '', '', '', '', '', '' }
       },
     },
     lualine_x = {

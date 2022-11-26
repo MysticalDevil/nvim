@@ -78,3 +78,6 @@ vim.o.pumheight = 10
 vim.o.showtabline = 2
 -- 使用增强状态栏插件后不再需要 vim 的模式显示
 vim.o.showmode = false
+-- 配置剪切板
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
