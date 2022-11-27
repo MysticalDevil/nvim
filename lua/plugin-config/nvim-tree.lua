@@ -19,10 +19,10 @@ local list_keys = { -- 打开文件或文件夹
     key = uTree.edit,
     action = 'edit'
   },
-  {
-    key = uTree.system_open,
-    action = 'system_open'
-  },
+  -- {
+  --    key = uTree.system_open,
+  --    action = 'system_open'
+  -- },
   { -- v 分屏打开文件
     key = uTree.vsplit,
     action = 'vsplit'

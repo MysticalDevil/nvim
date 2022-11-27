@@ -98,8 +98,8 @@ local M = {
 
     toggle = "<A-m>",
     -- toggle = "<leader>m"
-    edit = { "o", "<2-LeftMouse>" },
-    system_open = "<CR>",
+    edit = { "<CR>", "o", "<2-LeftMouse>" },
+    -- system_open = "<CR>",
     -- v分屏打开文件
     vsplit = "sv",
     -- h分屏打开文件
@@ -166,7 +166,7 @@ local M = {
   },
 
   mkdnflow = {
-    
+
     enable = true,
 
     next_link = 'gn',
