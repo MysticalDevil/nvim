@@ -4,7 +4,6 @@ if not status then
 end
 
 -- nvim-tree 支持
-respect_buf_cwd = 1
 
 project.setup({
   detection_methods = { 'pattern' },

@@ -102,6 +102,7 @@ local list_keys = { -- 打开文件或文件夹
 }
 
 nvim_tree.setup({
+  respect_buf_cwd = 1,
   open_on_setup = true,
   -- 完全禁止内置netrw
   disable_netrw = true,
