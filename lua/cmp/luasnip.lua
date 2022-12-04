@@ -38,8 +38,8 @@ ls.config.set_config({
 })
 
 vim.keymap.set({ 'i', 's' }, config.keys.snip_jump_next, function()
-  if ls.expand_or_jumpoable() then
-    ls.expand_or_jumpoable()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jumpable()
   end
 end)
 
