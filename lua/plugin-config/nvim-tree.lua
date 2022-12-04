@@ -102,7 +102,6 @@ local list_keys = { -- 打开文件或文件夹
 }
 
 nvim_tree.setup({
-  respect_buf_cwd = 1,
   open_on_setup = true,
   -- 完全禁止内置netrw
   disable_netrw = true,
@@ -134,7 +133,7 @@ nvim_tree.setup({
     -- 自定义列表中的快捷键
     mappings = {
       -- 只用内置快捷键
-      custome_only = false,
+      custom_only = false,
       list = list_keys,
     },
     -- 不显示行数
@@ -150,22 +149,22 @@ nvim_tree.setup({
       -- 打开文件时关闭
       quit_on_open = true,
     },
-    system_open = {
-      cmd = 'xdg-open',
-    },
-    renderer = {
-      indent_markers = {
-        enable = false,
-        icons = {
-          corner = "└ ",
-          edge = "│ ",
-          none = "  ",
-        },
-      },
+  },
+  system_open = {
+    cmd = 'xdg-open',
+  },
+  renderer = {
+    indent_markers = {
+      enable = false,
       icons = {
-        webdev_colors = true,
-        git_placement = 'after',
-      }
+        corner = "└ ",
+        edge = "│ ",
+        none = "  ",
+      },
+    },
+    icons = {
+      webdev_colors = true,
+      git_placement = 'after',
     }
   }
 })

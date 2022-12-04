@@ -52,7 +52,7 @@ telescope.setup({
   },
 })
 
-keymap('n', uTelescope.find_file, ':Telescope find_file<CR>')
+keymap('n', uTelescope.find_files, ':Telescope find_files<CR>')
 keymap('n', uTelescope.live_grep, ':Telescope live_grep<CR>')
 
 pcall(telescope.load_extension, 'env')

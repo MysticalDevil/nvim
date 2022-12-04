@@ -148,7 +148,7 @@ local M = {
 
     enable = true,
 
-    find_file = '<C-p>',
+    find_files = '<C-p>',
     live_grep = '<C-f>',
 
     -- 上下移动
