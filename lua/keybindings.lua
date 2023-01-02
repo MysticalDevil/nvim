@@ -32,7 +32,7 @@ local opts_expr = {
   silent = true,
 }
 
--- 命令行下 Ctrl+j/k 上/下一个
+-- 命令行下 Ctrl+j/k 下/上一个
 keymap('c', keys.c_next_item, '<C-n>', opts_remap)
 keymap('c', keys.c_prev_item, '<C-p>', opts_remap)
 
@@ -42,10 +42,11 @@ keymap('n', keys.n_save_quit, ':wq<CR>')
 keymap('n', keys.n_save_all, ':wa<CR>')
 keymap('n', keys.n_save_all_quit, ':wqa<CR>')
 keymap('n', keys.n_force_quit, ':qa!<CR>')
+keymap('n', keys.n_quit, ":q<CR>")
 
 -- $ 跳到行尾不带空格（交换 $ 和 g_）
-keymap({ 'v', 'n' }, '$', 'g_')
-keymap({ 'v', 'n' }, 'g_', '$')
+keymap({ 'n', 'v' }, '$', 'g_')
+keymap({ 'n', 'v' }, 'g_', '$')
 
 -- 上下滚动浏览
 keymap({ 'n', 'v' }, keys.n_v_5j, '5j')
@@ -53,7 +54,7 @@ keymap({ 'n', 'v' }, keys.n_v_5k, '5k')
 
 -- ctrl + u/d 只移动10行，默认移动半屏
 keymap({ 'n', 'v' }, keys.n_v_10j, '10j')
-keymap({ 'n', 'n' }, keys.n_v_10k, '10k')
+keymap({ 'n', 'v' }, keys.n_v_10k, '10k')
 
 -- magic search
 if uConfig.enable_magic_search then
@@ -245,7 +246,7 @@ pluginKeys.mapDAP = function()
   -- set breakpoint
   map('n', '<Leader>dt', ":lua require('dap').toggle_breakpoint()<CR>", opt)
   map('n', '<Leader>dT', ":lua require('dap').clear_breakpoints()<CR>", opt)
-  -- setpOver, setpOut, stepInfo
+  -- stepOver, stepOut, stepInfo
   map('n', '<Leader>dj', ":lua require('dap').steo_over()<CR>", opt)
   map('n', '<Leader>dk', ":lua require('dap').step_out()<CR>", opt)
   map('n', '<Leader>dl', ":lua require('dap').step_into()<CR>", opt)
@@ -309,7 +310,7 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
   map({ 'n', 'v' }, '<leader>gs', ":Gitsigns stage_hunk<CR>")
   map('n', '<leader>gS', gs.stage_buffer)
   map('n', '<leader>gu', gs.undo_stage_hunk)
-  map({ 'n', 'v' }, '<leader>gr', ":Gitsigns reset_hhunk<CR>")
+  map({ 'n', 'v' }, '<leader>gr', ":Gitsigns reset_hunk<CR>")
   map('n', '<leader>gR', gs.reset_buffer)
   map('n', '<leader>gp', gs.preview_hunk)
   map('n', '<leader>gb', function()
@@ -323,7 +324,7 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
   end)
   -- toggle
   map('n', '<leader>gtd', gs.toggle_deleted)
-  map('n', '<leader>gtd', gs.toggle_current_line_blame)
+  map('n', '<leader>gtD', gs.toggle_current_line_blame)
   -- Text object
   map({ 'o', 'x' }, 'ig', ':<C-U<Gitsigns select_hunk<CR>')
 end

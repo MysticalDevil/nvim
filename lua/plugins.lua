@@ -39,8 +39,6 @@ packer.startup({
     use {
       'olimorris/onedarkpro.nvim'
     }
-    -- tokyonight
-    use 'folke/tokyonight.nvim'
     ------------------ plugins ------------------
     -- nvim-notify
     use {
@@ -175,20 +173,6 @@ packer.startup({
       requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('plugin-config.todo-comments')
-      end,
-    }
-    -- mkdnflow.nvim
-    use {
-      'jakewvincent/mkdnflow.nvim',
-      config = function()
-        require('plugin-config.mkdnflow')
-      end,
-    }
-    -- venn 绘图
-    use {
-      'jbyuki/venn.nvim',
-      config = function()
-        require('plugin-config.venn')
       end,
     }
     -- zen mode

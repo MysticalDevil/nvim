@@ -81,3 +81,6 @@ vim.o.showmode = false
 -- 配置剪切板
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
+
+-- GUI 配置
+vim.opt.guifont = { "Fira Code", ":h10" }

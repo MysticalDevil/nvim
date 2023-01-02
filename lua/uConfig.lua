@@ -14,7 +14,8 @@ local M = {
     n_save_quit = "<leader>wq", --:wq
     n_save_all = "<leader>wa", -- :wa
     n_save_all_quit = "<leader>qa", -- :wqa
-    n_force_quit = "<leader>q", -- :qa!
+    n_force_quit = "<leader>qq", -- :qa!
+    n_quit = "<leader>q", -- :q
 
     n_v_5j = "<C-j>",
     n_v_5k = "<C-k>",
@@ -176,6 +177,20 @@ local M = {
     go_back = '<C-o>',
     follow_link = 'gd',
     toggle_item = 'tt',
+  },
+
+  comment = {
+    enable = true,
+    -- Normal 模式快捷键
+    toggler = {
+      line = "gcc", -- 行注释
+      block = "gbc", -- 块注释
+    },
+    -- Visual 模式
+    opleader = {
+      line = "gc",
+      bock = "gb",
+    },
   },
 
   toggleterm = {

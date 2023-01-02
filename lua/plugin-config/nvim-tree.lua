@@ -56,10 +56,6 @@ local list_keys = { -- 打开文件或文件夹
     action = 'remove'
   },
   {
-    key = uTree.remove,
-    action = 'remove'
-  },
-  {
     key = uTree.copy,
     action = 'copy'
   },
