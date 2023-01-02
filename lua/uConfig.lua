@@ -204,15 +204,6 @@ local M = {
     toggle_window_C = '<leader>tc',
   },
 
-  venn = {
-    -- toggle keymappings for venn using <leader>v
-    enable = true,
-    -- venn.nvim: enavle or disable keymappings
-    toggle = '<leader>v',
-    -- draw a box by pressing 'f' with visual selection
-    draw_box = 'f',
-  },
-
   zen = {
     enable = true,
     toggle = '<leader>a',

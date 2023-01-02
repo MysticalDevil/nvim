@@ -98,4 +98,4 @@ TODO
 
 ## 主要插件
 
-详见[Plugin.md](Plugin.md)
+详见[Plugin.md](Plugin.md) 和 [Languages.md](Languages.md)
