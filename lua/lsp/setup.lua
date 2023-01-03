@@ -16,6 +16,23 @@ if not status then
   return
 end
 
+local OS = vim.loop.os_uname().sysname
+local lspServers = {
+  'clangd',
+  'cmake',
+  'cssls',
+  'dockerls',
+  'gopls',
+  'html',
+  'jsonls',
+  'pylsp',
+  'rust_analyzer',
+  'sumneko_lua',
+  'tsserver',
+  'taplo',
+  'yamlls',
+}
+
 -- :h mason-default-settings
 mason.setup({
   ui = {
@@ -29,25 +46,17 @@ mason.setup({
 
 -- mason-lspconfig uses the `lspconfig` servers names in the APIs it exposes
 -- - not `mson.nvim` package names
-mason_config.setup({
-  ensure_installed = {
-    'bashls',
-    'clangd',
-    'cmake',
-    'cssls',
-    'dockerls',
-    'gopls',
-    'html',
-    'jsonls',
-    'pylsp',
-    'rust_analyzer',
-    'solargraph',
-    'sumneko_lua',
-    'tsserver',
-    'taplo',
-    'yamlls',
-  },
-})
+if OS ~= "Linux" then
+  mason_config.setup({
+    ensure_installed = lspServers
+  })
+else
+  table.insert(lspServers, "bashls")
+  table.insert(lspServers, "solargraph")
+  mason_config.setup({
+    ensure_installed = lspServers
+  })
+end
 
 -- 安装列表
 -- { key: 服务器名，value: 配置文件 }

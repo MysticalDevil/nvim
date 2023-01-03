@@ -44,3 +44,6 @@ db.custom_header = {
   [[]],
   [[]],
 }
+
+db.hide_tabline = true
+db.hide_statusline = false
