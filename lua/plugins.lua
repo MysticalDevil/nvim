@@ -1,4 +1,4 @@
--- 自动安装 Packer.nvim
+-- Auto install Packer.nvim
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
@@ -96,10 +96,10 @@ packer.startup({
     }
     -- telescope fzf plugin
     use {
-      'nvim-telescope/telescope-fzf-native.nvim', 
+      'nvim-telescope/telescope-fzf-native.nvim',
       run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
              cmake --build build --config Release && \
-             cmake --install build --prefix build' 
+             cmake --install build --prefix build'
     }
     -- project
     use {
@@ -189,6 +189,8 @@ packer.startup({
         require('plugin-config.zen-mode')
       end,
     }
+    -- editorconfigure
+    use 'editorconfig/editorconfig-vim'
     --
     ------------------ LSP ----------------------
     -- installer

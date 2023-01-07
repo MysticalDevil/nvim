@@ -1,4 +1,8 @@
-local ls = require('luasnip')
+local status, ls = pcall(require, 'luasnip')
+if not status then
+  return
+end
+
 local s = ls.s --> snippet
 local i = ls.i --> insert node
 local t = ls.t --> text node
