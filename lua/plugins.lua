@@ -94,6 +94,13 @@ packer.startup({
         require('plugin-config.telescope')
       end,
     }
+    -- telescope fzf plugin
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim', 
+      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
+             cmake --build build --config Release && \
+             cmake --install build --prefix build' 
+    }
     -- project
     use {
       'ahmedkhalf/project.nvim',
