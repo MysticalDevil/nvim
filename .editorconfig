@@ -20,7 +20,7 @@ indent_size = 2
 
 # 结尾换行符，可选"lf"、"cr"、"crlf"
 
-end_of_line = cr
+end_of_line = lf
 
 # 在文件结尾插入新行，为什么插入新行参见下面的链接
 # http://beiyuu.com/carriage-return-line-feed-new-line-end-file
