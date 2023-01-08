@@ -44,7 +44,7 @@ packer.startup({
     use {
       'rcarriga/nvim-notify',
       config = function()
-        require('configures.nvim-notify')
+        require('configs.nvim-notify')
       end,
     }
     -- nvim-tree
@@ -53,7 +53,7 @@ packer.startup({
       requires = 'nvim-tree/nvim-web-devicons', -- optional. for file icons
       tag = 'nightly', -- optional, updated every week.
       config = function()
-        require('configures.nvim-tree')
+        require('configs.nvim-tree')
       end,
     }
     -- bufferline
@@ -65,7 +65,7 @@ packer.startup({
       },
       tag = 'v3.*',
       config = function()
-        require('configures.bufferline')
+        require('configs.bufferline')
       end,
     }
     -- lualine
@@ -76,7 +76,7 @@ packer.startup({
         opt = true
       },
       config = function()
-        require('configures.lualine')
+        require('configs.lualine')
       end,
 
     }
@@ -91,7 +91,7 @@ packer.startup({
       },
       tag = '0.1.0',
       config = function()
-        require('configures.telescope')
+        require('configs.telescope')
       end,
     }
     -- telescope fzf plugin
@@ -105,14 +105,14 @@ packer.startup({
     use {
       'ahmedkhalf/project.nvim',
       config = function()
-        require('configures.project')
+        require('configs.project')
       end,
     }
     -- dashboard-nvim
     use {
       'glepnir/dashboard-nvim',
       config = function()
-        require('configures.dashboard')
+        require('configs.dashboard')
       end,
     }
     -- nvim-treesitter
@@ -129,49 +129,49 @@ packer.startup({
         { 'nvim-treesitter/nvim-treesitter-textobjects' },
       },
       config = function()
-        require('configures.nvim-treesitter')
+        require('configs.nvim-treesitter')
       end,
     }
     -- indent-blankline
     use {
       'lukas-reineke/indent-blankline.nvim',
       config = function()
-        require('configures.indent-blankline')
+        require('configs.indent-blankline')
       end,
     }
     -- toggleterm
     use {
       'akinsho/toggleterm.nvim',
       config = function()
-        require('configures.toggleterm')
+        require('configs.toggleterm')
       end,
     }
     -- nvim-surrond
     use {
       'kylechui/nvim-surround',
       config = function()
-        require('configures.nvim-surround')
+        require('configs.nvim-surround')
       end,
     }
     -- Comment
     use {
       'numToStr/Comment.nvim',
       config = function()
-        require('configures.comment')
+        require('configs.comment')
       end,
     }
     -- nvim-autopairs
     use {
       'windwp/nvim-autopairs',
       config = function()
-        require('configures.nvim-autopairs')
+        require('configs.nvim-autopairs')
       end,
     }
     -- fidget.nvim
     use {
       'j-hui/fidget.nvim',
       config = function()
-        require('configures.fidget')
+        require('configs.fidget')
       end,
     }
     -- todo-comments.nvim
@@ -179,14 +179,14 @@ packer.startup({
       'folke/todo-comments.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require('configures.todo-comments')
+        require('configs.todo-comments')
       end,
     }
     -- zen mode
     use {
       'folke/zen-mode.nvim',
       config = function()
-        require('configures.zen-mode')
+        require('configs.zen-mode')
       end,
     }
     -- editorconfigure
@@ -238,7 +238,7 @@ packer.startup({
     use {
       'lewis6991/gitsigns.nvim',
       config = function()
-        require('configures.gitsigns')
+        require('configs.gitsigns')
       end,
     }
     -- vimspector
