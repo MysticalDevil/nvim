@@ -1,6 +1,7 @@
 local status, project = pcall(require, 'project_nvim')
 if not status then
   vim.notify('project_nvim not found')
+  return
 end
 
 -- nvim-tree 支持

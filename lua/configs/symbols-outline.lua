@@ -1,6 +1,7 @@
-local status, symbol_outline = pcall(require, 'symbol-outline')
+local status, symbols_outline = pcall(require, 'symbols-outline')
 if not status then
   vim.notify("symbols-outline not found")
+  return
 end
 
 local opts = {
@@ -65,4 +66,4 @@ local opts = {
   }
 }
 
-symbol_outline.setup(opts)
+symbols_outline.setup(opts)
