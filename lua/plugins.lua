@@ -251,6 +251,13 @@ packer.startup({
     use 'b0o/schemastore.nvim'
     -- Rust 增强
     use 'simrat39/rust-tools.nvim'
+    -- nushell 支持
+    use {
+      'LhKipp/nvim-nu',
+      config = function()
+        require('configs.nu')
+      end
+    }
     ---------------------------------------------
     -- git
     use {
