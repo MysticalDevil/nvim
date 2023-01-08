@@ -1,6 +1,6 @@
 -- utf8
-vim.g.encoding = 'UTF-8'
-vim.o.fileencoding = 'utf-8'
+vim.g.encoding = "UTF-8"
+vim.o.fileencoding = "utf-8"
 -- jkhl 移动时光标周围保留8行
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
@@ -10,9 +10,9 @@ vim.wo.relativenumber = false
 -- 高亮所在行
 vim.wo.cursorline = true
 -- 显示左侧图标指引列
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 -- 右侧参考线，表示代码建议长度
-vim.wo.colorcolumn = '100'
+vim.wo.colorcolumn = "130"
 -- 缩进4个空格等于1个Tab
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
@@ -43,11 +43,11 @@ vim.bo.autoread = true
 -- 禁止折行
 vim.wo.wrap = false
 -- 光标在行首尾时<Left><Right>可以跳到下一行
-vim.o.whichwrap = '<,>,[,]'
+vim.o.whichwrap = "<,>,[,]"
 -- 允许隐藏被修改过的buffer
 vim.o.hidden = true
 -- 鼠标支持
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 -- 禁止创建备份文件
 vim.o.backup = false
 vim.o.writebackup = false
@@ -60,18 +60,18 @@ vim.o.timeoutlen = 1000
 vim.o.splitbelow = true
 vim.o.splitright = true
 -- 自动补全不自动选中
-vim.g.completeopt = 'menu,menuone,noselect,noinsert'
+vim.g.completeopt = "menu,menuone,noselect,noinsert"
 -- 样式
-vim.o.background = 'dark'
+vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- 不可见字符的显示
 vim.o.list = true
-vim.o.listchars = 'space:·'
+vim.o.listchars = "space:·"
 -- 补全增强
 vim.o.wildmenu = true
 -- Don't pass message to |ins-completion menu|
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.shortmess = vim.o.shortmess .. "c"
 -- 补全最多显示10行
 vim.o.pumheight = 10
 -- 永远显示 tabline
@@ -79,7 +79,7 @@ vim.o.showtabline = 2
 -- 使用增强状态栏插件后不再需要 vim 的模式显示
 vim.o.showmode = false
 -- 配置剪切板
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
 
 -- GUI 配置
