@@ -6,7 +6,7 @@ end
 
 require('nvim-treesitter.install').prefer_git = true
 
-treesitter.setup({
+local opts = {
   sync_install = false,
   -- 安装 language parser
   -- :TSInstallInfo 命令查看支持的语言
@@ -122,7 +122,9 @@ treesitter.setup({
       }
     }
   }
-})
+}
+
+treesitter.setup(opts)
 
 -- 开启 Folding 模块
 vim.opt.foldmethod = 'expr'

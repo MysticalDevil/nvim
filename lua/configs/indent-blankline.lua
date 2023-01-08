@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-indent_blankline.setup({
+local opts = {
   -- 空行占位
   space_char_blankline = ' ',
   -- 同 treesitter 判断上下文
@@ -45,4 +45,6 @@ indent_blankline.setup({
   -- char = '│'
   -- char = "⎸",
   char = "▏",
-})
+}
+
+indent_blankline.setup(opts)

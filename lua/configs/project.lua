@@ -5,7 +5,7 @@ end
 
 -- nvim-tree 支持
 
-project.setup({
+local opts = {
   detection_methods = { 'pattern' },
   patterns = {
     'README.md',
@@ -19,7 +19,9 @@ project.setup({
     'package.json',
     '.sln',
   },
-})
+}
+
+project.setup(opts)
 
 local status, telescope = pcall(require, 'telescope')
 if not status then

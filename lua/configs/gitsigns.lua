@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-gitsigns.setup({
+local opts = {
   -- 字母图标 A 增加，C 修改， D 删除
   signs = {
     add = { hl = 'GitSignsAdd', text = 'A|', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
@@ -51,4 +51,6 @@ gitsigns.setup({
     enable = false,
   },
   on_attach = require('keybindings').gitsigns_on_attach,
-})
+}
+
+gitsigns.setup(opts)

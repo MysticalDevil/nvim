@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-fidget.setup({
+local opts = {
   text = {
     spinner = 'zip', -- animation shown when tasks ar ongoing
     done = '', -- character shown when all tasks are complete
@@ -16,4 +16,6 @@ fidget.setup({
       ignore = true,
     }
   },
-})
+}
+
+fidget.setup(opts)

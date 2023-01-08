@@ -1,6 +1,6 @@
 local mkd = require('uConfig').mkdnflow
 if type(mkd) == 'table' and mkd.enable then
-  require('mkdnflow').setup({
+  local opts = {
     modules = {
       maps = false,
     },
@@ -16,7 +16,8 @@ if type(mkd) == 'table' and mkd.enable then
         return text
       end,
     },
-  })
+  }
+  require('mkdnflow').setup(opts)
 
   local mkdnflowGroup = vim.api.nvim_create_augroup('mkdnflowGroup', {
     clear = true,

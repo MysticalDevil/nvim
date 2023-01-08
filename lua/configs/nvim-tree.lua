@@ -97,7 +97,7 @@ local list_keys = { -- 打开文件或文件夹
   }
 }
 
-nvim_tree.setup({
+local opts = {
   open_on_setup = true,
   -- 完全禁止内置netrw
   disable_netrw = true,
@@ -163,7 +163,9 @@ nvim_tree.setup({
       git_placement = 'after',
     }
   }
-})
+}
+
+nvim_tree.setup(opts)
 -- 自动关闭
 vim.cmd([[
   autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif

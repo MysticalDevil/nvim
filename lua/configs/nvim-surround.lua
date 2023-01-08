@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-surround.setup({
+local opts = {
   keymaps = {
     -- you surround
     normal = 'ys',
@@ -24,4 +24,6 @@ surround.setup({
     visual = 's',
     visual_line = 'gs',
   }
-})
+}
+
+surround.setup(opts)

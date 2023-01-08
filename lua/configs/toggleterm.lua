@@ -10,7 +10,7 @@ if not status then
   vim.notify('toggleterm not found')
 end
 
-toggleterm.setup({
+local opts = {
   size = function(term)
     if term.direction == 'horizontal' then
       return 15
@@ -19,7 +19,9 @@ toggleterm.setup({
     end
   end,
   start_in_insert = true,
-})
+}
+
+toggleterm.setup(opts)
 
 local Terminal = require('toggleterm.terminal').Terminal
 

@@ -209,6 +209,13 @@ packer.startup({
         require('configs.lspfuzzy')
       end
     }
+    -- 提供 LSP 树状图
+    use {
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require('configs.symbols-outline')
+      end
+    }
     -- 补全引擎
     use 'hrsh7th/nvim-cmp'
     -- Snippet 引擎

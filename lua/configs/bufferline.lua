@@ -12,7 +12,7 @@ end
 
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
-bufferline.setup({
+local opts = {
   options = {
     -- 关闭 Tab 的命令，这里使用 moll/vim-bbye 的 :Bdelete 命令
     close_command = 'Bdelete! %d',
@@ -40,7 +40,8 @@ bufferline.setup({
       return s
     end
   },
-})
+}
+bufferline.setup(opts)
 
 -- 左右 Tab 切换
 keymap('n', uBufferLine.prev, ':BufferLineCyclePrev<CR>')

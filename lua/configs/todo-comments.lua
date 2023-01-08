@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-todo.setup({
+local opts = {
   keywords = {
     FIX = {
       icon = " ", -- icon used for the sign, and in search results
@@ -18,4 +18,6 @@ todo.setup({
     PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
     NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
   }
-})
+}
+
+todo.setup(opts)

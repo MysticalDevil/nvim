@@ -4,8 +4,10 @@ if not status then
   return
 end
 
-notify.setup({
+local opts = {
   stages = 'static',
   timeout = 5000,
-})
+}
+
+notify.setup(opts)
 vim.notify = notify

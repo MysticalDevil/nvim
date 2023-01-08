@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-lualine.setup({
+local opts = {
   options = {
     theme = 'onedark',
     component_separators = { left = '|', right = '|' },
@@ -41,4 +41,6 @@ lualine.setup({
       'filetype',
     },
   },
-})
+}
+
+lualine.setup()
