@@ -20,7 +20,7 @@ MysticalDevil 的 Neovim 的自定义配置
   无括号均为 normal 模式
 
 - **基础键位**
-  `<leader>` 键为空格
+  `<leader>` 键为逗号
 
   `Ctrl-j/k` 命令选取界面的下/上一个(c)
 
