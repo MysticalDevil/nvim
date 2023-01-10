@@ -1,16 +1,16 @@
 local status, autopairs = pcall(require, "nvim-autopairs")
 if not status then
-	vim.notify("nvim-autopairs not found")
-	return
+  vim.notify("nvim-autopairs not found")
+  return
 end
 
 local opts = {
-	check_ts = true,
-	ts_config = {
-		lua = { "string" }, -- it will not add a piar on that treesitter node
-		javascript = { "template_string" },
-		java = false, -- don't check treesitter on java
-	},
+  check_ts = true,
+  ts_config = {
+    lua = { "string" }, -- it will not add a piar on that treesitter node
+    javascript = { "template_string" },
+    java = false, -- don't check treesitter on java
+  },
 }
 
 autopairs.setup(opts)
