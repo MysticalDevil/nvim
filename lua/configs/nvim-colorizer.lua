@@ -4,6 +4,10 @@ if not status then
   return
 end
 
-local opts = {}
+local opts = {
+  "*",
+  css = { rgb_fn = true },
+  html = { names = false },
+}
 
 colorizer.setup(opts)
