@@ -1,21 +1,21 @@
-require('utils.global')
+require("utils.global")
 
 -- Basic configure
-require('basic')
+require("basic")
 -- Key bindings
-require('keybindings')
+require("keybindings")
 -- Packer plugins manage
-require('plugins')
+require("plugins")
 -- Color scheme setting
-require('colorscheme')
+require("colorscheme")
 -- auto command
-require('autocmds')
+require("autocmds")
 
 -- Language server protocol
-require('lsp.setup')
+require("lsp.setup")
 -- Auto complete
-require('cmp.setup')
+require("cmp.setup")
 -- Formater
-require('format.setup')
+require("format.setup")
 -- DAP
-require('dap.setup')
+require("dap.setup")

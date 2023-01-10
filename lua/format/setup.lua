@@ -1,1 +1,1 @@
-require('format.null-ls')
+require("format.null-ls")
