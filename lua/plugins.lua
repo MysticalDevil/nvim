@@ -192,8 +192,6 @@ packer.startup({
 				require("configs.zen-mode")
 			end,
 		})
-		-- editorconfigure
-		use("editorconfig/editorconfig-vim")
 		-- nvim-colorizer.lua
 		use({
 			"norcalli/nvim-colorizer.lua",

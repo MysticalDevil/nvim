@@ -181,3 +181,7 @@
   **键位绑定如下**
 
   `Leader-a` 开启 zen mode
+
+- ## nvim-colorizer.lua
+
+  > [`nvim-colorizer`](https://github.com/norcalli/nvim-colorizer.lua) 颜色代码高亮
