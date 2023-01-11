@@ -205,6 +205,14 @@ packer.startup({
         require("configs.nvim-colorizer")
       end,
     })
+    -- icon-picker.nvim
+    use("stevearc/dressing.nvim")
+    use({
+      "ziontee113/icon-picker.nvim",
+      config = function()
+        require("configs.icon-picker")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
