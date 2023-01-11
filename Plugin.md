@@ -38,6 +38,10 @@
 
   > [`dashboard`](https://github.com/glepnir/dashboard-nvim) neovim 的启动页面
 
+- ## dressing.nvim
+
+  > [`dressing`](https://github.com/stevearc/dressing.nvim) 改进默认 vim.ui 界面
+
 - ## fidget.nvim
 
   > [`fidget`](https://github.com/j-hui/fidget.nvim) nvim-lsp 的独立进度条 ui
@@ -76,6 +80,15 @@
 
   `ig` select hunk(o, x)
 
+- ## icon-picker.nvim
+
+  > [`icon-picker`](https://github.com/ziontee113/icon-picker.nvim) 利用 telescope 快速查询特殊符号、图标、emoji
+
+  **键位绑定如下**
+  `Leader-Leader-i` IconPickerNormal
+  `Leader-Leader-y` IconPickerYank
+  `Ctrl-i` IconPickerInsert(i) 
+
 - ## indent-blankline.nvim
 
   > [`indent-blankline`](https://github.com/lukas-reineke/indent-blankline.nvim) 用于显示缩进的线条，更加直观的确认缩进
@@ -87,6 +100,10 @@
 - ## nvim-autopairs
 
   > [`nvim-autopairs`](https://github.com/windwp/nvim-autopairs) neovim 自动配对插件，一般用于括号配对，引号配对
+
+- ## nvim-colorizer.lua
+
+  > [`nvim-colorizer`](https://github.com/norcalli/nvim-colorizer.lua) 颜色代码高亮
 
 - ## nvim-notify
 
@@ -144,6 +161,10 @@
 
   > [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) Better 代码高亮插件
 
+- ## nvim-treesitter-context
+
+  > [`nvim-treesitter-context`](https://github.com/nvim-treesitter/nvim-treesitter-context) 上下文推断
+
 - ## project.nvim
 
   > [`project`](https://github.com/ahmedkhalf/project.nvim) 项目管理插件，提供一个 tui 界面来显示最近打开的项目
@@ -181,7 +202,3 @@
   **键位绑定如下**
 
   `Leader-a` 开启 zen mode
-
-- ## nvim-colorizer.lua
-
-  > [`nvim-colorizer`](https://github.com/norcalli/nvim-colorizer.lua) 颜色代码高亮
