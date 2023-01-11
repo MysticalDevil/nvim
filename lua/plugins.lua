@@ -213,6 +213,11 @@ packer.startup({
         require("configs.icon-picker")
       end,
     })
+    -- nvim-navic
+    use({
+      "SmiteshP/nvim-navic",
+      requires = "neovim/nvim-lspconfig",
+    })
     --
     ------------------ LSP ----------------------
     -- installer
@@ -330,7 +335,7 @@ packer.startup({
     -- 锁定插件版本在 snapshots 目录
     snapshot_path = require("packer.util").join_paths(vim.fn.stdpath("config"), "snapshots"),
     -- 并发数限制
-    max_jobs = 8,
+    max_jobs = 4,
     -- 自定义源
     git = {
       -- default_url_format = "https://hub.fastgit.xyz/%s",
