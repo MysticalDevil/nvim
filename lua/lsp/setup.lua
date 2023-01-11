@@ -16,12 +16,6 @@ if not status then
   return
 end
 
-local status, navic = pcall(require, "nvim-navic")
-if not status then
-  vim.notify("nvim-navic not found")
-  return
-end
-
 local OS = vim.loop.os_uname().sysname
 local lspServers = {
   "clangd",
@@ -94,11 +88,7 @@ for name, config in pairs(servers) do
     config.on_setup(lspconfig[name])
   else
     -- 使用默认参数
-    lspconfig[name].setup({
-      on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-      end,
-    })
+    lspconfig[name].setup({})
   end
 end
 

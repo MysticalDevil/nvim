@@ -213,11 +213,6 @@ packer.startup({
         require("configs.icon-picker")
       end,
     })
-    -- nvim-navic
-    use({
-      "SmiteshP/nvim-navic",
-      requires = "neovim/nvim-lspconfig",
-    })
     --
     ------------------ LSP ----------------------
     -- installer
