@@ -161,10 +161,6 @@
 
   > [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) Better 代码高亮插件
 
-- ## nvim-treesitter-context
-
-  > [`nvim-treesitter-context`](https://github.com/nvim-treesitter/nvim-treesitter-context) 上下文推断
-
 - ## project.nvim
 
   > [`project`](https://github.com/ahmedkhalf/project.nvim) 项目管理插件，提供一个 tui 界面来显示最近打开的项目
