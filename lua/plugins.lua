@@ -207,6 +207,20 @@ packer.startup({
         require("configs.icon-picker")
       end,
     })
+    -- nvim-test
+    use({
+      "klen/nvim-test",
+      config = function()
+        require("configs.nvim-test")
+      end,
+    })
+    -- aerial.nvim
+    use({
+      "stevearc/aerial.nvim",
+      config = function()
+        require("configs.aerial")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
