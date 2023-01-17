@@ -221,6 +221,13 @@ packer.startup({
         require("configs.aerial")
       end,
     })
+    -- dotEnv support
+    use({
+      "ellisonleao/dotenv.nvim",
+      config = function()
+        require("configs.dotenv")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
