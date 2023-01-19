@@ -33,6 +33,7 @@ local lspServers = {
   "taplo",
   "vimls",
   "yamlls",
+  "zls",
 }
 
 -- :h mason-default-settings
@@ -82,6 +83,7 @@ local servers = {
   taplo = require("lsp.config.toml"),
   vimls = require("lsp.config.common"),
   yamlls = require("lsp.config.yaml"),
+  zls = require("lsp.config.common"),
 }
 
 for name, config in pairs(servers) do
