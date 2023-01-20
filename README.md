@@ -1,4 +1,4 @@
-# neovim-config
+# Neovim Config
 
 MysticalDevil 的 Neovim 的自定义配置
 
