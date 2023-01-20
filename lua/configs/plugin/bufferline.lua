@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uBufferLine = uConfig.bufferLine
 
 if uBufferLine == nil or not uBufferLine.enable then

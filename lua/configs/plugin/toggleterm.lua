@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uToggleTerm = uConfig.toggleterm
 
 if uToggleTerm == nil or not uToggleTerm.enable then

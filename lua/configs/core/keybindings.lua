@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local keys = uConfig.keys
 
 -- Modes

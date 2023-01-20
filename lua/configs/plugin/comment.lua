@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uComment = uConfig.comment
 
 if uComment == nil or not uComment.enable then

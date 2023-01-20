@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local common = require("lsp.common-config")
 local opts = {
   capabilities = common.capabilities,

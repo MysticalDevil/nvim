@@ -50,7 +50,7 @@ local opts = {
   yadm = {
     enable = false,
   },
-  on_attach = require("lua.configs.core.keybindings").gitsigns_on_attach,
+  on_attach = require("configs.core.keybindings").gitsigns_on_attach,
 }
 
 gitsigns.setup(opts)

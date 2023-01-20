@@ -1,4 +1,4 @@
-local mkd = require("uConfig").mkdnflow
+local mkd = require("configs.core.uConfig").mkdnflow
 if type(mkd) == "table" and mkd.enable then
   local opts = {
     modules = {

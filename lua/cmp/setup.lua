@@ -8,7 +8,7 @@ if not status then
   return
 end
 
-local status, config = pcall(require, "uConfig")
+local status, config = pcall(require, "configs.core.uConfig")
 if not status then
   return
 end

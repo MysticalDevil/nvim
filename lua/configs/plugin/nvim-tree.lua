@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uTree = uConfig.nvimTree
 
 if uTree == nil or not uTree.enable then

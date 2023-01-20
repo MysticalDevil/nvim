@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uTelescope = uConfig.telescope
 
 if uTelescope == nil or not uTelescope.enable then

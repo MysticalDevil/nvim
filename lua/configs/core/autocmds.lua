@@ -23,8 +23,8 @@ autocmd("BufWritePre", {
 autocmd("BufWritePost", {
   group = myAutoGroup,
   callback = function()
-    if vim.fn.expand("<afile>") == "lua/plugins.lua" then
-      vim.api.nvim_command("source lua/plugins.lua")
+    if vim.fn.expand("<afile>") == "lua/configs/core/plugins.lua" then
+      vim.api.nvim_command("source lua/configs/core/plugins.lua")
       vim.api.nvim_command("PackerSync")
     end
   end,

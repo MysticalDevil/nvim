@@ -1,5 +1,5 @@
 local common = require("lsp.common-config")
-local keybindings = require("lua.configs.core.keybindings")
+local keybindings = require("configs.core.keybindings")
 local ts_utils = require("nvim-lsp-ts-utils")
 local opts = {
   flags = common.flags,

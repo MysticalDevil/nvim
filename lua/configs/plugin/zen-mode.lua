@@ -1,4 +1,4 @@
-local uConfig = require("uConfig")
+local uConfig = require("configs.core.uConfig")
 local uZen = uConfig.zen
 
 if uZen == nil or not uZen.enable then
