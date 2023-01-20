@@ -1,1 +1,1 @@
-require("keybindings").mapVimspector()
+require("lua.configs.core.keybindings").mapVimspector()

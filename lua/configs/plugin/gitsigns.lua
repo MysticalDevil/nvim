@@ -19,7 +19,7 @@ local opts = {
   numhl = false, -- Toggle with `Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `Gitsigns toggle_linehl`
   word_diff = true, -- Toggle with `Gitsigns toggle_word_diff`
-  keymaps = require("keybindings").gitsigns,
+  keymaps = require("configs.core.keybindings").gitsigns,
   watch_gitdir = {
     interval = 1000,
     follow_files = true,
@@ -50,7 +50,7 @@ local opts = {
   yadm = {
     enable = false,
   },
-  on_attach = require("keybindings").gitsigns_on_attach,
+  on_attach = require("lua.configs.core.keybindings").gitsigns_on_attach,
 }
 
 gitsigns.setup(opts)

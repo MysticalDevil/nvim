@@ -1,13 +1,13 @@
 require("utils.global")
 
 -- Basic configure
-require("basic")
+require("configs.core.basic")
 -- Key bindings
-require("keybindings")
+require("configs.core.keybindings")
 -- Packer plugins manage
-require("plugins")
+require("configs.core.plugins")
 -- Color scheme setting
-require("colorscheme")
+require("configs.core.colorscheme")
 -- auto command
 require("autocmds")
 

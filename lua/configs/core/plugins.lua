@@ -36,7 +36,7 @@ packer.startup({
     use({
       "navarasu/onedark.nvim",
       config = function()
-        require("configs.onedark")
+        require("configs.plugin.onedark")
       end,
     })
     -- tokyonight
@@ -48,7 +48,7 @@ packer.startup({
     use({
       "rcarriga/nvim-notify",
       config = function()
-        require("configs.nvim-notify")
+        require("configs.plugin.nvim-notify")
       end,
     })
     -- nvim-tree
@@ -57,7 +57,7 @@ packer.startup({
       requires = "nvim-tree/nvim-web-devicons", -- optional. for file icons
       tag = "nightly", -- optional, updated every week.
       config = function()
-        require("configs.nvim-tree")
+        require("configs.plugin.nvim-tree")
       end,
     })
     -- bufferline
@@ -69,7 +69,7 @@ packer.startup({
       },
       tag = "v3.*",
       config = function()
-        require("configs.bufferline")
+        require("configs.plugin.bufferline")
       end,
     })
     -- lualine
@@ -80,7 +80,7 @@ packer.startup({
         opt = true,
       },
       config = function()
-        require("configs.lualine")
+        require("configs.plugin.lualine")
       end,
     })
     use("arkav/lualine-lsp-progress")
@@ -94,7 +94,7 @@ packer.startup({
       },
       tag = "0.1.0",
       config = function()
-        require("configs.telescope")
+        require("configs.plugin.telescope")
       end,
     })
     -- telescope fzf plugin
@@ -108,14 +108,14 @@ packer.startup({
     use({
       "ahmedkhalf/project.nvim",
       config = function()
-        require("configs.project")
+        require("configs.plugin.project")
       end,
     })
     -- dashboard-nvim
     use({
       "glepnir/dashboard-nvim",
       config = function()
-        require("configs.dashboard")
+        require("configs.plugin.dashboard")
       end,
     })
     -- nvim-treesitter
@@ -132,49 +132,49 @@ packer.startup({
         { "nvim-treesitter/nvim-treesitter-textobjects" },
       },
       config = function()
-        require("configs.nvim-treesitter")
+        require("configs.plugin.nvim-treesitter")
       end,
     })
     -- indent-blankline
     use({
       "lukas-reineke/indent-blankline.nvim",
       config = function()
-        require("configs.indent-blankline")
+        require("configs.plugin.indent-blankline")
       end,
     })
     -- toggleterm
     use({
       "akinsho/toggleterm.nvim",
       config = function()
-        require("configs.toggleterm")
+        require("configs.plugin.toggleterm")
       end,
     })
     -- nvim-surrond
     use({
       "kylechui/nvim-surround",
       config = function()
-        require("configs.nvim-surround")
+        require("configs.plugin.nvim-surround")
       end,
     })
     -- Comment
     use({
       "numToStr/Comment.nvim",
       config = function()
-        require("configs.comment")
+        require("configs.plugin.comment")
       end,
     })
     -- nvim-autopairs
     use({
       "windwp/nvim-autopairs",
       config = function()
-        require("configs.nvim-autopairs")
+        require("configs.plugin.nvim-autopairs")
       end,
     })
     -- fidget.nvim
     use({
       "j-hui/fidget.nvim",
       config = function()
-        require("configs.fidget")
+        require("configs.plugin.fidget")
       end,
     })
     -- todo-comments.nvim
@@ -182,21 +182,21 @@ packer.startup({
       "folke/todo-comments.nvim",
       requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("configs.todo-comments")
+        require("configs.plugin.todo-comments")
       end,
     })
     -- zen mode
     use({
       "folke/zen-mode.nvim",
       config = function()
-        require("configs.zen-mode")
+        require("configs.plugin.zen-mode")
       end,
     })
     -- nvim-colorizer.lua
     use({
       "norcalli/nvim-colorizer.lua",
       config = function()
-        require("configs.nvim-colorizer")
+        require("configs.plugin.nvim-colorizer")
       end,
     })
     -- icon-picker.nvim
@@ -204,28 +204,28 @@ packer.startup({
     use({
       "ziontee113/icon-picker.nvim",
       config = function()
-        require("configs.icon-picker")
+        require("configs.plugin.icon-picker")
       end,
     })
     -- nvim-test
     use({
       "klen/nvim-test",
       config = function()
-        require("configs.nvim-test")
+        require("configs.plugin.nvim-test")
       end,
     })
     -- aerial.nvim
     use({
       "stevearc/aerial.nvim",
       config = function()
-        require("configs.aerial")
+        require("configs.plugin.aerial")
       end,
     })
     -- dotEnv support
     use({
       "ellisonleao/dotenv.nvim",
       config = function()
-        require("configs.dotenv")
+        require("configs.plugin.dotenv")
       end,
     })
     --
@@ -243,14 +243,14 @@ packer.startup({
         { "junegunn/fzf.vim" }, -- to enable preview (optional)
       },
       config = function()
-        require("configs.lspfuzzy")
+        require("configs.plugin.lspfuzzy")
       end,
     })
     -- 提供 LSP 树状图
     use({
       "simrat39/symbols-outline.nvim",
       config = function()
-        require("configs.symbols-outline")
+        require("configs.plugin.symbols-outline")
       end,
     })
     -- 补全引擎
@@ -292,7 +292,7 @@ packer.startup({
     use({
       "LhKipp/nvim-nu",
       config = function()
-        require("configs.nu")
+        require("configs.plugin.nu")
       end,
     })
     ---------------------------------------------
@@ -300,7 +300,7 @@ packer.startup({
     use({
       "lewis6991/gitsigns.nvim",
       config = function()
-        require("configs.gitsigns")
+        require("configs.plugin.gitsigns")
       end,
     })
     -- vimspector
