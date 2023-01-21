@@ -9,7 +9,7 @@ require("configs.core.plugins")
 -- Color scheme setting
 require("configs.core.colorscheme")
 -- auto command
-require("autocmds")
+require("configs.core.autocmds")
 
 -- Language server protocol
 require("lsp.setup")
