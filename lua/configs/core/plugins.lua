@@ -264,6 +264,13 @@ packer.startup({
         require("configs.plugin.renamer")
       end,
     })
+    -- beacon.nvim
+    use({
+      "rainbowhxch/beacon.nvim",
+      config = function()
+        require("configs.plugin.beacon")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
