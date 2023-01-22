@@ -163,6 +163,13 @@ packer.startup({
         "MunifTanjim/nui.nvim",
       },
     })
+    -- nvim-scrollbar
+    use({
+      "petertriho/nvim-scrollbar",
+      config = function()
+        require("configs.plugin.scrollbar")
+      end,
+    })
     -- nvim-surrond
     use({
       "kylechui/nvim-surround",
@@ -240,13 +247,13 @@ packer.startup({
         require("configs.plugin.telescope")
       end,
     })
-    -- -- telescope-fzf-native.nvim
-    -- use({
-    --   "nvim-telescope/telescope-fzf-native.nvim",
-    --   run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
-    --          cmake --build build --config Release && \
-    --          cmake --install build --prefix build",
-    -- })
+    -- telescope-fzf-native.nvim
+    use({
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
+             cmake --build build --config Release && \
+             cmake --install build --prefix build",
+    })
     -- todo-comments.nvim
     use({
       "folke/todo-comments.nvim",
