@@ -31,7 +31,9 @@ packer.startup({
     -- Packer 可以管理自己本身
     use("wbthomason/packer.nvim")
     -- Plugin list
-    ---------------- colorscheme ----------------
+    --------------------- colorscheme ---------------------
+    -- material
+    use("marko-cerovac/material.nvim")
     -- one dark
     use({
       "navarasu/onedark.nvim",
@@ -41,26 +43,22 @@ packer.startup({
     })
     -- tokyonight
     use("folke/tokyonight.nvim")
-    -- material
-    use("marko-cerovac/material.nvim")
-    ------------------ plugins ------------------
-    -- nvim-notify
+    ------------------- common plugins --------------------
+    -- aerial.nvim
     use({
-      "rcarriga/nvim-notify",
+      "stevearc/aerial.nvim",
       config = function()
-        require("configs.plugin.nvim-notify")
+        require("configs.plugin.aerial")
       end,
     })
-    -- nvim-tree
+    -- beacon.nvim
     use({
-      "nvim-tree/nvim-tree.lua",
-      requires = "nvim-tree/nvim-web-devicons", -- optional. for file icons
-      tag = "nightly", -- optional, updated every week.
+      "rainbowhxch/beacon.nvim",
       config = function()
-        require("configs.plugin.nvim-tree")
+        require("configs.plugin.beacon")
       end,
     })
-    -- bufferline
+    -- bufferline.nvim
     use({
       "akinsho/bufferline.nvim",
       requires = {
@@ -72,7 +70,50 @@ packer.startup({
         require("configs.plugin.bufferline")
       end,
     })
-    -- lualine
+    -- comment.nvim
+    use({
+      "numToStr/Comment.nvim",
+      config = function()
+        require("configs.plugin.comment")
+      end,
+    })
+    -- dashboard-nvim
+    use({
+      "glepnir/dashboard-nvim",
+      config = function()
+        require("configs.plugin.dashboard")
+      end,
+    })
+    -- dotenv.nvim
+    use({
+      "ellisonleao/dotenv.nvim",
+      config = function()
+        require("configs.plugin.dotenv")
+      end,
+    })
+    -- fidget.nvim
+    use({
+      "j-hui/fidget.nvim",
+      config = function()
+        require("configs.plugin.fidget")
+      end,
+    })
+    -- icon-picker.nvim
+    use("stevearc/dressing.nvim")
+    use({
+      "ziontee113/icon-picker.nvim",
+      config = function()
+        require("configs.plugin.icon-picker")
+      end,
+    })
+    -- indent-blankline.nvim
+    use({
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("configs.plugin.indent-blankline")
+      end,
+    })
+    -- lualine.nvim
     use({
       "nvim-lualine/lualine.nvim",
       requires = {
@@ -83,39 +124,66 @@ packer.startup({
         require("configs.plugin.lualine")
       end,
     })
-    use("arkav/lualine-lsp-progress")
-    -- telescope
+    -- neoscroll.nvim
     use({
-      "nvim-telescope/telescope.nvim",
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("configs.plugin.neoscroll")
+      end,
+    })
+    -- nvim-autopairs
+    use({
+      "windwp/nvim-autopairs",
+      config = function()
+        require("configs.plugin.nvim-autopairs")
+      end,
+    })
+    -- nvim-colorizer.lua
+    use({
+      "norcalli/nvim-colorizer.lua",
+      config = function()
+        require("configs.plugin.nvim-colorizer")
+      end,
+    })
+    -- nvim-notify
+    use({
+      "rcarriga/nvim-notify",
+      config = function()
+        require("configs.plugin.nvim-notify")
+      end,
+    })
+    -- nvim-regexplainer
+    use({
+      "bennypowers/nvim-regexplainer",
+      config = function()
+        require("configs.plugin.regexplainer")
+      end,
       requires = {
-        "nvim-lua/plenary.nvim",
-        "LinArcX/telescope-env.nvim",
-        "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "MunifTanjim/nui.nvim",
       },
-      tag = "0.1.0",
+    })
+    -- nvim-surrond
+    use({
+      "kylechui/nvim-surround",
       config = function()
-        require("configs.plugin.telescope")
+        require("configs.plugin.nvim-surround")
       end,
     })
-    -- telescope fzf plugin
+    -- nvim-test
     use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
-             cmake --build build --config Release && \
-             cmake --install build --prefix build",
-    })
-    -- project
-    use({
-      "ahmedkhalf/project.nvim",
+      "klen/nvim-test",
       config = function()
-        require("configs.plugin.project")
+        require("configs.plugin.nvim-test")
       end,
     })
-    -- dashboard-nvim
+    -- nvim-tree.lua
     use({
-      "glepnir/dashboard-nvim",
+      "nvim-tree/nvim-tree.lua",
+      requires = "nvim-tree/nvim-web-devicons", -- optional. for file icons
+      tag = "nightly", -- optional, updated every week.
       config = function()
-        require("configs.plugin.dashboard")
+        require("configs.plugin.nvim-tree")
       end,
     })
     -- nvim-treesitter
@@ -142,118 +210,12 @@ packer.startup({
         require("configs.plugin.nvim-treesitter-context")
       end,
     })
-    -- indent-blankline
+    -- project.nvim
     use({
-      "lukas-reineke/indent-blankline.nvim",
+      "ahmedkhalf/project.nvim",
       config = function()
-        require("configs.plugin.indent-blankline")
+        require("configs.plugin.project")
       end,
-    })
-    -- toggleterm
-    use({
-      "akinsho/toggleterm.nvim",
-      config = function()
-        require("configs.plugin.toggleterm")
-      end,
-    })
-    -- nvim-surrond
-    use({
-      "kylechui/nvim-surround",
-      config = function()
-        require("configs.plugin.nvim-surround")
-      end,
-    })
-    -- Comment
-    use({
-      "numToStr/Comment.nvim",
-      config = function()
-        require("configs.plugin.comment")
-      end,
-    })
-    -- nvim-autopairs
-    use({
-      "windwp/nvim-autopairs",
-      config = function()
-        require("configs.plugin.nvim-autopairs")
-      end,
-    })
-    -- fidget.nvim
-    use({
-      "j-hui/fidget.nvim",
-      config = function()
-        require("configs.plugin.fidget")
-      end,
-    })
-    -- todo-comments.nvim
-    use({
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("configs.plugin.todo-comments")
-      end,
-    })
-    -- zen mode
-    use({
-      "folke/zen-mode.nvim",
-      config = function()
-        require("configs.plugin.zen-mode")
-      end,
-    })
-    -- nvim-colorizer.lua
-    use({
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("configs.plugin.nvim-colorizer")
-      end,
-    })
-    -- icon-picker.nvim
-    use("stevearc/dressing.nvim")
-    use({
-      "ziontee113/icon-picker.nvim",
-      config = function()
-        require("configs.plugin.icon-picker")
-      end,
-    })
-    -- nvim-test
-    use({
-      "klen/nvim-test",
-      config = function()
-        require("configs.plugin.nvim-test")
-      end,
-    })
-    -- aerial.nvim
-    use({
-      "stevearc/aerial.nvim",
-      config = function()
-        require("configs.plugin.aerial")
-      end,
-    })
-    -- dotEnv support
-    use({
-      "ellisonleao/dotenv.nvim",
-      config = function()
-        require("configs.plugin.dotenv")
-      end,
-    })
-    -- WhichKey
-    use({
-      "folke/which-key.nvim",
-      config = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-        require("configs.plugin.which-key")
-      end,
-    })
-    -- nvim-regexplainer
-    use({
-      "bennypowers/nvim-regexplainer",
-      config = function()
-        require("configs.plugin.regexplainer")
-      end,
-      requires = {
-        "nvim-treesitter/nvim-treesitter",
-        "MunifTanjim/nui.nvim",
-      },
     })
     -- renamer.nvim
     use({
@@ -264,22 +226,60 @@ packer.startup({
         require("configs.plugin.renamer")
       end,
     })
-    -- beacon.nvim
+    use("arkav/lualine-lsp-progress")
+    -- telescope.nvim
     use({
-      "rainbowhxch/beacon.nvim",
+      "nvim-telescope/telescope.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "LinArcX/telescope-env.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
+      },
+      tag = "0.1.0",
       config = function()
-        require("configs.plugin.beacon")
+        require("configs.plugin.telescope")
       end,
     })
-    -- neoscroll.nvim
+    -- -- telescope-fzf-native.nvim
+    -- use({
+    --   "nvim-telescope/telescope-fzf-native.nvim",
+    --   run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
+    --          cmake --build build --config Release && \
+    --          cmake --install build --prefix build",
+    -- })
+    -- todo-comments.nvim
     use({
-      "karb94/neoscroll.nvim",
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("configs.plugin.neoscroll")
+        require("configs.plugin.todo-comments")
+      end,
+    })
+    -- toggleterm.nvim
+    use({
+      "akinsho/toggleterm.nvim",
+      config = function()
+        require("configs.plugin.toggleterm")
+      end,
+    })
+    -- which-key.nvim
+    use({
+      "folke/which-key.nvim",
+      config = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+        require("configs.plugin.which-key")
+      end,
+    })
+    -- zen-mode.nvim
+    use({
+      "folke/zen-mode.nvim",
+      config = function()
+        require("configs.plugin.zen-mode")
       end,
     })
     --
-    ------------------ LSP ----------------------
+    ------------------------- LSP -------------------------
     -- installer
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
@@ -345,7 +345,15 @@ packer.startup({
         require("configs.plugin.nu")
       end,
     })
-    ---------------------------------------------
+    -- golang 支持
+    use({
+      "ray-x/go.nvim",
+      requires = { "ray-x/guihua.lua" }, -- recommended if need floating window support
+      config = function()
+        require("configs.plugin.go")
+      end,
+    })
+    -------------------------------------------------------
     -- git
     use({
       "lewis6991/gitsigns.nvim",
@@ -369,7 +377,7 @@ packer.startup({
         require("dap.vimspector")
       end,
     })
-    ---------------------------------------------
+    -------------------------------------------------------
     -- nvim-dap
     use("mfussenegger/nvim-dap")
     use("theHamsta/nvim-dap-virtual-text")
@@ -384,14 +392,7 @@ packer.startup({
       end,
     })
 
-    -- go 支持
-    use({
-      "ray-x/go.nvim",
-      requires = { "ray-x/guihua.lua" }, -- recommended if need floating window support
-      config = function()
-        require("configs.plugin.go")
-      end,
-    })
+    -- go
     use("leoluz/nvim-dap-go")
 
     if packer_bootstrap then
