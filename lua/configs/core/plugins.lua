@@ -271,6 +271,13 @@ packer.startup({
         require("configs.plugin.beacon")
       end,
     })
+    -- neoscroll.nvim
+    use({
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("configs.plugin.neoscroll")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
