@@ -255,6 +255,15 @@ packer.startup({
         "MunifTanjim/nui.nvim",
       },
     })
+    -- renamer.nvim
+    use({
+      "filipdutescu/renamer.nvim",
+      branch = "master",
+      requires = { { "nvim-lua/plenary.nvim" } },
+      config = function()
+        require("configs.plugin.renamer")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
