@@ -228,6 +228,15 @@ packer.startup({
         require("configs.plugin.dotenv")
       end,
     })
+    -- WhichKey
+    use({
+      "folke/which-key.nvim",
+      config = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+        require("configs.plugin.which-key")
+      end,
+    })
     --
     ------------------ LSP ----------------------
     -- installer
