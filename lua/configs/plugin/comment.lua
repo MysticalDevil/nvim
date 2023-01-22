@@ -30,7 +30,7 @@ local opts = {
 
   -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
   pre_hook = function(ctx)
-    local U = require("Comments.utils")
+    local U = require("Comment.utils")
     -- Determine whether to use linewise or blockwise commentstring
     local type = ctx.ctype == U.ctype.linewise and "__default" or "__multiline"
     -- Determine the location where to calculate commentstring from
