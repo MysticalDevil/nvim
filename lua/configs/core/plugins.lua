@@ -244,6 +244,17 @@ packer.startup({
         require("configs.plugin.which-key")
       end,
     })
+    -- nvim-regexplainer
+    use({
+      "bennypowers/nvim-regexplainer",
+      config = function()
+        require("configs.plugin.regexplainer")
+      end,
+      requires = {
+        "nvim-treesitter/nvim-treesitter",
+        "MunifTanjim/nui.nvim",
+      },
+    })
     --
     ------------------ LSP ----------------------
     -- installer
