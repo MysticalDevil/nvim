@@ -334,7 +334,14 @@ packer.startup({
       end,
     })
 
-    -- go
+    -- go 支持
+    use({
+      "ray-x/go.nvim",
+      requires = { "ray-x/guihua.lua" }, -- recommended if need floating window support
+      config = function()
+        require("configs.plugin.go")
+      end,
+    })
     use("leoluz/nvim-dap-go")
 
     if packer_bootstrap then
