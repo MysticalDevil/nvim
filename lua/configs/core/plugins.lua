@@ -135,6 +135,13 @@ packer.startup({
         require("configs.plugin.nvim-treesitter")
       end,
     })
+    -- nvim-treesitter-context
+    use({
+      "nvim-treesitter/nvim-treesitter-context",
+      config = function()
+        require("configs.plugin.nvim-treesitter-context")
+      end,
+    })
     -- indent-blankline
     use({
       "lukas-reineke/indent-blankline.nvim",
