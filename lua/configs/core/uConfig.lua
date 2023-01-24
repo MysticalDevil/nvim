@@ -164,6 +164,8 @@ local M = {
     -- 预览窗口上下滚动
     preview_scrolling_up = "<C-u>",
     preview_scrolling_down = "<C-d>",
+    -- trouble.nvim 支持
+    open_with_trouble = "<C-t>",
   },
 
   mkdnflow = {

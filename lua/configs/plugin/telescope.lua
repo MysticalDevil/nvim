@@ -11,6 +11,9 @@ if not status then
   return
 end
 
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
 local opts = {
   defaults = {
     -- 打开弹窗后进入的初始模式，默认为 insert, 也可以是 normal
@@ -31,6 +34,11 @@ local opts = {
         -- 预览窗口上下滚动
         [uTelescope.preview_scrolling_up] = "preview_scrolling_up",
         [uTelescope.preview_scrolling_down] = "preview_scrolling_down",
+        -- trouble.nvim 支持
+        [uTelescope.open_with_trouble] = trouble.open_with_trouble,
+      },
+      n = {
+        [uTelescope.open_with_trouble] = trouble.open_with_trouble,
       },
     },
   },

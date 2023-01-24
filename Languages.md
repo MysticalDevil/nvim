@@ -39,6 +39,6 @@ Formatter 采用了 [`formatter`](https://github.com/mhartington/formatter.nvim)
 
   [`lspkind`](https://github.com/onsails/lspkind-nvim)
 
-  [`lspsaga`](https://github.com/tami5/lspsaga.nvim)
+  [`lspsaga`](https://github.com/glepnir/lspsaga.nvim)
 
 TODO

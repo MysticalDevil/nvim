@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local colors = require("onedark.colors")
+
 local aerial = {
   "aerial",
 
@@ -22,6 +24,27 @@ local aerial = {
   dense_sep = ".", -- The separator to be used to separate symbols in dense mode.
 
   colored = true, -- Color the symbol icons.
+}
+
+local diagnostics = {
+  "diagnostics",
+
+  -- Table of diagnostic sources, available sources are:
+  --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+  -- or a function that returns a table as such:
+  --   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
+  sources = { "nvim_diagnostic" },
+
+  -- Displays diagnostics for the defined severity types
+  sections = { "error", "warn", "info", "hint" },
+
+  diagnostics_color = {
+    -- Same values as the general color option can be used here.
+    error = { fg = colors.red, bg = colors.grey },
+    warn = { fg = colors.yellow, bg = colors.grey },
+    info = { fg = colors.blue, bg = colors.grey },
+    hint = { fg = colors.cyan, bg = colors.grey },
+  },
 }
 
 local opts = {
@@ -66,17 +89,10 @@ local opts = {
     },
   },
   winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { aerial },
-    lualine_x = {
-      { -- Let winbar always visible
-        function()
-          return " "
-        end,
-        padding = 0,
-      },
-    },
+    lualine_a = { diagnostics },
+    lualine_b = { aerial },
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
     lualine_z = {},
   },

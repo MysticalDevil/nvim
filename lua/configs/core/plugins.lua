@@ -342,7 +342,13 @@ packer.startup({
     use("rafamadriz/friendly-snippets")
     -- UI 增强
     use("onsails/lspkind-nvim")
-    use("tami5/lspsaga.nvim")
+    use({
+      "glepnir/lspsaga.nvim",
+      branch = "main",
+      config = function()
+        require("configs.plugin.lspsage")
+      end,
+    })
     -- 代码格式化
     use("mhartington/formatter.nvim")
     use({
