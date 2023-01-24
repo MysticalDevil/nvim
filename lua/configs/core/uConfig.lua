@@ -209,6 +209,15 @@ local M = {
     toggle = "<leader>a",
   },
 
+  trouble = {
+    togggle = "<leader>xx",
+    toggle_workspace = "<leader>xw",
+    toggle_doc = "<leader>xd",
+    toggle_quickfix = "<leader>xq",
+    toggle_loclist = "<leader>xl",
+    toggle_lsp_references = "<leader>xr",
+  },
+
   lsp = {
     rename = "<leader>rn",
     code_action = "<leader>ca",

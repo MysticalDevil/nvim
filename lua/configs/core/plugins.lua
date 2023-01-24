@@ -84,6 +84,14 @@ packer.startup({
         require("configs.plugin.dashboard")
       end,
     })
+    -- diffview.nvim
+    use({
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("configs.plugin.diffview")
+      end,
+    })
     -- dotenv.nvim
     use({
       "ellisonleao/dotenv.nvim",
@@ -267,6 +275,14 @@ packer.startup({
       "akinsho/toggleterm.nvim",
       config = function()
         require("configs.plugin.toggleterm")
+      end,
+    })
+    -- trouble.nvim
+    use({
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons",
+      config = function()
+        require("configs.plugin.trouble")
       end,
     })
     -- which-key.nvim

@@ -3,15 +3,9 @@ if not status then
   return
 end
 
-local status, luasnip = pcall(require, "luasnip")
-if not status then
-  return
-end
+local luasnip = require("luasnip")
 
-local status, config = pcall(require, "configs.core.uConfig")
-if not status then
-  return
-end
+local config = require("configs.core.uConfig")
 
 local has_word_before = function()
   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
