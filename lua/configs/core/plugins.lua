@@ -106,6 +106,13 @@ packer.startup({
         require("configs.plugin.fidget")
       end,
     })
+    -- hydra.nvim
+    use({
+      "anuvyklack/hydra.nvim",
+      config = function()
+        require("configs.plugin.hydra")
+      end,
+    })
     -- icon-picker.nvim
     use("stevearc/dressing.nvim")
     use({
@@ -283,6 +290,14 @@ packer.startup({
       requires = "nvim-tree/nvim-web-devicons",
       config = function()
         require("configs.plugin.trouble")
+      end,
+    })
+    -- urlview.nvim
+    use({
+      "axieax/urlview.nvim",
+      requires = "nvim-telescope/telescope.nvim",
+      config = function()
+        require("configs.plugin.urlview")
       end,
     })
     -- which-key.nvim
