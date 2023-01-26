@@ -11,7 +11,6 @@ if not status then
   return
 end
 
-local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
 local opts = {

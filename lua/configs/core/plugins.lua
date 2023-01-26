@@ -80,6 +80,7 @@ packer.startup({
     -- dashboard-nvim
     use({
       "glepnir/dashboard-nvim",
+      event = "VimEnter",
       config = function()
         require("configs.plugin.dashboard")
       end,
@@ -107,12 +108,12 @@ packer.startup({
       end,
     })
     -- hydra.nvim
-    use({
-      "anuvyklack/hydra.nvim",
-      config = function()
-        require("configs.plugin.hydra")
-      end,
-    })
+    -- use({
+    --   "anuvyklack/hydra.nvim",
+    --   config = function()
+    --     require("configs.plugin.hydra")
+    --   end,
+    -- })
     -- icon-picker.nvim
     use("stevearc/dressing.nvim")
     use({

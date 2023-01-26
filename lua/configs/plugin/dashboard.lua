@@ -1,6 +1,7 @@
 local status, db = pcall(require, "dashboard")
 if not status then
   vim.notify("dashboard not found")
+  return
 end
 
 db.custom_footer = {
