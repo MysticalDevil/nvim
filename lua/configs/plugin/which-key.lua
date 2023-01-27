@@ -132,6 +132,7 @@ which_key.register({
     ["="] = { "<C-w>=", "Make split windows equal in size" },
   },
   t = {
+    name = "+tab",
     s = { "<CMD>tab split<CR>", "Split window use tab" },
     h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
     l = { "<CMD>tabnext<CR>", "Switch to next tab" },
