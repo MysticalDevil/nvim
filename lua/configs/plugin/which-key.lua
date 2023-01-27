@@ -78,3 +78,82 @@ local opts = {
 }
 
 which_key.setup(opts)
+
+which_key.register({
+  ["<leader>w"] = { ":w<CR>", "Save file" },
+  ["<leader>q"] = { ":q<CR>", "Quit editor" },
+  ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use LSP" },
+  ["<leader>rn"] = { "<CMD>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
+  ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
+  ["<leader>"] = {
+    w = {
+      name = "+save",
+      a = { ":wa<CR>", "Save all file" },
+      q = { ":wq<CR>", "Save file and quit editor" },
+    },
+    q = {
+      name = "+quit",
+      q = { ":qa!<CR>", "Safe force quit" },
+      a = { ":wqa<CR>", "Save all file and quit editor" },
+    },
+    b = {
+      name = "+bufferline",
+      h = { ":BufferLineCloseLeft<CR>", "Close left bufferline" },
+      l = { ":BufferLineCloseRight<CR>", "Close right bufferline" },
+      o = { ":BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", "Close other bufferlines" },
+      p = { ":BufferLinePickClose<CR>", "Close picked bufferline" },
+    },
+    -- t = {
+    --   name = "+toggleterm",
+    --   a = {},
+    --   b = {},
+    --   c = {},
+    -- },
+    x = {
+      name = "+trouble",
+      x = { "<CMD>TroubleToggle<CR>", "Open trouble toggle panel" },
+      w = { "<CMD>TroubleToggle workspace_diagnostics<CR>", "Open workspace diagnostics" },
+      d = { "<CMD>TroubleToggle document_diagnostics<CR>", "Open document diagnostics" },
+      q = { "<CMD>TroubleToggle quickfix<CR>", "Open trouble quickfix" },
+      l = { "<CMD>TroubleToggle loclist<CR>", "Open trouble loclist" },
+      r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
+    },
+  },
+  s = {
+    name = "+split",
+    v = { ":vsp<CR>", "Split window vertically" },
+    h = { ":sp<CR>", "Split window horizontally" },
+    c = { "<C-w>c", "Close split window" },
+    o = { "<C-w>o", "Close others split window" },
+    [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+    ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+    j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+    k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
+    ["="] = { "<C-w>=", "Make split windows equal in size" },
+  },
+  t = {
+    s = { "<CMD>tab split<CR>", "Split window use tab" },
+    h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
+    l = { "<CMD>tabnext<CR>", "Switch to next tab" },
+    j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
+    k = { "<CMD>tablast<CR>", "Switch to last tab" },
+    c = { "<CMD>tabclose<CR>", "Close tab" },
+  },
+  Z = { ":foldopen<CR>", "Open code block toggle" },
+  zz = { ":foldclose<CR>", "Close code block toggle" },
+  g = {
+    name = "+LSP",
+    d = { "", "Go to definition" },
+    r = { "", "Go to references" },
+    h = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Hover function definition" },
+    p = { "<CMD>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
+    j = { "<CMD>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic" },
+    k = { "<CMD>lua vim.diagnostic.goto_prev()<CR>", "Go to previous diagnostic" },
+    s = { "<CMD>TypescriptOrganizeImports<CR>", "Typescript: Organize imports" },
+    R = { "<CMD>TypescriptRenameFile<CR>", "Typescript: Rename file" },
+    i = { "<CMD>TypescriptAddMissingImports<CR>", "Typescript: Add missing imports" },
+    u = { "<CMD>TypescriptRemoveUnused<CR>", "Typescript: Remove unused imports" },
+    f = { "<CMD>TypescriptFixAll", "Typescript: Fix all problems" },
+    D = { "<CMD>TypescriptGoToSourceDefinition<CR>", "Typescript: Go to source defination" },
+  },
+})

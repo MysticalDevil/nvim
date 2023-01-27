@@ -107,8 +107,8 @@ if keys.s_windows ~= nil and keys.s_windows.enable then
   -- 比例控制
   keymap("n", skey.width_decrease, ":vertical resize -10<CR>")
   keymap("n", skey.width_increase, ":vertical resize +10<CR>")
-  keymap("n", skey.height_decrease, ":vertical resize -10<CR>")
-  keymap("n", skey.height_increase, ":vertical resize +10<CR>")
+  keymap("n", skey.height_decrease, ":horizontal resize -5<CR>")
+  keymap("n", skey.height_increase, ":horizontal resize +5<CR>")
   keymap("n", skey.size_equal, "<C-w>=")
 end
 
@@ -180,11 +180,9 @@ pluginKeys.mapLSP = function(mapbuf)
   mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
   mapbuf("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opt)
   --]]
-  mapbuf(
-    "n",
-    lsp.references,
-    "<cmd>lua require'telescope.builtin'.lsp_references(require('telescope.themes').get_ivy())<CR>"
-  )
+  mapbuf("n", lsp.references, function()
+    require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
+  end)
 
   if vim.fn.has("nvim-0.8") == 1 then
     mapbuf("n", lsp.format, "<cmd>lua vim.lsp.buf.format({ async = true })<CR>")

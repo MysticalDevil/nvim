@@ -109,7 +109,7 @@ local M = {
     toggle_git_ignored = "i",
     -- Hide (dotfiles)
     toggle_dotfiles = ".",
-    -- togglle custom config
+    -- toggle custom config
     toggle_custom = "u",
 
     refresh = "R",
