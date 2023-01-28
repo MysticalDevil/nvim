@@ -376,6 +376,15 @@ packer.startup({
         require("configs.plugin.urlview")
       end,
     })
+    -- vim-illuminate
+    -- (Neo)Vim plugin for automatically highlighting other uses of the word under the cursor using either LSP,
+    -- Tree-sitter, or regex matching
+    use({
+      "RRethy/vim-illuminate",
+      config = function()
+        require("configs.plugin.illuminate")
+      end,
+    })
     -- which-key.nvim
     -- Create key bindings that stick
     use({
