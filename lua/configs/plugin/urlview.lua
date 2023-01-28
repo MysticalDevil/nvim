@@ -1,6 +1,6 @@
 local status, urlview = pcall(require, "urlview")
 if not status then
-  vim.notify("urlview.nvim not found")
+  vim.notify("urlview.nvim not found", "error")
   return
 end
 

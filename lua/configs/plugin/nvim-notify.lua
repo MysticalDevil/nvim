@@ -1,11 +1,11 @@
 local status, notify = pcall(require, "notify")
 if not status then
-  vim.notify("nvim-notify not found")
+  vim.notify("nvim-notify not found", "error")
   return
 end
 
 local opts = {
-  stages = "static",
+  stages = "slide",
   timeout = 5000,
 }
 

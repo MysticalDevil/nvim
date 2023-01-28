@@ -1,6 +1,6 @@
 local status, fidget = pcall(require, "fidget")
 if not status then
-  vim.notify("fidget not found")
+  vim.notify("fidget not found", "error")
   return
 end
 

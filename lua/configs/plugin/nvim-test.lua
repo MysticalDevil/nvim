@@ -1,6 +1,6 @@
 local status, nvim_test = pcall(require, "nvim-test")
 if not status then
-  vim.notify("nvim-test not found")
+  vim.notify("nvim-test not found", "error")
 end
 
 local opts = {

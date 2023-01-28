@@ -1,6 +1,6 @@
 local status, beacon = pcall(require, "beacon")
 if not status then
-  vim.notify("beacon.nvim not found")
+  vim.notify("beacon.nvim not found", "error")
   return
 end
 

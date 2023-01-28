@@ -1,6 +1,6 @@
 local status, icon_picker = pcall(require, "icon-picker")
 if not status then
-  vim.notify("icon-picker not found")
+  vim.notify("icon-picker not found", "error")
   return
 end
 

@@ -1,6 +1,6 @@
 local status, symbols_outline = pcall(require, "symbols-outline")
 if not status then
-  vim.notify("symbols-outline not found")
+  vim.notify("symbols-outline not found", "error")
   return
 end
 

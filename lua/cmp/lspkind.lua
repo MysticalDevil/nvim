@@ -1,6 +1,6 @@
 local status, lspkind = pcall(require, "lspkind")
 if not status then
-  vim.notify("lspkind not found")
+  vim.notify("lspkind not found", "error")
   return
 end
 

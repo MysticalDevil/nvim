@@ -1,6 +1,6 @@
 local status, formatter = pcall(require, "formatter")
 if not status then
-  vim.notify("formatter not found")
+  vim.notify("formatter not found", "error")
   return
 end
 

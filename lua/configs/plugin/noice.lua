@@ -1,6 +1,6 @@
 local status, noice = pcall(require, "noice")
 if not status then
-  vim.notify("noice.nvim not found")
+  vim.notify("noice.nvim not found", "error")
   return
 end
 

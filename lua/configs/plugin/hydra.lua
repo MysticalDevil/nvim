@@ -1,6 +1,6 @@
 local status, Hydra = pcall(require, "hydra")
 if not status then
-  vim.notify("hydra.nvim not found")
+  vim.notify("hydra.nvim not found", "error")
   return
 end
 

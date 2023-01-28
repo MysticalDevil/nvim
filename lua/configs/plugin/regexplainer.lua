@@ -1,6 +1,6 @@
 local status, regexplainer = pcall(require, "regexplainer")
 if not status then
-  vim.notify("nvim-regexplainer not found")
+  vim.notify("nvim-regexplainer not found", "error")
   return
 end
 

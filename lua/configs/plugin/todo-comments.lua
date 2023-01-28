@@ -1,6 +1,6 @@
 local status, todo = pcall(require, "todo-comments")
 if not status then
-  vim.notify("todo-comments not found")
+  vim.notify("todo-comments not found", "error")
   return
 end
 

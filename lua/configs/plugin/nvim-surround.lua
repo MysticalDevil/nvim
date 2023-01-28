@@ -1,6 +1,6 @@
 local status, surround = pcall(require, "nvim-surround")
 if not status then
-  vim.notify("nvim-surround not found")
+  vim.notify("nvim-surround not found", "error")
   return
 end
 

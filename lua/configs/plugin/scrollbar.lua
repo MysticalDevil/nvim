@@ -1,6 +1,6 @@
 local status, scrollbar = pcall(require, "scrollbar")
 if not status then
-  vim.notify("nvim-scrollbar not found")
+  vim.notify("nvim-scrollbar not found", "error")
   return
 end
 

@@ -1,6 +1,6 @@
 local status, renamer = pcall(require, "renamer")
 if not status then
-  vim.notify("renamer.nvim not found")
+  vim.notify("renamer.nvim not found", "error")
   return
 end
 

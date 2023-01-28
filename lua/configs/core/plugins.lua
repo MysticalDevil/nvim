@@ -3,7 +3,7 @@ local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local packer_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
-  vim.notify("Packer.nvim is being installed, please wait...")
+  vim.notify("Packer.nvim is being installed, please wait...", "info")
   packer_bootstrap = fn.system({
     "git",
     "clone",
@@ -17,12 +17,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   if not string.find(vim.o.runtimepath, rtp_addition) then
     vim.o.runtimpath = rtp_addition .. "," .. vim.o.runtimpath
   end
-  vim.notify("Packer.nvim installed")
+  vim.notify("Packer.nvim installed", "info")
 end
 
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  vim.notify("Packer.nvim not install")
+  vim.notify("Packer.nvim not install", "warn")
   return
 end
 
@@ -556,12 +556,9 @@ packer.startup({
   },
 })
 -- 每次保存 plugins.lua 自动安装插件
-pcall(
-  vim.cmd,
-  [[
+vim.cmd([[
     augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile>  | PackerSync
     augroup end
-  ]]
-)
+  ]])

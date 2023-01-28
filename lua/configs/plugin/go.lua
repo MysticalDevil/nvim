@@ -1,6 +1,6 @@
 local status, go = pcall(require, "go")
 if not status then
-  vim.notify("Go.nvim not found")
+  vim.notify("Go.nvim not found", "error")
   return
 end
 

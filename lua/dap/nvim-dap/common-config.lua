@@ -27,7 +27,7 @@ M.keyAttach = function()
   keymap("n", "<leader>dT", dap.clear_breakpoints())
 
   -- 弹窗
-  keymap("n", "<leader>dh", dapui.eval())
+  keymap("n", "<leader>dh", dap.eval())
   -- nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
 
   -- 结束

@@ -1,6 +1,6 @@
 local status, lspfuzzy = pcall(require, "lspfuzzy")
 if not status then
-  vim.notify("lspfuzzy not found")
+  vim.notify("lspfuzzy not found", "error")
 end
 
 local opts = {

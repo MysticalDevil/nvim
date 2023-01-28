@@ -1,6 +1,6 @@
 local status, neoscroll = pcall(require, "neoscroll")
 if not status then
-  vim.notify("neoscroll not found")
+  vim.notify("neoscroll not found", "error")
   return
 end
 

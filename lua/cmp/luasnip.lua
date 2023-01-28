@@ -3,15 +3,9 @@ if not status then
   return
 end
 
-local status, config = pcall(require, "configs.core.uConfig")
-if not status then
-  return
-end
+local config = require("configs.core.uConfig")
 
-local status, types = pcall(require, "luasnip.util.types")
-if not status then
-  return
-end
+local types = require("luasnip.util.types")
 
 -- custom snippets
 require("luasnip.loaders.from_lua").load({

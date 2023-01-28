@@ -7,7 +7,7 @@ end
 
 local status, zen = pcall(require, "zen-mode")
 if not status then
-  vim.notify("zen-mode not found")
+  vim.notify("zen-mode not found", "error")
   return
 end
 
@@ -45,9 +45,13 @@ local opts = {
     tmux = { enabled = false }, -- disables the tmux statusline
   },
   -- callback where you can add custom code when the Zen window opens
-  on_open = function(win) end,
+  on_open = function(win)
+    vim.cmd("TwilightEnable")
+  end,
   -- callback where you can add custom code when the Zen window closes
-  on_close = function() end,
+  on_close = function()
+    vim.cmd("TwilightDisable")
+  end,
 }
 
 zen.setup(opts)

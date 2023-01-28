@@ -1,6 +1,6 @@
 local status, project = pcall(require, "project_nvim")
 if not status then
-  vim.notify("project_nvim not found")
+  vim.notify("project_nvim not found", "error")
   return
 end
 

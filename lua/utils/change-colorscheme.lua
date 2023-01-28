@@ -4,10 +4,10 @@ local finders = require("telescope.finders")
 local sorters = require("telescope.sorters")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
-local themes = require("telescope.themes")
+-- local themes = require("telescope.themes")
 
 -- local colors = vim.fn.getcompletion("", "color")
-local mycolors = { "onedark", "tokyonight", "aurora" }
+local local_colors = { "onedark", "tokyonight", "aurora" }
 
 local mini = {
   layout_strategy = "vertical",
@@ -51,7 +51,7 @@ end
 local opts = {
   prompt_title = "colorscheme",
   initial_mode = "normal",
-  finder = finders.new_table(mycolors),
+  finder = finders.new_table(local_colors),
   sorter = sorters.get_generic_fuzzy_sorter({}),
   attach_mappings = function(_, map)
     map("i", "<CR>", enter)

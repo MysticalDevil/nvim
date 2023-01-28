@@ -1,6 +1,6 @@
 local status, mason = pcall(require, "mason")
 if not status then
-  vim.notify("mason not found")
+  vim.notify("mason not found", "error")
   return
 end
 

@@ -1,6 +1,6 @@
 local status, lsp_signature = pcall(require, "lsp_signature")
 if not status then
-  vim.notify("lsp_signature.nvim not found")
+  vim.notify("lsp_signature.nvim not found", "error")
   return
 end
 

@@ -7,10 +7,10 @@ local luasnip = require("luasnip")
 
 local config = require("configs.core.uConfig")
 
-local has_word_before = function()
-  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+-- local has_word_before = function()
+--   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
 
 local mapping = {
   -- 出现补全

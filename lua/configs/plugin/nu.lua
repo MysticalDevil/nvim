@@ -1,6 +1,7 @@
 local status, nu = pcall(require, "nu")
 if not status then
-  vim.notify("nu not found")
+  vim.notify("nu not found", "error")
+  return
 end
 
 local opts = {

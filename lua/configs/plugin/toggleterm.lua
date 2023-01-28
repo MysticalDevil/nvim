@@ -7,7 +7,7 @@ end
 
 local status, toggleterm = pcall(require, "toggleterm")
 if not status then
-  vim.notify("toggleterm not found")
+  vim.notify("toggleterm not found", "error")
   return
 end
 
@@ -75,7 +75,7 @@ M.toggleA = function(cmd)
   tc:close()
   ta:open()
   if cmd ~= nil then
-    ta:sned(cmd)
+    ta:send(cmd)
   end
 end
 

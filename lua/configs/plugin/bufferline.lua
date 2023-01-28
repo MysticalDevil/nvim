@@ -7,7 +7,8 @@ end
 
 local status, bufferline = pcall(require, "bufferline")
 if not status then
-  vim.notify("bufferline not found")
+  vim.notify("bufferline not found", "error")
+  return
 end
 
 -- bufferline configure

@@ -1,6 +1,6 @@
 local status, lspsage = pcall(require, "lspsaga")
 if not status then
-  vim.notify("lspsaga.nvim not found")
+  vim.notify("lspsaga.nvim not found", "error")
   return
 end
 
