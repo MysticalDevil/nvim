@@ -7,7 +7,7 @@ local action_state = require("telescope.actions.state")
 local themes = require("telescope.themes")
 
 -- local colors = vim.fn.getcompletion("", "color")
-local mycolors = { "onedark", "tokyonight" }
+local mycolors = { "onedark", "tokyonight", "aurora" }
 
 local mini = {
   layout_strategy = "vertical",

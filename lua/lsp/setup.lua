@@ -4,17 +4,11 @@ if not status then
   return
 end
 
-local status, mason_config = pcall(require, "mason-lspconfig")
-if not status then
-  vim.notify("mason-lspconfig not found")
-  return
-end
+local mason_config = require("mason-lspconfig")
 
-local status, lspconfig = pcall(require, "lspconfig")
-if not status then
-  vim.notify("lspconfig not found")
-  return
-end
+local lspconfig = require("lspconfig")
+
+local lsp_signature = require("lsp_signature")
 
 local OS = vim.loop.os_uname().sysname
 local lspServers = {
@@ -92,7 +86,16 @@ for name, config in pairs(servers) do
     config.on_setup(lspconfig[name])
   else
     -- 使用默认参数
-    lspconfig[name].setup({})
+    lspconfig[name].setup({
+      on_attach = function(client, bufnr)
+        lsp_signature.on_attach({
+          bind = true,
+          handler_opts = {
+            border = "rounded",
+          },
+        }, bufnr)
+      end,
+    })
   end
 end
 

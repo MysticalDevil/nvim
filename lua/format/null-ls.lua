@@ -88,4 +88,5 @@ null_ls.setup({
     --   vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
     -- end
   end,
+  require("typescript.extensions.null-ls.code-actions"),
 })
