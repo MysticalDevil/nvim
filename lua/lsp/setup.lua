@@ -29,7 +29,6 @@ local lspServers = {
   "taplo",
   "vimls",
   "yamlls",
-  "zls",
 }
 
 -- :h mason-default-settings

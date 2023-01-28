@@ -324,14 +324,6 @@ packer.startup({
         require("configs.plugin.telescope")
       end,
     })
-    -- telescope-fzf-native.nvim
-    -- FZF sorter for telescope written in c
-    use({
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && \
-             cmake --build build --config Release && \
-             cmake --install build --prefix build",
-    })
     -- todo-comments.nvim
     -- Highlight, list and search todo comments in your projects
     use({
