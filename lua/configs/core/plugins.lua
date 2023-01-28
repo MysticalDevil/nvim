@@ -360,6 +360,14 @@ packer.startup({
         require("configs.plugin.trouble")
       end,
     })
+    -- twilight.nvim
+    -- Dims inactive portions of the code you're editing using TreeSitter.
+    use({
+      "folke/twilight.nvim",
+      config = function()
+        require("configs.plugin.twilight")
+      end,
+    })
     -- urlview.nvim
     -- Neovim plugin for viewing all the URLs in a buffer
     use({
