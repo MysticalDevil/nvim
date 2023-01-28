@@ -96,6 +96,7 @@ packer.startup({
       config = function()
         require("configs.plugin.dashboard")
       end,
+      requires = { "nvim-tree/nvim-web-devicons" },
     })
     -- diffview.nvim
     -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev

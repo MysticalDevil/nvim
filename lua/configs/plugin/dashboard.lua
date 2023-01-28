@@ -1,50 +1,64 @@
-local status, db = pcall(require, "dashboard")
+local status, dashboard = pcall(require, "dashboard")
 if not status then
   vim.notify("dashboard not found", "error")
   return
 end
 
-db.custom_footer = {
-  "",
-  "",
-  "https://github.com/MysticalDevil",
+dashboard.default_executive = "telescope"
+
+local opts = {
+  theme = "hyper",
+  config = {
+    header = {
+      [[]],
+      [[]],
+      [[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
+      [[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
+      [[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
+      [[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
+      [[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
+      [[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+      [[]],
+      [[]],
+    },
+    footer = {
+      "",
+      "https://github.com/MysticalDevil",
+    },
+    week_header = {
+      enable = true,
+    },
+    shortcut = {
+      { desc = "  Update", group = "@property", action = "PackerSync", key = "u" },
+      { desc = "  Projects", group = "Label", action = "Telescope projects", key = "p" },
+      {
+        desc = "ﮦ  Recently files",
+        group = "Label",
+        action = "Telescope oldfiles",
+        key = "r",
+      },
+      {
+        desc = "  Dotfiles",
+        group = "Number",
+        action = "Telescope dotfiles",
+        key = "d",
+      },
+      {
+        desc = "  Edit keybindings",
+        group = "DiagnosticHint",
+        action = "edit ~/.config/nvim/lua/keybindings.lua",
+        key = "ek",
+      },
+    },
+  },
+  hide = {
+    tabline = true,
+    statusline = false,
+    winbar = true,
+  },
+  project = {
+    limit = 6,
+  },
 }
 
-db.custom_center = {
-  {
-    icon = "  ",
-    desc = "Projects                 ",
-    action = "Telescope projects",
-  },
-  {
-    icon = "ﮦ  ",
-    desc = "Recently files           ",
-    action = "Telescope oldfiles",
-  },
-  {
-    icon = "  ",
-    desc = "Edit keybindings         ",
-    action = "edit ~/.config/nvim/lua/keybindings.lua",
-  },
-  {
-    icon = "  ",
-    desc = "Edit Project             ",
-    action = "edit ~/.local/share/nvim/project_nvim/project_history",
-  },
-}
-
-db.custom_header = {
-  [[]],
-  [[]],
-  [[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
-  [[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
-  [[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
-  [[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
-  [[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
-  [[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
-  [[]],
-  [[]],
-}
-
-db.hide_tabline = true
-db.hide_statusline = false
+dashboard.setup(opts)

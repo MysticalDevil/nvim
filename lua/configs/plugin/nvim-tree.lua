@@ -98,7 +98,7 @@ local list_keys = { -- 打开文件或文件夹
 }
 
 local opts = {
-  open_on_setup = true,
+  open_on_setup = false,
   -- 完全禁止内置netrw
   disable_netrw = true,
   -- 不显示 git 状态图标
