@@ -142,6 +142,14 @@ packer.startup({
         require("configs.plugin.icon-picker")
       end,
     })
+    -- inc-rename.nvim
+    -- Incremental LSP renaming based on Neovim's command-preview feature
+    use({
+      "smjonas/inc-rename.nvim",
+      config = function()
+        require("configs.plugin.inc-rename")
+      end,
+    })
     -- indent-blankline.nvim
     -- Indent guides for Neovim
     use({
@@ -300,16 +308,6 @@ packer.startup({
       "ahmedkhalf/project.nvim",
       config = function()
         require("configs.plugin.project")
-      end,
-    })
-    -- renamer.nvim
-    -- VS Code-like renaming UI for Neovim, writen in Lua
-    use({
-      "filipdutescu/renamer.nvim",
-      branch = "master",
-      requires = { { "nvim-lua/plenary.nvim" } },
-      config = function()
-        require("configs.plugin.renamer")
       end,
     })
     -- telescope.nvim

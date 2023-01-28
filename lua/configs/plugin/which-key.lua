@@ -83,7 +83,6 @@ which_key.register({
   ["<leader>w"] = { ":w<CR>", "Save file" },
   ["<leader>q"] = { ":q<CR>", "Quit editor" },
   ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use LSP" },
-  ["<leader>rn"] = { "<CMD>lua vim.lsp.buf.rename()<CR>", "LSP rename" },
   ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
   ["<leader>"] = {
     w = {
