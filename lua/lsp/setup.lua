@@ -1,6 +1,6 @@
 local status, mason = pcall(require, "mason")
 if not status then
-  vim.notify("mason not found", "error")
+  vim.notify("mason.nvim not found", "error")
   return
 end
 
@@ -9,6 +9,8 @@ local mason_config = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 
 local lsp_signature = require("lsp_signature")
+
+local coq = require("coq")
 
 local OS = vim.loop.os_uname().sysname
 local lspServers = {
@@ -95,6 +97,7 @@ for name, config in pairs(servers) do
           },
         }, bufnr)
       end,
+      coq.lsp_ensure_capabilities(),
     })
   end
 end

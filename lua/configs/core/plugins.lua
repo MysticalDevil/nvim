@@ -434,6 +434,9 @@ packer.startup({
     -- nvim-cmp
     -- A completion plugin for neovim coded in Lua.
     use("hrsh7th/nvim-cmp")
+    -- coq_nvim
+    -- Fast as FUCK nvim completion
+    use("ms-jpq/coq_nvim")
     -- Snippet provider
     use("L3MON4D3/LuaSnip")
     use("saadparwaiz1/cmp_luasnip")
@@ -480,6 +483,17 @@ packer.startup({
     -- rust-tools.nvim
     -- Tools for better development in rust using neovim's builtin lsp
     use("simrat39/rust-tools.nvim")
+    -- crates.nvim
+    -- A neovim plugin that helps managing crates.io dependencies
+    use({
+      "saecki/crates.nvim",
+      tag = "v0.3.0",
+      event = { "BufRead Cargo.toml" },
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("configs.plugin.crates")
+      end,
+    })
     -- nvim-nu
     -- Basic editor support for the nushell language
     use({

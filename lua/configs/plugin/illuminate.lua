@@ -6,4 +6,4 @@ end
 
 local opts = {}
 
-illuminate.configure()
+illuminate.configure(opts)

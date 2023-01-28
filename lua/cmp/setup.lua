@@ -73,6 +73,10 @@ cmp.setup({
       name = "path",
       group_index = 2,
     },
+    {
+      name = "crates",
+      group_index = 1,
+    },
   }),
 
   -- 使用 lspkind-nvim 显示类型图标
