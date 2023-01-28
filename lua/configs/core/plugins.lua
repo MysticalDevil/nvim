@@ -180,6 +180,23 @@ packer.startup({
         require("configs.plugin.neoscroll")
       end,
     })
+    -- noice.nvim
+    -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
+    use({
+      "folke/noice.nvim",
+      config = function()
+        require("configs.plugin.noice")
+      end,
+      requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    })
     -- nvim-autopairs
     -- autopairs for neovim written by lua
     use({
