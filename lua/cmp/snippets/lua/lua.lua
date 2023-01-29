@@ -17,21 +17,14 @@ local rep = require("luasnip.extras").rep
 
 local snippets, autosnippets = {}, {}
 
-local myFirstSnippet = s("myFirstSnippet", {
-  t("Hi! That is my frst snippet in Luasnip"),
-  i(1, "placeholder"),
-  t("H1! That is my first snippet in Luasnip"),
-})
-table.insert(snippets, myFirstSnippet)
-
-local mySecondSnippet = s(
-  "mySecondSnippet",
+local exampleSnippet = s(
+  "exampleSnippet",
   fmt(
     [[
-local {} = function({})
-  {}
-end
-]],
+    local {} = function({})
+      {}
+    end
+    ]],
     {
       i(1, " "),
       c(2, { t("aaa"), t("myArg"), t("3333") }),
@@ -39,6 +32,26 @@ end
     }
   )
 )
-table.insert(snippets, mySecondSnippet)
+table.insert(snippets, exampleSnippet)
+
+local pluginConfigSnippet = s(
+  "pluginConfig",
+  fmt(
+    [[
+    local status, {} = pcall(require, {})
+    if not status then
+      vim.notify("{} not found", "error")
+      return
+    end
+    ]],
+    {
+      i(1),
+      i(2, '""'),
+      i(3),
+    }
+  )
+)
+
+table.insert(snippets, pluginConfigSnippet)
 
 return snippets, autosnippets

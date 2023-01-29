@@ -294,6 +294,14 @@ packer.startup({
         require("configs.plugin.project")
       end,
     })
+    -- rest.nvim
+    -- A fast Neovim http client written in Lua
+    use({
+      "rest-nvim/rest.nvim",
+      config = function()
+        require("configs.plugin.rest")
+      end,
+    })
     -- telescope.nvim
     -- Find, Filter, Preview, Pick. All lua, all the time.
     use({
