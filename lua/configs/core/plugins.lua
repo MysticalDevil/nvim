@@ -31,11 +31,11 @@ packer.startup({
     -- Packer.nvim
     -- A use-package inspired plugin manager for Neovim
     use("wbthomason/packer.nvim")
-    -- Plugin list
-    --------------------- colorscheme ---------------------
+    --
+    ----------------------------------------- Colorscheme -----------------------------------------
     -- material.nvim
     -- Material colorscheme for NeoVim
-    use("marko-cerovac/material.nvim")
+    -- use("marko-cerovac/material.nvim")
     -- onedark.nvim
     -- One dark and light colorscheme for neovim
     use({
@@ -46,11 +46,12 @@ packer.startup({
     })
     -- tokyonight.nvim
     -- A clean, dark Neovim theme written in Lua
-    use("folke/tokyonight.nvim")
+    -- use("folke/tokyonight.nvim")
     -- aurora
     -- 24-bit dark theme for (Neo)vim
-    use("ray-x/aurora")
-    ------------------- common plugins --------------------
+    -- use("ray-x/aurora")
+    --
+    --------------------------------------- Common plugins ----------------------------------------
     -- aerial.nvim
     -- Neovim plugin for a code outline window
     use({
@@ -97,15 +98,6 @@ packer.startup({
         require("configs.plugin.dashboard")
       end,
       requires = { "nvim-tree/nvim-web-devicons" },
-    })
-    -- diffview.nvim
-    -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
-    use({
-      "sindrets/diffview.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("configs.plugin.diffview")
-      end,
     })
     -- dotenv.nvim
     -- A minimalist .env support for Neovim
@@ -173,14 +165,6 @@ packer.startup({
     -- lualine-lsp-progress
     -- LSP Progress lualine componenet
     use("arkav/lualine-lsp-progress")
-    -- lsp_signature.nvim
-    -- LSP signature hint as you type
-    use({
-      "ray-x/lsp_signature.nvim",
-      -- config = function()
-      --   require("configs.plugin.lsp_signature")
-      -- end,
-    })
     -- neoscroll.nvim
     -- Smooth scrolling neovim plugin written in lua
     use({
@@ -396,7 +380,26 @@ packer.startup({
       end,
     })
     --
-    ------------------------- LSP -------------------------
+    --------------------------------------------- Git ---------------------------------------------
+    -- gitsigns.nvim
+    -- Git integration for buffers
+    use({
+      "lewis6991/gitsigns.nvim",
+      config = function()
+        require("configs.plugin.gitsigns")
+      end,
+    })
+    -- diffview.nvim
+    -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
+    use({
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("configs.plugin.diffview")
+      end,
+    })
+    --
+    ---------------------------------- Language Server Protocol -----------------------------------
     -- mason.nvim
     -- Portable package manager for Neovim
     use("williamboman/mason.nvim")
@@ -415,6 +418,29 @@ packer.startup({
         require("configs.plugin.lspfuzzy")
       end,
     })
+    -- neodev.nvim
+    -- Neovim setup for init.lua and plugin development with full signature help,
+    -- docs and completion for the nvim lua API
+    use({
+      "folke/neodev.nvim",
+      config = function()
+        require("configs.plugin.neodev")
+      end,
+    })
+    -- null-ls.nvim
+    -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
+    use({
+      "jose-elias-alvarez/null-ls.nvim",
+      requires = "nvim-lua/plenary.nvim",
+    })
+    -- lsp_signature.nvim
+    -- LSP signature hint as you type
+    use({
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("configs.plugin.lsp_signature")
+      end,
+    })
     -- symbols-outline.nvim
     -- A tree like view for symbols in Neovim using the Language Server Protocol
     use({
@@ -423,24 +449,29 @@ packer.startup({
         require("configs.plugin.symbols-outline")
       end,
     })
-    -- nvim-cmp
-    -- A completion plugin for neovim coded in Lua.
-    use("hrsh7th/nvim-cmp")
+    -------------- Complete Engine --------------
     -- coq_nvim
     -- Fast as FUCK nvim completion
     use("ms-jpq/coq_nvim")
+    -- nvim-cmp
+    -- A completion plugin for neovim coded in Lua.
+    use("hrsh7th/nvim-cmp")
     -- Snippet provider
     use("L3MON4D3/LuaSnip")
     use("saadparwaiz1/cmp_luasnip")
     -- Complete Source
-    use("hrsh7th/cmp-vsnip")
-    use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
     use("hrsh7th/cmp-buffer") -- { name = 'buffer' }
-    use("hrsh7th/cmp-path") -- { name = 'path' }
+    use("hrsh7th/cmp-calc") -- { name = 'calc' }
     use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+    use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
     use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
-    -- Common language code snippets
-    use("rafamadriz/friendly-snippets")
+    use("hrsh7th/cmp-path") -- { name = 'path' }
+    use("hrsh7th/cmp-vsnip")
+    -- formatter.nvim
+    -- A format runner for Neovim
+    use("mhartington/formatter.nvim")
+
+    ----------------- UI Import -----------------
     -- lspkind-nvim
     -- vscode-like pictograms for neovim lsp completion items
     use("onsails/lspkind-nvim")
@@ -453,25 +484,21 @@ packer.startup({
         require("configs.plugin.lspsage")
       end,
     })
-    -- formatter.nvim
-    -- A format runner for Neovim
-    use("mhartington/formatter.nvim")
-    -- null-ls.nvim
-    -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
-    use({
-      "jose-elias-alvarez/null-ls.nvim",
-      requires = "nvim-lua/plenary.nvim",
-    })
-    -- TypeScrit.nvim
+
+    --------------- Code Snippets ---------------
+    -- Common language code snippets
+    use("rafamadriz/friendly-snippets")
+
+    -------------- Language Import --------------
+
+    -- TypeScript.nvim
     -- A Lua plugin, written in TypeScript, to write TypeScript (Lua optional)
     use("jose-elias-alvarez/typescript.nvim")
-    -- neodev.nvim
-    -- Neovim setup for init.lua and plugin development with full signature help,
-    -- docs and completion for the nvim lua API
-    use("folke/neodev.nvim")
+
     -- schemastore.nvim
     -- JSON schemas for Neovim
     use("b0o/schemastore.nvim")
+
     -- rust-tools.nvim
     -- Tools for better development in rust using neovim's builtin lsp
     use("simrat39/rust-tools.nvim")
@@ -486,6 +513,7 @@ packer.startup({
         require("configs.plugin.crates")
       end,
     })
+
     -- nvim-nu
     -- Basic editor support for the nushell language
     use({
@@ -494,6 +522,7 @@ packer.startup({
         require("configs.plugin.nu")
       end,
     })
+
     -- go.nvim
     -- Modern Go plugin for Neovim
     use({
@@ -503,15 +532,31 @@ packer.startup({
         require("configs.plugin.go")
       end,
     })
-    -------------------------------------------------------
-    -- gitsigns.nvim
-    -- Git integration for buffers
+    --
+    ----------------------------------- Debug Adapter Protocol ------------------------------------
+    -- nvim-dap
+    -- Debug Adapter Protocol client implementation for Neovim
+    use("mfussenegger/nvim-dap")
+    use("rcarriga/nvim-dap-ui")
+    use("theHamsta/nvim-dap-virtual-text")
+
+    -- nvim-dap-vscode-js
+    -- nvim-dap adapter for vscode-js-debug
     use({
-      "lewis6991/gitsigns.nvim",
+      "mxsdev/nvim-dap-vscode-js",
+      requires = { "mfussenegger/nvim-dap" },
       config = function()
-        require("configs.plugin.gitsigns")
+        require("dap.nvim-dap.config.vscode-js")
       end,
     })
+    -- nvim-dap-go
+    -- An extension for nvim-dap providing configurations for
+    -- launching go debugger (delve) and debugging individual tests
+    use({
+      "leoluz/nvim-dap-go",
+      requires = { "mfussenegger/nvim-dap" },
+    })
+
     -- vimspector
     -- vimspector - A multi-language debugging system for Vim
     use({
@@ -529,32 +574,12 @@ packer.startup({
         require("dap.vimspector")
       end,
     })
-    -------------------------------------------------------
-    -- nvim-dap
-    -- Debug Adapter Protocol client implementation for Neovim
-    use("mfussenegger/nvim-dap")
-    use("theHamsta/nvim-dap-virtual-text")
-    use("rcarriga/nvim-dap-ui")
-
-    -- nvim-dap-vscode-js
-    -- nvim-dap adapter for vscode-js-debug
-    use({
-      "mxsdev/nvim-dap-vscode-js",
-      requires = { "mfussenegger/nvim-dap" },
-      config = function()
-        require("dap.nvim-dap.config.vscode-js")
-      end,
-    })
-
-    -- nvim-dap-go
-    -- An extension for nvim-dap providing configurations for
-    -- launching go debugger (delve) and debugging individual tests
-    use("leoluz/nvim-dap-go")
 
     if packer_bootstrap then
       packer.sync()
     end
   end,
+  ------------------------------------- Packer configurations -------------------------------------
   config = {
     -- 锁定插件版本在 snapshots 目录
     snapshot_path = require("packer.util").join_paths(vim.fn.stdpath("config"), "snapshots"),
