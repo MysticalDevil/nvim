@@ -1,4 +1,4 @@
-local status, rest = pcall(require, "rest")
+local status, rest = pcall(require, "rest-nvim")
 if not status then
   vim.notify("rest.nvim not found", "error")
   return
