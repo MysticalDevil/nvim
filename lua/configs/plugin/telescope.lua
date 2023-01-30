@@ -66,6 +66,7 @@ keymap("n", uTelescope.live_grep, ":Telescope live_grep<CR>")
 
 pcall(telescope.load_extension, "env")
 pcall(telescope.load_extension, "ui-select")
+pcall(telescope.load_extension, "noice")
 
 -- You dont need to set any of these options. These are the default ones. Only
 -- the loading is important

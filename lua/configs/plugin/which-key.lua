@@ -84,6 +84,7 @@ which_key.register({
   ["<leader>q"] = { ":q<CR>", "Quit editor" },
   ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use LSP" },
   ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
+  ["<leader>rn"] = { "<CMD>IncRename", "Rename" },
   ["<leader>"] = {
     w = {
       name = "+save",
@@ -116,6 +117,12 @@ which_key.register({
       q = { "<CMD>TroubleToggle quickfix<CR>", "Open trouble quickfix" },
       l = { "<CMD>TroubleToggle loclist<CR>", "Open trouble loclist" },
       r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
+    },
+    s = {
+      name = "+rest",
+      s = { "<Plug>RestNvim", "Run request under cursor" },
+      p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
+      l = { "<Plug>RestNvimLast", "Re-run the last request" },
     },
   },
   s = {

@@ -40,3 +40,7 @@ local opts = {
 }
 
 rest.setup(opts)
+
+keymap("n", "<leader>ss", "<Plug>RestNvim")
+keymap("n", "<leader>sp", "<Plug>RestNvimPreview")
+keymap("n", "<leader>sl", "<Plug>RestNvimLast")
