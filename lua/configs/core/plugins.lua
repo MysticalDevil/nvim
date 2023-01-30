@@ -540,6 +540,10 @@ packer.startup({
         require("configs.plugin.go")
       end,
     })
+
+    -- semshi
+    -- Semantic Highlighting for Python in Neovim
+    use("numirias/semshi")
     --
     ----------------------------------- Debug Adapter Protocol ------------------------------------
     -- nvim-dap
