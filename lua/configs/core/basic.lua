@@ -31,8 +31,8 @@ vim.o.smartindent = true
 -- 搜索大小写不敏感，除非包含大写
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- 搜索不高亮
-vim.o.hlsearch = false
+-- 搜索高亮
+vim.o.hlsearch = true
 -- 边输入边搜索
 vim.o.incsearch = false
 -- 命令行高为2

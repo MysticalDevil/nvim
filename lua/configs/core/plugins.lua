@@ -206,6 +206,14 @@ packer.startup({
         require("configs.plugin.nvim-colorizer")
       end,
     })
+    -- nvim-hlslens
+    -- Hlsearch Lens for Neovim
+    use({
+      "kevinhwang91/nvim-hlslens",
+      config = function()
+        require("configs.plugin.hlslens")
+      end,
+    })
     -- nvim-notify
     -- A fancy, configurable, notification manager for NeoVim
     use({
