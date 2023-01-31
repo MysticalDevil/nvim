@@ -29,7 +29,7 @@ local opts = {
   messages = {
     -- NOTE: If you enable messages, then the cmdline is enabled automatically.
     -- This is a current Neovim limitation.
-    enabled = false, -- enables the Noice messages UI
+    enabled = true, -- enables the Noice messages UI
     view = "notify", -- default view for messages
     view_error = "notify", -- view for errors
     view_warn = "notify", -- view for warnings
@@ -111,7 +111,7 @@ local opts = {
       --- @type NoiceFormat|string
       format_done = "lsp_progress_done",
       throttle = 1000 / 30, -- frequency to update lsp progress message
-      -- view = "mini",
+      view = "mini",
     },
     override = {
       -- override the default lsp markdown formatter with Noice
@@ -122,7 +122,7 @@ local opts = {
       ["cmp.entry.get_documentation"] = true,
     },
     hover = {
-      enabled = true,
+      enabled = false,
       view = nil, -- when nil, use defaults from documentation
       ---@type NoiceViewOptions
       opts = {}, -- merged with defaults from documentation
@@ -189,7 +189,7 @@ local opts = {
     command_palette = true, -- position the cmdline and popupmenu together
     long_message_to_split = true, -- long messages will be sent to a split
     inc_rename = true, -- enables an input dialog for inc-rename.nvim
-    lsp_doc_border = true, -- add a border to hover docs and signature help
+    lsp_doc_border = false, -- add a border to hover docs and signature help
   },
   throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
   ---@type NoiceConfigViews
