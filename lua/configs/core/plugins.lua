@@ -503,11 +503,23 @@ packer.startup({
     use("onsails/lspkind-nvim")
     -- lspsage.nvim
     -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
+    -- use({
+    --   "glepnir/lspsaga.nvim",
+    --   branch = "main",
+    --   config = function()
+    --     require("configs.plugin.lspsage")
+    --   end,
+    -- })
+    -- navigator.lua
+    -- Source code analysis & navigation plugin for Neovim
     use({
-      "glepnir/lspsaga.nvim",
-      branch = "main",
+      "ray-x/navigator.lua",
+      requires = {
+        { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+        { "neovim/nvim-lspconfig" },
+      },
       config = function()
-        require("configs.plugin.lspsage")
+        require("configs.plugin.navigator")
       end,
     })
 

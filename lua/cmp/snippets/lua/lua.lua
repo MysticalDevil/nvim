@@ -1,16 +1,16 @@
-local status, ls = pcall(require, "luasnip")
+local status, luasnip = pcall(require, "luasnip")
 if not status then
   return
 end
 
-local s = ls.s --> snippet
-local i = ls.i --> insert node
-local t = ls.t --> text node
+local s = luasnip.s --> snippet
+local i = luasnip.i --> insert node
+local t = luasnip.t --> text node
 
-local d = ls.dytnamic_node
-local c = ls.choice_node
-local f = ls.function_node
-local sn = ls.snippet_node
+local d = luasnip.dytnamic_node
+local c = luasnip.choice_node
+local f = luasnip.function_node
+local sn = luasnip.snippet_node
 
 local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep

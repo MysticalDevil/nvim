@@ -13,6 +13,7 @@ local opts = {
       ["cmp.entry.get_documentation"] = true,
     },
     signature = { enabled = false },
+    hover = { enabled = false },
   },
   -- you can enable a preset for easier configuration
   presets = {
