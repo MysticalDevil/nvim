@@ -81,6 +81,10 @@ cmp.setup({
       name = "crates",
       group_index = 1,
     },
+    {
+      name = "cmdline",
+      group_index = 1,
+    },
   }),
 
   -- 使用 lspkind-nvim 显示类型图标
