@@ -165,6 +165,17 @@ packer.startup({
     -- lualine-lsp-progress
     -- LSP Progress lualine componenet
     use("arkav/lualine-lsp-progress")
+    -- neogen
+    -- A better annotation generator
+    use({
+      "danymat/neogen",
+      config = function()
+        require("configs.plugin.neogen")
+      end,
+      requires = "nvim-treesitter/nvim-treesitter",
+      -- Uncomment next line if you want to follow only stable versions
+      -- tag = "*"
+    })
     -- neoscroll.nvim
     -- Smooth scrolling neovim plugin written in lua
     use({
