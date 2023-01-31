@@ -128,5 +128,3 @@ treesitter.setup(opts)
 -- 开启 Folding 模块
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
--- 默认不折叠
-vim.opt.foldlevel = 99

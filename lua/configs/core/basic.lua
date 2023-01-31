@@ -82,5 +82,9 @@ vim.o.showmode = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
 
--- GUI 配置
-vim.opt.guifont = { "Fira Code", ":h10" }
+-- 代码折叠配置
+-- 默认不折叠
+vim.o.foldlevel = 99
+vim.o.foldcolumn = "1"
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
