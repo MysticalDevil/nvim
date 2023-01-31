@@ -311,6 +311,15 @@ packer.startup({
         require("configs.plugin.rest")
       end,
     })
+    -- sniprun
+    -- A neovim plugin to run lines/blocs of code
+    use({
+      "michaelb/sniprun",
+      run = "bash ./install.sh",
+      config = function()
+        require("configs.plugin.sniprun")
+      end,
+    })
     -- telescope.nvim
     -- Find, Filter, Preview, Pick. All lua, all the time.
     use({
