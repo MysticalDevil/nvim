@@ -286,6 +286,15 @@ packer.startup({
         require("configs.plugin.nvim-treesitter-context")
       end,
     })
+    -- nvim-ufo
+    -- Not UFO in the sky, but an ultra fold in Neovim
+    use({
+      "kevinhwang91/nvim-ufo",
+      requires = "kevinhwang91/promise-async",
+      config = function()
+        require("configs.plugin.nvim-ufo")
+      end,
+    })
     -- project.nvim
     -- The superior project management solution for neovim
     use({
