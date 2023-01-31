@@ -118,10 +118,16 @@ which_key.register({
       r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
     },
     s = {
-      name = "+rest",
+      name = "+plugins",
       s = { "<Plug>RestNvim", "Run request under cursor" },
       p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
       l = { "<Plug>RestNvimLast", "Re-run the last request" },
+      r = {
+        function()
+          require("ssr").open()
+        end,
+        "Replace by ssr.nvim",
+      },
     },
   },
   s = {

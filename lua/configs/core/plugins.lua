@@ -328,6 +328,16 @@ packer.startup({
         require("configs.plugin.sniprun")
       end,
     })
+    -- ssr.nvim
+    -- Treesitter based structural search and replace plugin for Neovim
+    use({
+      "cshuaimin/ssr.nvim",
+      module = "ssr",
+      -- Calling setup is optional.
+      config = function()
+        require("configs.plugin.ssr")
+      end,
+    })
     -- telescope.nvim
     -- Find, Filter, Preview, Pick. All lua, all the time.
     use({
