@@ -129,6 +129,52 @@ which_key.register({
         "Replace by ssr.nvim",
       },
     },
+    d = {
+      name = "+debug",
+      d = { "<CMD>RustDebuggables<CR>", "Start debugger" },
+      e = {
+        ":lua require('dap').close()<CR>"
+          .. ":lua require('dap').terminate()<CR>"
+          .. ":lua require('dap.repl').close()<CR>"
+          .. ":lua require('dapui').close()<CR>"
+          .. ":lua require('dap').clear_breakpoints()<CR>"
+          .. "<C-w>o<CR>",
+        "End debugger",
+      },
+      c = { "<CMD>lua require('dap').continue()<CR>", "Continue debug" },
+      t = { "<CMD>lua require('dap').toggle_breakpoint()<CR>", "Set breakpoint" },
+      T = { "<CMD>lua require('dap').clear_breakpoints()<CR>", "Clear breakpoint" },
+      j = { "<CMD>lua require('dap').step_over()<CR>", "Step over" },
+      k = { "<CMD>lua require('dap').step_out()<CR>", "Step out" },
+      l = { "<CMD>lua require('dap').step_into()<CR>", "Step into" },
+      h = { "<CMD>lua require('dapui').eval()<CR>", "Popups dapUI eval" },
+    },
+    -- g = {
+    --   name = "+git",
+    --   j = {},
+    --   k = {},
+    --   s = {},
+    --   S = {},
+    --   u = {},
+    --   r = {},
+    --   R = {},
+    --   p = {},
+    --   b = {},
+    --   d = {},
+    --   D = {},
+    --   t = {
+    --     name = "+toggle",
+    --     d = {},
+    --     D = {},
+    --   },
+    -- },
+    r = {
+      name = "+rust",
+      r = { "<CMD>lua require('rust-tools.runnables').runnables()<CR>", "Run runnables" },
+      h = { "<CMD>lua require('rust-tools.hover_actions').hover_actions()<CR>", "Hover actions" },
+      a = { "<CMD>lua require('rust-tools.code_action_group').code_action_group()<CR>", "Code actions" },
+      d = { "<CMD> lua require('rust-tools.debuggables).debuggables()<CR>", "Start debug" },
+    },
   },
   s = {
     name = "+split",

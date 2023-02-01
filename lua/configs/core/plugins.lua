@@ -536,7 +536,7 @@ packer.startup({
     --   "glepnir/lspsaga.nvim",
     --   branch = "main",
     --   config = function()
-    --     require("configs.plugin.lspsage")
+    --     require("configs.plugin.lspsaga")
     --   end,
     -- })
     -- navigator.lua
@@ -568,7 +568,12 @@ packer.startup({
 
     -- rust-tools.nvim
     -- Tools for better development in rust using neovim's builtin lsp
-    use("simrat39/rust-tools.nvim")
+    use({
+      "simrat39/rust-tools.nvim",
+      config = function()
+        require("configs.plugin.rust-tools")
+      end,
+    })
     -- crates.nvim
     -- A neovim plugin that helps managing crates.io dependencies
     use({

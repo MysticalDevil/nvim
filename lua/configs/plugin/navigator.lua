@@ -104,16 +104,16 @@ local opts = {
       },
     },
     -- the lsp setup can be a function, .e.g
-    gopls = function()
-      local go = pcall(require, "go")
-      if go then
-        local cfg = require("go.lsp").config()
-        cfg.on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false -- efm/null-ls
-        end
-        return cfg
-      end
-    end,
+    -- gopls = function()
+    --   local go = pcall(require, "go")
+    --   if go then
+    --     local cfg = require("go.lsp").config()
+    --     cfg.on_attach = function(client)
+    --       client.server_capabilities.documentFormattingProvider = false -- efm/null-ls
+    --     end
+    --     return cfg
+    --   end
+    -- end,
 
     sumneko_lua = {
       sumneko_root_path = vim.fn.expand("$HOME") .. "/github/sumneko/lua-language-server",
@@ -124,6 +124,9 @@ local opts = {
     -- can put them in the `servers` list and navigator will auto load them.
     -- you could still specify the custom config  like this
     -- cmake = {filetypes = {'cmake', 'makefile'}, single_file_support = false},
+    disable_lsp = {
+      "rust_analyzer",
+    },
   },
 }
 

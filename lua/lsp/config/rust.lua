@@ -11,6 +11,9 @@ local opts = {
       checkOnSave = {
         command = "clippy",
       },
+      cargo = {
+        autoReload = true,
+      },
     },
   },
 }
