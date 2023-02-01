@@ -6,8 +6,8 @@ end
 
 local opts = {
   "*",
-  css = { rgb_fn = true, hls_fn = true },
-  html = { names = false, rgb_fn = true, hls_fn = true },
+  css = { rgb_fn = true, hsl_fn = true },
+  html = { names = false, rgb_fn = true, hsl_fn = true },
 }
 
 colorizer.setup(opts)
