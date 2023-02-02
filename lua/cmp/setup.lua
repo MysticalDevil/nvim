@@ -83,7 +83,7 @@ cmp.setup({
     },
     {
       name = "cmdline",
-      group_index = 1,
+      group_index = 2,
     },
   }),
 
