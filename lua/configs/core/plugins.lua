@@ -218,6 +218,12 @@ packer.startup({
         require("configs.plugin.nvim-autopairs")
       end,
     })
+    -- nvim-code-action-menu
+    -- Pop-up menu for code actions to show meta-information and diff preview
+    require("packer").use({
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu",
+    })
     -- nvim-colorizer.lua
     -- The fastest Neovim colorizer
     use({

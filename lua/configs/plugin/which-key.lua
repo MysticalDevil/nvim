@@ -82,8 +82,9 @@ which_key.setup(opts)
 which_key.register({
   ["<leader>w"] = { ":w<CR>", "Save file" },
   ["<leader>q"] = { ":q<CR>", "Quit editor" },
-  ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use LSP" },
-  ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
+  ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use builtin LSP" },
+  -- ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
+  ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action menu" },
   ["<leader>"] = {
     w = {
       name = "+save",
