@@ -7,12 +7,19 @@ local opts = {
     -- https://github.com/rhysd/fixjson
     common.disableFormat(client)
     common.keyAttach(bufnr)
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    }, bufnr)
   end,
   settings = {
     json = {
       schemas = require("schemastore").json.schemas(),
     },
   },
+  require("coq").lsp_ensure_capabilities(),
 }
 
 return {

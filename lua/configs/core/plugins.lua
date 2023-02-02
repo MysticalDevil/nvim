@@ -474,6 +474,13 @@ packer.startup({
     -- Portable package manager for Neovim
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
+    use({
+      "jay-babu/mason-null-ls.nvim",
+      require = {
+        "williamboman/mason.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
+      },
+    })
     -- LSP config
     use("neovim/nvim-lspconfig")
     -- nvim-lspfuzzy

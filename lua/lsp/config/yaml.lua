@@ -4,6 +4,12 @@ local opts = {
   flags = common.flags,
   on_attach = function(_, bufnr)
     common.keyAttach(bufnr)
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    }, bufnr)
   end,
   settings = {
     yaml = {
@@ -16,6 +22,7 @@ local opts = {
       },
     },
   },
+  require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(server)

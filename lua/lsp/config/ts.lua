@@ -24,6 +24,12 @@ local opts = {
   on_attach = function(client, bufnr)
     common.disableFormat(client)
     common.keyAttach(bufnr)
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    }, bufnr)
     -- defaults
     ts_utils.setup({
       debug = false,
@@ -78,6 +84,7 @@ local opts = {
     -- no default maps, so you may want to define some here
     keybindings.mapTsLSP(bufnr)
   end,
+  require("coq").lsp_ensure_capabilities(),
 }
 
 return {

@@ -66,6 +66,10 @@ local opts = {
     -- If you using null-ls and want null-ls format your code
     -- you should disable all other lsp and allow only null-ls.
     -- disable_lsp = {'pylsd', 'sqlls'},  -- prevents navigator from setting up this list of servers.
+    disable_lsp = {
+      "rust_analyzer",
+      "gopls",
+    },
     -- if you use your own LSP setup, and don't want navigator to setup
     -- any LSP server for you, use `disable_lsp = "all"`.
     -- you may need to add this to your own on_attach hook:
@@ -97,7 +101,7 @@ local opts = {
         -- your special on attach here
         -- e.g. disable gopls format because a known issue https://github.com/golang/go/issues/45732
         print("i am a hook, I will disable document format")
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
       end,
       settings = {
         gopls = { gofumpt = false }, -- disable gofumpt etc,
@@ -124,9 +128,6 @@ local opts = {
     -- can put them in the `servers` list and navigator will auto load them.
     -- you could still specify the custom config  like this
     -- cmake = {filetypes = {'cmake', 'makefile'}, single_file_support = false},
-    disable_lsp = {
-      "rust_analyzer",
-    },
   },
 }
 

@@ -12,6 +12,12 @@ local opts = {
   on_attach = function(client, bufnr)
     -- common.disableFormat(client)
     common.keyAttach(bufnr)
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    }, bufnr)
 
     --[[
         :TypescriptOrganizeImports
@@ -30,6 +36,7 @@ local opts = {
     keymap("n", uConfig.lsp.ts_fix_all, ":TypescriptFixAll<CR>", bufopts)
     keymap("n", uConfig.lsp.ts_goto_source, ":TypescriptGoToSourceDefinition<CR>", bufopts)
   end,
+  require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(_)

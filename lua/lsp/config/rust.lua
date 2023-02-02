@@ -5,6 +5,12 @@ local opts = {
   on_attach = function(client, bufnr)
     common.disableFormat(client)
     common.keyAttach(bufnr)
+    require("lsp_signature").on_attach({
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    }, bufnr)
   end,
   settings = {
     ["rust-analyzer"] = {
@@ -24,6 +30,7 @@ local opts = {
       },
     },
   },
+  require("coq").lsp_ensure_capabilities(),
 }
 
 return {
