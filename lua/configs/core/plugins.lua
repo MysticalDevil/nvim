@@ -107,12 +107,24 @@ packer.startup({
         require("configs.plugin.dotenv")
       end,
     })
+    -- dressing.nvim
+    -- Neovim plugin to improve the default vim.ui interfaces
+    use("stevearc/dressing.nvim")
     -- fidget.nvim
     -- Standalone UI for nvim-lsp progress
     use({
       "j-hui/fidget.nvim",
       config = function()
         require("configs.plugin.fidget")
+      end,
+    })
+    -- hlargs.nvim
+    -- Highlight arguments' definitions and usages, using Treesitter
+    use({
+      "m-demare/hlargs.nvim",
+      requires = { "nvim-treesitter/nvim-treesitter" },
+      config = function()
+        require("configs.plugin.hlargs")
       end,
     })
     -- hydra.nvim
@@ -123,9 +135,6 @@ packer.startup({
         require("configs.plugin.hydra")
       end,
     })
-    -- dressing.nvim
-    -- Neovim plugin to improve the default vim.ui interfaces
-    use("stevearc/dressing.nvim")
     -- icon-picker.nvim
     -- This is a Neovim plugin that helps you pick Nerd Font Icons, Symbols & Emojis
     use({
