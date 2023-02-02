@@ -17,7 +17,7 @@ null_ls.setup({
     -- StyLua
     formatting.stylua,
     -- frontend
-    formatting.prettier.with({ -- 比默认少了 markdown
+    formatting.prettier.with({
       filetypes = {
         "javascript",
         "javascriptreact",
@@ -62,13 +62,8 @@ null_ls.setup({
     diagnostics.eslint_d.with({
       prefer_local = "node_modules/.bin",
     }),
-    -- diagnostics.markdownlint,
-    -- markdownlint-cli2
-    -- diagnostics.markdownlint.with({
-    --   prefer_local = "node_modules/.bin",
-    --   command = "markdownlint-cli2",
-    --   args = { "$FILENAME", "#node_modules" },
-    -- }),
+    -- revive -- golang linter
+    diagnostics.revive,
     --
     -- code actions ---------------------
     code_actions.gitsigns,

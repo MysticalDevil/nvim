@@ -13,6 +13,7 @@ local opts = {
         unusedparams = true,
       },
       staticcheck = true,
+      gofumpt = true,
     },
   },
 }
