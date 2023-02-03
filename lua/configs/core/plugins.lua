@@ -143,6 +143,9 @@ packer.startup({
         require("configs.plugin.icon-picker")
       end,
     })
+    -- impatient.nvim
+    -- Improve startup time for Neovim
+    use("lewis6991/impatient.nvim")
     -- inc-rename.nvim
     -- Incremental LSP renaming based on Neovim's command-preview feature
     use({
