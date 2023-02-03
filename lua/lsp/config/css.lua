@@ -33,7 +33,7 @@ local opts = {
       },
     },
   },
-  require("coq").lsp_ensure_capabilities(),
+  -- require("coq").lsp_ensure_capabilities(),
 }
 
 return {

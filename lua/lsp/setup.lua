@@ -10,7 +10,7 @@ local lspconfig = require("lspconfig")
 
 local lsp_signature = require("lsp_signature")
 
-local coq = require("coq")
+-- local coq = require("coq")
 
 local OS = vim.loop.os_uname().sysname
 local lspServers = {
@@ -96,7 +96,7 @@ for name, config in pairs(servers) do
           },
         }, bufnr)
       end,
-      coq.lsp_ensure_capabilities(),
+      -- coq.lsp_ensure_capabilities(),
     })
   end
 end

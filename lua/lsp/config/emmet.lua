@@ -13,7 +13,7 @@ local opts = {
     }, bufnr)
   end,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
-  require("coq").lsp_ensure_capabilities(),
+  -- require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(server)

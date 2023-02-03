@@ -529,7 +529,7 @@ packer.startup({
     -------------- Complete Engine --------------
     -- coq_nvim
     -- Fast as FUCK nvim completion
-    use("ms-jpq/coq_nvim")
+    -- use("ms-jpq/coq_nvim")
     -- nvim-cmp
     -- A completion plugin for neovim coded in Lua.
     use("hrsh7th/nvim-cmp")

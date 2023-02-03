@@ -36,7 +36,7 @@ local opts = {
     keymap("n", uConfig.lsp.ts_fix_all, ":TypescriptFixAll<CR>", bufopts)
     keymap("n", uConfig.lsp.ts_goto_source, ":TypescriptGoToSourceDefinition<CR>", bufopts)
   end,
-  require("coq").lsp_ensure_capabilities(),
+  -- require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(_)

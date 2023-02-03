@@ -84,7 +84,7 @@ local opts = {
     -- no default maps, so you may want to define some here
     keybindings.mapTsLSP(bufnr)
   end,
-  require("coq").lsp_ensure_capabilities(),
+  -- require("coq").lsp_ensure_capabilities(),
 }
 
 return {

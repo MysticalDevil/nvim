@@ -9,7 +9,7 @@ local opts = {
       },
     }, bufnr)
   end,
-  require("coq").lsp_ensure_capabilities(),
+  -- require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(server)
