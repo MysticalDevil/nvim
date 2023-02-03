@@ -14,7 +14,7 @@ local config = require("configs.core.uConfig")
 
 local mapping = {
   -- 出现补全
-  [config.keys.cmp_complete] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+  [config.keys.cmp_complete] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
   -- 取消
   [config.keys.cmp_abort] = cmp.mapping({
     i = cmp.mapping.abort(),
@@ -75,7 +75,7 @@ cmp.setup({
     },
     {
       name = "calc",
-      group_index = 2,
+      group_index = 3,
     },
     {
       name = "crates",
@@ -117,6 +117,15 @@ cmp.setup.filetype({ "markdown", "help" }, {
   }, {
     name = "path",
   } },
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype("gitcommit", {
+  sources = cmp.config.sources({
+    { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = "buffer" },
+  }),
 })
 
 require("cmp.luasnip")
