@@ -29,7 +29,7 @@ local opts = {
       enable = true,
     },
     shortcut = {
-      { desc = "  Update", group = "@property", action = "PackerSync", key = "u" },
+      { desc = "  Update", group = "@property", action = "LazySync", key = "u" },
       { desc = "  Projects", group = "Label", action = "Telescope projects", key = "p" },
       {
         desc = "ﮦ  Recently files",
