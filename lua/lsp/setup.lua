@@ -88,7 +88,7 @@ for name, config in pairs(servers) do
   else
     -- 使用默认参数
     lspconfig[name].setup({
-      on_attach = function(client, bufnr)
+      on_attach = function(_, bufnr)
         lsp_signature.on_attach({
           bind = true,
           handler_opts = {

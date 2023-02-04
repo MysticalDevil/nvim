@@ -85,6 +85,12 @@ which_key.register({
   ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use builtin LSP" },
   -- ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
   ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action menu" },
+  ["<leader>k"] = {
+    function()
+      vim.lsp.buf.signature_help()
+    end,
+    "Toggle signature",
+  },
   ["<leader>"] = {
     w = {
       name = "+save",
