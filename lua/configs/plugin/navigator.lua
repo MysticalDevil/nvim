@@ -67,8 +67,24 @@ local opts = {
     -- you should disable all other lsp and allow only null-ls.
     -- disable_lsp = {'pylsd', 'sqlls'},  -- prevents navigator from setting up this list of servers.
     disable_lsp = {
-      "rust_analyzer",
+      "clangd",
+      "cmake",
+      "cssls",
+      "cssmodules_ls",
+      "dockerls",
+      "emmet_ls",
+      "html",
       "gopls",
+      "jsonls",
+      "pylsp",
+      "rust_analyzer",
+      "sumneko_lua",
+      "tsserver",
+      "taplo",
+      "vimls",
+      "vuels",
+      "yamlls",
+      "zls",
     },
     -- if you use your own LSP setup, and don't want navigator to setup
     -- any LSP server for you, use `disable_lsp = "all"`.

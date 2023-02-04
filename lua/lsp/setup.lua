@@ -17,6 +17,7 @@ local lspServers = {
   "clangd",
   "cmake",
   "cssls",
+  "cssmodules_ls",
   "dockerls",
   "emmet_ls",
   "gopls",
@@ -28,6 +29,7 @@ local lspServers = {
   "tsserver",
   "taplo",
   "vimls",
+  "vuels",
   "yamlls",
 }
 
@@ -65,6 +67,7 @@ local servers = {
   clangd = require("lsp.config.common"),
   cmake = require("lsp.config.common"),
   cssls = require("lsp.config.css"),
+  cssmodules_ls = require("lsp.config.common"),
   dockerls = require("lsp.config.common"),
   emmet_ls = require("lsp.config.emmet"),
   gopls = require("lsp.config.gopls"),
@@ -77,6 +80,7 @@ local servers = {
   tsserver = require("lsp.config.typescript"),
   taplo = require("lsp.config.toml"),
   vimls = require("lsp.config.common"),
+  vuels = require("lsp.config.common"),
   yamlls = require("lsp.config.yaml"),
   zls = require("lsp.config.common"),
 }
