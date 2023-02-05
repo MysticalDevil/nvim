@@ -13,6 +13,7 @@ local opts = {
         border = "rounded",
       },
     }, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end,
   settings = {
     json = {

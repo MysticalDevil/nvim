@@ -6,6 +6,8 @@ end
 
 local colors = require("onedark.colors")
 
+local navic = require("nvim-navic")
+
 local aerial = {
   "aerial",
 
@@ -24,6 +26,11 @@ local aerial = {
   dense_sep = ".", -- The separator to be used to separate symbols in dense mode.
 
   colored = true, -- Color the symbol icons.
+}
+
+local nvim_navic = {
+  navic.get_location,
+  cond = navic.is_available,
 }
 
 local diagnostics = {
@@ -110,7 +117,7 @@ local opts = {
   },
   winbar = {
     lualine_a = { diagnostics },
-    lualine_b = { aerial },
+    lualine_b = { nvim_navic },
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},

@@ -53,6 +53,20 @@ lazy.setup({
       require("configs.plugin.aerial")
     end,
   },
+  -- barbecue.nvim
+  -- A VS Code like winbar for Neovim
+  -- {
+  --   "utilyre/barbecue.nvim",
+  --   name = "barbecue",
+  --   version = "*",
+  --   dependencies = {
+  --     "SmiteshP/nvim-navic",
+  --     "nvim-tree/nvim-web-devicons", -- optional dependency
+  --   },
+  --   opts = {
+  --     -- configurations go here
+  --   },
+  -- },
   -- beacon.nvim
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
@@ -234,6 +248,14 @@ lazy.setup({
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("configs.plugin.hlslens")
+    end,
+  },
+  -- nvim-navic
+  {
+    "SmiteshP/nvim-navic",
+    dependencies = "neovim/nvim-lspconfig",
+    config = function()
+      require("configs.plugin.navic")
     end,
   },
   -- nvim-notify

@@ -11,6 +11,7 @@ local opts = {
         border = "rounded",
       },
     }, bufnr)
+    require("nvim-navic").attach(client, bufnr)
   end,
   -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim
   settings = {

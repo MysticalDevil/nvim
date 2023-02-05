@@ -10,6 +10,8 @@ local lspconfig = require("lspconfig")
 
 local lsp_signature = require("lsp_signature")
 
+local navic = require("nvim-navic")
+
 -- local coq = require("coq")
 
 local OS = vim.loop.os_uname().sysname
@@ -99,6 +101,7 @@ for name, config in pairs(servers) do
             border = "rounded",
           },
         }, bufnr)
+        navic.attach(client, bufnr)
       end,
       -- coq.lsp_ensure_capabilities(),
     })

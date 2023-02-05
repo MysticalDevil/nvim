@@ -30,6 +30,7 @@ local opts = {
         border = "rounded",
       },
     }, bufnr)
+    require("nvim-navic").attach(client, bufnr)
     -- defaults
     ts_utils.setup({
       debug = false,
