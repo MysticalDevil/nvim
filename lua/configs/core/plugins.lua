@@ -550,25 +550,26 @@ lazy.setup({
   "onsails/lspkind-nvim",
   -- lspsage.nvim
   -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
-  --  {
-  --   "glepnir/lspsaga.nvim",
-  --   branch = "main",
-  --   config = function()
-  --     require("configs.plugin.lspsaga",
-  --   end,
-  --  },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "BufRead",
+    config = function()
+      require("configs.plugin.lspsaga")
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
   -- navigator.lua
   -- Source code analysis & navigation plugin for Neovim
-  {
-    "ray-x/navigator.lua",
-    dependencies = {
-      { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
-      { "neovim/nvim-lspconfig" },
-    },
-    config = function()
-      require("configs.plugin.navigator")
-    end,
-  },
+  -- {
+  --   "ray-x/navigator.lua",
+  --   dependencies = {
+  --     { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
+  --     { "neovim/nvim-lspconfig" },
+  --   },
+  --   config = function()
+  --     require("configs.plugin.navigator")
+  --   end,
+  -- },
 
   --------------- Code Snippets ---------------
   -- Common language code snippets

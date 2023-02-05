@@ -83,8 +83,8 @@ which_key.register({
   ["<leader>w"] = { ":w<CR>", "Save file" },
   ["<leader>q"] = { ":q<CR>", "Quit editor" },
   ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use builtin LSP" },
-  -- ["<leader>ca"] = { "<CMD>lua vim.lsp.buf.code_action()<CR>", "LSP code action" },
-  ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action menu" },
+  -- LSP keybinding
+  ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
   ["<leader>k"] = {
     function()
       vim.lsp.buf.signature_help()
@@ -208,8 +208,21 @@ which_key.register({
   zz = { ":foldclose<CR>", "Close code block toggle" },
   g = {
     name = "+LSP",
-    d = { "", "Go to definition" },
-    r = { "", "Go to references" },
+    d = {
+      function()
+        require("telescope.builtin").lsp_definitions({
+          initial_mode = "normal",
+          -- ignore_filename = false,
+        })
+      end,
+      "Go to definition",
+    },
+    r = {
+      function()
+        require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
+      end,
+      "Go to references",
+    },
     h = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Hover function definition" },
     p = { "<CMD>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
     j = { "<CMD>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic" },
