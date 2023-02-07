@@ -1,9 +1,8 @@
 -- Auto install lazy.nvim
-local fn = vim.fn
-local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.notify("lazt.nvim is being installed, please wait..", "info")
-  fn.system({
+  vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
@@ -668,24 +667,6 @@ lazy.setup({
   {
     "leoluz/nvim-dap-go",
     dependencies = { "mfussenegger/nvim-dap" },
-  },
-
-  -- vimspector
-  -- vimspector - A multi-language debugging system for Vim
-  {
-    "puremourning/vimspector",
-    cmd = {
-      "VimspectorInstall",
-      "VimspectorUpdate",
-    },
-    fn = {
-      "vimspector#Launch()",
-      "vimspector#ToggleBreakpoint",
-      "vimspector#Continue",
-    },
-    config = function()
-      require("dap.vimspector")
-    end,
   },
 }, {
   checker = {
