@@ -65,8 +65,8 @@ end
 -- key 必须为下列网址列出的 server name
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
-  bashls = require("lsp.config.common"),
-  clangd = require("lsp.config.common"),
+  bashls = require("lsp.config.bash"),
+  clangd = require("lsp.config.clangd"),
   cmake = require("lsp.config.common"),
   cssls = require("lsp.config.css"),
   cssmodules_ls = require("lsp.config.common"),
@@ -94,7 +94,7 @@ for name, config in pairs(servers) do
   else
     -- 使用默认参数
     lspconfig[name].setup({
-      on_attach = function(_, bufnr)
+      on_attach = function(client, bufnr)
         lsp_signature.on_attach({
           bind = true,
           handler_opts = {

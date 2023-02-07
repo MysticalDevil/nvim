@@ -14,7 +14,17 @@ local opts = {
     require("nvim-navic").attach(client, bufnr)
   end,
   -- require("coq").lsp_ensure_capabilities(),
-  settings = {},
+  settings = {
+    cmd = { "bash-language-server", "start" },
+    cmd_env = {
+      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)",
+    },
+    filetype = {
+      "sh",
+      "zsh",
+      "bash",
+    },
+  },
 }
 return {
   on_setup = function(server)
