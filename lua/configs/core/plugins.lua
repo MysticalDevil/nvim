@@ -265,6 +265,9 @@ lazy.setup({
       require("configs.plugin.nvim-notify")
     end,
   },
+  -- nvim-qt
+  -- Neovim client library and GUI
+  "equalsraf/neovim-gui-shim",
   -- nvim-regexplainer
   -- Describe the regexp under the cursor
   {

@@ -19,8 +19,3 @@ require("cmp.setup")
 require("format.setup")
 -- DAP
 require("dap.setup")
-
--- local vim_scripts = vim.fn.stdpath("config") .. "/vim"
--- -- Neovide
--- vim.cmd.source(vim_scripts .. "/neovide.vim")
-require("configs.gui.neovide")
