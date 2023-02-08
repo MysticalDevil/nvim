@@ -503,18 +503,6 @@ lazy.setup({
   },
   -- LSP config
   "neovim/nvim-lspconfig",
-  -- nvim-lspfuzzy
-  -- A Neovim plugin to make the LSP client use FZF
-  {
-    "ojroques/nvim-lspfuzzy",
-    dependencies = {
-      { "junegunn/fzf" },
-      { "junegunn/fzf.vim" }, -- to enable preview (optional)
-    },
-    config = function()
-      require("configs.plugin.lspfuzzy")
-    end,
-  },
   -- neodev.nvim
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
