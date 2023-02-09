@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-dashboard.default_executive = "telescope"
-
 local opts = {
   theme = "hyper",
   config = {
@@ -57,8 +55,9 @@ local opts = {
     winbar = true,
   },
   project = {
-    limit = 6,
+    limit = 4,
   },
+  default_executive = "telescope",
 }
 
 dashboard.setup(opts)

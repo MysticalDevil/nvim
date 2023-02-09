@@ -19,7 +19,7 @@ if not status_ok then
   return
 end
 
-lazy.setup({
+local list = {
   -- lazy.nvim
   -- A modern plugin manager for Neovim
   "folke/lazy.nvim",
@@ -659,7 +659,9 @@ lazy.setup({
     "leoluz/nvim-dap-go",
     dependencies = { "mfussenegger/nvim-dap" },
   },
-}, {
+}
+
+local opts = {
   checker = {
     -- automatically check for plugin updates
     enabled = true,
@@ -672,4 +674,6 @@ lazy.setup({
     enabled = true,
     notify = true, -- get a notification when changes are found
   },
-})
+}
+
+lazy.setup(list, opts)
