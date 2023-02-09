@@ -468,7 +468,7 @@ local list = {
       require("configs.plugin.illuminate")
     end,
   },
-
+  "dstein64/vim-startuptime",
   -- which-key.nvim
   -- Create key bindings that stick
   {
