@@ -85,8 +85,6 @@ local formatOpt = function()
   end
 end
 
-local gs = require("gitsigns")
-
 which_key.setup(opts)
 
 which_key.register({
@@ -168,57 +166,6 @@ which_key.register({
       k = { "<CMD>lua require('dap').step_out()<CR>", "Step out" },
       l = { "<CMD>lua require('dap').step_into()<CR>", "Step into" },
       h = { "<CMD>lua require('dapui').eval()<CR>", "Popups dapUI eval" },
-    },
-    g = {
-      name = "+git",
-      j = {
-        function()
-          if vim.wo.diff then
-            return "]c"
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return "<Ignore>"
-        end,
-        "Diff, go to next hunk",
-      },
-      k = {
-        function()
-          if vim.wo.diff then
-            return "[c"
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return "<Ignore>"
-        end,
-        "Diff, go to prev hunk",
-      },
-      s = { "<CMD>Gitsigns stage_hunk<CR>", "Stage hunk" },
-      S = { gs.stage_buffer, "Stage buffer" },
-      u = { gs.undo_stage_hunk, "Undo stage hunk" },
-      r = { "<CMD>Gitsigns reset_hunk", "Reset hunk" },
-      R = { gs.reset_buffer, "Reset buffer" },
-      p = { gs.preview_hunk, "Preview hunk" },
-      b = {
-        function()
-          gs.blame_line({ full = true })
-        end,
-        "Full blam line",
-      },
-      d = { gs.diffthis, "Diff current file" },
-      D = {
-        function()
-          gs.diffthis("~")
-        end,
-        "Diff current directory",
-      },
-      t = {
-        name = "+toggle",
-        d = { gs.toggle_deleted, "Toggle deleted" },
-        D = { gs.toggle_current_line_blame, "Toggle current line blame" },
-      },
     },
     r = {
       name = "+rust",
