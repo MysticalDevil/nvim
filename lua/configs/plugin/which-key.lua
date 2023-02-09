@@ -92,7 +92,6 @@ which_key.register({
   ["<leader>f"] = { formatOpt(), "Format file use builtin LSP" },
   -- <cmd>Lspsaga code_action<CR>
   ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
-  ["ig"] = { "<C-U>Gitsigns select_hunk<CR>", "Select hunk" },
   -- <cmd>Lspsaga rename<CR>
   -- ["<leader>rn"] = { "<cmd>Lspsaga rename<CR>", "Rename" },
   ["<leader>k"] = {

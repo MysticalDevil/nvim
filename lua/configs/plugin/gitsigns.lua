@@ -102,7 +102,7 @@ local opts = {
     map("n", "<leader>gtd", gs.toggle_deleted)
     map("n", "<leader>gtD", gs.toggle_current_line_blame)
     -- Text object
-    map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
+    -- map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
   end,
 }
 

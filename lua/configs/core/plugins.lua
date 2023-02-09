@@ -468,6 +468,7 @@ local list = {
       require("configs.plugin.illuminate")
     end,
   },
+
   -- which-key.nvim
   -- Create key bindings that stick
   {
