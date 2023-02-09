@@ -150,6 +150,11 @@ null_ls.setup({
     -- ESLint_d
     -- npm install -g eslint_d
     code_actions.eslint_d,
+    -- GoModifyTags
+    -- go install github.com/fatih/gomodifytags@latest
+    code_actions.gomodifytags,
+    -- ShellCheck
+    code_actions.shellcheck,
   },
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
