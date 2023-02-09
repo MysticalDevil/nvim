@@ -13,22 +13,22 @@ autocmd("TermOpen", {
 -- 保存时自动格式化
 autocmd("BufWritePre", {
   group = newAutoGroup,
-  pattern = { "*.lua", "*.py", "*.sh", "*.rb" },
+  pattern = { "*.lua", "*.py", "*.sh", "*.rb", "*.rs", "*.toml" },
   callback = function()
     vim.lsp.buf.format()
   end,
 })
 
 -- 修改 lua/plugins.lua 自动更新插件
-autocmd("BufWritePost", {
-  group = newAutoGroup,
-  callback = function()
-    if vim.fn.expand("<afile>") == "lua/configs/core/plugins.lua" then
-      vim.api.nvim_command("source lua/configs/core/plugins.lua")
-      vim.api.nvim_command("LazySync")
-    end
-  end,
-})
+-- autocmd("BufWritePost", {
+--   group = newAutoGroup,
+--   callback = function()
+--     if vim.fn.expand("<afile>") == "lua/configs/core/plugins.lua" then
+--       vim.api.nvim_command("source lua/configs/core/plugins.lua")
+--       vim.api.nvim_command("LazySync sync")
+--     end
+--   end,
+-- })
 
 -- Highlight on yank
 autocmd("TextYankPost", {

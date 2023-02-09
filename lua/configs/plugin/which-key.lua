@@ -77,29 +77,42 @@ local opts = {
   },
 }
 
+local formatOpt = function()
+  if vim.fn.has("nvim-0.8") == 1 then
+    return "<cmd>lua vim.lsp.buf.format({ async = true })<CR>"
+  else
+    return "<cmd>lua vim.lsp.buf.formatting()<CR>"
+  end
+end
+
+local gs = require("gitsigns")
+
 which_key.setup(opts)
 
 which_key.register({
-  ["<leader>w"] = { ":w<CR>", "Save file" },
-  ["<leader>q"] = { ":q<CR>", "Quit editor" },
-  ["<leader>f"] = { "<CMD>lua vim.lsp.buf.format({ async = true })<CR>", "Format file use builtin LSP" },
-  -- LSP keybinding
+  ["<leader>q"] = { "<CMD>q<CR>", "Quit editor" },
+  ["<leader>f"] = { formatOpt(), "Format file use builtin LSP" },
+  -- <cmd>Lspsaga code_action<CR>
   ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
+  ["ig"] = { "<C-U>Gitsigns select_hunk<CR>", "Select hunk" },
+  -- <cmd>Lspsaga rename<CR>
+  -- ["<leader>rn"] = { "<cmd>Lspsaga rename<CR>", "Rename" },
   ["<leader>k"] = {
     function()
       vim.lsp.buf.signature_help()
     end,
     "Toggle signature",
   },
+  ["<leader>w"] = { ":w<CR>", "Save file" },
   ["<leader>"] = {
     w = {
       name = "+save",
-      a = { ":wa<CR>", "Save all file" },
-      q = { ":wq<CR>", "Save file and quit editor" },
+      a = { "<CMD>wa<CR>", "Save all file" },
+      q = { "<CMD>wq<CR>", "Save file and quit editor" },
     },
     q = {
       name = "+quit",
-      q = { ":qa!<CR>", "Safe force quit" },
+      q = { ":qa!<CR>", "Force quit" },
       a = { ":wqa<CR>", "Save all file and quit editor" },
     },
     b = {
@@ -124,18 +137,18 @@ which_key.register({
       l = { "<CMD>TroubleToggle loclist<CR>", "Open trouble loclist" },
       r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
     },
-    s = {
-      name = "+plugins",
-      s = { "<Plug>RestNvim", "Run request under cursor" },
-      p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
-      l = { "<Plug>RestNvimLast", "Re-run the last request" },
-      r = {
-        function()
-          require("ssr").open()
-        end,
-        "Replace by ssr.nvim",
-      },
-    },
+    -- s = {
+    --   name = "+plugins",
+    --   s = { "<Plug>RestNvim", "Run request under cursor" },
+    --   p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
+    --   l = { "<Plug>RestNvimLast", "Re-run the last request" },
+    --   r = {
+    --     function()
+    --       require("ssr").open()
+    --     end,
+    --     "Replace by ssr.nvim",
+    --   },
+    -- },
     d = {
       name = "+debug",
       d = { "<CMD>RustDebuggables<CR>", "Start debugger" },
@@ -156,25 +169,57 @@ which_key.register({
       l = { "<CMD>lua require('dap').step_into()<CR>", "Step into" },
       h = { "<CMD>lua require('dapui').eval()<CR>", "Popups dapUI eval" },
     },
-    -- g = {
-    --   name = "+git",
-    --   j = {},
-    --   k = {},
-    --   s = {},
-    --   S = {},
-    --   u = {},
-    --   r = {},
-    --   R = {},
-    --   p = {},
-    --   b = {},
-    --   d = {},
-    --   D = {},
-    --   t = {
-    --     name = "+toggle",
-    --     d = {},
-    --     D = {},
-    --   },
-    -- },
+    g = {
+      name = "+git",
+      j = {
+        function()
+          if vim.wo.diff then
+            return "]c"
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return "<Ignore>"
+        end,
+        "Diff, go to next hunk",
+      },
+      k = {
+        function()
+          if vim.wo.diff then
+            return "[c"
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+          return "<Ignore>"
+        end,
+        "Diff, go to prev hunk",
+      },
+      s = { "<CMD>Gitsigns stage_hunk<CR>", "Stage hunk" },
+      S = { gs.stage_buffer, "Stage buffer" },
+      u = { gs.undo_stage_hunk, "Undo stage hunk" },
+      r = { "<CMD>Gitsigns reset_hunk", "Reset hunk" },
+      R = { gs.reset_buffer, "Reset buffer" },
+      p = { gs.preview_hunk, "Preview hunk" },
+      b = {
+        function()
+          gs.blame_line({ full = true })
+        end,
+        "Full blam line",
+      },
+      d = { gs.diffthis, "Diff current file" },
+      D = {
+        function()
+          gs.diffthis("~")
+        end,
+        "Diff current directory",
+      },
+      t = {
+        name = "+toggle",
+        d = { gs.toggle_deleted, "Toggle deleted" },
+        D = { gs.toggle_current_line_blame, "Toggle current line blame" },
+      },
+    },
     r = {
       name = "+rust",
       r = { "<CMD>lua require('rust-tools.runnables').runnables()<CR>", "Run runnables" },
@@ -182,32 +227,43 @@ which_key.register({
       a = { "<CMD>lua require('rust-tools.code_action_group').code_action_group()<CR>", "Code actions" },
       d = { "<CMD> lua require('rust-tools.debuggables).debuggables()<CR>", "Start debug" },
     },
+    -----------------------------------------------------------
+    -- s_windows 分屏快捷键
+    -----------------------------------------------------------
+    s = {
+      name = "+split",
+      v = { ":vsp<CR>", "Split window vertically" },
+      h = { ":sp<CR>", "Split window horizontally" },
+      c = { "<C-w>c", "Close split window" },
+      o = { "<C-w>o", "Close others split window" },
+      [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+      ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+      j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+      k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
+      ["="] = { "<C-w>=", "Make split windows equal in size" },
+    },
+
+    -----------------------------------------------------------
+    -- tab 分页快捷键
+    -----------------------------------------------------------
+    t = {
+      name = "+tab",
+      s = { "<CMD>tab split<CR>", "Split window use tab" },
+      h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
+      l = { "<CMD>tabnext<CR>", "Switch to next tab" },
+      j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
+      k = { "<CMD>tablast<CR>", "Switch to last tab" },
+      c = { "<CMD>tabclose<CR>", "Close tab" },
+    },
   },
-  s = {
-    name = "+split",
-    v = { ":vsp<CR>", "Split window vertically" },
-    h = { ":sp<CR>", "Split window horizontally" },
-    c = { "<C-w>c", "Close split window" },
-    o = { "<C-w>o", "Close others split window" },
-    [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
-    ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
-    j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
-    k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
-    ["="] = { "<C-w>=", "Make split windows equal in size" },
-  },
-  t = {
-    name = "+tab",
-    s = { "<CMD>tab split<CR>", "Split window use tab" },
-    h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
-    l = { "<CMD>tabnext<CR>", "Switch to next tab" },
-    j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
-    k = { "<CMD>tablast<CR>", "Switch to last tab" },
-    c = { "<CMD>tabclose<CR>", "Close tab" },
-  },
+
+  -- treesitter 折叠
   Z = { ":foldopen<CR>", "Open code block toggle" },
   zz = { ":foldclose<CR>", "Close code block toggle" },
+  -- LSP 快捷键
   g = {
     name = "+LSP",
+    -- <cmd>Lspsaga preview_definition<CR>
     d = {
       function()
         require("telescope.builtin").lsp_definitions({
@@ -217,21 +273,35 @@ which_key.register({
       end,
       "Go to definition",
     },
+    -- <cmd>Lspsaga lsp_finder<CR>
     r = {
       function()
         require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
       end,
       "Go to references",
     },
+    -- <cmd>Lspsaga hover_doc<cr>
     h = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Hover function definition" },
+    -- <cmd>Lspsaga show_line_diagnostics<CR>
     p = { "<CMD>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
+    -- <cmd>Lspsaga diagnostic_jump_next<cr>
     j = { "<CMD>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic" },
+    -- <cmd>Lspsaga diagnostic_jump_prev<cr>
     k = { "<CMD>lua vim.diagnostic.goto_prev()<CR>", "Go to previous diagnostic" },
+
     s = { "<CMD>TypescriptOrganizeImports<CR>", "Typescript: Organize imports" },
     R = { "<CMD>TypescriptRenameFile<CR>", "Typescript: Rename file" },
     i = { "<CMD>TypescriptAddMissingImports<CR>", "Typescript: Add missing imports" },
     u = { "<CMD>TypescriptRemoveUnused<CR>", "Typescript: Remove unused imports" },
     f = { "<CMD>TypescriptFixAll", "Typescript: Fix all problems" },
     D = { "<CMD>TypescriptGoToSourceDefinition<CR>", "Typescript: Go to source defination" },
+    -- mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
+    -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
+    -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
+    -- mapbuf("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opt)
+    -- mapbuf('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opt)
+    -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
+    -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
+    -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
   },
 })

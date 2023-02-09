@@ -73,4 +73,3 @@ require("dap.nvim-dap.config.lua").setup()
 require("dap.nvim-dap.config.cpp").setup()
 
 require("dap-go").setup()
-require("configs.core.keybindings").mapDAP()

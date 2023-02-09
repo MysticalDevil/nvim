@@ -124,6 +124,15 @@ local list = {
       require("configs.plugin.fidget")
     end,
   },
+  -- flit.nvim
+  -- Enhanced f/t motions for Leap
+  {
+    "ggandor/flit.nvim",
+    dependencies = "ggandor/leap.nvim",
+    config = function()
+      require("configs.plugin.flit")
+    end,
+  },
   -- hlargs.nvim
   -- Highlight arguments' definitions and usages, using Treesitter
   {
@@ -166,6 +175,14 @@ local list = {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require("configs.plugin.indent-blankline")
+    end,
+  },
+  -- leap.nvim
+  -- Neovim's answer to the mouse
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require("configs.plugin.leap")
     end,
   },
   -- lualine.nvim
