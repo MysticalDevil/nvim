@@ -134,18 +134,18 @@ which_key.register({
       l = { "<CMD>TroubleToggle loclist<CR>", "Open trouble loclist" },
       r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
     },
-    -- s = {
-    --   name = "+plugins",
-    --   s = { "<Plug>RestNvim", "Run request under cursor" },
-    --   p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
-    --   l = { "<Plug>RestNvimLast", "Re-run the last request" },
-    --   r = {
-    --     function()
-    --       require("ssr").open()
-    --     end,
-    --     "Replace by ssr.nvim",
-    --   },
-    -- },
+    s = {
+      name = "+plugins",
+      s = { "<Plug>RestNvim", "Run request under cursor" },
+      p = { "<Plug>RestNvimPreview", "Preview request cURL command" },
+      l = { "<Plug>RestNvimLast", "Re-run the last request" },
+      r = {
+        function()
+          require("ssr").open()
+        end,
+        "Replace by ssr.nvim",
+      },
+    },
     d = {
       name = "+debug",
       d = { "<CMD>RustDebuggables<CR>", "Start debugger" },
@@ -173,33 +173,28 @@ which_key.register({
       a = { "<CMD>lua require('rust-tools.code_action_group').code_action_group()<CR>", "Code actions" },
       d = { "<CMD> lua require('rust-tools.debuggables).debuggables()<CR>", "Start debug" },
     },
-    -----------------------------------------------------------
-    -- s_windows 分屏快捷键
-    -----------------------------------------------------------
-    s = {
-      name = "+split",
-      v = { ":vsp<CR>", "Split window vertically" },
-      h = { ":sp<CR>", "Split window horizontally" },
-      c = { "<C-w>c", "Close split window" },
-      o = { "<C-w>o", "Close others split window" },
-      [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
-      ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
-      j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
-      k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
-      ["="] = { "<C-w>=", "Make split windows equal in size" },
-    },
 
     -----------------------------------------------------------
-    -- tab 分页快捷键
+    -- Gitsigns
     -----------------------------------------------------------
-    t = {
-      name = "+tab",
-      s = { "<CMD>tab split<CR>", "Split window use tab" },
-      h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
-      l = { "<CMD>tabnext<CR>", "Switch to next tab" },
-      j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
-      k = { "<CMD>tablast<CR>", "Switch to last tab" },
-      c = { "<CMD>tabclose<CR>", "Close tab" },
+    g = {
+      name = "+git",
+      j = { "", "Diff, go to next hunk" },
+      k = { "", "Diff, go to prev hunk" },
+      s = { "", "Stage hunk" },
+      S = { "", "Stage buffer" },
+      u = { "", "Undo stage hunk" },
+      r = { "", "Reset hunk" },
+      R = { "", "Reset buffer" },
+      p = { "", "Preview hunk" },
+      b = { "", "Full blam line" },
+      d = { "", "Diff current file" },
+      D = { "", "Diff current directory" },
+      t = {
+        name = "+toggle",
+        d = { "", "Toggle deleted" },
+        D = { "", "Toggle current line blame" },
+      },
     },
   },
 
@@ -249,5 +244,33 @@ which_key.register({
     -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
     -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
     -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+  },
+  -----------------------------------------------------------
+  -- s_windows 分屏快捷键
+  -----------------------------------------------------------
+  s = {
+    name = "+split",
+    v = { ":vsp<CR>", "Split window vertically" },
+    h = { ":sp<CR>", "Split window horizontally" },
+    c = { "<C-w>c", "Close split window" },
+    o = { "<C-w>o", "Close others split window" },
+    [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+    ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+    j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+    k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
+    ["="] = { "<C-w>=", "Make split windows equal in size" },
+  },
+
+  -----------------------------------------------------------
+  -- tab 分页快捷键
+  -----------------------------------------------------------
+  t = {
+    name = "+tab",
+    s = { "<CMD>tab split<CR>", "Split window use tab" },
+    h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
+    l = { "<CMD>tabnext<CR>", "Switch to next tab" },
+    j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
+    k = { "<CMD>tablast<CR>", "Switch to last tab" },
+    c = { "<CMD>tabclose<CR>", "Close tab" },
   },
 })
