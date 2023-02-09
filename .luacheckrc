@@ -1,7 +1,6 @@
-ignore = {
-  "631",    -- max_line_length
-}
-read_globals = {
-  "vim",
-  "use",
+std = {
+  read_globals = {
+    "vim",
+    "use",
+  }
 }

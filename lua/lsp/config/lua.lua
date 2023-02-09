@@ -22,7 +22,7 @@ local opts = {
     Lua = {
       runtime = {
         -- Tell the langurage server which version of Lua you're using
-        version = "LugJIT",
+        version = "LuaJIT",
         -- Setup your lua path
         path = runtime_path,
       },

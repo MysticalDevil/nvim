@@ -130,7 +130,7 @@ null_ls.setup({
     }),
     -- Lua
     -- luarocks install luacheck
-    diagnostics.luacheck,
+    -- diagnostics.luacheck,
     -- PHP
     -- composer require --dev phpstan/phpstan
     diagnostics.phpstan,
