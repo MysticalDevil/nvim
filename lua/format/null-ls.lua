@@ -115,7 +115,9 @@ null_ls.setup({
     }),
     -- Go
     -- go install github.com/mgechev/revive@latest
-    diagnostics.revive,
+    -- diagnostics.revive,
+    -- go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.51.1
+    diagnostics.golangci_lint,
     -- Java
     -- checkstyle.jar
     diagnostics.checkstyle.with({
