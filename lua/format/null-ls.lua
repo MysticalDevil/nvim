@@ -85,8 +85,8 @@ null_ls.setup({
       prefer_local = "node_modules/.bin",
     }),
     -- PHP
-    -- builtin php
-    formatting.php,
+    -- composer global require "squizlabs/php_codesniffer=*"
+    formatting.phpcsfixer,
     -- Python
     -- pip install black isort
     formatting.black.with({ extra_args = { "--fast" } }),
