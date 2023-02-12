@@ -85,8 +85,8 @@ null_ls.setup({
       prefer_local = "node_modules/.bin",
     }),
     -- PHP
-    -- composer require --dev laravel/pint
-    formatting.pint,
+    -- builtin php
+    formatting.php,
     -- Python
     -- pip install black isort
     formatting.black.with({ extra_args = { "--fast" } }),
