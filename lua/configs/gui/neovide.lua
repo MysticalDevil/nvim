@@ -1,4 +1,4 @@
-vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font:h10"
+vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h10"
 vim.g.remember_window_size = true
 vim.g.remember_window_position = true
 
