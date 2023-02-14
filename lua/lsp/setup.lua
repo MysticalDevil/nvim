@@ -25,7 +25,7 @@ local lspServers = {
   "gopls",
   "html",
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "pylsp",
   "rust_analyzer",
   "tsserver",
