@@ -4,9 +4,9 @@ if not status then
   return
 end
 
-local extension_path = ".vscode/extensions/vadimcn.vscode-lldb-1.8.1"
-local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+local extension_path = "~/.local/share/nvim/mason/packages/codelldb"
+local codelldb_path = extension_path .. "codelldb"
+local liblldb_path = extension_path .. "extension/lldb/lib/liblldb.so"
 
 local opts = {
   tools = { -- rust-tools options
