@@ -127,5 +127,4 @@ MysticalDevil 的 Neovim 的自定义配置
   `Laeder-dh` Pop ups
 
 ## 主要插件
-
-详见[Plugin.md](Plugin.md) 和 [Languages.md](Languages.md)
+TODO
