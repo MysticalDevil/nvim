@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-local uConfig = require("configs.core.uConfig")
-
 local opts = {
   position = "bottom", -- position of the list can be: bottom, top, left, right
   height = 10, -- height of the trouble list when position is top or bottom
@@ -57,9 +55,9 @@ local opts = {
 trouble.setup(opts)
 
 -- keybindings
-keymap("n", uConfig.trouble.togggle, "<cmd>TroubleToggle<cr>")
-keymap("n", uConfig.trouble.toggle_workspace, "<cmd>TroubleToggle workspace_diagnostics<cr>")
-keymap("n", uConfig.trouble.toggle_doc, "<cmd>TroubleToggle document_diagnostics<cr>")
-keymap("n", uConfig.trouble.toggle_quickfix, "<cmd>TroubleToggle quickfix<cr>")
-keymap("n", uConfig.trouble.togggle_loclist, "<cmd>TroubleToggle loclist<cr>")
-keymap("n", uConfig.trouble.toggle_lsp_references, "<cmd>TroubleToggle lsp_references<cr>")
+keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>")
+keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>")
+keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>")
+keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>")
+keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>")
+keymap("n", "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>")

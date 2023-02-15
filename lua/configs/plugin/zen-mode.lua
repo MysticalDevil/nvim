@@ -1,10 +1,3 @@
-local uConfig = require("configs.core.uConfig")
-local uZen = uConfig.zen
-
-if uZen == nil or not uZen.enable then
-  return
-end
-
 local status, zen = pcall(require, "zen-mode")
 if not status then
   vim.notify("zen-mode not found", "error")
@@ -45,7 +38,7 @@ local opts = {
     tmux = { enabled = false }, -- disables the tmux statusline
   },
   -- callback where you can add custom code when the Zen window opens
-  on_open = function(win)
+  on_open = function(_)
     vim.cmd("TwilightEnable")
   end,
   -- callback where you can add custom code when the Zen window closes
@@ -56,4 +49,4 @@ local opts = {
 
 zen.setup(opts)
 
-keymap("n", uZen.toggle, ":ZenMode<CR>")
+keymap("n", ":ZenMode<CR>", "<leader>a")

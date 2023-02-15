@@ -5,8 +5,6 @@ end
 
 local luasnip = require("luasnip")
 
-local config = require("configs.core.uConfig")
-
 -- local has_word_before = function()
 --   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -14,9 +12,9 @@ local config = require("configs.core.uConfig")
 
 local mapping = {
   -- 出现补全
-  [config.keys.cmp_complete] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
+  ["<A-.>"] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
   -- 取消
-  [config.keys.cmp_abort] = cmp.mapping({
+  ["<A-,>"] = cmp.mapping({
     i = cmp.mapping.abort(),
     c = cmp.mapping.close(),
   }),
@@ -24,18 +22,18 @@ local mapping = {
   -- 确认
   -- Accept surrently selected item. If none slected, `select` first item
   -- Set `select` to `fasle` to only confirm explicitly slected items
-  [config.keys.cmp_confirm] = cmp.mapping.confirm({
+  ["<CR>"] = cmp.mapping.confirm({
     select = true,
     behavior = cmp.ConfirmBehavior.Replace,
   }),
   -- 如果窗口太多可以滚动
-  [config.keys.cmp_scroll_doc_up] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-  [config.keys.cmp_scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+  ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+  ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 
   -- 上一个
-  [config.keys.cmp_select_prev_item] = cmp.mapping.select_prev_item(),
+  ["<C-k>"] = cmp.mapping.select_prev_item(),
   -- 下一个
-  [config.keys.cmp_select_next_item] = cmp.mapping.select_next_item(),
+  ["<C-j>"] = cmp.mapping.select_next_item(),
 }
 
 cmp.setup({

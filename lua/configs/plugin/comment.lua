@@ -1,10 +1,3 @@
-local uConfig = require("configs.core.uConfig")
-local uComment = uConfig.comment
-
-if uComment == nil or not uComment.enable then
-  return
-end
-
 local status, comment = pcall(require, "Comment")
 if not status then
   vim.notify("Comment not found", "error")
@@ -19,13 +12,13 @@ local opts = {
 
   -- Normal 模式快捷键
   toggler = {
-    line = uComment.toggler.line, -- 行注释
-    block = uComment.toggler.block, -- 块注释
+    line = "gcc", -- 行注释
+    block = "gbc", -- 块注释
   },
   -- Visual 模式
   opleader = {
-    line = uComment.opleader.line,
-    block = uComment.opleader.block,
+    line = "gc",
+    block = "gb",
   },
 
   -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring

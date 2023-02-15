@@ -1,10 +1,3 @@
-local uConfig = require("configs.core.uConfig")
-local uBufferLine = uConfig.bufferLine
-
-if uBufferLine == nil or not uBufferLine.enable then
-  return
-end
-
 local status, bufferline = pcall(require, "bufferline")
 if not status then
   vim.notify("bufferline not found", "error")
@@ -45,14 +38,14 @@ local opts = {
 bufferline.setup(opts)
 
 -- 左右 Tab 切换
-keymap("n", uBufferLine.prev, ":BufferLineCyclePrev<CR>")
-keymap("n", uBufferLine.next, ":BufferLineCycleNext<CR>")
+keymap("n", "<C-h>", ":BufferLineCyclePrev<CR>")
+keymap("n", "<C-l>", ":BufferLineCycleNext<CR>")
 -- 'moll/vim-bbye' 关闭当前 buffer
-keymap("n", uBufferLine.close, ":Bdelete!<CR>")
+keymap("n", "<C-w>", ":Bdelete!<CR>")
 -- 关闭左/右侧标签页
-keymap("n", uBufferLine.close_left, ":BufferLineCloseLeft<CR>")
-keymap("n", uBufferLine.close_right, ":BufferLineCloseRight<CR>")
+keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
+keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>")
 -- 关闭其他标签页
-keymap("n", uBufferLine.close_others, ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>")
+keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>")
 -- 关闭选中标签页
-keymap("n", uBufferLine.close_pick, ":BufferLinePickClose<CR>")
+keymap("n", "<leader>bp", ":BufferLinePickClose<CR>")

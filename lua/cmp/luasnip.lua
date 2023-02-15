@@ -3,16 +3,14 @@ if not status then
   return
 end
 
-local config = require("configs.core.uConfig")
-
 local types = require("luasnip.util.types")
 
 -- custom snippets
 require("luasnip.loaders.from_lua").load({
-  paths = config.config_path .. "/lua/cmp/snippets/lua",
+  paths = vim.fn.stdpath("config") .. "/lua/cmp/snippets/lua",
 })
 require("luasnip.loaders.from_vscode").load({
-  paths = config.config_path .. "/lua/cmp/snippets/vscode",
+  paths = vim.fn.stdpath("config") .. "/lua/cmp/snippets/vscode",
 })
 
 -- https://github.com/rafamadriz/friendly-snippets/
@@ -31,25 +29,25 @@ ls.config.set_config({
   },
 })
 
-vim.keymap.set({ "i", "s" }, config.keys.snip_jump_next, function()
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jumpable()
   end
 end)
 
-vim.keymap.set({ "i", "s" }, config.keys.snip_jump_prev, function()
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end
 end)
 
-vim.keymap.set({ "i", "s" }, config.keys.snip_next_choice, function()
+vim.keymap.set({ "i", "s" }, "<C-j>", function()
   if ls.choice_active() then
     ls.choice_active(1)
   end
 end)
 
-vim.keymap.set({ "i", "s" }, config.keys.snip_prev_choice, function()
+vim.keymap.set({ "i", "s" }, "<C-k>", function()
   if ls.choice_active() then
     ls.change_choice(-1)
   end

@@ -4,7 +4,6 @@ if not status then
   return
 end
 
-local uConfig = require("configs.core.uConfig")
 local common = require("lsp.common-config")
 local opts = {
   capabilities = common.capabilities,
@@ -30,12 +29,12 @@ local opts = {
     ]]
 
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    keymap("n", uConfig.lsp.ts_organize, ":TypescriptOrganizeImports<CR>", bufopts)
-    keymap("n", uConfig.lsp.ts_rename_file, ":TypescriptRenameFile<CR>", bufopts)
-    keymap("n", uConfig.lsp.ts_add_missing_import, ":TypescriptAddMissingImports<CR>", bufopts)
-    keymap("n", uConfig.lsp.ts_remove_unused, ":TypescriptRemoveUnused<CR>", bufopts)
-    keymap("n", uConfig.lsp.ts_fix_all, ":TypescriptFixAll<CR>", bufopts)
-    keymap("n", uConfig.lsp.ts_goto_source, ":TypescriptGoToSourceDefinition<CR>", bufopts)
+    keymap("n", "gs", ":TypescriptOrganizeImports<CR>", bufopts)
+    keymap("n", "gR", ":TypescriptRenameFile<CR>", bufopts)
+    keymap("n", "gi", ":TypescriptAddMissingImports<CR>", bufopts)
+    keymap("n", "gu", ":TypescriptRemoveUnused<CR>", bufopts)
+    keymap("n", "gf", ":TypescriptFixAll<CR>", bufopts)
+    keymap("n", "gD", ":TypescriptGoToSourceDefinition<CR>", bufopts)
   end,
   -- require("coq").lsp_ensure_capabilities(),
 }
