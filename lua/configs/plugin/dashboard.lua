@@ -44,7 +44,7 @@ local opts = {
       {
         desc = "  Edit keybindings",
         group = "DiagnosticHint",
-        action = "edit ~/.config/nvim/lua/configs/core/keybindings.lua",
+        action = "edit" .. vim.fn.stdpath("config") .. "/lua/configs/core/keybindings.lua",
         key = "ek",
       },
     },

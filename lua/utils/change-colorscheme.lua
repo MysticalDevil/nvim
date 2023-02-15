@@ -71,7 +71,7 @@ function CC()
   colorPicker:find()
 end
 
-vim.api.nvim_add_user_command("ChangeColorScheme", CC, {})
+vim.api.nvim_create_user_command("ChangeColorScheme", CC, {})
 
 -- vim.g.tokyonight_style = "night"
 -- vim.g.tokyonight_italic_functions = true
