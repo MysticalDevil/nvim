@@ -49,4 +49,4 @@ local opts = {
 
 zen.setup(opts)
 
-keymap("n", ":ZenMode<CR>", "<leader>a")
+keymap("n", "<leader>z", "<CMD>ZenMode<CR>")

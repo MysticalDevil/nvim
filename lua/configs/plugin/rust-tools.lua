@@ -4,6 +4,10 @@ if not status then
   return
 end
 
+local extension_path = ".vscode/extensions/vadimcn.vscode-lldb-1.8.1"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
 local opts = {
   tools = { -- rust-tools options
 
@@ -177,11 +181,7 @@ local opts = {
 
   -- debugging stuff
   dap = {
-    adapter = {
-      type = "executable",
-      command = "lldb-vscode",
-      name = "rt_lldb",
-    },
+    adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
   },
 }
 

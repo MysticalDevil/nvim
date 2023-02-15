@@ -1,10 +1,10 @@
-local status, dap = pcall(require, "dap")
-if not status then
+local dap_status, dap = pcall(require, "dap")
+if not dap_status then
   return
 end
 
-local status, dapui = pcall(require, "dapui")
-if not status then
+local ui_status, dapui = pcall(require, "dapui")
+if not ui_status then
   return
 end
 

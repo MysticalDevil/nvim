@@ -3,8 +3,8 @@ if not status then
   return
 end
 
-local dap_status, dapui = pcall(require, "dapui")
-if not dap_status then
+local ui_status, _ = pcall(require, "dapui")
+if not ui_status then
   return
 end
 
@@ -12,7 +12,7 @@ local M = {}
 
 M.keyAttach = function()
   -- run
-  keymap("n", "<leader>dc", dap.continue())
+  keymap("n", "<leader>dc", dap.continue({}))
   -- nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
 
   --  stepOver, stepInto, stepOut,

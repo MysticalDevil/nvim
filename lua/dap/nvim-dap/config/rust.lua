@@ -1,8 +1,6 @@
--- 这里要修改为你的绝对路径
-local extension_path =
-  "/home/omega/.local/share/nvim/lazy/start/vimspector/gadgets/linux/download/CodeLLDB/v1.6.10/root/extension/"
+local extension_path = ".vscode/extensions/vadimcn.vscode-lldb-1.8.1"
 local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 return {
   adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
