@@ -667,6 +667,16 @@ local list = {
       require("configs.plugin.go")
     end,
   },
+
+  -- flutter-tools.nvim
+  -- Tools to help create flutter apps in neovim using the native lsp
+  {
+    "akinsho/flutter-tools/nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("configs.plugin.flutter")
+    end,
+  },
   --
   ----------------------------------- Debug Adapter Protocol ------------------------------------
   -- nvim-dap
