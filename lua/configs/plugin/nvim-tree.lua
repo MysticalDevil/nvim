@@ -1,98 +1,87 @@
-local uConfig = require("configs.core.uConfig")
-local uTree = uConfig.nvimTree
-
-if uTree == nil or not uTree.enable then
-  return
-end
-
 local status, nvim_tree = pcall(require, "nvim-tree")
 if not status then
   vim.notify("nvim-tree not found", "error")
   return
 end
 
-keymap("n", uTree.toggle, ":NvimTreeToggle<CR>")
+keymap("n", "<A-m>", ":NvimTreeToggle<CR>")
 
 -- 列表操作快捷键
 local list_keys = { -- 打开文件或文件夹
   {
-    key = uTree.edit,
+    key = { "<CR>", "o", "<2-LeftMouse>" },
     action = "edit",
   },
-  -- {
-  --    key = uTree.system_open,
-  --    action = 'system_open'
-  -- },
   { -- v 分屏打开文件
-    key = uTree.vsplit,
+    key = "sv",
     action = "vsplit",
   },
   { -- h 分屏打开文件
-    key = uTree.split,
+    key = "sh",
     action = "split",
   },
   { -- gitignore
-    key = uTree.toggle_git_ignored,
+    key = "i",
     action = "toggle_git_ignored",
   },
   { -- Hide (dotfiles)
-    key = uTree.toggle_dotfiles,
+    key = ".",
     action = "toggle_dotfiles",
   },
   {
-    key = uTree.toggle_custom,
+    key = "u",
     action = "toggle_custom",
   },
   {
-    key = uTree.refresh,
+    key = "R",
     action = "refresh",
   },
   { -- 文件操作
-    key = uTree.create,
+    key = "a",
     action = "create",
   },
   {
-    key = uTree.remove,
+    key = "d",
     action = "remove",
   },
   {
-    key = uTree.copy,
+    key = "c",
     action = "copy",
   },
   {
-    key = uTree.cut,
+    key = "x",
     action = "cut",
   },
   {
-    key = uTree.paste,
+    key = "p",
     action = "paste",
   },
   {
-    key = uTree.copy_name,
+    key = "y",
     action = "copy_name",
   },
   {
-    key = uTree.copy_path,
+    key = "Y",
     action = "copy_path",
   },
   {
-    key = uTree.copy_absolute_path,
+    key = "gy",
     action = "copy_absolute_path",
   },
   {
-    key = uTree.toggle_file_info,
+    key = "I",
     action = "toggle_file_info",
   },
   {
-    key = uTree.tabnew,
+    key = "t",
     action = "tabnew",
   },
   { -- 进入下一级
-    key = uTree.cd,
+    key = ">",
     action = "cd",
   },
   { -- 进入上一级
-    key = uTree.dir_up,
+    key = "<",
     action = "dir_ip",
   },
 }

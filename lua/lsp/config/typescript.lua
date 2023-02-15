@@ -1,6 +1,6 @@
 local status, typescript = pcall(require, "typescript")
 if not status then
-  vim.notify("Typescript not found")
+  vim.notify("Typescript not found", "error")
   return
 end
 

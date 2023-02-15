@@ -222,6 +222,20 @@ local list = {
       require("configs.plugin.neoscroll")
     end,
   },
+  -- neo-tree.nvim
+  -- Neovim plugin to manage the file system and other tree like structures
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("configs.plugin.neo-tree")
+    end,
+  },
   -- noice.nvim
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
   {
@@ -337,14 +351,14 @@ local list = {
   },
   -- nvim-tree.lua
   -- A file explorer tree for neovim written in lua
-  {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = "nvim-tree/nvim-web-devicons", -- optional. for file icons
-    version = "nightly", -- optional, updated every week.
-    config = function()
-      require("configs.plugin.nvim-tree")
-    end,
-  },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   dependencies = "nvim-tree/nvim-web-devicons", -- optional. for file icons
+  --   version = "nightly", -- optional, updated every week.
+  --   config = function()
+  --     require("configs.plugin.nvim-tree")
+  --   end,
+  -- },
   -- nvim-treesitter
   -- Nvim Treesitter configurations and abstraction layer
   {
@@ -378,6 +392,15 @@ local list = {
     dependencies = "kevinhwang91/promise-async",
     config = function()
       require("configs.plugin.nvim-ufo")
+    end,
+  },
+  -- nvim-window-picker
+  -- This plugins prompts the user to pick a window and returns the window id of the picked window
+  {
+    "s1n7ax/nvim-window-picker",
+    version = "v1.*",
+    config = function()
+      require("configs.plugin.window-picker")
     end,
   },
   -- project.nvim
