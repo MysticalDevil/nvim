@@ -7,7 +7,7 @@ function M.setup()
     type = "executable",
     -- change to your path
     -- if can not find OpenDebugAD7, please install cpptools by mason
-    command = "/home/lzr/.local/share/nvim/mason/bin/OpenDebugAD7",
+    command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
   }
   dap.configurations.cpp = {
     -- launch exe
