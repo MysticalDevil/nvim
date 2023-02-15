@@ -22,7 +22,7 @@ local opts = {
       },
     },
     -- 使用 nvim 内置 LSP
-    diagnostics = "nvim_LSP",
+    diagnostics = "nvim_lsp",
     -- 可选，显示 LSP 报错图标
     ---@diagnostic disable-next-line: unused-local
     diagnostics_indicator = function(count, level, diagnotics_dict, contect)
