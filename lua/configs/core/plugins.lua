@@ -133,6 +133,9 @@ local list = {
       require("configs.plugin.flit")
     end,
   },
+  -- glow.nvim
+  -- A markdown preview directly in your neovim.
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   -- hlargs.nvim
   -- Highlight arguments' definitions and usages, using Treesitter
   {

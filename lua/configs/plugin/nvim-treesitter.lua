@@ -17,7 +17,7 @@ local opts = {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-    disable = function(lang, bufnr) -- Disable in larg C++ buffers
+    disable = function(_, bufnr) -- Disable in larg C++ buffers
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
   },
