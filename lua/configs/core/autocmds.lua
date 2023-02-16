@@ -19,19 +19,19 @@ autocmd("BufWritePre", {
   end,
 })
 
--- Highlight on yank
-autocmd("TextYankPost", {
-  group = newAutoGroup,
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- -- Highlight on yank
+-- autocmd("TextYankPost", {
+--   group = newAutoGroup,
+--   pattern = "**",
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 -- 用 o 换行不要延续注释
 autocmd("BufEnter", {
   group = newAutoGroup,
-  pattern = "*",
+  pattern = "**",
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - "o" + "r"
   end,
