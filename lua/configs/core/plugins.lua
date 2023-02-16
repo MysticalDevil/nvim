@@ -1,7 +1,7 @@
 -- Auto install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.notify("lazt.nvim is being installed, please wait..", "info")
+  vim.notify("lazy.nvim is being installed, please wait..", "info")
   vim.fn.system({
     "git",
     "clone",
