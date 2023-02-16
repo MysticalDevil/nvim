@@ -22,7 +22,7 @@ local mapping = {
   -- 确认
   -- Accept surrently selected item. If none slected, `select` first item
   -- Set `select` to `fasle` to only confirm explicitly slected items
-  ["<CR>"] = cmp.mapping.confirm({
+  ["<tab>"] = cmp.mapping.confirm({
     select = true,
     behavior = cmp.ConfirmBehavior.Replace,
   }),
