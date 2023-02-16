@@ -7,10 +7,6 @@ function _G.requirePlugin(name)
   return plugin
 end
 
-function _G.lspCap()
-  print(vim.inspcet(vim.lsp.buf_get_clients()[1].resolved_capabilities))
-end
-
 function _G.log(v)
   print(vim.inspect(v))
   return v
