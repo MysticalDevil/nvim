@@ -10,4 +10,5 @@ local opts = {
 }
 
 notify.setup(opts)
+
 vim.notify = notify

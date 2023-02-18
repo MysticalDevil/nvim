@@ -17,13 +17,14 @@ null_ls.setup({
     -- C/C++
     -- pacman -S clang-format
     formatting.clang_format.with({
-      filetypes = {
+      filetype = {
         "c",
-        "cpp",
         "h",
+        "cpp",
+        "cppm",
         "hpp",
         "cuda",
-        "cppm",
+        "objcpp",
       },
     }),
     -- CMake
@@ -162,7 +163,7 @@ null_ls.setup({
   -- #{s}: source name (defaults to null-ls if not specified)
   -- #{c}: code (if available)
   diagnostics_format = "[#{s}] #{m}",
-  on_attach = function(_)
+  on_attach = function(client)
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()']])
     -- if client.resolved_capabilities.document_formatting then
     --   vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")

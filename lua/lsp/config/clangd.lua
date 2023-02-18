@@ -2,8 +2,20 @@ local common = require("lsp.common-config")
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--pch-storage=memory",
+    "--clang-tidy",
+    "--completion-style=detailed",
+  },
+  init_options = {
+    clangdFileStatus = true,
+    usePlaceholders = true,
+    completeUnimported = true,
+    semanticHighlighting = true,
+  },
   on_attach = function(client, bufnr)
-    client.offset_encoding = "utf-16"
     common.disableFormat(client)
     common.keyAttach(bufnr)
     require("lsp_signature").on_attach({
