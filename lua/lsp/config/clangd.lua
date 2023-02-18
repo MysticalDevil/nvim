@@ -3,6 +3,7 @@ local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
   on_attach = function(client, bufnr)
+    client.offset_encoding = "utf-16"
     common.disableFormat(client)
     common.keyAttach(bufnr)
     require("lsp_signature").on_attach({
