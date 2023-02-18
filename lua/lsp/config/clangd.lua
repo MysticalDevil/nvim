@@ -1,6 +1,8 @@
 local common = require("lsp.common-config")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
 local opts = {
-  capabilities = common.capabilities,
+  capabilities = capabilities,
   flags = common.flags,
   cmd = {
     "clangd",

@@ -109,6 +109,9 @@ null_ls.setup({
     formatting.zigfmt,
     --
     -- Diagnostics  -----------------------------------------------------------
+    -- C/C++
+    -- pacman -S cppcheck
+    diagnostics.cppcheck,
     -- ECMAScript
     -- npm install -g eslint_d
     diagnostics.eslint_d.with({
