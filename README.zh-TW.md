@@ -55,7 +55,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
 -   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
--   `playground`包含一些杂七杂八的代码
+-   `playground`包含一些雜七雜八的代碼
 -   `utils`常用的工具庫，如全局函數、更改顏色主題等
 
 ## 使用
@@ -75,7 +75,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so`關閉其他分屏
 -   `Alt-h/j/k/l` 窗口之间跳转
 -   `ts`分割標籤`th/l/j/k`前後首尾標籤`tc`關閉標籤
--   `Z`打開代碼塊`zz` 关闭代码块 `Leader-f`格式化代碼
+-   `Z`打開代碼塊`zz`關閉代碼塊`Leader-f`格式化代碼
 -   其他快捷鍵請參考具體配置
 
 ### 插件
