@@ -36,7 +36,7 @@ The code editing in this configuration is mainly configured for go, rust, javasc
     git clone https://github.com/MysticalDevil/nvim ~/.config/nvim/
     ```
 
-3.  打开 neovim 来安装插件
+3.  Open neovim to install plugins
 
     ```bash
     :Lazy install
@@ -47,8 +47,8 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
 -   `configs/plugin`Configuration for most plugins, excluding completion, formatting, DAP, LSP
@@ -64,21 +64,21 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 
 The main buttons are configured in[`keybindings.lua`](./lua/configs/core/keybindings.lua)and[`which-key.lua`](./lua/configs/plugin/whick-key.lua)in the file
 
-以下是一些常用的快捷键
+The following are some commonly used shortcut keys
 
 -   `<leader>`key for`,`
 -   `<leader>w + ...`Save files and derivative operations (such as save and exit)
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
--   `Ctrl-d/u` 向下/上滚动 10 行
--   `gcc/gcb`quick note
+-   `Ctrl-d/u`Scroll down/up 10 lines
+-   `gcc/gcb`quick notes
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
--   `ts`split label`th/l/j/k`front and back tags`tc` 关闭标签
+-   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
 -   For other shortcut keys, please refer to the specific configuration
 
-### 插件
+### plug-in
 
 Here are some of the main plugins used
 
