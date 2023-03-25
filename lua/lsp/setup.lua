@@ -31,7 +31,7 @@ local lspServers = {
   "tsserver",
   "taplo",
   "vimls",
-  "vuels",
+  "volar",
   "yamlls",
 }
 
