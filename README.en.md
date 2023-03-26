@@ -47,8 +47,8 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
 -   `configs/plugin`Configuration for most plugins, excluding completion, formatting, DAP, LSP
