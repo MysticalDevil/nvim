@@ -6,7 +6,7 @@
 
 該配置中的代碼編輯的等主要針對 go、rust、javascript、typescript、lua 進行配置，其他語言只使用了 nvim-lsp 的基本功能
 
-## 安裝
+## 安装
 
 1.  安裝 neovim：
     我主要使用的 Linux 發行版是 Arch、Gentoo、Debian，其他發行版請自行查看官方文檔。 neovim 版本需要 0.8.0 及以上，因為一些插件在 0.8.0 之前無法正常工作
@@ -44,11 +44,11 @@
 
 ## 目錄及文件說明
 
-neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua`目錄
+neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua` 目录
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
--   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp`補全引擎相關配置，補全引擎使用了[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)、補全圖標採用了[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `ginit.vim` 使用 neovim 前端时加载的额外配置，该配置支持 [`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `cmp`補全引擎相關配置，補全引擎使用了[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) 、补全图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`核心配置，主要包括了基礎配置、基本按鍵綁定、主題配色、插件列表和 autocmd
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
@@ -72,9 +72,9 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `Ctrl-j/k`向下/上滾動 5 行
 -   `Ctrl-d/u`向下/上滾動 10 行
 -   `gcc/gcb`快速註釋
--   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so`關閉其他分屏
+-   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so` 关闭其他分屏
 -   `Alt-h/j/k/l`窗口之間跳轉
--   `ts` 分割标签`th/l/j/k`前後首尾標籤`tc`關閉標籤
+-   `ts`分割標籤`th/l/j/k`前後首尾標籤`tc`關閉標籤
 -   `Z`打開代碼塊`zz`關閉代碼塊`Leader-f`格式化代碼
 -   其他快捷鍵請參考具體配置
 
@@ -87,7 +87,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
 -   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
--   [`leap.nvim`](https://github.com/ggandor/leap.nvim)文本快速跳轉插件，快捷鍵為`-`和`_`
+-   [`leap.nvim`](https://github.com/ggandor/leap.nvim) 文本快速跳转插件，快捷键为 `-`和`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)狀態欄插件
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)文件管理器，之前使用的是[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
 -   [`noice.nvim`](https://github.com/folke/noice.nvim)通知、命令行、彈出菜單等功能的改進插件，有點不穩定
