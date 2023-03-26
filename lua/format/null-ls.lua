@@ -17,7 +17,7 @@ null_ls.setup({
     -- C/C++
     -- pacman -S clang-format
     formatting.clang_format.with({
-      filetype = {
+      filetypes = {
         "c",
         "h",
         "cpp",
@@ -25,7 +25,6 @@ null_ls.setup({
         "hpp",
         "cuda",
         "objcpp",
-        -- "proto",
       },
     }),
     -- CMake
