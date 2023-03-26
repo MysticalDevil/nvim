@@ -16,6 +16,7 @@ local navic = require("nvim-navic")
 
 local OS = vim.loop.os_uname().sysname
 local lspServers = {
+  "bufls",
   "clangd",
   "cmake",
   "cssls",
@@ -66,6 +67,7 @@ end
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   bashls = require("lsp.config.bash"),
+  bufls = require("lsp.config.common"),
   clangd = require("lsp.config.clangd"),
   cmake = require("lsp.config.common"),
   cssls = require("lsp.config.css"),
