@@ -25,6 +25,7 @@ null_ls.setup({
         "hpp",
         "cuda",
         "objcpp",
+        -- "proto",
       },
     }),
     -- CMake
@@ -55,6 +56,9 @@ null_ls.setup({
     -- PgSQL
     -- builtin postgresql
     formatting.pg_format,
+    -- Protocol Buffer
+    -- go install github.com/yoheimuta/protolint/cmd/protolint@latest
+    formatting.protolint,
     -- Scala
     -- builtin coursier
     formatting.scalafmt,
@@ -140,6 +144,9 @@ null_ls.setup({
     -- PHP
     -- composer require --dev phpstan/phpstan
     diagnostics.phpstan,
+    -- Protocol Bufer
+    -- go install github.com/yoheimuta/protolint/cmd/protolint@latest
+    diagnostics.protolint,
     -- Ruby
     -- gem install rubocop
     diagnostics.rubocop,
