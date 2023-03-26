@@ -56,8 +56,8 @@ null_ls.setup({
     -- builtin postgresql
     formatting.pg_format,
     -- Protocol Buffer
-    -- go install github.com/yoheimuta/protolint/cmd/protolint@latest
-    formatting.protolint,
+    -- go install github.com/bufbuild/buf/cmd/buf@@latest
+    formatting.buf,
     -- Scala
     -- builtin coursier
     formatting.scalafmt,
@@ -144,8 +144,8 @@ null_ls.setup({
     -- composer require --dev phpstan/phpstan
     diagnostics.phpstan,
     -- Protocol Bufer
-    -- go install github.com/yoheimuta/protolint/cmd/protolint@latest
-    diagnostics.protolint,
+    -- go install github.com/bufbuild/buf/cmd/buf@@latest
+    diagnostics.buf,
     -- Ruby
     -- gem install rubocop
     diagnostics.rubocop,
