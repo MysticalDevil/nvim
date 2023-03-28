@@ -86,7 +86,7 @@ Here are some of the main plugins used
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)The main color, I like the onedark color scheme very much, it can also be changed to other color schemes
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)Plugins like tabs for other editors
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)Line comments and block comments plugin
--   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)More beautiful neovim welcome screen, with[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)to quickly open recent projects or files
+-   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)More beautiful neovim welcome screen, with[`project.nvim`](https://github.com/ahmedkhalf/project.nvim) 来快速打开最近项目或文件
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)Text quick jump plug-in, the shortcut key is`-`and`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)status bar plugin
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)file manager, previously used the[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
