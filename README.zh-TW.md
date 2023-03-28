@@ -48,7 +48,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
 -   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)、補全圖標採用了[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `cmp`補全引擎相關配置，補全引擎使用了[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)、補全圖標採用了[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`核心配置，主要包括了基礎配置、基本按鍵綁定、主題配色、插件列表和 autocmd
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
@@ -83,7 +83,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 以下是一些使用的主要插件
 
 -   [`lazy.nvim`](https://github.com/folke/lazy.nvim)插件管理器，相比[`packer.nvim`](https://github.com/wbthomason/packer.nvim)更簡單易用、性能更好、配置簡單
--   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim) 主体颜色，我很喜欢 onedark 配色方案，也可以更改为其他的配色方案
+-   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)主體顏色，我很喜歡 onedark 配色方案，也可以更改為其他的配色方案
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
 -   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
