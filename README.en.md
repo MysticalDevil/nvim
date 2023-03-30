@@ -55,7 +55,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 -   `dap`Debug Adapter Protocol related configuration, mainly used[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)As a dap (the configuration is not good, because I don't understand)
 -   `format`Code formatting related configuration, mainly used[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protocol related configuration, mainly used[`mason`](https://github.com/williamboman/mason.nvim)Manage LSP, DAP, Linter, Formmater and other packages,[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)and[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)Perform LSP configuration
--   `playground`包含一些杂七杂八的代码
+-   `playground`Contains some miscellaneous code
 -   `utils`Commonly used tool libraries, such as global functions, changing color themes, etc.
 
 ## use
@@ -72,7 +72,7 @@ The following are some commonly used shortcut keys
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
 -   `gcc/gcb`quick note
--   `sv` 水平分屏 `sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
+-   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
@@ -105,6 +105,6 @@ code editing page
 
 ![image-20230310210623206](./assets/image-20230310210623206.png)
 
-## 贡献
+## contribute
 
 Contributions to my neovim configuration files are welcome! If you want to add new plugins or modify existing configuration, please make a pull request
