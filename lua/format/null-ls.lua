@@ -62,8 +62,8 @@ null_ls.setup({
     -- builtin coursier
     formatting.scalafmt,
     -- Shell
-    -- pacman -S shfmt
-    formatting.shfmt,
+    -- pip install beautysh
+    formatting.beautysh,
     -- Lua
     -- cargo install stylua
     formatting.stylua,
