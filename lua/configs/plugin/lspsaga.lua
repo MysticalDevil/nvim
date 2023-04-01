@@ -31,6 +31,28 @@ local opts = {
     respect_root = false,
     color_mode = true,
   },
+  diagnostic = {
+    on_insert = true,
+    on_insert_follow = false,
+    insert_winblend = 0,
+    show_code_action = true,
+    show_source = true,
+    jump_num_shortcut = true,
+    max_width = 0.7,
+    max_height = 0.6,
+    max_show_width = 0.9,
+    max_show_height = 0.6,
+    text_hl_follow = true,
+    border_follow = true,
+    extend_relatedInformation = false,
+    keys = {
+      exec_action = "o",
+      quit = "q",
+      go_action = "g",
+      expand_or_jump = "<CR>",
+      quit_in_show = { "q", "<ESC>" },
+    },
+  },
 }
 
 lspsage.setup(opts)

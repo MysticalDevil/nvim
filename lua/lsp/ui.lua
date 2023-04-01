@@ -1,11 +1,11 @@
 -- 自定义图标
 vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
+  virtual_text = false,
+  signs = false,
   update_in_insert = false,
-  underline = true,
+  underline = false,
   show_header = false,
-  severity_sort = true,
+  severity_sort = false,
   float = {
     source = "always",
     border = "rounded",
