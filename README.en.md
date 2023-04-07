@@ -48,7 +48,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 
 -   `init.lua`Startup file when configuring neovim with pure lua
 -   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
 -   `configs/plugin`Configuration for most plugins, excluding completion, formatting, DAP, LSP
@@ -56,7 +56,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 -   `format`Code formatting related configuration, mainly used[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protocol related configuration, mainly used[`mason`](https://github.com/williamboman/mason.nvim)Manage LSP, DAP, Linter, Formmater and other packages,[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)and[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)Perform LSP configuration
 -   `playground`Contains some miscellaneous code
--   `utils`Commonly used tool libraries, such as global functions, changing color themes, etc.
+-   `utils` 常用的工具库，如全局函数、更改颜色主题等
 
 ## use
 
@@ -66,12 +66,12 @@ The main buttons are configured in[`keybindings.lua`](./lua/configs/core/keybind
 
 The following are some commonly used shortcut keys
 
--   `<leader>` 键为 `,`
+-   `<leader>`key for`,`
 -   `<leader>w + ...`Save files and derivative operations (such as save and exit)
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
--   `gcc/gcb`quick note
+-   `gcc/gcb`quick notes
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
@@ -82,7 +82,7 @@ The following are some commonly used shortcut keys
 
 Here are some of the main plugins used
 
--   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim)Easier to use, better performance, and simple configuration
+-   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim) 更简单易用、性能更好、配置简单
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)The main color, I like the onedark color scheme very much, it can also be changed to other color schemes
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)Plugins like tabs for other editors
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)Line comments and block comments plugin
@@ -90,7 +90,7 @@ Here are some of the main plugins used
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)Text quick jump plug-in, the shortcut key is`-`and`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)status bar plugin
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)file manager, previously used the[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
--   [`noice.nvim`](https://github.com/folke/noice.nvim)Improved plugin for notifications, command line, popup menu, etc., a bit unstable
+-   [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件，有点不稳定
 -   [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)syntax tree, syntax highlighting
 -   [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim)Find, filter, preview, select plugins
 -   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim)Integrate git into buffer
