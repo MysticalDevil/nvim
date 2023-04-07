@@ -190,4 +190,23 @@ null_ls.setup({
     -- end
   end,
   require("typescript.extensions.null-ls.code-actions"),
+  diagnostic_config = {
+    -- see :help vim.diagnostic.config()
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+    underline = true,
+    show_header = false,
+    severity_sort = true,
+    float = {
+      source = "always",
+      border = "rounded",
+      style = "minimal",
+      header = "",
+      -- prefix = " ",
+      -- max_width = 100,
+      -- width = 60,
+      -- height = 20,
+    },
+  },
 })
