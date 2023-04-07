@@ -4,6 +4,17 @@ if not status then
   return
 end
 
+-- Union mason and null-ls
+local mason_null_ls = require("mason-null-ls")
+
+mason_null_ls.setup({
+  ensure_installed = {
+    -- Opt to list sources here, when available in mason.
+  },
+  automatic_installation = false,
+  automatic_setup = true, -- Recommended, but optional
+})
+
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions

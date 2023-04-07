@@ -555,6 +555,9 @@ local list = {
       "williamboman/mason.nvim",
       "jose-elias-alvarez/null-ls.nvim",
     },
+    config = function()
+      require("format.null-ls")
+    end,
   },
   -- LSP config
   "neovim/nvim-lspconfig",
