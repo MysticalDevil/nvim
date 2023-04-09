@@ -78,15 +78,15 @@ null_ls.setup({
     -- Lua
     -- cargo install stylua
     formatting.stylua,
+    -- ESLint
+    -- npm install @eslint
+    formatting.eslint_d.with({
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    }),
     -- ECMAScript HTML CSS
     -- npm install prettier
     formatting.prettier.with({
       filetypes = {
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "vue",
         "css",
         "scss",
         "less",
