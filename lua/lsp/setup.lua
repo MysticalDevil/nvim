@@ -23,7 +23,6 @@ local lsp_servers = {
   "clangd",
   "cmake",
   "cssls",
-  "cssmodules_ls",
   "dockerls",
   "emmet_ls",
   "eslint",
