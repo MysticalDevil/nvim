@@ -6,7 +6,7 @@ This configuration mainly uses[`lazy.nvim`](https://github.com/folke/lazy.nvim)M
 
 The code editing in this configuration is mainly configured for go, rust, javascript, typescript, lua, and other languages ​​only use the basic functions of nvim-lsp
 
-## Install
+## 安装
 
 1.  Install neovim:
     The Linux distributions I mainly use are Arch, Gentoo, and Debian. Please check the official documentation for other distributions. neovim version needs 0.8.0 and above, because some plugins don't work properly before 0.8.0
@@ -48,7 +48,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 
 -   `init.lua`Startup file when configuring neovim with pure lua
 -   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
 -   `configs/plugin`Configuration for most plugins, excluding completion, formatting, DAP, LSP
@@ -71,7 +71,7 @@ The following are some commonly used shortcut keys
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
--   `gcc/gcb`quick notes
+-   `gcc/gcb`quick note
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
@@ -82,7 +82,7 @@ The following are some commonly used shortcut keys
 
 Here are some of the main plugins used
 
--   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim) 更简单易用、性能更好、配置简单
+-   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim)Easier to use, better performance, and simple configuration
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)The main color, I like the onedark color scheme very much, it can also be changed to other color schemes
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)Plugins like tabs for other editors
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)Line comments and block comments plugin
@@ -90,7 +90,7 @@ Here are some of the main plugins used
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)Text quick jump plug-in, the shortcut key is`-`and`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)status bar plugin
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)file manager, previously used the[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
--   [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件，有点不稳定
+-   [`noice.nvim`](https://github.com/folke/noice.nvim)Improved plugin for notifications, command line, popup menu, etc., a bit unstable
 -   [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)syntax tree, syntax highlighting
 -   [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim)Find, filter, preview, select plugins
 -   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim)Integrate git into buffer
