@@ -5,13 +5,17 @@ local opts = {
   on_attach = function(client, bufnr)
     common.keyAttach(bufnr)
     -- common.disableFormat(client)
+
     require("lsp_signature").on_attach({
       bind = true,
       handler_opts = {
         border = "rounded",
       },
     }, bufnr)
-    require("nvim-navic").attach(client, bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end,
   -- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim
   settings = {

@@ -5,13 +5,17 @@ local opts = {
   on_attach = function(client, bufnr)
     common.disableFormat(client)
     common.keyAttach(bufnr)
+
     require("lsp_signature").on_attach({
       bind = true,
       handler_opts = {
         border = "rounded",
       },
     }, bufnr)
-    require("nvim-navic").attach(client, bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end,
   settings = {
     ["rust-analyzer"] = {
