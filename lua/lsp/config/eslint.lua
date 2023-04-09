@@ -11,7 +11,6 @@ local opts = {
         border = "rounded",
       },
     }, bufnr)
-    require("nvim-navic").attach(client, bufnr)
   end,
   single_file_support = false,
   settings = {
