@@ -6,7 +6,7 @@ This configuration mainly uses[`lazy.nvim`](https://github.com/folke/lazy.nvim)M
 
 The code editing in this configuration is mainly configured for go, rust, javascript, typescript, lua, and other languages ​​only use the basic functions of nvim-lsp
 
-## 安装
+## Install
 
 1.  Install neovim:
     The Linux distributions I mainly use are Arch, Gentoo, and Debian. Please check the official documentation for other distributions. neovim version needs 0.8.0 and above, because some plugins don't work properly before 0.8.0
@@ -47,7 +47,7 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
 -   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
@@ -56,7 +56,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 -   `format`Code formatting related configuration, mainly used[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protocol related configuration, mainly used[`mason`](https://github.com/williamboman/mason.nvim)Manage LSP, DAP, Linter, Formmater and other packages,[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)and[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)Perform LSP configuration
 -   `playground`Contains some miscellaneous code
--   `utils` 常用的工具库，如全局函数、更改颜色主题等
+-   `utils`Commonly used tool libraries, such as global functions, changing color themes, etc.
 
 ## use
 
