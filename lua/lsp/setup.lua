@@ -11,10 +11,6 @@ local mason_config = require("mason-lspconfig")
 
 local lspconfig = require("lspconfig")
 
-local lsp_signature = require("lsp_signature")
-
-local navic = require("nvim-navic")
-
 --------------------------------------- Configures ------------------------------------------------
 
 lsp.on_attach(function(client, bufnr)
@@ -30,6 +26,7 @@ local lsp_servers = {
   "cssmodules_ls",
   "dockerls",
   "emmet_ls",
+  "eslint",
   "gopls",
   "html",
   "jsonls",
@@ -65,14 +62,13 @@ else
 end
 
 -- 安装列表
--- { key: 服务器名，value: 配置文件 }
--- key 必须为下列网址列出的 server name
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   bashls = require("lsp.config.bash"),
   clangd = require("lsp.config.clangd"),
   cssls = require("lsp.config.css"),
   emmet_ls = require("lsp.config.emmet"),
+  eslint = require("lsp.config.eslint"),
   gopls = require("lsp.config.gopls"),
   jsonls = require("lsp.config.json"),
   lua_ls = require("lsp.config.lua"),
@@ -82,6 +78,7 @@ local servers = {
   yamlls = require("lsp.config.yaml"),
 }
 
+-- 配置语言服务器，配置文件中必须实现 on_setup 函数
 for _, name in ipairs(lsp_servers) do
   local config = servers[name] or require("lsp.config.common")
   if type(config) == "table" and config.on_setup ~= nil then
