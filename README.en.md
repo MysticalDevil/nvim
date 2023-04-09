@@ -28,7 +28,7 @@ The code editing in this configuration is mainly configured for go, rust, javasc
     brew install neovim
     ```
 
-    Debian recommends building your own, since the latest version of neovim in the official Debian repositories is 0.7
+    Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
 
 2.  Clone the repository:
 
