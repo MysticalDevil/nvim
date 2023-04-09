@@ -48,13 +48,13 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
 -   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
--   `cmp`補全引擎相關配置，補全引擎使用了[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)、補全圖標採用了[`lspkind`](https://github.com/onsails/lspkind.nvim)
+-   `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代碼片段使用了[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)、補全圖標採用了[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`核心配置，主要包括了基礎配置、基本按鍵綁定、主題配色、插件列表和 autocmd
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
 -   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
 -   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
--   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
+-   `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
 -   `playground`包含一些雜七雜八的代碼
 -   `utils`常用的工具庫，如全局函數、更改顏色主題等
 
