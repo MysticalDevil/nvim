@@ -36,7 +36,6 @@ local opts = {
     keymap("n", "gf", ":TypescriptFixAll<CR>", bufopts)
     keymap("n", "gD", ":TypescriptGoToSourceDefinition<CR>", bufopts)
   end,
-  -- require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(_)

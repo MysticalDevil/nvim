@@ -10,13 +10,8 @@ end
 
 -- 禁用格式化功能，交给专门的插件处理
 M.disableFormat = function(client)
-  if vim.fn.has("nvim-0.8") == 1 then
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  else
-    client.resolved_capabilities_document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
 end
 
 -- M.capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())

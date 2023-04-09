@@ -20,7 +20,6 @@ local opts = {
       schemas = require("schemastore").json.schemas(),
     },
   },
-  -- require("coq").lsp_ensure_capabilities(),
 }
 
 return {

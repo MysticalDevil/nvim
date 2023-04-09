@@ -23,7 +23,6 @@ local opts = {
       gofumpt = true,
     },
   },
-  -- require("coq").lsp_ensure_capabilities(),
 }
 return {
   on_setup = function(server)

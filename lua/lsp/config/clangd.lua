@@ -28,7 +28,6 @@ local opts = {
     }, bufnr)
     require("nvim-navic").attach(client, bufnr)
   end,
-  -- require("coq").lsp_ensure_capabilities(),
   settings = {
     filetypes = {
       "c",

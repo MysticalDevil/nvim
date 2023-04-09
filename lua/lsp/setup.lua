@@ -107,7 +107,6 @@ for name, config in pairs(servers) do
         }, bufnr)
         navic.attach(client, bufnr)
       end,
-      -- coq.lsp_ensure_capabilities(),
     })
   end
 end

@@ -51,7 +51,6 @@ local opts = {
       update_in_insert = false,
     }),
   },
-  -- require("coq").lsp_ensure_capabilities(),
 }
 
 return {
