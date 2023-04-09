@@ -7,13 +7,12 @@ end
 local lsp = lsp_zero.preset({})
 
 local mason = require("mason")
-local mason_config = require("mason-lspconfig")
 
 local lspconfig = require("lspconfig")
 
 --------------------------------------- Configures ------------------------------------------------
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
 end)
 

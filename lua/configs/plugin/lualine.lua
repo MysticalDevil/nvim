@@ -117,7 +117,16 @@ local opts = {
   },
   winbar = {
     lualine_a = { diagnostics },
-    lualine_b = { nvim_navic },
+    lualine_b = {
+      {
+        function()
+          return navic.get_location()
+        end,
+        cond = function()
+          return navic.is_available()
+        end,
+      },
+    },
     lualine_c = {},
     lualine_x = {},
     lualine_y = {},

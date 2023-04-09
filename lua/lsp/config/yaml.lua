@@ -2,15 +2,19 @@ local common = require("lsp.common-config")
 local opts = {
   capabilities = common.capabilities,
   flags = common.flags,
-  on_attach = function(_, bufnr)
+  on_attach = function(client, bufnr)
     common.keyAttach(bufnr)
+
     require("lsp_signature").on_attach({
       bind = true,
       handler_opts = {
         border = "rounded",
       },
     }, bufnr)
-    require("nvim-navic").attach(client, bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, bufnr)
+    end
   end,
   settings = {
     yaml = {
