@@ -4,7 +4,7 @@
 
 該配置主要使用[`lazy.nvim`](https://github.com/folke/lazy.nvim)進行插件的管理
 
-該配置中的代碼編輯的等主要針對 go、rust、javascript、typescript、lua 進行配置，其他語言只使用了 nvim-lsp 的基本功能
+该配置中的代码编辑的等主要针对 go、rust、javascript、typescript、lua 进行配置，其他语言只使用了 nvim-lsp 的基本功能
 
 ## 安裝
 
@@ -52,7 +52,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `configs/core`核心配置，主要包括了基礎配置、基本按鍵綁定、主題配色、插件列表和 autocmd
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
--   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
+-   `dap`  Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
 -   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
 -   `playground`包含一些雜七雜八的代碼
@@ -62,13 +62,13 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 
 ### 快捷鍵
 
-主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua)和[`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
+主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua) 和 [`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
 
 以下是一些常用的快捷鍵
 
 -   `<leader>`鍵為`,`
 -   `<leader>w + ...`保存文件及衍生操作（如保存並退出）
--   `<leader>q + ...`退出及衍生操作（如強制退出）
+-   `<leader>q + ...` 退出及衍生操作（如强制退出）
 -   `Ctrl-j/k`向下/上滾動 5 行
 -   `Ctrl-d/u`向下/上滾動 10 行
 -   `gcc/gcb`快速註釋
@@ -83,10 +83,10 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 以下是一些使用的主要插件
 
 -   [`lazy.nvim`](https://github.com/folke/lazy.nvim)插件管理器，相比[`packer.nvim`](https://github.com/wbthomason/packer.nvim)更簡單易用、性能更好、配置簡單
--   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)主體顏色，我很喜歡 onedark 配色方案，也可以更改為其他的配色方案
+-   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim) 主体颜色，我很喜欢 onedark 配色方案，也可以更改为其他的配色方案
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
--   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
+-   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim) 更美观的 neovim 的欢迎屏幕，配合 [`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)文本快速跳轉插件，快捷鍵為`-`和`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)狀態欄插件
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)文件管理器，之前使用的是[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
