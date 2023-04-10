@@ -81,21 +81,19 @@ null_ls.setup({
     -- ESLint
     -- npm install @eslint
     formatting.eslint_d.with({
-      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+      condition = function(utils)
+        return utils.root_has_file({
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.yaml",
+          ".eslintrc.yml",
+          ".eslintrc.json",
+        })
+      end,
     }),
     -- ECMAScript HTML CSS
     -- npm install prettier
     formatting.prettier.with({
-      filetypes = {
-        "css",
-        "scss",
-        "less",
-        "html",
-        "json",
-        "yaml",
-        "graphql",
-        "markdown",
-      },
       timeout = 10000,
       prefer_local = "node_modules/.bin",
     }),
@@ -130,6 +128,15 @@ null_ls.setup({
     -- npm install -g eslint_d
     diagnostics.eslint_d.with({
       prefer_local = "node_modules/.bin",
+      condition = function(utils)
+        return utils.root_has_file({
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.yaml",
+          ".eslintrc.yml",
+          ".eslintrc.json",
+        })
+      end,
     }),
     -- Go
     -- go install github.com/mgechev/revive@latest
