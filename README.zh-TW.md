@@ -62,16 +62,16 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 
 ### 快捷鍵
 
-主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua)和[`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
+主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua) 和 [`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
 
 以下是一些常用的快捷鍵
 
 -   `<leader>`鍵為`,`
 -   `<leader>w + ...`保存文件及衍生操作（如保存並退出）
--   `<leader>q + ...`退出及衍生操作（如強制退出）
--   `Ctrl-j/k` 向下/上滚动 5 行
+-   `<leader>q + ...` 退出及衍生操作（如强制退出）
+-   `Ctrl-j/k`向下/上滾動 5 行
 -   `Ctrl-d/u`向下/上滾動 10 行
--   `gcc/gcb`快速註釋
+-   `gcc/gcb` 快速注释
 -   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so`關閉其他分屏
 -   `Alt-h/j/k/l`窗口之間跳轉
 -   `ts`分割標籤`th/l/j/k`前後首尾標籤`tc`關閉標籤
@@ -87,10 +87,10 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
 -   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
--   [`leap.nvim`](https://github.com/ggandor/leap.nvim)文本快速跳轉插件，快捷鍵為`-` 和 `_`
+-   [`leap.nvim`](https://github.com/ggandor/leap.nvim)文本快速跳轉插件，快捷鍵為`-`和`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)狀態欄插件
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)文件管理器，之前使用的是[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
--   [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件，有点不稳定
+-   [`noice.nvim`](https://github.com/folke/noice.nvim)通知、命令行、彈出菜單等功能的改進插件，有點不穩定
 -   [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)語法樹、語法高亮
 -   [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim)查找、篩選、預覽、選擇插件
 -   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim)將 git 集成到緩衝區中
