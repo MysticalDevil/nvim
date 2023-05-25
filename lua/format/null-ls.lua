@@ -96,6 +96,10 @@ null_ls.setup({
     formatting.prettier.with({
       timeout = 10000,
       prefer_local = "node_modules/.bin",
+      extra_args = {
+        "--single-quote",
+        "--no-semi",
+      },
     }),
     -- PHP
     -- composer global require "squizlabs/php_codesniffer=*"
