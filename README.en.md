@@ -44,10 +44,10 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 
 ## Directory and file description
 
-If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua` 目录中，所以该说明无特殊指定的话根目录指的就是 `./lua`Table of contents
+If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
 -   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
@@ -56,7 +56,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 -   `format`Code formatting related configuration, mainly used[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protocol related configuration, mainly used[`mason`](https://github.com/williamboman/mason.nvim)Manage LSP, DAP, Linter, Formmater and other packages,[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)and[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)Perform LSP configuration
 -   `playground`Contains some miscellaneous code
--   `utils`Commonly used tool libraries, such as global functions, changing color themes, etc.
+-   `utils` 常用的工具库，如全局函数、更改颜色主题等
 
 ## use
 
@@ -74,7 +74,7 @@ The following are some commonly used shortcut keys
 -   `gcc/gcb`quick note
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
--   `ts` 分割标签`th/l/j/k`front and back tags`tc`close tab
+-   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
 -   For other shortcut keys, please refer to the specific configuration
 
@@ -82,7 +82,7 @@ The following are some commonly used shortcut keys
 
 Here are some of the main plugins used
 
--   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim)Easier to use, better performance, and simple configuration
+-   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim) 更简单易用、性能更好、配置简单
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)The main color, I like the onedark color scheme very much, it can also be changed to other color schemes
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)Plugins like tabs for other editors
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)Line comments and block comments plugin
@@ -101,7 +101,7 @@ Home screen
 
 ![image-20230310210526742](./assets/image-20230310210526742.png)
 
-code editing page
+代码编辑页面
 
 ![image-20230310210623206](./assets/image-20230310210623206.png)
 
