@@ -62,16 +62,16 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 
 ### 快捷鍵
 
-主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua) 和 [`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
+主要按鍵配置在[`keybindings.lua`](./lua/configs/core/keybindings.lua)和[`which-key.lua`](./lua/configs/plugin/whick-key.lua)文件中
 
 以下是一些常用的快捷鍵
 
 -   `<leader>`鍵為`,`
 -   `<leader>w + ...`保存文件及衍生操作（如保存並退出）
--   `<leader>q + ...` 退出及衍生操作（如强制退出）
+-   `<leader>q + ...`退出及衍生操作（如強制退出）
 -   `Ctrl-j/k`向下/上滾動 5 行
 -   `Ctrl-d/u`向下/上滾動 10 行
--   `gcc/gcb` 快速注释
+-   `gcc/gcb`快速註釋
 -   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so`關閉其他分屏
 -   `Alt-h/j/k/l`窗口之間跳轉
 -   `ts`分割標籤`th/l/j/k`前後首尾標籤`tc`關閉標籤
