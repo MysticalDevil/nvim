@@ -364,7 +364,7 @@ local list = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
-      -- require('nvim-tresitter.install').update({ with_sync = true  },
+      require('nvim-tresitter.install').update({ with_sync = true  })
     end,
     dependencies = {
       { "p00f/nvim-ts-rainbow" },
