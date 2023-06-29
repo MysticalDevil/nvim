@@ -62,7 +62,7 @@ If neovim uses pure lua configuration, the configuration files will be concentra
 
 ### hot key
 
-主要按键配置在 [`keybindings.lua`](./lua/configs/core/keybindings.lua)and[`which-key.lua`](./lua/configs/plugin/whick-key.lua)in the file
+The main buttons are configured in[`keybindings.lua`](./lua/configs/core/keybindings.lua)and[`which-key.lua`](./lua/configs/plugin/whick-key.lua)in the file
 
 The following are some commonly used shortcut keys
 
@@ -71,9 +71,9 @@ The following are some commonly used shortcut keys
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
--   `gcc/gcb`quick note
+-   `gcc/gcb`quick notes
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
--   `Alt-h/j/k/l`jump between windows
+-   `Alt-h/j/k/l` 窗口之间跳转
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
 -   For other shortcut keys, please refer to the specific configuration
