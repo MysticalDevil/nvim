@@ -28,7 +28,7 @@
     brew install neovim
     ```
 
-    Debian 建議自行構建，因為 Debian 官方倉庫的 neovim 最新版本為 0.7
+    Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
 
 2.  克隆該倉庫：
 
@@ -44,7 +44,7 @@
 
 ## 目錄及文件說明
 
-neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua`目錄
+neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua` 目录中，所以该说明无特殊指定的话根目录指的就是 `./lua`目錄
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
 -   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
