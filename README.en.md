@@ -71,9 +71,9 @@ The following are some commonly used shortcut keys
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
--   `gcc/gcb`quick notes
+-   `gcc/gcb`quick note
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
--   `Alt-h/j/k/l` 窗口之间跳转
+-   `Alt-h/j/k/l`jump between windows
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
 -   For other shortcut keys, please refer to the specific configuration
@@ -90,7 +90,7 @@ Here are some of the main plugins used
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)Text quick jump plug-in, the shortcut key is`-`and`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)status bar plugin
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)file manager, previously used the[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
--   [`noice.nvim`](https://github.com/folke/noice.nvim)Improved plugin for notifications, command line, popup menu, etc., a bit unstable
+-   [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件，有点不稳定
 -   [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)syntax tree, syntax highlighting
 -   [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim)Find, filter, preview, select plugins
 -   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim)Integrate git into buffer
