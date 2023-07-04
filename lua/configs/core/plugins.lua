@@ -123,6 +123,7 @@ local list = {
     config = function()
       require("configs.plugin.fidget")
     end,
+    tag = "legacy",
   },
   -- flit.nvim
   -- Enhanced f/t motions for Leap
@@ -364,7 +365,7 @@ local list = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
-      require('nvim-tresitter.install').update({ with_sync = true  })
+      require("nvim-tresitter.install").update({ with_sync = true })
     end,
     dependencies = {
       { "p00f/nvim-ts-rainbow" },
