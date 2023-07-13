@@ -125,15 +125,22 @@ local list = {
     end,
     tag = "legacy",
   },
-  -- flit.nvim
-  -- Enhanced f/t motions for Leap
   {
-    "ggandor/flit.nvim",
-    dependencies = "ggandor/leap.nvim",
+    "folke/flash.nvim",
+    event = "VeryLazy",
     config = function()
-      require("configs.plugin.flit")
+      require("configs.plugin.flash")
     end,
   },
+  -- flit.nvim
+  -- Enhanced f/t motions for Leap
+  -- {
+  --   "ggandor/flit.nvim",
+  --   dependencies = "ggandor/leap.nvim",
+  --   config = function()
+  --     require("configs.plugin.flit")
+  --   end,
+  -- },
   -- glow.nvim
   -- A markdown preview directly in your neovim.
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
@@ -183,12 +190,12 @@ local list = {
   },
   -- leap.nvim
   -- Neovim's answer to the mouse
-  {
-    "ggandor/leap.nvim",
-    config = function()
-      require("configs.plugin.leap")
-    end,
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   config = function()
+  --     require("configs.plugin.leap")
+  --   end,
+  -- },
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
