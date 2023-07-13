@@ -28,7 +28,7 @@
     brew install neovim
     ```
 
-    Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
+    Debian 建議自行構建，因為 Debian 官方倉庫的 neovim 最新版本為 0.7
 
 2.  克隆該倉庫：
 
@@ -44,7 +44,7 @@
 
 ## 目錄及文件說明
 
-neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua` 目录中，所以该说明无特殊指定的话根目录指的就是 `./lua`目錄
+neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua`目錄
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
 -   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
@@ -54,7 +54,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua` 目
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
 -   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
 -   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
--   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
+-   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
 -   `playground`包含一些雜七雜八的代碼
 -   `utils`常用的工具庫，如全局函數、更改顏色主題等
 
@@ -105,6 +105,6 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua` 目
 
 ![image-20230310210623206](./assets/image-20230310210623206.png)
 
-## 貢獻
+## 贡献
 
 歡迎為我的 neovim 配置文件做出貢獻！如果你想要添加新的插件或修改現有配置嗎，請進行 pull request
