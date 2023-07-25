@@ -153,12 +153,8 @@ null_ls.setup({
       extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
     }),
     -- Python
-    -- pip install pylint
-    diagnostics.pylint.with({
-      diagnostics_postprocess = function(diagnostic)
-        diagnostic.code = diagnostic.message_id
-      end,
-    }),
+    -- pip install ruff
+    diagnostics.ruff,
     -- Lua
     -- luarocks install luacheck
     -- diagnostics.luacheck,
