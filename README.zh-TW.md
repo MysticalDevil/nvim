@@ -44,7 +44,7 @@
 
 ## 目錄及文件說明
 
-neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua`目錄
+neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目錄中，所以該說明無特殊指定的話根目錄指的就是`./lua` 目录
 
 -   `init.lua`使用純 lua 配置 neovim 時的啟動文件
 -   `ginit.vim`使用 neovim 前端時加載的額外配置，該配置支持[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
@@ -52,7 +52,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `configs/core`核心配置，主要包括了基礎配置、基本按鍵綁定、主題配色、插件列表和 autocmd
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
--   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap) 作为 dap（配置并不好，因为不懂）
+-   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
 -   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
 -   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
 -   `playground`包含一些雜七雜八的代碼
@@ -73,16 +73,16 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `Ctrl-d/u`向下/上滾動 10 行
 -   `gcc/gcb`快速註釋
 -   `sv`水平分屏`sh`垂直分屏`sc`關閉分屏`so`關閉其他分屏
--   `Alt-h/j/k/l` 窗口之间跳转
+-   `Alt-h/j/k/l`窗口之間跳轉
 -   `ts`分割標籤`th/l/j/k`前後首尾標籤`tc`關閉標籤
--   `Z`打開代碼塊`zz`關閉代碼塊`Leader-f`格式化代碼
+-   `Z`打開代碼塊`zz`關閉代碼塊`Leader-f` 格式化代码
 -   其他快捷鍵請參考具體配置
 
 ### 插件
 
 以下是一些使用的主要插件
 
--   [`lazy.nvim`](https://github.com/folke/lazy.nvim)插件管理器，相比[`packer.nvim`](https://github.com/wbthomason/packer.nvim)更簡單易用、性能更好、配置簡單
+-   [`lazy.nvim`](https://github.com/folke/lazy.nvim)插件管理器，相比[`packer.nvim`](https://github.com/wbthomason/packer.nvim) 更简单易用、性能更好、配置简单
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)主體顏色，我很喜歡 onedark 配色方案，也可以更改為其他的配色方案
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
@@ -93,7 +93,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   [`noice.nvim`](https://github.com/folke/noice.nvim)通知、命令行、彈出菜單等功能的改進插件，有點不穩定
 -   [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)語法樹、語法高亮
 -   [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim)查找、篩選、預覽、選擇插件
--   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim) 将 git 集成到缓冲区中
+-   [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim)將 git 集成到緩衝區中
 
 ## 截圖
 
