@@ -1,6 +1,6 @@
 # Neovim configuration file
 
-This is the configuration file of MysticalDevil's neovim, which contains some of my commonly used plugins and custom configurations
+这是 MysticalDevil 的 neovim 的配置文件，包含了一些我常用的插件和自定义配置
 
 This configuration mainly uses[`lazy.nvim`](https://github.com/folke/lazy.nvim)Manage plugins
 
@@ -47,7 +47,7 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
 -   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
@@ -82,7 +82,7 @@ The following are some commonly used shortcut keys
 
 Here are some of the main plugins used
 
--   [`lazy.nvim`](https://github.com/folke/lazy.nvim)plugin manager, compared to[`packer.nvim`](https://github.com/wbthomason/packer.nvim)Easier to use, better performance, and simple configuration
+-   [`lazy.nvim`](https://github.com/folke/lazy.nvim) 插件管理器，相比 [`packer.nvim`](https://github.com/wbthomason/packer.nvim)Easier to use, better performance, and simple configuration
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)The main color, I like the onedark color scheme very much, it can also be changed to other color schemes
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)Plugins like tabs for other editors
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)Line comments and block comments plugin
