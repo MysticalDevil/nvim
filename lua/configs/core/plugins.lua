@@ -714,6 +714,26 @@ local list = {
     end,
   },
 
+  -- venv-selector.nvim
+  -- Allows selection of python virtual environment from within neovim
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("configs.plugin.vevn-selector")
+    end,
+    event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+    keys = {
+      {
+        "<leader>vs",
+        "<cmd>:VenvSelect<cr>",
+        -- optional if you use a autocmd (see #🤖-Automate)
+        "<leader>vc",
+        "<cmd>:VenvSelectCached<cr>",
+      },
+    },
+  },
+
   -- go.nvim
   -- Modern Go plugin for Neovim
   {
