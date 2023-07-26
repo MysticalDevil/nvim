@@ -6,7 +6,7 @@ This configuration mainly uses[`lazy.nvim`](https://github.com/folke/lazy.nvim)M
 
 The code editing in this configuration is mainly configured for go, rust, javascript, typescript, lua, and other languages ​​only use the basic functions of nvim-lsp
 
-## 安装
+## Install
 
 1.  Install neovim:
     The Linux distributions I mainly use are Arch, Gentoo, and Debian. Please check the official documentation for other distributions. neovim version needs 0.8.0 and above, because some plugins don't work properly before 0.8.0
