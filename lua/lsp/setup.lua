@@ -56,6 +56,7 @@ if OS ~= "Linux" then
   lsp.ensure_installed(lsp_servers)
 else
   table.insert(lsp_servers, "bashls")
+  table.insert(lsp_servers, "solargraph")
   lsp.ensure_installed(lsp_servers)
 end
 
@@ -72,6 +73,7 @@ local servers = {
   lua_ls = require("lsp.config.lua"),
   pyright = require("lsp.config.python"),
   rust_analyzer = require("lsp.config.rust"),
+  solargraph = require("lsp.config.ruby"),
   tsserver = require("lsp.config.typescript"),
   taplo = require("lsp.config.toml"),
   yamlls = require("lsp.config.yaml"),

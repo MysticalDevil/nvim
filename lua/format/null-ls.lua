@@ -110,7 +110,9 @@ null_ls.setup({
     formatting.isort,
     -- Ruby
     -- gem install rubocop
-    formatting.rubocop,
+    -- formatting.rubocop,
+    -- gem install standard
+    formatting.standard,
     -- Rust
     -- rustup component add rustfmt
     formatting.rustfmt,
@@ -166,7 +168,9 @@ null_ls.setup({
     diagnostics.buf,
     -- Ruby
     -- gem install rubocop
-    diagnostics.rubocop,
+    -- diagnostics.rubocop,
+    -- gem install standard
+    diagnostics.standard,
     -- Shell
     -- cabal install ShellCheck
     diagnostics.shellcheck,
