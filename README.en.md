@@ -71,12 +71,12 @@ The following are some commonly used shortcut keys
 -   `<leader>q + ...`Exit and derivative operations (such as forced exit)
 -   `Ctrl-j/k`Scroll down/up 5 lines
 -   `Ctrl-d/u`Scroll down/up 10 lines
--   `gcc/gcb`quick notes
+-   `gcc/gcb`quick note
 -   `sv`split screen horizontally`sh`vertical split screen`sc`Turn off split screen`so`Turn off other split screens
 -   `Alt-h/j/k/l`jump between windows
 -   `ts`split label`th/l/j/k`front and back tags`tc`close tab
 -   `Z`open code block`zz`close code block`Leader-f`format code
--   其他快捷键请参考具体配置
+-   For other shortcut keys, please refer to the specific configuration
 
 ### plug-in
 
