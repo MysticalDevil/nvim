@@ -28,7 +28,7 @@
     brew install neovim
     ```
 
-    Debian 建議自行構建，因為 Debian 官方倉庫的 neovim 最新版本為 0.7
+    Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
 
 2.  克隆該倉庫：
 
