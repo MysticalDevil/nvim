@@ -105,7 +105,7 @@ local opts = {
     },
 
     diagnostic_scrollbar_sign = { "▃", "▆", "█" }, -- experimental:  diagnostic status in scroll bar area; set to false to disable the diagnostic sign,
-    --                for other style, set to {'╍', 'ﮆ'} or {'-', '='}
+    --                for other style, set to {'╍', '󰚈'} or {'-', '='}
     diagnostic_virtual_text = true, -- show virtual for diagnostic message
     diagnostic_update_in_insert = false, -- update diagnostic message in insert mode
     disply_diagnostic_qf = true, -- always show quickfix if there are diagnostic errors, set to false if you want to ignore it

@@ -7,7 +7,7 @@ end
 local opts = {
   text = {
     spinner = "zip", -- animation shown when tasks ar ongoing
-    done = "", -- character shown when all tasks are complete
+    done = "󰄬", -- character shown when all tasks are complete
     commenced = "Started", -- message shown when task started
     completed = "Completed", -- message shown when task completes
   },

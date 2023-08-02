@@ -68,7 +68,7 @@ local filename = {
   -- for other components. (terrible name, any suggestions?)
   symbols = {
     modified = "[*]", -- Text to show when the file is modified.
-    readonly = " ", -- Text to show when the file is non-modifiable or readonly.
+    readonly = "󰌾 ", -- Text to show when the file is non-modifiable or readonly.
     unnamed = "[No Name]", -- Text to show for unnamed buffers.
     newfile = "[New]", -- Text to show for new created file before first writting
   },
@@ -92,7 +92,7 @@ local opts = {
       filename,
       {
         "lsp_progress",
-        spinner_symbols = { "", "", "", "", "", "" },
+        spinner_symbols = { "󰇊", "󰇋", "󰇌", "󰇍", "󰇎", "󰇏" },
       },
     },
     lualine_x = {
