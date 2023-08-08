@@ -738,10 +738,17 @@ local list = {
   -- Modern Go plugin for Neovim
   {
     "ray-x/go.nvim",
-    dependencies = { "ray-x/guihua.lua" }, -- recommended if need floating window support
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
     config = function()
       require("configs.plugin.go")
     end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 
   -- flutter-tools.nvim
