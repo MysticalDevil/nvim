@@ -119,12 +119,6 @@ pluginKeys.mapLSP = function(mapbuf)
     require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
   end)
 
-  if vim.fn.has("nvim-0.8") == 1 then
-    mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>")
-  else
-    mapbuf("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-  end
-
   -- diagnostic
   -- Lspsaga 替换 gp, gj, gk
   -- mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>", opt)

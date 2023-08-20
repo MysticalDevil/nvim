@@ -52,20 +52,6 @@ local list = {
       require("configs.plugin.aerial")
     end,
   },
-  -- barbecue.nvim
-  -- A VS Code like winbar for Neovim
-  -- {
-  --   "utilyre/barbecue.nvim",
-  --   name = "barbecue",
-  --   version = "*",
-  --   dependencies = {
-  --     "SmiteshP/nvim-navic",
-  --     "nvim-tree/nvim-web-devicons", -- optional dependency
-  --   },
-  --   opts = {
-  --     -- configurations go here
-  --   },
-  -- },
   -- beacon.nvim
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
@@ -132,15 +118,6 @@ local list = {
       require("configs.plugin.flash")
     end,
   },
-  -- flit.nvim
-  -- Enhanced f/t motions for Leap
-  -- {
-  --   "ggandor/flit.nvim",
-  --   dependencies = "ggandor/leap.nvim",
-  --   config = function()
-  --     require("configs.plugin.flit")
-  --   end,
-  -- },
   -- glow.nvim
   -- A markdown preview directly in your neovim.
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
@@ -188,14 +165,6 @@ local list = {
       require("configs.plugin.indent-blankline")
     end,
   },
-  -- leap.nvim
-  -- Neovim's answer to the mouse
-  -- {
-  --   "ggandor/leap.nvim",
-  --   config = function()
-  --     require("configs.plugin.leap")
-  --   end,
-  -- },
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
@@ -357,16 +326,6 @@ local list = {
       require("configs.plugin.nvim-test")
     end,
   },
-  -- nvim-tree.lua
-  -- A file explorer tree for neovim written in lua
-  -- {
-  --   "nvim-tree/nvim-tree.lua",
-  --   dependencies = "nvim-tree/nvim-web-devicons", -- optional. for file icons
-  --   version = "nightly", -- optional, updated every week.
-  --   config = function()
-  --     require("configs.plugin.nvim-tree")
-  --   end,
-  -- },
   -- nvim-treesitter
   -- Nvim Treesitter configurations and abstraction layer
   {
@@ -542,31 +501,12 @@ local list = {
       require("configs.plugin.gitsigns")
     end,
   },
-  -- diffview.nvim
-  -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   dependencies = "nvim-lua/plenary.nvim",
-  --   config = function()
-  --     require("configs.plugin.diffview")
-  --   end,
-  -- },
-  --
+
   ---------------------------------- Language Server Protocol -----------------------------------
   -- mason.nvim
   -- Portable package manager for Neovim
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  {
-    "jay-babu/mason-null-ls.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    config = function()
-      require("format.null-ls")
-    end,
-  },
   -- LSP config
   "neovim/nvim-lspconfig",
   -- neodev.nvim
@@ -600,12 +540,6 @@ local list = {
       { "L3MON4D3/LuaSnip" }, -- Required
     },
   },
-  -- null-ls.nvim
-  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-  },
   -- lsp_signature.nvim
   -- LSP signature hint as you type
   {
@@ -623,9 +557,6 @@ local list = {
     end,
   },
   -------------- Complete Engine --------------
-  -- coq_nvim
-  -- Fast as FUCK nvim completion
-  --  "ms-jpq/coq_nvim",
   -- nvim-cmp
   -- A completion plugin for neovim coded in Lua.
   "hrsh7th/nvim-cmp",
@@ -676,10 +607,6 @@ local list = {
   "rafamadriz/friendly-snippets",
 
   -------------- Language Import --------------
-
-  -- TypeScript.nvim
-  -- A Lua plugin, written in TypeScript, to write TypeScript (Lua optional)
-  "jose-elias-alvarez/typescript.nvim",
 
   -- schemastore.nvim
   -- JSON schemas for Neovim

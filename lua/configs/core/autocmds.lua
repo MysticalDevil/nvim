@@ -4,6 +4,8 @@ local newAutoGroup = vim.api.nvim_create_augroup("newAutoGroup", {
 
 local autocmd = vim.api.nvim_create_autocmd
 
+local filetypes = { "*.lua", "*.js", "*.ts", "*.jsx", "*.tsx", "*.rs" }
+
 -- 进入 Terminal 自动进入插入模式
 autocmd("TermOpen", {
   group = newAutoGroup,
@@ -13,20 +15,9 @@ autocmd("TermOpen", {
 -- 保存时自动格式化
 autocmd("BufWritePre", {
   group = newAutoGroup,
-  pattern = { "*.lua", "*.py", "*.sh", "*.rb", "*.rs", "*.toml", "*.html" },
-  callback = function()
-    vim.lsp.buf.format()
-  end,
+  pattern = filetypes,
+  command = "FormatWrite",
 })
-
--- -- Highlight on yank
--- autocmd("TextYankPost", {
---   group = newAutoGroup,
---   pattern = "**",
---   callback = function()
---     vim.highlight.on_yank()
---   end,
--- })
 
 -- 用 o 换行不要延续注释
 autocmd("BufEnter", {
@@ -37,16 +28,13 @@ autocmd("BufEnter", {
   end,
 })
 
--- 保存 Fold
-local saveable_type = { "*.lua", "*.js", "*.ts", "*.jsx", "*.tsx", "*.rs" }
-
 autocmd("BufWinEnter", {
   group = newAutoGroup,
-  pattern = saveable_type,
+  pattern = filetypes,
   command = "silent! loadview",
 })
 autocmd("BufWrite", {
   group = newAutoGroup,
-  pattern = saveable_type,
+  pattern = filetypes,
   command = "mkview",
 })

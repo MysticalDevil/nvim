@@ -4,47 +4,61 @@ if not status then
   return
 end
 
+-- Utilities for creating configurations
+local util = require("formatter.util")
+local filetypes = require("formatter.filetypes")
+local config = require("formatter.config")
+
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 formatter.setup({
+  -- Enable or disable logging
+  logging = true,
+  -- Set the log level
+  log_level = vim.log.levels.WARN,
+  -- All formatter configurations are opt-in
   filetype = {
+    -- Formatter configurations for filetype "lua" go here
+    -- and will be executed in order
     lua = {
+      -- "formatter.filetypes.lua" defines default configurations for the
+      -- "lua" filetype
+      filetypes.lua.stylua,
+
+      -- You can also define your own configuration
       function()
+        -- Supports conditional formatting
+        if util.get_current_buffer_file_name() == "special.lua" then
+          return nil
+        end
+
+        -- Full specification of configurations is down below and in Vim help
+        -- files
         return {
           exe = "stylua",
           args = {
-            --   '--config-path '
-            --       .. os.getenv('XDG_CONFIG_HOME')
-            --       .. '/stylua/stylua.toml',
+            "--search-parent-directories",
+            "--stdin-filepath",
+            util.escape_path(util.get_current_buffer_file_path()),
+            "--",
             "-",
           },
           stdin = true,
         }
       end,
     },
-    rust = {
-      -- Rustfmt
+
+    -- Use the special "*" filetype for defining formatter configurations on
+    -- any filetype
+    ["*"] = {
+      filetypes.any.remove_trailing_whitespace,
       function()
-        return {
-          exe = "rustfmt",
-          args = { "--emit=stdout" },
-          stdin = true,
-        }
+        -- Ignore already configured types.
+        local defined_types = config.values.filetype
+        if defined_types[vim.bo.filetype] ~= nil then
+          return nil
+        end
+        vim.lsp.buf.format({ async = true })
       end,
     },
-
-    javascript = function()
-      return {
-        exe = "prettier",
-        args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote", "--no-semi" },
-        stdin = true,
-      }
-    end,
   },
 })
-
--- format on save
-vim.api.nvim_exec([[
-autogroup FormatAutoGroup
-  autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
-autogroup END
-]])

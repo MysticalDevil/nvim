@@ -77,19 +77,13 @@ local opts = {
   },
 }
 
-local formatOpt = function()
-  if vim.fn.has("nvim-0.8") == 1 then
-    return "<cmd>lua vim.lsp.buf.format({ async = true })<CR>"
-  else
-    return "<cmd>lua vim.lsp.buf.formatting()<CR>"
-  end
-end
 
 which_key.setup(opts)
 
 which_key.register({
   ["<leader>q"] = { "<CMD>q<CR>", "Quit editor" },
-  ["<leader>f"] = { formatOpt(), "Format file use builtin LSP" },
+  ["<leader>f"] = { "<CMD>Format<CR>", "Format file" },
+  ["<leader>F"] = { "<CMD>FormatWrite<CR>", "Format and write file"},
   -- <cmd>Lspsaga code_action<CR>
   ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
   -- <cmd>Lspsaga rename<CR>
