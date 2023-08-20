@@ -26,7 +26,7 @@ autocmd("BufEnter", {
 autocmd("LspAttach", {
   callback = function(args)
     local buf = args.buf
-    keymap("n", "<C-M-l>", "<cmd> lua vim.lsp.buf.format()<cr>")
+    vim.api.nvim_buf_set_keymap(buf, "n", "<C-M-l>", "<cmd> lua vim.lsp.buf.format()<cr>")
   end,
 })
 
@@ -34,7 +34,9 @@ autocmd("LspAttach", {
 autocmd("BufWritePre", {
   group = lspAutoGroup,
   pattern = filetypes,
-  command = "FormatWrite",
+  callback = function()
+    vim.cmd("FormatWrite")
+  end,
 })
 
 -- Auto lint after writing to the file
