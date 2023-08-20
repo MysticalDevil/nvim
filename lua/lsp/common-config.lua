@@ -4,11 +4,11 @@ M.keyAttach = function(bufnr)
   local function buf_set_keymap(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
   end
-  -- 绑定快捷键
+  -- keybingings
   require("configs.core.keybindings").mapLSP(buf_set_keymap)
 end
 
--- 禁用格式化功能，交给专门的插件处理
+-- disable format, handle it to a dedicated plugin
 M.disableFormat = function(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false

@@ -193,10 +193,10 @@ which_key.register({
     },
   },
 
-  -- treesitter 折叠
+  -- treesitter fold
   Z = { ":foldopen<CR>", "Open code block toggle" },
   zz = { ":foldclose<CR>", "Close code block toggle" },
-  -- LSP 快捷键
+  -- LSP shortcut key
   g = {
     name = "+LSP",
     -- <cmd>Lspsaga preview_definition<CR>
@@ -241,7 +241,7 @@ which_key.register({
     -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
   },
   -----------------------------------------------------------
-  -- s_windows 分屏快捷键
+  -- s_windows split window shortcut key
   -----------------------------------------------------------
   s = {
     name = "+split",
@@ -257,7 +257,7 @@ which_key.register({
   },
 
   -----------------------------------------------------------
-  -- tab 分页快捷键
+  -- tab split page shortcut key
   -----------------------------------------------------------
   t = {
     name = "+tab",

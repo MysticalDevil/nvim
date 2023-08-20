@@ -8,12 +8,11 @@ require("nvim-treesitter.install").prefer_git = true
 
 local opts = {
   sync_install = false,
-  -- 安装 language parser
-  -- :TSInstallInfo 命令查看支持的语言
+  -- Install language parser
   -- ensure_installed = { "json", "html", "css", "vim", "lua", "javascript", "typescript", "tsx", "markdown" },
   -- ensure_installed = "maintained",
 
-  -- 启用代码高亮模块
+  -- enable code highlight module
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -21,7 +20,7 @@ local opts = {
       return vim.api.nvim_buf_line_count(bufnr) > 10000
     end,
   },
-  -- 启用增量选择模块
+  -- enable incremental selection module
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -31,7 +30,7 @@ local opts = {
       scope_incremental = "<TAB>",
     },
   },
-  -- 启用代码缩进模块
+  -- enable code indent module
   indent = {
     enable = true,
   },

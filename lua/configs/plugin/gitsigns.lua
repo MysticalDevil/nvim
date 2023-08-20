@@ -5,17 +5,17 @@ if not status then
 end
 
 local opts = {
-  -- 字母图标 A 增加，C 修改， D 删除
+  -- Letter icon. A is add，M is modify， D is delete
   signs = {
     add = { hl = "GitSignsAdd", text = "A|", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-    change = { hl = "GitSignsChange", text = "C|", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    change = { hl = "GitSignsChange", text = "M|", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
     delete = { hl = "GitSignsDelete", text = "D_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     topdelete = { hl = "GitSignsDelete", text = "D‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     changedelete = { hl = "GitSignsChange", text = "D~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
-  -- 显示图标
+  -- show icon
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-  -- 行数高亮
+  -- line number highlight
   numhl = false, -- Toggle with `Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `Gitsigns toggle_linehl`
   word_diff = true, -- Toggle with `Gitsigns toggle_word_diff`

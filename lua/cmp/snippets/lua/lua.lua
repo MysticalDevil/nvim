@@ -7,13 +7,13 @@ local s = luasnip.s --> snippet
 local i = luasnip.i --> insert node
 local t = luasnip.t --> text node
 
-local d = luasnip.dytnamic_node
+-- local d = luasnip.dytnamic_node
 local c = luasnip.choice_node
-local f = luasnip.function_node
-local sn = luasnip.snippet_node
+-- local f = luasnip.function_node
+-- local sn = luasnip.snippet_node
 
 local fmt = require("luasnip.extras.fmt").fmt
-local rep = require("luasnip.extras").rep
+-- local rep = require("luasnip.extras").rep
 
 local snippets, autosnippets = {}, {}
 

@@ -6,16 +6,14 @@
 -- term_mode = 't',
 -- command_mode = 'c',
 
--- 本地变量，用于简化键位映射
 local map = vim.api.nvim_set_keymap
--- 复用 opt 参数
 local opt = {
   noremap = true,
   silent = true,
 }
 -----------------------------------------------------------
 
--- leader key 为空
+-- leader key is null
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
@@ -29,19 +27,18 @@ local opts_expr = {
   silent = true,
 }
 
--- 命令行下 Ctrl+j/k 下/上一个
+-- under the command line, Ctrl+j/k is the next/previous
 keymap("c", "<C-j>", "<C-n>", opts_remap)
 keymap("c", "<C-k>", "<C-p>", opts_remap)
 
--- $ 跳到行尾不带空格（交换 $ 和 g_）
 keymap({ "n", "v" }, "$", "g_")
 keymap({ "n", "v" }, "g_", "$")
 
--- 上下滚动浏览
+-- scroll up and down
 keymap({ "n", "v" }, "<C-j>", "5j")
 keymap({ "n", "v" }, "<C-k>", "5k")
 
--- ctrl + u/d 只移动10行，默认移动半屏
+-- ctrl + u/d move 10 lines, half screen by default
 keymap({ "n", "v" }, "<C-d>", "10j")
 keymap({ "n", "v" }, "<C-u>", "10k")
 
@@ -66,33 +63,32 @@ end
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", opts_expr)
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", opts_expr)
 
--- visual 模式下缩进代码
+-- indent code in visual mode
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 
--- 上下移动选中文本
+-- move selected text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv")
 keymap("x", "K", ":move '<-2<CR>gv-gv")
 
--- 在 visual mode 里粘贴不要复制
+-- paste but do not copy in visual mode
 keymap("x", "p", "_dP")
 
--- Esc 回 Normal 模式
+-- type `esc` to back normal mode
 keymap("t", "<ESC>", "<C-\\><C-n>")
 
 -----------------------------------------------------------
--- 插件快捷键
 local pluginKeys = {}
 
--- lsp 回调函数快捷键设置
+-- LSP callback function shortcut key setting
 pluginKeys.mapLSP = function(mapbuf)
   -- rename
-  -- Lspsaga 替换 rn
+  -- Lspsaga replace rn
   -- mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
   -- mapbuf("n", lsp.rename, "<cmd>lua vim.lsp.buf.rename()<CR>")
 
   -- code action
-  -- Lspsaga 替换 ca
+  -- Lspsaga replace ca
   mapbuf("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
   -- mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 
@@ -107,12 +103,12 @@ pluginKeys.mapLSP = function(mapbuf)
   end)
 
   -- hover document
-  -- Lspsaga 替换 gh
+  -- Lspsaga replace gh
   mapbuf("n", "gh", "<cmd>Lspsaga hover_doc<cr>", opt)
   -- mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
   -- Go to references
-  -- Lspsaga 替换 gr
+  -- Lspsaga replace gr
   -- mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
   -- mapbuf("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opt)
   mapbuf("n", "gr", function()
@@ -120,7 +116,7 @@ pluginKeys.mapLSP = function(mapbuf)
   end)
 
   -- diagnostic
-  -- Lspsaga 替换 gp, gj, gk
+  -- Lspsaga replace gp, gj, gk
   -- mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>", opt)
   -- mapbuf("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opt)
   -- mapbuf("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opt)
@@ -128,7 +124,7 @@ pluginKeys.mapLSP = function(mapbuf)
   mapbuf("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>")
   mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
-  -- 未用
+  -- unused
   -- mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
   -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
   -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
@@ -137,14 +133,6 @@ pluginKeys.mapLSP = function(mapbuf)
   -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
   -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
   -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
-end
-
--- typescript 快捷键
-pluginKeys.mapTsLSP = function(bufnr)
-  local bufopts = { noremap = true, slient = true, buffer = bufnr }
-  keymap("n", "gs", ":TSLspOrganize<CR>", bufopts)
-  keymap("n", "gR", ":TSLspRenameFile<CR>", bufopts)
-  keymap("n", "gi", ":TSLspImportAll<CR>", bufopts)
 end
 
 -- nvim-dap

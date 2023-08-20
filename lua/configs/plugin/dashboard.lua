@@ -27,19 +27,13 @@ local opts = {
       enable = true,
     },
     shortcut = {
-      { desc = "󰊳  Update", group = "@property", action = "LazySync", key = "u" },
+      { desc = "󰊳  Update", group = "@property", action = "Lazy update", key = "u" },
       { desc = "  Projects", group = "Label", action = "Telescope projects", key = "p" },
       {
         desc = "󰦛  Recently files",
         group = "Label",
         action = "Telescope oldfiles",
         key = "r",
-      },
-      {
-        desc = "  Dotfiles",
-        group = "Number",
-        action = "Telescope dotfiles",
-        key = "d",
       },
       {
         desc = "󰌌  Edit keybindings",

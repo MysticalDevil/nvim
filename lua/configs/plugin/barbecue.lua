@@ -44,7 +44,7 @@ local opts = {
   ---`auto` uses your current colorscheme's theme or generates a theme based on it
   ---`string` is the theme name to be used (theme should be located under `barbecue.theme` module)
   ---`barbecue.Theme` is a table that overrides the `auto` theme detection/generation
-  ---@type "auto"|string|barbecue.Theme
+  ---@type "auto"|string
   theme = "auto",
 
   ---whether to display path to file

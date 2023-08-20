@@ -6,16 +6,16 @@ end
 
 local opts = {
   mappings = {
-    -- 关闭 extra 快捷键
+    -- disable extra shortcut key
     extra = false,
   },
 
-  -- Normal 模式快捷键
+  -- Normal mode shortcut key
   toggler = {
-    line = "gcc", -- 行注释
-    block = "gbc", -- 块注释
+    line = "gcc", -- line comment
+    block = "gbc", -- block comment
   },
-  -- Visual 模式
+  -- Visual mode
   opleader = {
     line = "gc",
     block = "gb",
@@ -39,13 +39,5 @@ local opts = {
     })
   end,
 }
-
--- ctrl + /
--- map('n', '<C-->', gcc, {
---   noremap = false,
--- })
--- map('v', '<C-_>', 'gc', {
---   noremap = false,
--- })
 
 comment.setup(opts)

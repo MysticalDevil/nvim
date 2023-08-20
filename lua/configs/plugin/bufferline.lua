@@ -1,6 +1,6 @@
 local status, bufferline = pcall(require, "bufferline")
 if not status then
-  vim.notify("bufferline not found", "error")
+  vim.notify("bufferline.nvim not found", "error")
   return
 end
 
@@ -8,24 +8,25 @@ end
 -- https://github.com/akinsho/bufferline.nvim#configuration
 local opts = {
   options = {
-    -- 关闭 Tab 的命令，这里使用 moll/vim-bbye 的 :Bdelete 命令
+    -- The command to close tab. The `Bdelete` command of mall/vim-bbye is used here.
     close_command = "Bdelete! %d",
     right_mouse_command = "Bdelete! %d",
-    -- 侧边栏配置
-    -- 左侧让出 nvim-terr 的位置，显示文字 File Explorer
+    -- sidebar configuration
+    -- give up the position of neo-tree on the left, show File Explorer
     offsets = {
       {
-        filetype = "NvimTree",
+        filetype = "neo-tree",
         text = "File Explorer",
         highlight = "Directory",
         text_algin = "left",
       },
     },
-    -- 使用 nvim 内置 LSP
+    -- use neovim built-in LSP
     diagnostics = "nvim_lsp",
-    -- 可选，显示 LSP 报错图标
+    -- optional, show LSP diagnostic icon
     ---@diagnostic disable-next-line: unused-local
-    diagnostics_indicator = function(count, level, diagnostics_dict, contect)
+    -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    diagnostics_indicator = function(_, _, diagnostics_dict, _)
       local s = ""
       for e, n in pairs(diagnostics_dict) do
         local sym = e == "error" and "" or (e == "warning" and "" or "")
@@ -37,15 +38,15 @@ local opts = {
 }
 bufferline.setup(opts)
 
--- 左右 Tab 切换
+-- left and right tab switching
 keymap("n", "<C-h>", ":BufferLineCyclePrev<CR>")
 keymap("n", "<C-l>", ":BufferLineCycleNext<CR>")
--- 'moll/vim-bbye' 关闭当前 buffer
+-- close current buffer
 keymap("n", "<C-w>", ":Bdelete!<CR>")
--- 关闭左/右侧标签页
+-- close left/right tab
 keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
 keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>")
--- 关闭其他标签页
+-- close other tab
 keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>")
--- 关闭选中标签页
+-- close picked tab
 keymap("n", "<leader>bp", ":BufferLinePickClose<CR>")

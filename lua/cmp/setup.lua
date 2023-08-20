@@ -36,7 +36,7 @@ local mapping = {
   ["<C-j>"] = cmp.mapping.select_next_item(),
 }
 
-cmp.setup({
+local opts = {
   -- 制定 snippet 引擎 luasnip
   snippet = {
     expand = function(args)
@@ -85,9 +85,11 @@ cmp.setup({
     },
   }),
 
-  -- 使用 lspkind-nvim 显示类型图标
+  -- use lspkind-nvim to show type icon
   formatting = require("cmp.lspkind").formatting,
-})
+}
+
+cmp.setup(opts)
 
 -- Use buffer source for `/`
 cmp.setup.cmdline("/", {

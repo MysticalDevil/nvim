@@ -4,8 +4,6 @@ if not status then
   return
 end
 
--- nvim-tree 支持
-
 local opts = {
   detection_methods = { "pattern" },
   patterns = {
@@ -24,8 +22,8 @@ local opts = {
 
 project.setup(opts)
 
-local status, telescope = pcall(require, "telescope")
-if not status then
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
   vim.notify("telescope not found")
   return
 end

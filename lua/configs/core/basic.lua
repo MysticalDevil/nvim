@@ -1,89 +1,89 @@
--- utf8
+-- utf8 encoding
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
--- jkhl 移动时光标周围保留8行
+-- keep 8 lines around the cursor when `hjkl` moves
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
--- 不使用相对行号
+-- do not use relative line numbers
 vim.wo.number = true
 vim.wo.relativenumber = false
--- 高亮所在行
+-- hightlight the row
 vim.wo.cursorline = true
--- 显示左侧图标指引列
+-- show lwft icon guide bar
 vim.wo.signcolumn = "yes"
--- 右侧参考线，表示代码建议长度
+-- the reference line on the right indicates the recommended length of the code
 vim.wo.colorcolumn = "130"
--- 缩进4个空格等于1个Tab
+-- indentation, 2 spaces equals a tab
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftround = true
--- >> << 时移动长度
+-- >> and << the length of the move
 vim.o.shiftwidth = 2
 vim.bo.shiftwidth = 2
--- 空格替代Tab
+-- spaces instead of tabs
 vim.o.expandtab = true
 vim.bo.expandtab = true
--- 新行自动对齐当前行
+-- new line is automatically aligned with current line
 vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.smartindent = true
--- 搜索大小写不敏感，除非包含大写
+-- searches are case insensitive unless uppercase is included
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- 搜索高亮
+-- search result highlight
 vim.o.hlsearch = true
--- 边输入边搜索
+-- search while typing
 vim.o.incsearch = false
--- 命令行高为2
+-- the command line height is 2
 vim.o.cmdheight = 2
--- 当文件被外部程序修改时自动加载
+-- automatically load when the file is modified by an external program
 vim.o.autoread = true
 vim.bo.autoread = true
--- 禁止折行
+-- no wrapping
 vim.wo.wrap = false
--- 光标在行首尾时<Left><Right>可以跳到下一行
+-- when the cursor is at the beginning and end of the line, use <Left><Right> to jump the next line
 vim.o.whichwrap = "<,>,[,]"
--- 允许隐藏被修改过的buffer
+-- allows to hide modified buffers
 vim.o.hidden = true
--- 鼠标支持
+-- mouse support
 vim.o.mouse = "a"
--- 禁止创建备份文件
+-- disable creation of backup files
 vim.o.backup = false
 vim.o.writebackup = false
 vim.swapfile = false
 -- smaller updatetime
 vim.o.updatetime = 300
--- 设置 timeoutlen 为等待键盘快捷键连击时间1000毫秒
+-- set the shortcut key combo time to not exceed 1000ms
 vim.o.timeoutlen = 1000
--- split window 从下边和右边出现
+-- `split window` appeares from above and to the right
 vim.o.splitbelow = true
 vim.o.splitright = true
--- 自动补全不自动选中
+-- autocomplete but not autoselect
 vim.g.completeopt = "menu,menuone,noselect,noinsert"
--- 样式
+-- style
 vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
--- 不可见字符的显示
+-- show invisible characters
 vim.o.list = true
 vim.o.listchars = "space:·"
--- 补全增强
+-- completion enhancement
 vim.o.wildmenu = true
--- Don't pass message to |ins-completion menu|
+-- don't pass message to |ins-completion menu|
 vim.o.shortmess = vim.o.shortmess .. "c"
--- 补全最多显示10行
+-- completion can display up to 10 lines
 vim.o.pumheight = 10
--- 永远显示 tabline
+-- always show tabline
 vim.o.showtabline = 2
--- 使用增强状态栏插件后不再需要 vim 的模式显示
+-- plug-ins that use the enhanced status bar no longer require vim's mode display
 vim.o.showmode = false
--- 配置剪切板
+-- configure clipboard
 vim.opt.clipboard = "unnamedplus"
 vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
 
--- 代码折叠配置
--- 默认不折叠
+-- code folding configuration
+-- default is not folded
 vim.o.foldlevel = 99
 vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99

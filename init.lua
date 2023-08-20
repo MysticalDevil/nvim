@@ -4,11 +4,11 @@ require("utils.global")
 require("configs.core.basic")
 -- Key bindings
 require("configs.core.keybindings")
--- Packer plugins manage
+-- Lazy plugins manage
 require("configs.core.plugins")
 -- Color scheme setting
 require("configs.core.colorscheme")
--- auto command
+-- Auto command
 require("configs.core.autocmds")
 
 -- Language server protocol
@@ -19,5 +19,5 @@ require("cmp.setup")
 require("format.setup")
 -- Linter
 require("lint.setup")
--- DAP
+-- Debug Adapter Protocol
 require("dap.setup")

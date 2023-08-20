@@ -5,9 +5,9 @@ if not status then
 end
 
 local opts = {
-  -- 空行占位
+  -- black space
   space_char_blankline = " ",
-  -- 同 treesitter 判断上下文
+  -- judge context
   show_current_context = true,
   show_current_context_start = true,
   context_patterns = {
@@ -39,7 +39,6 @@ local opts = {
     "toggleterm",
     "text",
   },
-  -- 竖线样式
   -- char = '¦'
   -- char = '┆'
   -- char = '│'
