@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,12 +15,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      # ISO Language Codes: https://cloud.google.com/translate/docs/languages
+      - name: Check for README changes
+        id: check_readme
+        run: echo ::set-output name=changed::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep README.md)
+
       - name: Adding README - Chinese Traditional
+        if: steps.check_readme.outputs.changed == 'README.md'
         uses: dephraiim/translate-readme@main
         with:
           LANG: zh-TW
+
       - name: Adding README - English
+        if: steps.check_readme.outputs.changed == 'README.md'
         uses: dephraiim/translate-readme@main
         with:
           LANG: en
