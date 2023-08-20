@@ -1,4 +1,10 @@
-local newAutoGroup = vim.api.nvim_create_augroup("newAutoGroup", {
+local commonAutoGroup = vim.api.nvim_create_augroup("commonAutoGroup", {
+  clear = true,
+})
+local formatAutoGroup = vim.api.nvim_create_augroup("formatAutoGroup", {
+  clear = true,
+})
+local lintAutoGroup = vim.api.nvim_create_augroup("lintAutoGroup", {
   clear = true,
 })
 
@@ -6,35 +12,31 @@ local autocmd = vim.api.nvim_create_autocmd
 
 local filetypes = { "*.lua", "*.js", "*.ts", "*.jsx", "*.tsx", "*.rs" }
 
--- 进入 Terminal 自动进入插入模式
+-- Terminal mode automatically enters insert mode
 autocmd("TermOpen", {
-  group = newAutoGroup,
+  group = commonAutoGroup,
   command = "startinsert",
 })
 
--- 保存时自动格式化
-autocmd("BufWritePre", {
-  group = newAutoGroup,
-  pattern = filetypes,
-  command = "FormatWrite",
-})
-
--- 用 o 换行不要延续注释
+-- Newlines with `o` do not continue comments
 autocmd("BufEnter", {
-  group = newAutoGroup,
-  pattern = "**",
+  group = commonAutoGroup,
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - "o" + "r"
   end,
 })
 
-autocmd("BufWinEnter", {
-  group = newAutoGroup,
+-- Auto format before writing to the file
+autocmd("BufWritePre", {
+  group = formatAutoGroup,
   pattern = filetypes,
-  command = "silent! loadview",
+  command = "FormatWrite",
 })
-autocmd("BufWrite", {
-  group = newAutoGroup,
-  pattern = filetypes,
-  command = "mkview",
+
+-- Auto lint after writing to the file
+autocmd("BufWritePost", {
+  group = lintAutoGroup,
+  callback = function()
+    require("lint").try_lint()
+  end,
 })

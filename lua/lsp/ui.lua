@@ -1,6 +1,6 @@
--- 自定义图标
+-- Customize icon
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   signs = false,
   update_in_insert = false,
   underline = false,

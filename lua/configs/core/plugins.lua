@@ -540,6 +540,15 @@ local list = {
       { "L3MON4D3/LuaSnip" }, -- Required
     },
   },
+  ------------------ Formatter ------------------
+  -- formatter.nvim
+  -- A format runner for Neovim
+  "mhartington/formatter.nvim",
+  ------------------- Linter --------------------
+  -- nvim-lint
+  -- An asynchronous linter plugin for Neovim complementary to
+  -- the built-in Language Server Protocol support.
+  "mfussenegger/nvim-lint",
   -- lsp_signature.nvim
   -- LSP signature hint as you type
   {
@@ -563,6 +572,7 @@ local list = {
   -- Snippet provider
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
+  "rafamadriz/friendly-snippets",
   -- Complete Source
   "hrsh7th/cmp-buffer", -- { name = 'buffer' }
   "hrsh7th/cmp-calc", -- { name = 'calc' }
@@ -571,9 +581,6 @@ local list = {
   "hrsh7th/cmp-nvim-lsp-signature-help", -- { name = 'nvim_lsp_signature_help' }
   "hrsh7th/cmp-path", -- { name = 'path' }
   "hrsh7th/cmp-vsnip",
-  -- formatter.nvim
-  -- A format runner for Neovim
-  "mhartington/formatter.nvim",
 
   ----------------- UI Import -----------------
   -- lspkind-nvim
@@ -601,10 +608,6 @@ local list = {
   --     require("configs.plugin.navigator")
   --   end,
   -- },
-
-  --------------- Code Snippets ---------------
-  -- Common language code snippets
-  "rafamadriz/friendly-snippets",
 
   -------------- Language Import --------------
 

@@ -17,5 +17,7 @@ require("lsp.setup")
 require("cmp.setup")
 -- Formater
 require("format.setup")
+-- Linter
+require("lint.setup")
 -- DAP
 require("dap.setup")
