@@ -47,13 +47,14 @@ The code editing in this configuration is mainly configured for go, rust, javasc
 If neovim uses pure lua configuration, the configuration files will be concentrated in`./lua`directory, so if there is no special specification in this description, the root directory refers to`./lua`Table of contents
 
 -   `init.lua`Startup file when configuring neovim with pure lua
--   `ginit.vim`Extra configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
+-   `ginit.vim`Additional configuration loaded when using the neovim frontend, which supports[`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
 -   `cmp`Completion engine related configuration, the completion engine uses[`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp), the code snippet uses[`LuaSnip`](https://github.com/L3MON4D3/LuaSnip), the completion icon uses the[`lspkind`](https://github.com/onsails/lspkind.nvim)
 -   `configs/core`Core configuration, mainly including basic configuration, basic key bindings, theme color matching, plugin list and autocmd
 -   `configs/gui`Front-end fonts, animations and other configurations
 -   `configs/plugin`Configuration for most plugins, excluding completion, formatting, DAP, LSP
 -   `dap`Debug Adapter Protocol related configuration, mainly used[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)As a dap (the configuration is not good, because I don't understand)
--   `format`Code formatting related configuration, mainly used[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
+-   `format`Code formatting related configuration, mainly used[`formatter.nvim`](https://github.com/mhartington/formatter.nvim)
+-   `lint`Code check related configuration, mainly use[`nvim-lint`](https://github.com/mfussenegger/nvim-lint)
 -   `lsp`Language Server Protocol related configuration, mainly used[`mason`](https://github.com/williamboman/mason.nvim)Manage LSP, DAP, Linter, Formmater and other packages,[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)and[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)Perform LSP configuration
 -   `playground`Contains some miscellaneous code
 -   `utils`Commonly used tool libraries, such as global functions, changing color themes, etc.
