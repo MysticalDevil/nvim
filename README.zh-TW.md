@@ -87,7 +87,7 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   [`onedark.nvim`](https://github.com/navarasu/onedark.nvim)主體顏色，我很喜歡 onedark 配色方案，也可以更改為其他的配色方案
 -   [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim)類似其他編輯器的標籤頁的插件
 -   [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`)行註釋和塊註釋插件
--   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim)來快速打開最近項目或文件
+-   [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim)更美觀的 neovim 的歡迎屏幕，配合[`project.nvim`](https://github.com/ahmedkhalf/project.nvim) 来快速打开最近项目或文件
 -   [`leap.nvim`](https://github.com/ggandor/leap.nvim)文本快速跳轉插件，快捷鍵為`-`和`_`
 -   [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim)狀態欄插件
 -   [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim)文件管理器，之前使用的是[`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
