@@ -10,24 +10,24 @@
 
 1. 安装 neovim：
     我主要使用的 Linux 发行版是 Arch、Gentoo、Debian，其他发行版请自行查看官方文档。neovim 版本需要 0.8.0 及以上，因为一些插件在 0.8.0 之前无法正常工作
-    
+
     ```bash
     # Arch
     sudo pacman -S neovim
-    
+
     # Gentoo
     sudo emerge -vj app-editors/neovim
-    
+
     # Debian
     sudo apt install neovim
-    
+
     # Windows
     scoop install neovim
-    
+
     # macOS
     brew install neovim
     ```
-    
+
     Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
 
 2. 克隆该仓库：
@@ -53,7 +53,8 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - `configs/gui` 前端的字体、动画等配置
 - `configs/plugin` 大多数插件的配置，不包含补全、格式化、DAP、LSP
 - `dap`  Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap) 作为 dap（配置并不好，因为不懂）
-- `format` 代码格式化相关配置，主要使用 [`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
+- `format` 代码格式化相关配置，主要使用 [`formatter.nvim`](https://github.com/mhartington/formatter.nvim)
+- `lint` 代码检查相关配置，主要使用 [`nvim-lint`](https://github.com/mfussenegger/nvim-lint)
 - `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) 和 [`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim) 进行 LSP 的配置
 - `playground`包含一些杂七杂八的代码
 - `utils` 常用的工具库，如全局函数、更改颜色主题等
