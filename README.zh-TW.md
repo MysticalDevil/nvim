@@ -53,7 +53,8 @@ neovim 如果使用純 lua 配置，那麼配置文件都會集中在`./lua`目�
 -   `configs/gui`前端的字體、動畫等配置
 -   `configs/plugin`大多數插件的配置，不包含補全、格式化、DAP、LSP
 -   `dap`Debug Adapter Protocol 相關配置，主要使用[`nvim-dap`](https://github.com/mfussenegger/nvim-dap)作為 dap（配置並不好，因為不懂）
--   `format`代碼格式化相關配置，主要使用[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim)
+-   `format`代碼格式化相關配置，主要使用[`formatter.nvim`](https://github.com/mhartington/formatter.nvim)
+-   `lint`代碼檢查相關配置，主要使用[`nvim-lint`](https://github.com/mfussenegger/nvim-lint)
 -   `lsp`Language Server Protolcol 相關配置，主要使用[`mason`](https://github.com/williamboman/mason.nvim)進行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig)和[`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim)進行 LSP 的配置
 -   `playground`包含一些雜七雜八的代碼
 -   `utils`常用的工具庫，如全局函數、更改顏色主題等
