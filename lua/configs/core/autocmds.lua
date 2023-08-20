@@ -1,10 +1,7 @@
 local commonAutoGroup = vim.api.nvim_create_augroup("commonAutoGroup", {
   clear = true,
 })
-local formatAutoGroup = vim.api.nvim_create_augroup("formatAutoGroup", {
-  clear = true,
-})
-local lintAutoGroup = vim.api.nvim_create_augroup("lintAutoGroup", {
+local lspAutoGroup = vim.api.nvim_create_augroup("lspAutoGroup", {
   clear = true,
 })
 
@@ -26,16 +23,23 @@ autocmd("BufEnter", {
   end,
 })
 
+autocmd("LspAttach", {
+  callback = function(args)
+    local buf = args.buf
+    keymap("n", "<C-M-l>", "<cmd> lua vim.lsp.buf.format()<cr>")
+  end,
+})
+
 -- Auto format before writing to the file
 autocmd("BufWritePre", {
-  group = formatAutoGroup,
+  group = lspAutoGroup,
   pattern = filetypes,
   command = "FormatWrite",
 })
 
 -- Auto lint after writing to the file
 autocmd("BufWritePost", {
-  group = lintAutoGroup,
+  group = lspAutoGroup,
   callback = function()
     require("lint").try_lint()
   end,
