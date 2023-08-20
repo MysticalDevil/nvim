@@ -9,11 +9,13 @@ local util = require("formatter.util")
 local filetypes = require("formatter.filetypes")
 local config = require("formatter.config")
 
-local mason_binary = vim.fn.stdpath("data") .. "/mason/bin/"
+local mason_binary = function(name)
+  return vim.fn.stdpath("data") .. "/mason/bin/" .. name
+end
 
 local prettier_defaults = function()
   return {
-    exe = mason_binary .. "prettier",
+    exe = mason_binary("prettier"),
     args = {
       "--single-quote",
       "--no-semi",
@@ -21,6 +23,16 @@ local prettier_defaults = function()
     },
     stdin = true,
     try_node_modules = true,
+  }
+end
+
+local shell_defaults = function()
+  return {
+    exe = mason_binary("beautysh"),
+    args = {
+      util.escape_path(util.get_current_buffer_file_path()),
+    },
+    stdin = true,
   }
 end
 
@@ -38,9 +50,7 @@ local settings = {
     filetypes.go.goimports,
   },
 
-  rust = {
-    filetypes.rust.rustfmt,
-  },
+  rust = { filetypes.rust.rustfmt },
 
   python = {
     filetypes.python.black,
@@ -48,75 +58,36 @@ local settings = {
     filetypes.python.docformatter,
   },
 
-  ruby = {
-    filetypes.ruby.standardrb,
-  },
+  ruby = { filetypes.ruby.standardrb },
 
-  c = {
-    filetypes.c.clangformat,
-  },
-  cpp = {
-    filetypes.c.clangformat,
-  },
-  cmake = {
-    filetypes.cmake.cmakeformat,
-  },
+  c = { filetypes.c.clangformat },
+  cpp = { filetypes.c.clangformat },
+  cmake = { filetypes.cmake.cmakeformat },
 
-  css = {
-    filetypes.css.prettier,
-  },
-  html = {
-    filetypes.html.prettier,
-  },
+  css = { filetypes.css.prettier },
+  html = { filetypes.html.prettier },
   javascript = prettier_defaults,
   typescript = prettier_defaults,
   javascriptreact = prettier_defaults,
   typescriptreact = prettier_defaults,
   vue = prettier_defaults,
 
-  fish = {
-    filetypes.fish.fishindent,
-  },
-  sh = {
-    function()
-      return {
-        exe = mason_binary .. "beautysh",
-        args = {
-          util.escape_path(util.get_current_buffer_file_path()),
-        },
-        stdin = true,
-      }
-    end,
-  },
+  fish = { filetypes.fish.fishindent },
+  sh = shell_defaults,
+  zsh = shell_defaults,
 
-  json = {
-    filetypes.json.fixjson,
-  },
-  toml = {
-    filetypes.toml.taplo,
-  },
-  yaml = {
-    filetypes.yaml.yamlfmt,
-  },
+  json = { filetypes.json.fixjson },
+  toml = { filetypes.toml.taplo },
+  yaml = { filetypes.yaml.yamlfmt },
 
-  java = {
-    filetypes.java.clangformat,
-  },
-  kotlin = {
-    filetypes.kotlin.ktlint,
-  },
+  java = { filetypes.java.clangformat },
+  kotlin = { filetypes.kotlin.ktlint },
 
-  cs = {
-    filetypes.cs.dotnetformat,
-  },
+  cs = { filetypes.cs.dotnetformat },
 
-  dart = {
-    filetypes.dart.dartformat,
-  },
+  dart = { filetypes.dart.dartformat },
 
-  elixir = {
-    filetypes.elixir.mixformat,
-  },
+  elixir = { filetypes.elixir.mixformat },
 
   -- Use the special "*" filetype for defining formatter configurations on
   -- any filetype

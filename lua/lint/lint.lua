@@ -5,7 +5,13 @@ if not status then
 end
 
 lint.linters_by_ft = {
-  lua = {
-    "luacheck",
-  },
+  lua = { "luacheck" },
+  c = { "clangtidy" },
+  cpp = { "clangtidy" },
+  python = { "ruff" },
+  ruby = { "standardrb" },
+  sh = { "shellcheck" },
+  zsh = { "shellcheck" },
+  go = { "golangcilint" },
+  java = { "checkstyle" },
 }
