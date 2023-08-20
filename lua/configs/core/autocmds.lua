@@ -23,13 +23,6 @@ autocmd("BufEnter", {
   end,
 })
 
-autocmd("LspAttach", {
-  callback = function(args)
-    local buf = args.buf
-    vim.api.nvim_buf_set_keymap(buf, "n", "<C-M-l>", "<cmd> lua vim.lsp.buf.format()<cr>")
-  end,
-})
-
 -- Auto format before writing to the file
 autocmd("BufWritePre", {
   group = lspAutoGroup,
