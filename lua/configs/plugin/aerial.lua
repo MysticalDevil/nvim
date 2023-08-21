@@ -7,12 +7,23 @@ local opts = {
   -- optionally use on_attach to set keymaps when aerial has attached to a buffer
   on_attach = function(bufnr)
     -- Jump forwards/backwards with '{' and '}'
-    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "<leader>}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   end,
   -- Priority list of preferred backends for aerial.
   -- This can be a filetype map (see :help aerial-filetype-map)
-  backends = { "treesitter", "lsp", "markdown", "man" },
+  backends = { ["_"] = { "treesitter", "lsp" } },
+
+  -- Automatically open aerial when entering supported buffers.
+  -- This can be a function (see :help aerial-open-automatic)
+  open_automatic = function(bufnr)
+    -- Enforce a minimum line count
+    return vim.api.nvim_buf_line_count(bufnr) > 120
+      -- Enforce a minimum symbol count
+      and aerial.num_symbols(bufnr) > 4
+      -- A useful way to keep aerial closed when closed manually
+      and not aerial.was_closed()
+  end,
 
   layout = {
     -- These control the width of the aerial window.
@@ -50,7 +61,7 @@ local opts = {
   --   unfocus       - close aerial when you leave the original source window
   --   switch_buffer - close aerial when you change buffers in the source window
   --   unsupported   - close aerial when attaching to a buffer that has no symbol source
-  close_automatic_events = {},
+  close_automatic_events = { "switch_buffer", "unsupported" },
 
   -- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
   -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
@@ -194,14 +205,43 @@ local opts = {
   -- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
   nerd_font = "auto",
   -- Call this function when aerial first sets symbols on a buffer.
-  on_first_symbols = function(bufnr) end,
-
-  -- Automatically open aerial when entering supported buffers.
-  -- This can be a function (see :help aerial-open-automatic)
-  open_automatic = false,
+  on_first_symbols = function(_) end,
 
   -- Run this command after jumping to a symbol (false will disable)
   post_jump_cmd = "normal! zz",
+
+  -- Invoked after each symbol is parsed, can be used to modify the parsed item,
+  -- or to filter it by returning false.
+  --
+  -- bufnr: a neovim buffer number
+  -- item: of type aerial.Symbol
+  -- ctx: a record containing the following fields:
+  --   * backend_name: treesitter, lsp, man...
+  --   * lang: info about the language
+  --   * symbols?: specific to the lsp backend
+  --   * symbol?: specific to the lsp backend
+  --   * syntax_tree?: specific to the treesitter backend
+  --   * match?: specific to the treesitter backend, TS query match
+  -- function(bufnr, items, ctx)
+  post_parse_symbol = function(_, _, _)
+    return true
+  end,
+
+  -- Invoked after all symbols have been parsed and post-processed,
+  -- allows to modify the symbol structure before final display
+  --
+  -- bufnr: a neovim buffer number
+  -- items: a collection of aerial.Symbol items, organized in a tree,
+  --        with 'parent' and 'children' fields
+  -- ctx: a record containing the following fields:
+  --   * backend_name: treesitter, lsp, man...
+  --   * lang: info about the language
+  --   * symbols?: specific to the lsp backend
+  --   * syntax_tree?: specific to the treesitter backend
+  -- function(bufnr, items, ctx)
+  post_add_all_symbols = function(_, items, _)
+    return items
+  end,
 
   -- When true, aerial will automatically close after jumping to a symbol
   close_on_select = false,
@@ -243,7 +283,7 @@ local opts = {
     height = nil,
     min_height = { 8, 0.1 },
 
-    override = function(conf, source_winid)
+    override = function(conf, _)
       -- This is the config that will be passed to nvim_open_win.
       -- Change values here to customize the layout
       return conf
@@ -261,11 +301,22 @@ local opts = {
     -- How long to wait (in ms) after a buffer change before updating
     -- Only used when diagnostics_trigger_update = false
     update_delay = 300,
+
+    -- Map of LSP client name to priority. Default value is 10.
+    -- Clients with higher (larger) priority will be used before those with lower priority.
+    -- Set to -1 to never use the client.
+    priority = {
+      -- pyright = 10,
+    },
   },
 
   treesitter = {
     -- How long to wait (in ms) after a buffer change before updating
     update_delay = 300,
+    -- Experimental feature to navigate to symbol names instead of the declaration
+    -- See https://github.com/stevearc/aerial.nvim/issues/279
+    -- If no bugs are reported for a time this will become the default
+    experimental_selection_range = false,
   },
 
   markdown = {
@@ -280,6 +331,3 @@ local opts = {
 }
 
 aerial.setup(opts)
-
--- You probably also want to set a keymap to toggle aerial
-vim.keymap.set("n", "<leader>e", "<cmd>AerialToggle!<CR>")

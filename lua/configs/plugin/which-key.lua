@@ -85,6 +85,7 @@ which_key.register({
   ["<leader>f"] = { "<CMD>Format<CR>", "Format file" },
   ["<leader>F"] = { "<CMD>FormatWrite<CR>", "Format file and write"},
   ["<leader>l"] = { require("lint").try_lint, "Lint"},
+  ["<leader>e"] = { "<cmd>AerialToggle!<CR>", "Aerial Symbol Outline"},
   -- <cmd>Lspsaga code_action<CR>
   ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
   -- <cmd>Lspsaga rename<CR>

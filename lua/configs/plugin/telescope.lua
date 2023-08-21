@@ -61,10 +61,11 @@ pcall(telescope.load_extension, "env")
 pcall(telescope.load_extension, "ui-select")
 pcall(telescope.load_extension, "noice")
 pcall(telescope.load_extension, "neoclip")
+pcall(telescope.load_extension, "aerial")
 
 -- You dont need to set any of these options. These are the default ones. Only
 -- the loading is important
-require("telescope").setup({
+telescope.setup({
   extensions = {
     fzf = {
       fuzzy = true, -- false will only do exact matching
@@ -72,6 +73,14 @@ require("telescope").setup({
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
+    },
+    aerial = {
+      -- Display symbols as <root>.<parent>.<symbol>
+      show_nesting = {
+        ["_"] = false, -- This key will be the default
+        json = true, -- You can set the option for specific filetypes
+        yaml = true,
+      },
     },
   },
 })
