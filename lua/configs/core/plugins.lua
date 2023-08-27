@@ -370,6 +370,13 @@ local list = {
       require("configs.plugin.window-picker")
     end,
   },
+  -- painefer-rust
+  -- A Rust port of parinfer.
+  {
+    "eraserhd/parinfer-rust",
+    cmd = "ParinferOn",
+    run = "cargo build --release",
+  },
   -- project.nvim
   -- The superior project management solution for neovim
   {

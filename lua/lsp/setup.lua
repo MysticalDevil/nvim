@@ -25,6 +25,7 @@ local lsp_servers = {
   "dockerls",
   "emmet_ls",
   "eslint",
+  "fennel_language_server",
   "gopls",
   "html",
   "jsonls",
