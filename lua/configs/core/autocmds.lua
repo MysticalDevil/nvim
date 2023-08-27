@@ -7,7 +7,8 @@ local lspAutoGroup = vim.api.nvim_create_augroup("lspAutoGroup", {
 
 local autocmd = vim.api.nvim_create_autocmd
 
-local filetypes = { "*.lua", "*.js", "*.ts", "*.jsx", "*.tsx", "*.rs" }
+local commonFiletypes = { "*.js", "*.jsx", "*.lua", "*.py", "*.rb", "*.rbs", "*.rs", "*.ts", "*.tsx" }
+local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 
 -- Terminal mode automatically enters insert mode
 autocmd("TermOpen", {
@@ -26,7 +27,7 @@ autocmd("BufEnter", {
 -- Auto format before writing to the file
 autocmd("BufWritePre", {
   group = lspAutoGroup,
-  pattern = filetypes,
+  pattern = commonFiletypes,
   callback = function()
     vim.cmd("FormatWrite")
   end,
@@ -38,4 +39,11 @@ autocmd("BufWritePost", {
   callback = function()
     require("lint").try_lint()
   end,
+})
+
+-- Auto enable parinfer when edit lisp file
+autocmd({ "BufEnter", "BufWinEnter" }, {
+  group = "commonAutoGroup",
+  pattern = lispFiletypes,
+  command = "ParinferOn",
 })
