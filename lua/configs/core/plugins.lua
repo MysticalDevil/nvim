@@ -93,6 +93,15 @@ local plugins_list = {
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+  -- dial.nvim
+  -- enhanced increment/decrement plugin for Neovim.
+  {
+    "monaqa/dial.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("configs.plugin.dial")
+    end
+  },
   -- dotenv.nvim
   -- A minimalist .env support for Neovim
   {
@@ -382,6 +391,10 @@ local plugins_list = {
     cmd = "ParinferOn",
     run = "cargo build --release",
   },
+  -- plenary.nvim
+  -- plenary: full; complete; entire; absolute; unqualified.
+  -- All the lua functions I don't want to write twice.
+  { "nvim-lua/plenary.nvim", lazy = true },
   -- project.nvim
   -- The superior project management solution for neovim
   {
@@ -446,6 +459,18 @@ local plugins_list = {
     "akinsho/toggleterm.nvim",
     config = function()
       require("configs.plugin.toggleterm")
+    end,
+  },
+  -- treesj
+  -- Neovim plugin for splitting/joining blocks of code
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+    },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("configs.plugin.treesj")
     end,
   },
   -- trouble.nvim
