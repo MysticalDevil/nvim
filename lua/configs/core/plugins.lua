@@ -62,13 +62,16 @@ local plugins_list = {
       require("configs.plugin.beacon")
     end,
   },
+  -- bufdelete.nvim
+  -- Delete Neovim buffers without losing window layout
+  { "famiu/bufdelete.nvim", lazy = true },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "moll/vim-bbye",
+      "famiu/bufdelete.nvim",
     },
     version = "v3.*",
     config = function()
@@ -100,7 +103,7 @@ local plugins_list = {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("configs.plugin.dial")
-    end
+    end,
   },
   -- dotenv.nvim
   -- A minimalist .env support for Neovim

@@ -13,6 +13,11 @@ local opts = {
     right_mouse_command = "Bdelete! %d",
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer
+    hover = {
+      enabled = true,
+      delay = 200,
+      reveal = { "close" },
+    },
     offsets = {
       {
         filetype = "neo-tree",
@@ -34,6 +39,33 @@ local opts = {
       end
       return s
     end,
+    custom_areas = {
+      right = function()
+        local result = {}
+        local seve = vim.diagnostic.severity
+        local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
+        local warning = #vim.diagnostic.get(0, { severity = seve.WARN })
+        local info = #vim.diagnostic.get(0, { severity = seve.INFO })
+        local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
+
+        if error ~= 0 then
+          table.insert(result, { text = "  " .. error, fg = "#EC5241" })
+        end
+
+        if warning ~= 0 then
+          table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
+        end
+
+        if hint ~= 0 then
+          table.insert(result, { text = "  " .. hint, fg = "#A3BA5E" })
+        end
+
+        if info ~= 0 then
+          table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
+        end
+        return result
+      end,
+    },
   },
 }
 bufferline.setup(opts)
@@ -43,10 +75,3 @@ keymap("n", "<C-h>", ":BufferLineCyclePrev<CR>")
 keymap("n", "<C-l>", ":BufferLineCycleNext<CR>")
 -- close current buffer
 keymap("n", "<C-w>", ":Bdelete!<CR>")
--- close left/right tab
-keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>")
-keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>")
--- close other tab
-keymap("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>")
--- close picked tab
-keymap("n", "<leader>bp", ":BufferLinePickClose<CR>")
