@@ -1,6 +1,6 @@
 -- Auto install lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazy_path) then
   vim.notify("lazy.nvim is being installed, please wait..", "info")
   vim.fn.system({
     "git",
@@ -8,10 +8,10 @@ if not vim.loop.fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
-    lazypath,
+    lazy_path,
   })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazy_path)
 
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
@@ -19,7 +19,7 @@ if not status_ok then
   return
 end
 
-local list = {
+local plugins_list = {
   -- lazy.nvim
   -- A modern plugin manager for Neovim
   "folke/lazy.nvim",
@@ -27,21 +27,23 @@ local list = {
   ----------------------------------------- Colorscheme -----------------------------------------
   -- material.nvim
   -- Material colorscheme for NeoVim
-  --  "marko-cerovac/material.nvim",
+  { "marko-cerovac/material.nvim", lazy = true },
   -- onedark.nvim
   -- One dark and light colorscheme for neovim
   {
     "navarasu/onedark.nvim",
+    lazy = false,
+    proiority = 1000,
     config = function()
       require("configs.plugin.onedark")
     end,
   },
   -- tokyonight.nvim
   -- A clean, dark Neovim theme written in Lua
-  --  "folke/tokyonight.nvim",
+  { "folke/tokyonight.nvim", lazy = true },
   -- aurora
   -- 24-bit dark theme for (Neo)vim
-  --  "ray-x/aurora",
+  { "ray-x/aurora", lazy = true },
   --
   --------------------------------------- Common plugins ----------------------------------------
   -- aerial.nvim
@@ -101,7 +103,7 @@ local list = {
   },
   -- dressing.nvim
   -- Neovim plugin to improve the default vim.ui interfaces
-  "stevearc/dressing.nvim",
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
   -- fidget.nvim
   -- Standalone UI for nvim-lsp progress
   {
@@ -252,6 +254,9 @@ local list = {
       require("configs.plugin.nvim-colorizer")
     end,
   },
+  -- nvim-web-devicons
+  -- lua `fork` of vim-web-devicons for neovim
+  { "nvim-tree/nvim-web-devicons", lazy = true },
   -- nvim-hlslens
   -- Hlsearch Lens for Neovim
   {
@@ -479,7 +484,13 @@ local list = {
       require("configs.plugin.illuminate")
     end,
   },
-  "dstein64/vim-startuptime",
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    init = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
   -- which-key.nvim
   -- Create key bindings that stick
   {
@@ -575,7 +586,17 @@ local list = {
   -------------- Complete Engine --------------
   -- nvim-cmp
   -- A completion plugin for neovim coded in Lua.
-  "hrsh7th/nvim-cmp",
+  {
+    "hrsh7th/nvim-cmp",
+    -- load cmp on InsertEnter
+    event = "InsertEnter",
+    -- these dependencies will only be loaded when cmp loads
+    -- dependencies are always lazy-loaded unless specified otherwise
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+    },
+  },
   -- Snippet provider
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
@@ -738,4 +759,4 @@ local opts = {
   },
 }
 
-lazy.setup(list, opts)
+lazy.setup(plugins_list, opts)
