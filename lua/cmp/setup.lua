@@ -11,33 +11,32 @@ local luasnip = require("luasnip")
 -- end
 
 local mapping = {
-  -- 出现补全
+  -- completion appears
   ["<A-.>"] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
-  -- 取消
+  -- cancel
   ["<A-,>"] = cmp.mapping({
     i = cmp.mapping.abort(),
     c = cmp.mapping.close(),
   }),
 
-  -- 确认
+  -- confirm
   -- Accept surrently selected item. If none slected, `select` first item
   -- Set `select` to `fasle` to only confirm explicitly slected items
   ["<CR>"] = cmp.mapping.confirm({
     select = true,
     behavior = cmp.ConfirmBehavior.Replace,
   }),
-  -- 如果窗口太多可以滚动
+  -- can scroll if too many items
   ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
   ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 
-  -- 上一个
+  -- previous
   ["<C-k>"] = cmp.mapping.select_prev_item(),
-  -- 下一个
+  -- next
   ["<C-j>"] = cmp.mapping.select_next_item(),
 }
 
 local opts = {
-  -- 制定 snippet 引擎 luasnip
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -47,9 +46,7 @@ local opts = {
     completion = cmp.config.window.bordered(),
     -- documentation = cmp.config.window.bordered(),
   },
-  -- 快捷键
   mapping = mapping,
-  -- 来源
   sources = cmp.config.sources({
     {
       name = "luasnip",
@@ -94,35 +91,35 @@ cmp.setup(opts)
 -- Use buffer source for `/`
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = { {
-    name = "buffer",
-  } },
+  sources = cmp.config.sources({
+    { name = "buffer" },
+  }),
 })
 
 -- Use cmdline & path source for ':'
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({ {
-    name = "buffer",
-  } }, { {
-    name = "cmdline",
-  } }),
+  sources = cmp.config.sources({
+    { name = "buffer" },
+  }, {
+    { name = "cmdline" },
+  }),
 })
 
 cmp.setup.filetype({ "markdown", "help" }, {
-  sources = { {
-    name = "luasnip",
+  sources = cmp.config.sources({
+    { name = "luasnip" },
   }, {
-    name = "buffer",
+    { name = "buffer" },
   }, {
-    name = "path",
-  } },
+    { name = "path" },
+  }),
 })
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
-    { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+    { name = "git" }, -- You can specify the `cmp_git` source if you were installed it.
   }, {
     { name = "buffer" },
   }),
