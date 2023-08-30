@@ -20,6 +20,7 @@ local OS = vim.loop.os_uname().sysname
 local lsp_servers = {
   "bufls",
   "clangd",
+  "clojure_lsp",
   "cmake",
   "cssls",
   "dockerls",
@@ -66,6 +67,7 @@ end
 local servers = {
   bashls = require("lsp.config.bash"),
   clangd = require("lsp.config.clangd"),
+  clojure_lsp = require("lsp.config.clojure"),
   cssls = require("lsp.config.css"),
   emmet_ls = require("lsp.config.emmet"),
   eslint = require("lsp.config.eslint"),

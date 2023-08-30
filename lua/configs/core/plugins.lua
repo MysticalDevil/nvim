@@ -50,6 +50,7 @@ local plugins_list = {
   -- Neovim plugin for a code outline window
   {
     "stevearc/aerial.nvim",
+    cmd = "AerialToggle",
     config = function()
       require("configs.plugin.aerial")
     end,
@@ -651,7 +652,7 @@ local plugins_list = {
   -- A tree like view for symbols in Neovim using the Language Server Protocol
   {
     "simrat39/symbols-outline.nvim",
-    cmd = { "SymbolOutline", "SymbolOutlineOpen" },
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
     config = function()
       require("configs.plugin.symbols-outline")
     end,

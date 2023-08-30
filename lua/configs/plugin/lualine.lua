@@ -9,8 +9,12 @@ local colors = require("onedark.colors")
 local navic = require("nvim-navic")
 
 local nvim_navic = {
-  navic.get_location,
-  cond = navic.is_available,
+  function()
+    return navic.get_location()
+  end,
+  cond = function()
+    return navic.is_available()
+  end,
 }
 
 local diagnostics = {
@@ -90,7 +94,7 @@ local opts = {
       winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree" },
     },
   },
-  extensions = { "nvim-tree", "toggleterm" },
+  extensions = { "toggleterm" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
@@ -113,8 +117,8 @@ local opts = {
   },
   winbar = {
     lualine_a = { diagnostics },
-    lualine_b = { nvim_navic },
-    lualine_c = {},
+    lualine_b = {},
+    lualine_c = { nvim_navic },
     lualine_x = { filename, "selectioncount" },
     lualine_y = {},
     lualine_z = {},
