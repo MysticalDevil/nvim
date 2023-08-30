@@ -80,6 +80,10 @@ local opts = {
       name = "cmdline",
       group_index = 2,
     },
+    {
+      name = "conjure",
+      group_index = 1,
+    },
   }),
 
   -- use lspkind-nvim to show type icon

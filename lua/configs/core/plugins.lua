@@ -442,7 +442,7 @@ local plugins_list = {
       "LinArcX/telescope-env.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
     },
-    version = "0.1.0",
+    version = "0.1.x",
     config = function()
       require("configs.plugin.telescope")
     end,
@@ -460,6 +460,7 @@ local plugins_list = {
   -- A neovim lua plugin to help easily manage multiple terminal windows
   {
     "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
     config = function()
       require("configs.plugin.toggleterm")
     end,
@@ -468,6 +469,7 @@ local plugins_list = {
   -- Neovim plugin for splitting/joining blocks of code
   {
     "Wansmer/treesj",
+    cmd = "TSJToggle",
     keys = {
       { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
     },
@@ -481,6 +483,7 @@ local plugins_list = {
   -- quickfix and location list to help you solve all the trouble your code is causing
   {
     "folke/trouble.nvim",
+    cmd = "TroubleToggle",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("configs.plugin.trouble")
@@ -533,6 +536,7 @@ local plugins_list = {
   -- Distraction-free coding for Neovim
   {
     "folke/zen-mode.nvim",
+    cmd = "Zen",
     config = function()
       require("configs.plugin.zen-mode")
     end,
@@ -575,7 +579,7 @@ local plugins_list = {
       { -- Optional
         "williamboman/mason.nvim",
         build = function()
-          pcall(vim.cmd, "MasonUpdate")
+          vim.cmd("MasonUpdate")
         end,
       },
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
@@ -607,6 +611,7 @@ local plugins_list = {
   -- A tree like view for symbols in Neovim using the Language Server Protocol
   {
     "simrat39/symbols-outline.nvim",
+    cmd = { "SymbolOutline", "SymbolOutlineOpen" },
     config = function()
       require("configs.plugin.symbols-outline")
     end,
@@ -637,6 +642,7 @@ local plugins_list = {
   "hrsh7th/cmp-nvim-lsp-signature-help", -- { name = 'nvim_lsp_signature_help' }
   "hrsh7th/cmp-path", -- { name = 'path' }
   "hrsh7th/cmp-vsnip",
+  "PaterJason/cmp-conjure",
 
   ----------------- UI Import -----------------
   -- lspkind-nvim
@@ -669,12 +675,17 @@ local plugins_list = {
 
   -- schemastore.nvim
   -- JSON schemas for Neovim
-  "b0o/schemastore.nvim",
+  {
+    "b0o/schemastore.nvim",
+    ft = { "json", "jsonc" },
+    lazy = true,
+  },
 
   -- rust-tools.nvim
   -- Tools for better development in rust using neovim's builtin lsp
   {
     "simrat39/rust-tools.nvim",
+    ft = { "rust" },
     config = function()
       require("configs.plugin.rust-tools")
     end,
@@ -688,15 +699,6 @@ local plugins_list = {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("configs.plugin.crates")
-    end,
-  },
-
-  -- nvim-nu
-  -- Basic editor support for the nushell language
-  {
-    "LhKipp/nvim-nu",
-    config = function()
-      require("configs.plugin.nu")
     end,
   },
 
@@ -741,9 +743,40 @@ local plugins_list = {
   -- Tools to help create flutter apps in neovim using the native lsp
   {
     "akinsho/flutter-tools.nvim",
+    ft = { "dart" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("configs.plugin.flutter")
+    end,
+  },
+
+  -- typescript-tools.nvim
+  --
+  {
+    "pmizio/typescript-tools.nvim",
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("configs.plugin.typescript")
+    end,
+  },
+
+  -- conjure
+  --Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile)
+  {
+    "Olical/conjure",
+    ft = { "clojure", "fennel", "hy", "scheme" }, -- etc
+    -- [Optional] cmp-conjure for cmp
+    dependencies = {
+      "PaterJason/cmp-conjure",
+    },
+    config = function(_, _)
+      require("conjure.main").main()
+      require("conjure.mapping")["on-filetype"]()
+    end,
+    init = function()
+      -- Set configuration options here
+      vim.g["conjure#debug"] = true
     end,
   },
   --
