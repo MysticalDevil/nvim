@@ -8,26 +8,6 @@ local colors = require("onedark.colors")
 
 local navic = require("nvim-navic")
 
-local aerial = {
-  "aerial",
-
-  sep = " > ", -- The separator to be used to separate symbols in status line.
-
-  -- The number of symbols to render top-down. In order to render only 'N' last
-  -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
-  -- be used in order to render only current symbol.
-  depth = nil,
-
-  -- When 'dense' mode is on, icons are not rendered near their symbols. Only
-  -- a single icon that represents the kind of current symbol is rendered at
-  -- the beginning of status line.
-  dense = false,
-
-  dense_sep = ".", -- The separator to be used to separate symbols in dense mode.
-
-  colored = true, -- Color the symbol icons.
-}
-
 local nvim_navic = {
   navic.get_location,
   cond = navic.is_available,
@@ -74,6 +54,30 @@ local filename = {
   },
 }
 
+local lsp_progress = {
+  "lsp_progress",
+  colors = {
+    percentage = colors.cyan,
+    title = colors.cyan,
+    message = colors.cyan,
+    spinner = colors.cyan,
+    lsp_client_name = colors.magenta,
+    use = true,
+  },
+  separators = {
+    component = " ",
+    progress = " | ",
+    percentage = { pre = "", post = "%% " },
+    title = { pre = "", post = ": " },
+    lsp_client_name = { pre = "[", post = "]" },
+    spinner = { pre = "", post = "" },
+    message = { pre = "(", post = ")", commenced = "In Progress", completed = "Completed" },
+  },
+  display_components = { "lsp_client_name", "spinner" },
+  timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+  spinner_symbols = { "🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 " },
+}
+
 local opts = {
   options = {
     theme = "onedark",
@@ -88,23 +92,13 @@ local opts = {
   },
   extensions = { "nvim-tree", "toggleterm" },
   sections = {
-    lualine_c = {
-      filename,
-      {
-        "lsp_progress",
-        spinner_symbols = { "󰇊", "󰇋", "󰇌", "󰇍", "󰇎", "󰇏" },
-      },
-    },
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff" },
+    lualine_c = { lsp_progress },
     lualine_x = {
       "filesize",
       {
-        "fimeformat",
-        -- symbols = {
-        --   bsd = '', -- f30c
-        --   linux = '', -- ebc6
-        --   dos = '', -- e70f
-        --   mac = '', --e711
-        -- }
+        "fileformat",
         symbols = {
           unix = "LF",
           dos = "CRLF",
@@ -114,21 +108,14 @@ local opts = {
       "encoding",
       "filetype",
     },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
   },
   winbar = {
     lualine_a = { diagnostics },
-    lualine_b = {
-      {
-        function()
-          return navic.get_location()
-        end,
-        cond = function()
-          return navic.is_available()
-        end,
-      },
-    },
+    lualine_b = { nvim_navic },
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = { filename, "selectioncount" },
     lualine_y = {},
     lualine_z = {},
   },

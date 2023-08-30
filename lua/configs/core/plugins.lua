@@ -193,7 +193,13 @@ local plugins_list = {
   },
   -- lualine-lsp-progress
   -- LSP Progress lualine componenet
-  "arkav/lualine-lsp-progress",
+  {
+    "arkav/lualine-lsp-progress",
+    lazy = true,
+    dependencies = {
+      "nvim-lualine/lualine.nvim",
+    },
+  },
   -- neogen
   -- A better annotation generator
   {
@@ -323,6 +329,9 @@ local plugins_list = {
   -- Extensible Neovim Scrollbar
   {
     "petertriho/nvim-scrollbar",
+    dependencies = {
+      "kevinhwang91/nvim-hlslens",
+    },
     config = function()
       require("configs.plugin.scrollbar")
     end,

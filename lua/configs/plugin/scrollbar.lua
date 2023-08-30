@@ -142,9 +142,9 @@ local opts = {
   handlers = {
     cursor = true,
     diagnostic = true,
-    gitsigns = false, -- Requires gitsigns
+    gitsigns = true, -- Requires gitsigns
     handle = true,
-    search = false, -- Requires hlslens
+    search = true, -- Requires hlslens
     ale = false, -- Requires ALE
   },
 }
