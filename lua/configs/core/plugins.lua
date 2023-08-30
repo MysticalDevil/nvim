@@ -543,12 +543,34 @@ local plugins_list = {
   },
   --
   --------------------------------------------- Git ---------------------------------------------
+  -- diffview.nvim
+  -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  {
+    "sindrets/diffview.nvim",
+    cmd = "DiffviewOpen",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
   -- gitsigns.nvim
   -- Git integration for buffers
   {
     "lewis6991/gitsigns.nvim",
     config = function()
       require("configs.plugin.gitsigns")
+    end,
+  },
+  -- neogit
+  -- magit for neovim
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
+    },
+    config = function()
+      require("configs.plugin.neogit")
     end,
   },
 
