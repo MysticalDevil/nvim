@@ -64,7 +64,7 @@ local plugins_list = {
   },
   -- bufdelete.nvim
   -- Delete Neovim buffers without losing window layout
-  { "famiu/bufdelete.nvim", lazy = true },
+  { "famiu/bufdelete.nvim", cmd = "Bdelete" },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {

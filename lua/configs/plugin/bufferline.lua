@@ -4,13 +4,20 @@ if not status then
   return
 end
 
+local function buf_close(bufnum)
+  require("bufdelete").bufdelete(bufnum, true)
+end
+
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
 local opts = {
   options = {
-    -- The command to close tab. The `Bdelete` command of mall/vim-bbye is used here.
-    close_command = "Bdelete! %d",
-    right_mouse_command = "Bdelete! %d",
+    close_command = function(bufnum)
+      buf_close(bufnum)
+    end,
+    right_mouse_command = function(bufnum)
+      buf_close(bufnum)
+    end,
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer
     hover = {
@@ -71,7 +78,7 @@ local opts = {
 bufferline.setup(opts)
 
 -- left and right tab switching
-keymap("n", "<C-h>", ":BufferLineCyclePrev<CR>")
-keymap("n", "<C-l>", ":BufferLineCycleNext<CR>")
+keymap("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>")
+keymap("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>")
 -- close current buffer
-keymap("n", "<C-w>", ":Bdelete!<CR>")
+keymap("n", "<C-w>", "<CMD>bdelete<CR>")
