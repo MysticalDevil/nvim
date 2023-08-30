@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local utils = require("utils.setup")
+
 local function buf_close(bufnum)
   require("bufdelete").bufdelete(bufnum, true)
 end
@@ -78,7 +80,7 @@ local opts = {
 bufferline.setup(opts)
 
 -- left and right tab switching
-keymap("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>")
-keymap("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>")
+utils.keymap("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>")
+utils.keymap("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>")
 -- close current buffer
-keymap("n", "<C-w>", "<CMD>bdelete<CR>")
+utils.keymap("n", "<C-w>", "<CMD>bdelete<CR>")

@@ -20,7 +20,7 @@ local opts = {
   settings = {
     cmd = { "bash-language-server", "start" },
     cmd_env = {
-      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)",
+      GLOB_PATTERN = "*@(.sh|.inc|.bash|.command|.zsh)",
     },
     filetype = {
       "sh",

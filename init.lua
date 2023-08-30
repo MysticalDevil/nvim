@@ -1,15 +1,15 @@
-require("utils.global")
-
 -- Basic configure
 require("configs.core.basic")
+-- Bootstrap necessary plugins
+require("configs.core.bootstrap")
 -- Key bindings
 require("configs.core.keybindings")
--- Lazy plugins manage
-require("configs.core.plugins")
 -- Color scheme setting
 require("configs.core.colorscheme")
 -- Auto command
 require("configs.core.autocmds")
+-- Lazy plugins manage
+require("configs.core.plugins")
 
 -- Language server protocol
 require("lsp.setup")

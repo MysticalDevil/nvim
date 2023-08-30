@@ -1,3 +1,5 @@
+local utils = require("utils.setup")
+
 -- Modes
 -- normal_mode = 'n',
 -- insert_mode = 'i',
@@ -28,30 +30,30 @@ local opts_expr = {
 }
 
 -- under the command line, Ctrl+j/k is the next/previous
-keymap("c", "<C-j>", "<C-n>", opts_remap)
-keymap("c", "<C-k>", "<C-p>", opts_remap)
+utils.keymap("c", "<C-j>", "<C-n>", opts_remap)
+utils.keymap("c", "<C-k>", "<C-p>", opts_remap)
 
-keymap({ "n", "v" }, "$", "g_")
-keymap({ "n", "v" }, "g_", "$")
+utils.keymap({ "n", "v" }, "$", "g_")
+utils.keymap({ "n", "v" }, "g_", "$")
 
 -- scroll up and down
-keymap({ "n", "v" }, "<C-j>", "5j")
-keymap({ "n", "v" }, "<C-k>", "5k")
+utils.keymap({ "n", "v" }, "<C-j>", "5j")
+utils.keymap({ "n", "v" }, "<C-k>", "5k")
 
 -- ctrl + u/d move 10 lines, half screen by default
-keymap({ "n", "v" }, "<C-d>", "10j")
-keymap({ "n", "v" }, "<C-u>", "10k")
+utils.keymap({ "n", "v" }, "<C-d>", "10j")
+utils.keymap({ "n", "v" }, "<C-u>", "10k")
 
 local enable_magic_search = true
 
 -- magic search
 if enable_magic_search then
-  keymap({ "n", "v" }, "/", "/\\v", {
+  utils.keymap({ "n", "v" }, "/", "/\\v", {
     remap = false,
     silent = false,
   })
 else
-  keymap({ "n", "v" }, "/", "/", {
+  utils.keymap({ "n", "v" }, "/", "/", {
     remap = false,
     silent = false,
   })
@@ -60,28 +62,28 @@ end
 ---------------------------- fix --------------------------
 
 -- fix :set wrap
-keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", opts_expr)
-keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", opts_expr)
+utils.keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", opts_expr)
+utils.keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", opts_expr)
 
 -- indent code in visual mode
-keymap("v", "<", "<gv")
-keymap("v", ">", ">gv")
+utils.keymap("v", "<", "<gv")
+utils.keymap("v", ">", ">gv")
 
 -- move selected text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv")
-keymap("x", "K", ":move '<-2<CR>gv-gv")
+utils.keymap("x", "J", ":move '>+1<CR>gv-gv")
+utils.keymap("x", "K", ":move '<-2<CR>gv-gv")
 
 -- paste but do not copy in visual mode
-keymap("x", "p", "_dP")
+utils.keymap("x", "p", "_dP")
 
 -- type `esc` to back normal mode
-keymap("t", "<ESC>", "<C-\\><C-n>")
+utils.keymap("t", "<ESC>", "<C-\\><C-n>")
 
 -----------------------------------------------------------
-local pluginKeys = {}
+local plugin_keys = {}
 
 -- LSP callback function shortcut key setting
-pluginKeys.mapLSP = function(mapbuf)
+plugin_keys.mapLSP = function(mapbuf)
   -- rename
   -- Lspsaga replace rn
   -- mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
@@ -136,7 +138,7 @@ pluginKeys.mapLSP = function(mapbuf)
 end
 
 -- nvim-dap
-pluginKeys.mapDAP = function()
+plugin_keys.map_DAP = function()
   -- start
   map("n", "<leader>dd", ":RustDebuggables<CR>", opt)
   -- end
@@ -165,17 +167,17 @@ pluginKeys.mapDAP = function()
 end
 
 -- gitsigns
-pluginKeys.gitsigns_on_attach = function(bufnr)
+plugin_keys.gitsigns_on_attach = function(bufnr)
   local gs = package.loaded.gitsigns
 
-  local function map(mode, l, r, opts)
+  local function local_map(mode, l, r, opts)
     opts = opts or {}
     opts.buffer = bufnr
     vim.keymap.set(mode, l, r, opts)
   end
 
   -- Navigation
-  map("n", "<leader>gj", function()
+  local_map("n", "<leader>gj", function()
     if vim.wo.diff then
       return "]c"
     end
@@ -187,7 +189,7 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
     expr = true,
   })
 
-  map("n", "<leader>gk", function()
+  local_map("n", "<leader>gk", function()
     if vim.wo.diff then
       return "[c"
     end
@@ -199,26 +201,26 @@ pluginKeys.gitsigns_on_attach = function(bufnr)
     expr = true,
   })
 
-  map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
-  map("n", "<leader>gS", gs.stage_buffer)
-  map("n", "<leader>gu", gs.undo_stage_hunk)
-  map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
-  map("n", "<leader>gR", gs.reset_buffer)
-  map("n", "<leader>gp", gs.preview_hunk)
-  map("n", "<leader>gb", function()
+  local_map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
+  local_map("n", "<leader>gS", gs.stage_buffer)
+  local_map("n", "<leader>gu", gs.undo_stage_hunk)
+  local_map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
+  local_map("n", "<leader>gR", gs.reset_buffer)
+  local_map("n", "<leader>gp", gs.preview_hunk)
+  local_map("n", "<leader>gb", function()
     gs.blame_line({
       full = true,
     })
   end)
-  map("n", "<leader>gd", gs.diffthis)
-  map("n", "<leader>gD", function()
+  local_map("n", "<leader>gd", gs.diffthis)
+  local_map("n", "<leader>gD", function()
     gs.diffthis("~")
   end)
   -- toggle
-  map("n", "<leader>gtd", gs.toggle_deleted)
-  map("n", "<leader>gtD", gs.toggle_current_line_blame)
+  local_map("n", "<leader>gtd", gs.toggle_deleted)
+  local_map("n", "<leader>gtD", gs.toggle_current_line_blame)
   -- Text object
-  map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
+  local_map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>")
 end
 
-return pluginKeys
+return plugin_keys

@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local utils = require("utils.setup")
+
 local opts = {
   -- Open request results in a horizontal split
   result_split_horizontal = false,
@@ -41,6 +43,6 @@ local opts = {
 
 rest.setup(opts)
 
-keymap("n", "<leader>ss", "<Plug>RestNvim")
-keymap("n", "<leader>sp", "<Plug>RestNvimPreview")
-keymap("n", "<leader>sl", "<Plug>RestNvimLast")
+utils.keymap("n", "<leader>ss", "<Plug>RestNvim")
+utils.keymap("n", "<leader>sp", "<Plug>RestNvimPreview")
+utils.keymap("n", "<leader>sl", "<Plug>RestNvimLast")

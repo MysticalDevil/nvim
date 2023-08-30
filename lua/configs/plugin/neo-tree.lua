@@ -4,7 +4,9 @@ if not status then
   return
 end
 
-keymap("n", "<A-m>", ":Neotree toggle<CR>")
+local utils = require("utils.setup")
+
+utils.keymap("n", "<A-m>", ":Neotree toggle<CR>")
 
 -- Unless you are still migrating, remove the deprecated commands from v1.x
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
@@ -116,13 +118,15 @@ local opts = {
       --["Z"] = "expand_all_nodes",
       ["a"] = {
         "add",
-        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc).
+        -- see `:h neo-tree-file-actions` for details
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
         config = {
           show_path = "relative", -- "none", "relative", "absolute"
         },
       },
-      ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+      -- also accepts the optional config.show_path option like "add".this also supports BASH style brace expansion.
+      ["A"] = "add_directory",
       ["d"] = "delete",
       ["r"] = "rename",
       ["y"] = "copy_to_clipboard",
@@ -213,7 +217,8 @@ local opts = {
   event_handlers = {
     {
       event = "file_opened",
-      handler = function(file_path)
+      -- handler = function(file_path)
+      handler = function(_)
         --auto close
         require("neo-tree").close_all()
       end,

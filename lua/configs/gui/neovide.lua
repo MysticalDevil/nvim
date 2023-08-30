@@ -1,3 +1,5 @@
+local utils = require("utils.setup")
+
 vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h10"
 vim.g.remember_window_size = true
 vim.g.remember_window_position = true
@@ -13,4 +15,4 @@ local function toggleFullscreen()
   end
 end
 
-keymap("n", "<F11>", toggleFullscreen())
+utils.keymap("n", "<F11>", toggleFullscreen())

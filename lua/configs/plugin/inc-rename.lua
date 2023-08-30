@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local utils = require("utils.setup")
+
 local opts = {
   cmd_name = "IncRename", -- the name of the command
   hl_group = "Substitute", -- the highlight group used for highlighting the identifier's new name
@@ -15,4 +17,4 @@ local opts = {
 
 inc_rename.setup(opts)
 
-keymap("n", "<leader>rn", ":IncRename ")
+utils.keymap("n", "<leader>rn", ":IncRename ")

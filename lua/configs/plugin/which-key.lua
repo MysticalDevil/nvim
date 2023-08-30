@@ -96,6 +96,7 @@ which_key.register({
     "Toggle signature",
   },
   ["<leader>w"] = { ":w<CR>", "Save file" },
+  ["<leader>z"] = { "<CMD>ZenMode<CR>", "Enter zen mode" },
   ["<leader>"] = {
     w = {
       name = "+save",
@@ -114,12 +115,6 @@ which_key.register({
       o = { ":BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", "Close other bufferlines" },
       p = { ":BufferLinePickClose<CR>", "Close picked bufferline" },
     },
-    -- t = {
-    --   name = "+toggleterm",
-    --   a = {},
-    --   b = {},
-    --   c = {},
-    -- },
     x = {
       name = "+trouble",
       x = { "<CMD>TroubleToggle<CR>", "Open trouble toggle panel" },

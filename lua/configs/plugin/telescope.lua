@@ -4,6 +4,7 @@ if not status then
   return
 end
 
+local utils = require("utils.setup")
 local trouble = require("trouble.providers.telescope")
 
 local opts = {
@@ -54,8 +55,8 @@ local opts = {
 
 telescope.setup(opts)
 
-keymap("n", "<C-p>", ":Telescope find_files<CR>")
-keymap("n", "<C-f>", ":Telescope live_grep<CR>")
+utils.keymap("n", "<C-p>", ":Telescope find_files<CR>")
+utils.keymap("n", "<C-f>", ":Telescope live_grep<CR>")
 
 pcall(telescope.load_extension, "env")
 pcall(telescope.load_extension, "ui-select")
