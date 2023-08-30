@@ -582,6 +582,15 @@ local plugins_list = {
       require("configs.plugin.neogit")
     end,
   },
+  -- git-conflict.nvim
+  --
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = function()
+      require("configs.plugin.git-conflict")
+    end,
+  },
 
   ---------------------------------- Language Server Protocol -----------------------------------
   -- mason.nvim
