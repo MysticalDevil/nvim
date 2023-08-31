@@ -5,7 +5,15 @@ if not status then
 end
 
 local utils = require("utils.setup")
+
 local trouble = require("trouble.providers.telescope")
+local builtin = require("telescope.builtin")
+
+local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial" }
+
+for _, value in pairs(extensions_list) do
+  telescope.load_extension(value)
+end
 
 local opts = {
   defaults = {
@@ -16,8 +24,8 @@ local opts = {
     mappings = {
       i = {
         -- move up and down
-        ["cj"] = "move_selection_next",
-        ["ck"] = "move_selection_previous",
+        ["C-j"] = "move_selection_next",
+        ["C-k"] = "move_selection_previous",
         -- history records
         ["<Down>"] = "cycle_history_next",
         ["<Up>"] = "cycle_history_prev",
@@ -27,9 +35,7 @@ local opts = {
         ["<C-u>"] = "preview_scrolling_up",
         ["<C-d>"] = "preview_scrolling_down",
         -- trouble.nvim support
-        ["<C-t>"] = trouble.open_with_trouble,
-        -- whick-key.nvim support
-        ["<C-h>"] = "which_key",
+        ["<C-T>"] = trouble.open_with_trouble,
       },
       n = {
         ["<C-t>"] = trouble.open_with_trouble,
@@ -50,24 +56,6 @@ local opts = {
         initial_mode = "normal",
       }),
     },
-  },
-}
-
-telescope.setup(opts)
-
-utils.keymap("n", "<C-p>", ":Telescope find_files<CR>")
-utils.keymap("n", "<C-f>", ":Telescope live_grep<CR>")
-
-pcall(telescope.load_extension, "env")
-pcall(telescope.load_extension, "ui-select")
-pcall(telescope.load_extension, "noice")
-pcall(telescope.load_extension, "neoclip")
-pcall(telescope.load_extension, "aerial")
-
--- You dont need to set any of these options. These are the default ones. Only
--- the loading is important
-telescope.setup({
-  extensions = {
     fzf = {
       fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter
@@ -84,4 +72,9 @@ telescope.setup({
       },
     },
   },
-})
+}
+
+telescope.setup(opts)
+
+utils.keymap("n", "<C-p>", builtin.find_files)
+utils.keymap("n", "<C-f>", builtin.live_grep)

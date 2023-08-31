@@ -7,15 +7,9 @@ end
 
 ---@param mode string|table
 ---@param lhs string
----@param rhs string
+---@param rhs string|function
 ---@param opts table?
 function M.keymap(mode, lhs, rhs, opts)
-  if type(lhs) ~= "string" then
-    return
-  end
-  if type(rhs) ~= "string" then
-    return
-  end
   opts = opts or {}
   local default_opts = {
     remap = false,
