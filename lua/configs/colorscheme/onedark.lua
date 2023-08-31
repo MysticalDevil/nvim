@@ -1,8 +1,4 @@
-local status, onedark = pcall(require, "onedark")
-if not status then
-  vim.notify("onedark not found", "error")
-  return
-end
+local onedark = require("onedark")
 
 local opts = { -- Main options --
   style = "darker",
@@ -47,3 +43,4 @@ local opts = { -- Main options --
 }
 
 onedark.setup(opts)
+onedark.load()

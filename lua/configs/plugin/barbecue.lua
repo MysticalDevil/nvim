@@ -15,7 +15,7 @@ local opts = {
 
   ---whether to create winbar updater autocmd
   ---@type boolean
-  create_autocmd = true,
+  create_autocmd = false,
 
   ---buftypes to enable winbar in
   ---@type string[]
@@ -73,33 +73,48 @@ local opts = {
   ---`false` to disable kind icons
   ---@type table<string, string>|false
   kinds = {
-    File = "",
-    Module = "",
-    Namespace = "",
-    Package = "",
-    Class = "",
-    Method = "",
-    Property = "",
-    Field = "",
-    Constructor = "",
-    Enum = "",
-    Interface = "",
-    Function = "",
-    Variable = "",
-    Constant = "",
-    String = "",
-    Number = "",
-    Boolean = "",
-    Array = "",
-    Object = "",
-    Key = "",
-    Null = "",
-    EnumMember = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
+    File = "󰈙 ",
+    Module = " ",
+    Namespace = "󰌗 ",
+    Package = " ",
+    Class = "󰌗 ",
+    Method = "󰆧 ",
+    Property = " ",
+    Field = " ",
+    Constructor = " ",
+    Enum = "󰕘",
+    Interface = "󰕘",
+    Function = "󰊕 ",
+    Variable = "󰆧 ",
+    Constant = "󰏿 ",
+    String = "󰀬 ",
+    Number = "󰎠 ",
+    Boolean = "◩ ",
+    Array = "󰅪 ",
+    Object = "󰅩 ",
+    Key = "󰌋 ",
+    Null = "󰟢 ",
+    EnumMember = " ",
+    Struct = "󰌗 ",
+    Event = " ",
+    Operator = "󰆕 ",
+    TypeParameter = "󰊄 ",
   },
 }
+
+vim.api.nvim_create_autocmd({
+  "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+  "BufWinEnter",
+  "CursorHold",
+  "InsertLeave",
+
+  -- include this if you have set `show_modified` to `true`
+  "BufModifiedSet",
+}, {
+  group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+  callback = function()
+    require("barbecue.ui").update()
+  end,
+})
 
 barbecue.setup(opts)
