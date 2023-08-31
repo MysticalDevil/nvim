@@ -283,6 +283,9 @@ local plugins_list = {
       "nvim-treesitter/nvim-treesitter",
     },
   },
+  -- nui.nvim
+  -- UI Component Library for Neovim
+  { "MunifTanjim/nui.nvim", lazy = true },
   -- nvim-autopairs
   -- autopairs for neovim written by lua
   {
@@ -314,6 +317,18 @@ local plugins_list = {
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("configs.plugin.hlslens")
+    end,
+  },
+  -- nvim-navbuddy
+  -- A simple popup display that provides breadcrumbs feature using LSP server
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("configs.plugin.navbuddy")
     end,
   },
   -- nvim-navic
@@ -730,7 +745,7 @@ local plugins_list = {
   "hrsh7th/cmp-buffer", -- { name = 'buffer' }
   "hrsh7th/cmp-calc", -- { name = 'calc' }
   "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
-  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp }
+  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp p
   "hrsh7th/cmp-nvim-lsp-signature-help", -- { name = 'nvim_lsp_signature_help' }
   "hrsh7th/cmp-path", -- { name = 'path' }
   "hrsh7th/cmp-vsnip",
@@ -743,7 +758,7 @@ local plugins_list = {
   -- lspsage.nvim
   -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
   {
-    "glepnir/lspsaga.nvim",
+    "nvimdev/lspsaga.nvim",
     event = "BufRead",
     config = function()
       require("configs.plugin.lspsaga")

@@ -17,16 +17,8 @@ local opts = {
     close_command = function(bufnum)
       buf_close(bufnum)
     end,
-    right_mouse_command = function(bufnum)
-      buf_close(bufnum)
-    end,
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer
-    hover = {
-      enabled = true,
-      delay = 200,
-      reveal = { "close" },
-    },
     offsets = {
       {
         filetype = "neo-tree",

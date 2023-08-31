@@ -11,9 +11,6 @@ local opts = {
         border = "rounded",
       },
     }, bufnr)
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, bufnr)
-    end
   end,
   settings = {},
 }
