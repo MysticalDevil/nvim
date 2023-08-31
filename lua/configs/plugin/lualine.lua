@@ -59,7 +59,7 @@ local fileformat = {
 
 local lsp_status = {
   function()
-    local msg = "No Active Lsp"
+    local msg = "No Active LSP"
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
@@ -74,19 +74,19 @@ local lsp_status = {
     return msg
   end,
   icon = "  LSP:",
-  color = { fg = "#ffffff", gui = "bold" },
+  color = { fg = "#aaa", gui = "bold" },
 }
 
 local opts = {
   options = {
-    theme = "onedark",
+    theme = "auto",
     component_separators = { left = "|", right = "|" },
     -- https://github.com/ryanoasis/powerline-extra-symbols
     section_separators = { left = "", right = "" },
     globalstatus = true,
     disabled_filetypes = {
       statusline = { "alpha" },
-      winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree" },
+      winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree", "dashboard", "Trouble" },
     },
   },
   extensions = { "toggleterm", "aerial" },

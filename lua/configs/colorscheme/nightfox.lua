@@ -45,6 +45,3 @@ local opts = {
 }
 
 nightfox.setup(opts)
-
--- setup must be called before loading
-vim.cmd("colorscheme nightfox")

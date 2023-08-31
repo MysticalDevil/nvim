@@ -17,7 +17,7 @@ local plugins_list = {
     lazy = true,
     name = "catppuccin",
     config = function()
-      require("config.colorscheme.catppuccin")
+      require("configs.colorscheme.catppuccin")
     end,
   },
   -- material.nvim
@@ -26,7 +26,7 @@ local plugins_list = {
     "marko-cerovac/material.nvim",
     lazy = true,
     config = function()
-      require("config.colorscheme.meterial")
+      require("configs.colorscheme.meterial")
     end,
   },
   -- nightfox.nvim
@@ -35,7 +35,7 @@ local plugins_list = {
     "EdenEast/nightfox.nvim",
     lazy = true,
     config = function()
-      require("config.colorscheme.nightfox")
+      require("configs.colorscheme.nightfox")
     end,
   },
   -- nord.nvim
@@ -44,7 +44,7 @@ local plugins_list = {
     "shaunsingh/nord.nvim",
     lazy = true,
     config = function()
-      require("config.Acolorscheme.nord")
+      require("configs.colorscheme.nord")
     end,
   },
   -- nordic.nvim
@@ -53,7 +53,7 @@ local plugins_list = {
     "AlexvZyl/nordic.nvim",
     lazy = true,
     config = function()
-      require("config.colorscheme.nordic")
+      require("configs.colorscheme.nordic")
     end,
   },
   -- onedark.nvim
@@ -72,7 +72,7 @@ local plugins_list = {
     "nyoom-engineering/oxocarbon.nvim",
     lazy = true,
     config = function()
-      require("config.colorscheme.oxocarbon")
+      require("configs.colorscheme.oxocarbon")
     end,
   },
   -- tokyonight.nvim
@@ -81,7 +81,7 @@ local plugins_list = {
     "folke/tokyonight.nvim",
     lazy = true,
     config = function()
-      require("config.colorscheme.tokyonight")
+      require("configs.colorscheme.tokyonight")
     end,
   },
   --

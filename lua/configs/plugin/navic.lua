@@ -34,7 +34,7 @@ local opts = {
     TypeParameter = "󰊄 ",
   },
   highlight = true,
-  separator = " > ",
+  separator = "",
   depth_limit = 0,
   depth_limit_indicator = "..",
   safe_output = true,
