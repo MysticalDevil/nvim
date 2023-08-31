@@ -1,24 +1,9 @@
-local common = require("lsp.common-config")
-local opts = {
-  capabilities = common.capabilities,
-  flags = common.flags,
-  on_attach = function(client, bufnr)
-    common.disableFormat(client)
-    common.keyAttach(bufnr)
+local util = require("lsp.util")
 
-    require("lsp_signature").on_attach({
-      bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
-    }, bufnr)
+local opts = util.default_configs
 
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, bufnr)
-    end
-  end,
-  settings = {
-    ["rust-analyzer"] = {
+opts.settings = {
+    rust_analyzer = {
       checkOnSave = {
         allFeatures = true,
         overrideCommand = {
@@ -34,7 +19,6 @@ local opts = {
         autoReload = true,
       },
     },
-  },
 }
 
 return {

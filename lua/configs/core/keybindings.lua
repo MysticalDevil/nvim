@@ -83,7 +83,7 @@ utils.keymap("t", "<ESC>", "<C-\\><C-n>")
 local plugin_keys = {}
 
 -- LSP callback function shortcut key setting
-plugin_keys.mapLSP = function(mapbuf)
+plugin_keys.map_LSP = function(mapbuf)
   -- rename
   -- Lspsaga replace rn
   -- mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)

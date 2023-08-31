@@ -6,16 +6,12 @@ end
 
 local utils = require("utils.setup")
 
-local function buf_close(bufnum)
-  require("bufdelete").bufdelete(bufnum, true)
-end
-
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
 local opts = {
   options = {
     close_command = function(bufnum)
-      buf_close(bufnum)
+      require("bufdelete").bufdelete(bufnum, true)
     end,
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer

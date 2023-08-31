@@ -1,19 +1,8 @@
-local common = require("lsp.common-config")
-local opts = {
-  capabilities = common.capabilities,
-  flags = common.flags,
-  on_attach = function(client, bufnr)
-    common.disableFormat(client)
-    common.keyAttach(bufnr)
-    require("lsp_signature").on_attach({
-      bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
-    }, bufnr)
-  end,
-  single_file_support = false,
-  settings = {
+local util = require("lsp.util")
+
+local opts = util.default_configs
+
+  opts.settings = {
     codeAction = {
       disableRuleComment = {
         enable = true,
@@ -45,8 +34,8 @@ local opts = {
     workingDirectory = {
       mode = "location",
     },
-  },
-}
+  }
+
 return {
   on_setup = function(server)
     server.setup(opts)
