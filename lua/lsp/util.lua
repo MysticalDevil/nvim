@@ -20,27 +20,22 @@ M.flags = {
   debounce_text_changes = 150,
 }
 
-M.default_configs = {
-  capabilities = M.capabilities,
-  flags = M.flags,
-  on_attach = function(client, bufnr)
-    M.disable_format(client)
-    M.key_attach(bufnr)
+M.default_configs = function()
+  return {
+    capabilities = M.capabilities,
+    flags = M.flags,
+    on_attach = function(client, bufnr)
+      M.disable_format(client)
+      M.key_attach(bufnr)
 
-    require("lsp_signature").on_attach({
-      bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
-    }, bufnr)
-  end,
-  settings = {},
-  handlers = {},
-  filetypes = {},
-  root_dir = nil,
-  init_options = {},
-  cmd = {},
-  single_file_support = false,
-}
+      require("lsp_signature").on_attach({
+        bind = true,
+        handler_opts = {
+          border = "rounded",
+        },
+      }, bufnr)
+    end,
+  }
+end
 
 return M

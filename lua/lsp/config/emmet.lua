@@ -1,6 +1,6 @@
 local util = require("lsp.util")
 
-local opts = util.default_configs
+local opts = util.default_configs()
 
 opts.filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" }
 

@@ -1,7 +1,7 @@
 local util = require("lsp.util")
 
 
-local opts = util.default_configs
+local opts = util.default_configs()
 
 opts.settings = {
     yaml = {

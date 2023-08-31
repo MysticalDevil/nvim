@@ -3,7 +3,7 @@ local util = require("lsp.util")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.offsetEncoding = { "utf-16" }
 
-local opts = util.default_configs
+local opts = util.default_configs()
 
 opts.capabilities = capabilities
 opts.settings = {
