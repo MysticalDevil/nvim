@@ -86,7 +86,7 @@ local opts = {
     globalstatus = true,
     disabled_filetypes = {
       statusline = { "alpha" },
-      winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree", "dashboard", "Trouble" },
+      winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree", "dashboard", "Trouble", "DiffViewFiles" },
     },
   },
   extensions = { "toggleterm", "aerial" },

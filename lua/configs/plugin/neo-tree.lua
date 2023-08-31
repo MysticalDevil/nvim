@@ -220,7 +220,7 @@ local opts = {
       -- handler = function(file_path)
       handler = function(_)
         --auto close
-        require("neo-tree").close_all()
+        neo_tree.close_all()
       end,
     },
   },
