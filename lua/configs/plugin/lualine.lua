@@ -58,6 +58,15 @@ local filename = {
   },
 }
 
+local fileformat = {
+  "fileformat",
+  symbols = {
+    unix = "LF",
+    dos = "CRLF",
+    mac = "CR",
+  },
+}
+
 local lsp_progress = {
   "lsp_progress",
   colors = {
@@ -94,21 +103,14 @@ local opts = {
       winbar = { "alpha", "aerial", "neo-tree", "nerdtree", "NvimTree" },
     },
   },
-  extensions = { "toggleterm" },
+  extensions = { "toggleterm", "aerial" },
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
     lualine_c = { filename },
     lualine_x = {
       "filesize",
-      {
-        "fileformat",
-        symbols = {
-          unix = "LF",
-          dos = "CRLF",
-          mac = "CR",
-        },
-      },
+      fileformat,
       "encoding",
       "filetype",
     },
@@ -116,8 +118,8 @@ local opts = {
     lualine_z = { "location" },
   },
   winbar = {
-    lualine_a = { diagnostics },
-    lualine_b = {},
+    lualine_a = {},
+    lualine_b = { diagnostics },
     lualine_c = { nvim_navic },
     lualine_x = { lsp_progress, "selectioncount" },
     lualine_y = {},
