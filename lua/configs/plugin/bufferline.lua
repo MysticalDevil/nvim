@@ -6,13 +6,16 @@ end
 
 local utils = require("utils.setup")
 
+local function buf_close()
+  require("close_buffers").delete({ type = "this" })
+end
+
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
 local opts = {
   options = {
-    close_command = function(bufnum)
-      require("bufdelete").bufdelete(bufnum, true)
-    end,
+    close_command = buf_close(),
+    right_mouse_command = buf_close(),
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer
     offsets = {
@@ -71,4 +74,6 @@ bufferline.setup(opts)
 utils.keymap("n", "<C-h>", "<CMD>BufferLineCyclePrev<CR>")
 utils.keymap("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>")
 -- close current buffer
-utils.keymap("n", "<C-w>", "<CMD>bdelete<CR>")
+utils.keymap("n", "<C-w>", function()
+  buf_close()
+end)

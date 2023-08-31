@@ -103,16 +103,16 @@ local plugins_list = {
       require("configs.plugin.beacon")
     end,
   },
-  -- bufdelete.nvim
-  -- Delete Neovim buffers without losing window layout
-  { "famiu/bufdelete.nvim", cmd = "Bdelete" },
+  -- close-buffers.nvim
+  -- Delete multiple vim buffers based on different conditions
+  { "kazhala/close-buffers.nvim", lazy = true },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "famiu/bufdelete.nvim",
+      "kazhala/close-buffers.nvim",
     },
     version = "v3.*",
     config = function()

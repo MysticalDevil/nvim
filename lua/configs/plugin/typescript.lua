@@ -4,10 +4,10 @@ if not status then
   return
 end
 
-local mason_path = vim.fn.stdpath("data") .. "/mason"
+--local mason_path = vim.fn.stdpath("data") .. "/mason"
 
 local opts = {
-  on_attach = function()end,
+  on_attach = function() end,
   handlers = {},
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it

@@ -7,30 +7,30 @@ local opts = util.default_configs()
 
 opts.capabilities = capabilities
 opts.settings = {
-    filetypes = {
-      "c",
-      "cpp",
-      "h",
-      "hpp",
-      "cuda",
-      "objcpp",
-      "proto",
-      "cppm",
-    },
-  }
+  filetypes = {
+    "c",
+    "cpp",
+    "h",
+    "hpp",
+    "cuda",
+    "objcpp",
+    "proto",
+    "cppm",
+  },
+}
 opts.cmd = {
-    "clangd",
-    "--background-index",
-    "--pch-storage=memory",
-    "--clang-tidy",
-    "--completion-style=detailed",
-  }
+  "clangd",
+  "--background-index",
+  "--pch-storage=memory",
+  "--clang-tidy",
+  "--completion-style=detailed",
+}
 opts.init_options = {
-    clangdFileStatus = true,
-    usePlaceholders = true,
-    completeUnimported = true,
-    semanticHighlighting = true,
-  }
+  clangdFileStatus = true,
+  usePlaceholders = true,
+  completeUnimported = true,
+  semanticHighlighting = true,
+}
 return {
   on_setup = function(server)
     server.setup(opts)
