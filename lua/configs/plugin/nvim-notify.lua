@@ -7,6 +7,7 @@ end
 local opts = {
   stages = "slide",
   timeout = 5000,
+  render = "default",
 }
 
 notify.setup(opts)

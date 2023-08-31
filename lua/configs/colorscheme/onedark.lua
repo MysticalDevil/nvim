@@ -47,5 +47,3 @@ local opts = { -- Main options --
 }
 
 onedark.setup(opts)
-
-onedark.load()

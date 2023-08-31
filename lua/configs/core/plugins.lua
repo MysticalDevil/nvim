@@ -10,9 +10,24 @@ local plugins_list = {
   "folke/lazy.nvim",
   --
   ----------------------------------------- Colorscheme -----------------------------------------
+  -- aurora
+  -- 24-bit dark theme for (Neo)vim
+  { "ray-x/aurora", lazy = true },
+  -- catppuccin
+  -- Soothing pastel theme for (Neo)vim
+  { "catppuccin/nvim", lazy = true, name = "catppuccin", priority = 1000 },
   -- material.nvim
   -- Material colorscheme for NeoVim
   { "marko-cerovac/material.nvim", lazy = true },
+  -- nightfox.nvim
+  -- A highly customizable theme for vim and neovim with support for lsp, treesitter and a variety of plugins.
+  { "EdenEast/nightfox.nvim", lazy = true },
+  -- nord.nvim
+  -- Neovim theme based off of the Nord Color Palette, written in lua with tree sitter support
+  { "shaunsingh/nord.nvim", lazy = true },
+  -- nordic.nvim
+  --  Nord for Neovim, but warmer and darker. Supports a variety of plugins and other platforms.
+  { "AlexvZyl/nordic.nvim", lazy = true },
   -- onedark.nvim
   -- One dark and light colorscheme for neovim
   {
@@ -20,15 +35,15 @@ local plugins_list = {
     lazy = false,
     proiority = 1000,
     config = function()
-      require("configs.plugin.onedark")
+      require("configs.colorscheme.onedark")
     end,
   },
+  -- oxocarbon.nvim
+  -- A dark and light Neovim theme written in fennel, inspired by IBM Carbon.
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true },
   -- tokyonight.nvim
   -- A clean, dark Neovim theme written in Lua
   { "folke/tokyonight.nvim", lazy = true },
-  -- aurora
-  -- 24-bit dark theme for (Neo)vim
-  { "ray-x/aurora", lazy = true },
   --
   --------------------------------------- Common plugins ----------------------------------------
   -- aerial.nvim
@@ -95,6 +110,7 @@ local plugins_list = {
   -- A minimalist .env support for Neovim
   {
     "ellisonleao/dotenv.nvim",
+    event = "BufRead .env",
     config = function()
       require("configs.plugin.dotenv")
     end,
@@ -270,6 +286,7 @@ local plugins_list = {
     end,
   },
   -- nvim-navic
+  -- Simple winbar/statusline plugin that shows your current code context
   {
     "SmiteshP/nvim-navic",
     dependencies = "neovim/nvim-lspconfig",
@@ -278,6 +295,7 @@ local plugins_list = {
     end,
   },
   -- nvim-neoclip
+  -- Clipboard manager neovim plugin with telescope integration
   {
     "AckslD/nvim-neoclip.lua",
     dependencies = {
@@ -292,6 +310,7 @@ local plugins_list = {
   -- A fancy, configurable, notification manager for NeoVim
   {
     "rcarriga/nvim-notify",
+    lazy = true,
     config = function()
       require("configs.plugin.nvim-notify")
     end,
@@ -382,6 +401,19 @@ local plugins_list = {
       require("configs.plugin.window-picker")
     end,
   },
+  -- overseer.nvim
+  -- A task runner and job management plugin for Neovim
+  {
+    "stevearc/overseer.nvim",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-telescope/telescope.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("configs.plugin.overseer")
+    end,
+  },
   -- painefer-rust
   -- A Rust port of parinfer.
   {
@@ -418,6 +450,9 @@ local plugins_list = {
       require("configs.plugin.sniprun")
     end,
   },
+  -- sqlite.lua
+  -- SQLite LuaJIT binding with a very simple api.
+  { "kkharji/sqlite.lua", lazy = true },
   -- ssr.nvim
   -- Treesitter based structural search and replace plugin for Neovim
   {

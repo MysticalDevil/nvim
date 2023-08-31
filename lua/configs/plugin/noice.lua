@@ -7,7 +7,8 @@ end
 local opts = {
   cmdline = {
     enabled = true, -- enables the Noice cmdline UI
-    view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+    -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+    view = "cmdline_popup",
     opts = {}, -- global options for the cmdline. See section on views
     ---@type table<string, CmdlineFormat>
     format = {
@@ -191,7 +192,8 @@ local opts = {
     inc_rename = true, -- enables an input dialog for inc-rename.nvim
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
-  throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+  -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+  throttle = 1000 / 30,
   ---@type NoiceConfigViews
   views = {}, ---@see section on views
   ---@type NoiceRouteConfig[]

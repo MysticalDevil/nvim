@@ -4,12 +4,12 @@ require("configs.core.basic")
 require("configs.core.bootstrap")
 -- Key bindings
 require("configs.core.keybindings")
--- Color scheme setting
-require("configs.core.colorscheme")
 -- Auto command
 require("configs.core.autocmds")
 -- Lazy plugins manage
 require("configs.core.plugins")
+-- Color scheme setting
+require("configs.colorscheme.setup")
 
 -- Language server protocol
 require("lsp.setup")
