@@ -98,7 +98,7 @@ local opts = {
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff" },
-    lualine_c = { lsp_progress },
+    lualine_c = { filename },
     lualine_x = {
       "filesize",
       {
@@ -119,7 +119,7 @@ local opts = {
     lualine_a = { diagnostics },
     lualine_b = {},
     lualine_c = { nvim_navic },
-    lualine_x = { filename, "selectioncount" },
+    lualine_x = { lsp_progress, "selectioncount" },
     lualine_y = {},
     lualine_z = {},
   },
