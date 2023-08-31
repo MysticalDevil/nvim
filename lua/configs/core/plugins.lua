@@ -233,15 +233,6 @@ local plugins_list = {
       require("configs.plugin.lualine")
     end,
   },
-  -- lualine-lsp-progress
-  -- LSP Progress lualine componenet
-  {
-    "arkav/lualine-lsp-progress",
-    lazy = true,
-    dependencies = {
-      "nvim-lualine/lualine.nvim",
-    },
-  },
   -- neogen
   -- A better annotation generator
   {

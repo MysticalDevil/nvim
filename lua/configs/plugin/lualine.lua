@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-local colors = require("onedark.colors")
-
 local navic = require("nvim-navic")
 
 local nvim_navic = {
@@ -28,14 +26,6 @@ local diagnostics = {
 
   -- Displays diagnostics for the defined severity types
   sections = { "error", "warn", "info", "hint" },
-
-  diagnostics_color = {
-    -- Same values as the general color option can be used here.
-    error = { fg = colors.red, bg = colors.grey },
-    warn = { fg = colors.yellow, bg = colors.grey },
-    info = { fg = colors.blue, bg = colors.grey },
-    hint = { fg = colors.cyan, bg = colors.grey },
-  },
 }
 
 local filename = {
@@ -67,28 +57,24 @@ local fileformat = {
   },
 }
 
-local lsp_progress = {
-  "lsp_progress",
-  colors = {
-    percentage = colors.cyan,
-    title = colors.cyan,
-    message = colors.cyan,
-    spinner = colors.cyan,
-    lsp_client_name = colors.magenta,
-    use = true,
-  },
-  separators = {
-    component = " ",
-    progress = " | ",
-    percentage = { pre = "", post = "%% " },
-    title = { pre = "", post = ": " },
-    lsp_client_name = { pre = "[", post = "]" },
-    spinner = { pre = "", post = "" },
-    message = { pre = "(", post = ")", commenced = "In Progress", completed = "Completed" },
-  },
-  display_components = { "lsp_client_name", "spinner" },
-  timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
-  spinner_symbols = { "󰇊 ", "󰇋 ", "󰇌 ", "󰇍 ", "󰇎 ", "󰇏 " },
+local lsp_status = {
+  function()
+    local msg = "No Active Lsp"
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return msg
+    end
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return client.name
+      end
+    end
+    return msg
+  end,
+  icon = " LSP:",
+  color = { fg = "#ffffff", gui = "bold" },
 }
 
 local opts = {
@@ -121,7 +107,7 @@ local opts = {
     lualine_a = {},
     lualine_b = { diagnostics },
     lualine_c = { nvim_navic },
-    lualine_x = { lsp_progress, "selectioncount" },
+    lualine_x = { lsp_status, "selectioncount" },
     lualine_y = {},
     lualine_z = {},
   },
