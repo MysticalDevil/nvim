@@ -18,7 +18,6 @@ end)
 
 local OS = vim.loop.os_uname().sysname
 local lsp_servers = {
-  "bufls",
   "clangd",
   "clojure_lsp",
   "cmake",
