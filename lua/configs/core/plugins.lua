@@ -20,8 +20,17 @@ local plugins_list = {
       require("configs.colorscheme.catppuccin")
     end,
   },
+  -- gruvbox.nvim
+  -- Lua port of the most famous vim colorscheme
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.gruvbox")
+    end,
+  },
   -- kanagawa.nvim
-  --
+  -- NeoVim dark colorscheme inspired by the colors of the famous painting by Katsushika Hokusai.
   {
     "rebelot/kanagawa.nvim",
     lazy = true,
@@ -75,6 +84,16 @@ local plugins_list = {
       require("configs.colorscheme.onedark")
     end,
   },
+  -- onedarkpro.nvim
+  --  Atom's iconic One Dark theme, for Neovim. Fully customisable, with Treesitter,
+  --  LSP semantic token support and a light variant
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.onedarkpro")
+    end,
+  },
   -- tokyonight.nvim
   -- A clean, dark Neovim theme written in Lua
   {
@@ -103,16 +122,13 @@ local plugins_list = {
       require("configs.plugin.beacon")
     end,
   },
-  -- bufdelete.nvim
-  -- Delete Neovim buffers without losing window layout
-  { "famiu/bufdelete.nvim", lazy = true },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "famiu/bufdelete.nvim",
+      "moll/vim-bbye",
     },
     version = "v3.*",
     config = function()
