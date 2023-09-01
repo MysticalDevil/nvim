@@ -22,6 +22,11 @@ local opts = {
         text_algin = "left",
       },
     },
+    hover = {
+      enabled = true,
+      delay = 200,
+      reveal = { "close" },
+    },
     -- use neovim built-in LSP
     diagnostics = "nvim_lsp",
     -- optional, show LSP diagnostic icon
