@@ -17,5 +17,4 @@ lint.linters_by_ft = {
   sh = { "shellcheck" },
   vim = { "vint" },
   yaml = { "yamllint" },
-  zsh = { "shellcheck" },
 }

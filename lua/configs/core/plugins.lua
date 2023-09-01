@@ -697,6 +697,14 @@ local plugins_list = {
       { "L3MON4D3/LuaSnip" }, -- Required
     },
   },
+
+  -- efmls-configs-nvim
+  -- An unofficial collection of linters and formatters configured for efm-langserver for neovim.
+  {
+    "creativenull/efmls-configs-nvim",
+    version = "v1.x.x", -- version is optional, but recommended
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
   ------------------ Formatter ------------------
   -- formatter.nvim
   -- A format runner for Neovim

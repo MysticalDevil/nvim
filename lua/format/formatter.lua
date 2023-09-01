@@ -48,6 +48,7 @@ local settings = {
   go = {
     filetypes.go.gofumpt,
     filetypes.go.goimports,
+    filetypes.go.golines,
   },
 
   rust = { filetypes.rust.rustfmt },
@@ -55,7 +56,6 @@ local settings = {
   python = {
     filetypes.python.black,
     filetypes.python.isort,
-    filetypes.python.docformatter,
   },
 
   ruby = { filetypes.ruby.standardrb },
