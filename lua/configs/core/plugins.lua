@@ -20,13 +20,22 @@ local plugins_list = {
       require("configs.colorscheme.catppuccin")
     end,
   },
+  -- kanagawa.nvim
+  --
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.kanagawa")
+    end,
+  },
   -- material.nvim
   -- Material colorscheme for NeoVim
   {
     "marko-cerovac/material.nvim",
     lazy = true,
     config = function()
-      require("configs.colorscheme.meterial")
+      require("configs.colorscheme.material")
     end,
   },
   -- nightfox.nvim
@@ -39,9 +48,9 @@ local plugins_list = {
     end,
   },
   -- nord.nvim
-  -- Neovim theme based off of the Nord Color Palette, written in lua with tree sitter support
+  -- An arctic, north-bluish clean and elegant Neovim theme.
   {
-    "shaunsingh/nord.nvim",
+    "gbprod/nord.nvim",
     lazy = true,
     config = function()
       require("configs.colorscheme.nord")
@@ -64,15 +73,6 @@ local plugins_list = {
     proiority = 1000,
     config = function()
       require("configs.colorscheme.onedark")
-    end,
-  },
-  -- oxocarbon.nvim
-  -- A dark and light Neovim theme written in fennel, inspired by IBM Carbon.
-  {
-    "nyoom-engineering/oxocarbon.nvim",
-    lazy = true,
-    config = function()
-      require("configs.colorscheme.oxocarbon")
     end,
   },
   -- tokyonight.nvim
@@ -507,6 +507,14 @@ local plugins_list = {
     -- Calling setup is optional.
     config = function()
       require("configs.plugin.ssr")
+    end,
+  },
+  -- styler.nvim
+  -- Simple Neovim plugin to set a different colorscheme per filetype.
+  {
+    "folke/styler.nvim",
+    config = function()
+      require("configs.plugin.styler")
     end,
   },
   -- telescope.nvim
