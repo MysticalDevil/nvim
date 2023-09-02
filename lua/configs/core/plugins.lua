@@ -122,13 +122,16 @@ local plugins_list = {
       require("configs.plugin.beacon")
     end,
   },
+  -- bufdelete.nvim
+  -- Delete Neovim buffers without losing window layout
+  { "famiu/bufdelete.nvim", lazy = true },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "moll/vim-bbye",
+      "famiu/bufdelete.nvim",
     },
     version = "v3.*",
     config = function()
@@ -427,11 +430,11 @@ local plugins_list = {
       require("nvim-tresitter.install").update({ with_sync = true })
     end,
     dependencies = {
-      { "p00f/nvim-ts-rainbow" },
-      { "JoosepAlviste/nvim-ts-context-commentstring" },
-      { "windwp/nvim-ts-autotag" },
-      { "nvim-treesitter/nvim-treesitter-refactor" },
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
+      "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-tree-docs",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
     },
     config = function()
       require("configs.plugin.nvim-treesitter")
@@ -541,12 +544,25 @@ local plugins_list = {
       "nvim-lua/plenary.nvim",
       "LinArcX/telescope-env.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
     },
     version = "0.1.x",
     config = function()
       require("configs.plugin.telescope")
     end,
   },
+  -- telescope-env.nvim
+  -- watch environment variables with telescope
+  { "LinArcX/telescope-env.nvim", lazy = true },
+  -- telescope-ui-select.nvim
+  -- It sets vim.ui.select to telescope.
+  { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+  -- telescope-fzf-native,nvim
+  -- FZF sorter for telescope written in c
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+  -- telescope-file-browser.nvim
+  -- File Browser extension for telescope.nvim
+  { "nvim-telescope/telescope.nvim", lazy = true },
   -- todo-comments.nvim
   -- Highlight, list and search todo comments in your projects
   {
@@ -674,7 +690,7 @@ local plugins_list = {
     end,
   },
   -- git-conflict.nvim
-  --
+  -- A plugin to visualise and resolve merge conflicts in neovim
   {
     "akinsho/git-conflict.nvim",
     version = "*",
@@ -684,12 +700,27 @@ local plugins_list = {
   },
 
   ---------------------------------- Language Server Protocol -----------------------------------
+  -- nvim-lspconfig
+  -- Quickstart configs for Nvim LSP
+  { "neovim/nvim-lspconfig", proiority = 1000 },
   -- mason.nvim
   -- Portable package manager for Neovim
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  -- LSP config
-  "neovim/nvim-lspconfig",
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-lint",
+      "mhartington/formatter.nvim",
+    },
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+    },
+  },
   -- neodev.nvim
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
@@ -699,6 +730,9 @@ local plugins_list = {
       require("configs.plugin.neodev")
     end,
   },
+  -- nlsp-settings.nvim
+  -- A plugin for setting Neovim LSP with JSON or YAML files
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
   -- lsp-zero.nvim
   -- A starting point to setup some lsp related features in neovim.
   {
@@ -732,12 +766,20 @@ local plugins_list = {
   ------------------ Formatter ------------------
   -- formatter.nvim
   -- A format runner for Neovim
-  "mhartington/formatter.nvim",
+  {
+    "mhartington/formatter.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+  },
   ------------------- Linter --------------------
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
-  "mfussenegger/nvim-lint",
+  {
+    "mfussenegger/nvim-lint",
+    dependencies = { "williamboman/mason.nvim" },
+  },
+
+  ------------------- Helpers -------------------
   -- lsp_signature.nvim
   -- LSP signature hint as you type
   {
@@ -769,24 +811,35 @@ local plugins_list = {
       "hrsh7th/cmp-buffer",
     },
   },
-  -- Snippet provider
-  "L3MON4D3/LuaSnip",
-  "saadparwaiz1/cmp_luasnip",
-  "rafamadriz/friendly-snippets",
+  -- LuaSnip
+  -- Snippet Engine for Neovim written in Lua.
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
+  },
+  -- friendly-snippets
+  -- Set of preconfigured snippets for different languages.
+  { "rafamadriz/friendly-snippets", lazy = true },
   -- Complete Source
-  "hrsh7th/cmp-buffer", -- { name = 'buffer' }
-  "hrsh7th/cmp-calc", -- { name = 'calc' }
-  "hrsh7th/cmp-cmdline", -- { name = 'cmdline' }
-  "hrsh7th/cmp-nvim-lsp", -- { name = nvim_lsp p
-  "hrsh7th/cmp-nvim-lsp-signature-help", -- { name = 'nvim_lsp_signature_help' }
-  "hrsh7th/cmp-path", -- { name = 'path' }
-  "hrsh7th/cmp-vsnip",
-  "PaterJason/cmp-conjure",
+  { "hrsh7th/cmp-buffer", lazy = true }, -- { name = 'buffer' }
+  { "hrsh7th/cmp-calc", lazy = true }, -- { name = 'calc' }
+  { "hrsh7th/cmp-cmdline", lazy = true }, -- { name = 'cmdline' }
+  { "hrsh7th/cmp-nvim-lsp", lazy = true }, -- { name = nvim_lsp p
+  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true }, -- { name = 'nvim_lsp_signature_help' }
+  { "hrsh7th/cmp-path", lazy = true }, -- { name = 'path' }
+  { "hrsh7th/cmp-vsnip", lazy = true },
+  { "PaterJason/cmp-conjure", lazy = true },
+  { "saadparwaiz1/cmp_luasnip", lazy = true },
 
   ----------------- UI Import -----------------
-  -- lspkind-nvim
+  -- lspkind.nvim
   -- vscode-like pictograms for neovim lsp completion items
-  "onsails/lspkind-nvim",
+  {
+    "onsails/lspkind-nvim",
+    config = function()
+      require("configs.plugin.lspkind")
+    end,
+  },
   -- lspsage.nvim
   -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
   {

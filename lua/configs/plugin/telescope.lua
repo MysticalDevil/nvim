@@ -9,7 +9,7 @@ local utils = require("utils.setup")
 local trouble = require("trouble.providers.telescope")
 local builtin = require("telescope.builtin")
 
-local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial" }
+local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project" }
 
 for _, value in pairs(extensions_list) do
   telescope.load_extension(value)
@@ -71,6 +71,18 @@ local opts = {
         yaml = true,
       },
     },
+    file_browser = {
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          -- your custom normal mode mappings
+        },
+      },
+    },
   },
 }
 
@@ -78,3 +90,8 @@ telescope.setup(opts)
 
 utils.keymap("n", "<C-p>", builtin.find_files)
 utils.keymap("n", "<C-f>", builtin.live_grep)
+
+utils.keymap("n", "<space>fb", "<CMD>Telescope file_browser<CR>")
+utils.keymap("n", "<space>no", "<CMD>Telescope noice<CR>")
+utils.keymap("n", "<space>cl", "<CMD>Telescope neoclip<CR>")
+utils.keymap("n", "<space>pj", "<CMD>Telescope project<CR>")
