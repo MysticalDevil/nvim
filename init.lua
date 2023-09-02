@@ -7,7 +7,7 @@ require("configs.core.keybindings")
 -- Auto command
 require("configs.core.autocmds")
 -- Lazy plugins manage
-require("configs.core.plugins")
+require("plugins.setup")
 -- Color scheme setting
 require("configs.colorscheme.setup")
 
