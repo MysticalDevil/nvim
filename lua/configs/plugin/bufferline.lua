@@ -10,8 +10,12 @@ local utils = require("utils.setup")
 -- https://github.com/akinsho/bufferline.nvim#configuration
 local opts = {
   options = {
-    close_command = "Bdelete! %d",
-    right_mouse_command = "Bdelete! %d",
+    close_command = function(bufnum)
+      require("bufdelete").bufdelete(bufnum, true)
+    end,
+    right_mouse_command = function(bufnum)
+      require("bufdelete").bufdelete(bufnum, true)
+    end,
     -- sidebar configuration
     -- give up the position of neo-tree on the left, show File Explorer
     offsets = {

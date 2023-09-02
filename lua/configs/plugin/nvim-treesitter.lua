@@ -6,11 +6,30 @@ end
 
 require("nvim-treesitter.install").prefer_git = true
 
+local languages = {
+  "c",
+  "cpp",
+  "dart",
+  "go",
+  "haskell",
+  "java",
+  "javascript",
+  "kotlin",
+  "lua",
+  "python",
+  "ruby",
+  "rust",
+  "typescript",
+  "tsx",
+  "vim",
+  "yaml",
+  "zig",
+}
+
 local opts = {
+  ensure_installed = languages,
   sync_install = false,
-  -- Install language parser
-  -- ensure_installed = { "json", "html", "css", "vim", "lua", "javascript", "typescript", "tsx", "markdown" },
-  -- ensure_installed = "maintained",
+  auto_install = true,
 
   -- enable code highlight module
   highlight = {
@@ -31,25 +50,14 @@ local opts = {
     },
   },
   -- enable code indent module
-  indent = {
-    enable = true,
-  },
-  -- p00f/nvim-ts-rainbow
+  indent = { enable = true },
   rainbow = {
-    enable = true,
-    -- disable { 'jsx', 'cpp' }, list of languages you wang to disable the plugin for
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, bollean or table: lang -> boolean
-    max_file_lines = 10000, -- Do not enable for files with more than n lines, int
-    colors = {
-      "#85ca60",
-      "#ee6985",
-      "#d6a760",
-      "#7794f4",
-      "#b38bf5",
-      "#7cc7fe",
-    }, -- table of hex strings
-    -- termcolors = { } -- table of color name strings
+    enable = false,
+    extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+    max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
   },
+  -- nvim-treesitter/nvim-tree-docs
+  tree_docs = { enable = true },
   -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
   context_commentstring = {
     enable = true,
@@ -58,6 +66,9 @@ local opts = {
   -- http://github.com/windwp/nvim-ts-autotag
   autotag = {
     enable = true,
+    enable_rename = true,
+    enable_close = true,
+    enable_close_on_slash = true,
   },
   -- nvim-treesitter/nvim-treesitter-refactor
   refactor = {
@@ -70,6 +81,7 @@ local opts = {
   },
   -- nvim-treesitter/nvim-treesitter-textobjects
   textobjects = {
+    enable = true,
     select = {
       enable = true,
 
@@ -124,6 +136,6 @@ local opts = {
 
 treesitter.setup(opts)
 
--- 开启 Folding 模块
+-- enable Folding module
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
