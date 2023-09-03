@@ -214,6 +214,21 @@ return {
     end,
   },
 
+  -- hashell-tools.nvim
+  -- Supercharge your Haskell experience in neovim!
+  {
+    "mrcjkb/haskell-tools.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim", -- Optional
+    },
+    branch = "2.x.x", -- Recommended
+    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+    config = function()
+      require("configs.plugin.haskell")
+    end,
+  },
+
   -- conjure
   --Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile)
   {
