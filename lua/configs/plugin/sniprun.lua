@@ -71,6 +71,3 @@ local opts = {
 }
 
 sniprun.setup(opts)
-
-local a = 10
-print(a)

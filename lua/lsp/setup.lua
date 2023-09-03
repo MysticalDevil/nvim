@@ -47,8 +47,6 @@ local servers = {
   yamlls = require("lsp.config.yaml"),
 }
 
-print(servers["bashls"], "info")
-
 -- Configure the language server. The on_setup function must be implemented in the configuration file.
 for _, name in ipairs(lsp_servers) do
   local config = servers[name] or require("lsp.config.common")

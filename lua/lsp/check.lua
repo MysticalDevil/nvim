@@ -3,7 +3,6 @@ local util = require("lsp.util")
 local servers_list = {
   "clangd",
   "clojure_lsp",
-  "elixirls",
   "lua_ls",
   "taplo",
 }
