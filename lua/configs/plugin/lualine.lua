@@ -65,6 +65,10 @@ local lsp_status = {
     if next(clients) == nil then
       return msg
     end
+    if #clients == 1 then
+      return clients[1].name
+    end
+
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then

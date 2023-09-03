@@ -10,6 +10,7 @@ elixir.setup({
       dialyzerEnabled = false,
       enableTestLenses = false,
     }),
+    filetypes = { "elixir", "eelixir", "heex", "surface" },
     on_attach = function()
       vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
       vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
