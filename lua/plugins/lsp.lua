@@ -62,6 +62,7 @@ return {
     "creativenull/efmls-configs-nvim",
     version = "v1.x.x", -- version is optional, but recommended
     dependencies = { "neovim/nvim-lspconfig" },
+    lazy = true,
   },
   ------------------ Formatter ------------------
   -- formatter.nvim
@@ -105,7 +106,7 @@ return {
   -- Complete Source
   { "hrsh7th/cmp-buffer", lazy = true }, -- { name = 'buffer' }
   { "hrsh7th/cmp-calc", lazy = true }, -- { name = 'calc' }
-  { "hrsh7th/cmp-cmdline", lazy = true }, -- { name = 'cmdline' }
+  { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" }, -- { name = 'cmdline' }
   { "hrsh7th/cmp-nvim-lsp", lazy = true }, -- { name = nvim_lsp p
   { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true }, -- { name = 'nvim_lsp_signature_help' }
   { "hrsh7th/cmp-path", lazy = true }, -- { name = 'path' }
@@ -178,6 +179,7 @@ return {
 
   -- go.nvim
   -- Modern Go plugin for Neovim
+  { "ray-x/guihua.lua", lazy = true },
   {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
