@@ -5,9 +5,7 @@ if not status then
 end
 
 local lsp = lsp_zero.preset({})
-
 local mason = require("mason")
-
 local lspconfig = require("lspconfig")
 
 --------------------------------------- Configures ------------------------------------------------
@@ -16,29 +14,7 @@ lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
 end)
 
-local OS = vim.loop.os_uname().sysname
-local lsp_servers = {
-  "clangd",
-  "clojure_lsp",
-  "cmake",
-  "cssls",
-  "dockerls",
-  "emmet_ls",
-  "eslint",
-  "fennel_language_server",
-  "gopls",
-  "html",
-  "jsonls",
-  "lua_ls",
-  "omnisharp",
-  "pyright",
-  "rust_analyzer",
-  "tsserver",
-  "taplo",
-  "vimls",
-  "volar",
-  "yamlls",
-}
+local lsp_servers = require("lsp.check")
 
 -- :h mason-default-settings
 mason.setup({
@@ -51,17 +27,7 @@ mason.setup({
   },
 })
 
--- mason-lspconfig uses the `lspconfig` servers names in the APIs it exposes
--- - not `mson.nvim` package names
-if OS ~= "Linux" then
-  lsp.ensure_installed(lsp_servers)
-else
-  table.insert(lsp_servers, "bashls")
-  table.insert(lsp_servers, "solargraph")
-  lsp.ensure_installed(lsp_servers)
-end
-
--- 安装列表
+-- Install list
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   bashls = require("lsp.config.bash"),
@@ -81,7 +47,9 @@ local servers = {
   yamlls = require("lsp.config.yaml"),
 }
 
--- 配置语言服务器，配置文件中必须实现 on_setup 函数
+print(servers["bashls"], "info")
+
+-- Configure the language server. The on_setup function must be implemented in the configuration file.
 for _, name in ipairs(lsp_servers) do
   local config = servers[name] or require("lsp.config.common")
   if type(config) == "table" and config.on_setup ~= nil then

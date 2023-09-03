@@ -167,20 +167,12 @@ return {
   -- Allows selection of python virtual environment from within neovim
   {
     "linux-cultist/venv-selector.nvim",
+    ft = { "python" },
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     config = function()
       require("configs.plugin.venv-selector")
     end,
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-    keys = {
-      {
-        "<leader>vs",
-        "<cmd>:VenvSelect<cr>",
-        -- optional if you use a autocmd (see #🤖-Automate)
-        "<leader>vc",
-        "<cmd>:VenvSelectCached<cr>",
-      },
-    },
   },
 
   -- go.nvim
@@ -212,7 +204,7 @@ return {
   },
 
   -- typescript-tools.nvim
-  --
+  -- TypeScript integration NeoVim deserves
   {
     "pmizio/typescript-tools.nvim",
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
