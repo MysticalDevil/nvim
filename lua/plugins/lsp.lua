@@ -197,9 +197,12 @@ return {
   {
     "akinsho/flutter-tools.nvim",
     ft = { "dart" },
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
     config = function()
-      require("configs.plugin.flutter")
+      require("configs.plugin.flutter-tools")
     end,
   },
 
@@ -210,7 +213,7 @@ return {
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
-      require("configs.plugin.typescript")
+      require("configs.plugin.typescript-tools")
     end,
   },
 
@@ -225,8 +228,22 @@ return {
     branch = "2.x.x", -- Recommended
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
     config = function()
-      require("configs.plugin.haskell")
+      require("configs.plugin.haskell-tools")
     end,
+  },
+
+  -- elixir-tools.nvim
+  {
+    "elixir-tools/elixir-tools.nvim",
+    version = "*",
+    event = { "BufReadPre", "BufNewFile" },
+    ft = { "elixir", "eelixir", "heex", "surface" },
+    config = function()
+      require("configs.plugin.elixir-tools")
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
 
   -- conjure
