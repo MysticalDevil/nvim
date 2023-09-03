@@ -19,6 +19,7 @@ vt.setup({
   commented = true,
 })
 
+---@diagnostic disable-next-line
 dapui.setup({
   emelent_mappings = {
     scopes = {

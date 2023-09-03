@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local ufo = require("ufo")
+
 local opts = {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
@@ -192,8 +194,46 @@ which_key.register({
   },
 
   -- treesitter fold
-  Z = { ":foldopen<CR>", "Open code block toggle" },
-  zz = { ":foldclose<CR>", "Close code block toggle" },
+  z = {
+    name = "Folding",
+    R = {
+      function()
+        ufo.openAllFolds()
+      end,
+      "Open all folds",
+    },
+    M = {
+      function()
+        ufo.closeAllFolds()
+      end,
+      "Close all folds",
+    },
+    r = {
+      function()
+        ufo.openFoldsExceptKinds()
+      end,
+      "Open all folds except kinds",
+    },
+    m = {
+      function()
+        ufo.closeFoldsWith()
+      end,
+      "Close fold with",
+    },
+    K = {
+      function()
+        local winid = ufo.peekFoldedLinesUnderCursor()
+        if not winid then
+          -- choose one of coc.nvim and nvim lsp
+          vim.fn.CocActionAsync("definitionHover") -- coc.nvim
+          vim.lsp.buf.hover()
+        end
+      end,
+      "Peek folded lines under cursor",
+    },
+    o = { "<CMD>foldopen<CR>", "Open fold" },
+    c = { "<CMD>foldclose<CR>", "Close fold" },
+  },
   -- LSP shortcut key
   g = {
     name = "+LSP",
@@ -214,29 +254,11 @@ which_key.register({
       end,
       "Go to references",
     },
-    -- <cmd>Lspsaga hover_doc<cr>
-    h = { "<CMD>lua vim.lsp.buf.hover()<CR>", "Hover function definition" },
-    -- <cmd>Lspsaga show_line_diagnostics<CR>
-    p = { "<CMD>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
-    -- <cmd>Lspsaga diagnostic_jump_next<cr>
-    j = { "<CMD>lua vim.diagnostic.goto_next()<CR>", "Go to next diagnostic" },
-    -- <cmd>Lspsaga diagnostic_jump_prev<cr>
-    k = { "<CMD>lua vim.diagnostic.goto_prev()<CR>", "Go to previous diagnostic" },
-
-    s = { "<CMD>TypescriptOrganizeImports<CR>", "Typescript: Organize imports" },
-    R = { "<CMD>TypescriptRenameFile<CR>", "Typescript: Rename file" },
-    i = { "<CMD>TypescriptAddMissingImports<CR>", "Typescript: Add missing imports" },
-    u = { "<CMD>TypescriptRemoveUnused<CR>", "Typescript: Remove unused imports" },
-    f = { "<CMD>TypescriptFixAll", "Typescript: Fix all problems" },
-    D = { "<CMD>TypescriptGoToSourceDefinition<CR>", "Typescript: Go to source defination" },
-    -- mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-    -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-    -- mapbuf('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opt)
-    -- mapbuf("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opt)
-    -- mapbuf('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opt)
-    -- mapbuf('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opt)
-    -- mapbuf('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opt)
-    -- mapbuf('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opt)
+    h = { "<CMD>Lspsaga hover_doc<CR>", "Hover function definition" },
+    p = { "<CMD>Lspsaga show_line_diagnostics<CR>", "Open float diagnostics" },
+    j = { "<CMD>Lspsaga diagnostic_jump_next<CR>", "Go to next diagnostic" },
+    k = { "<CMD>Lspsaga diagnostic_jump_prev<CR>", "Go to previous diagnostic" },
+    i = { "<cmd>Lspsafa finder imp<CR>", "" },
   },
   -----------------------------------------------------------
   -- s_windows split window shortcut key

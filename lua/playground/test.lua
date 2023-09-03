@@ -1,16 +1,3 @@
-local function deep_print(t)
-  local request_headers_all = ""
-  for k, v in pairs(t) do
-    if type(v) == "table" then
-      request_headers_all = request_headers_all .. "[" .. k .. " " .. deep_print(v) .. "] "
-    else
-      local rowtext = string.format("[%s %s] ", k, v)
-      request_headers_all = request_headers_all .. rowtext
-    end
-  end
-  return request_headers_all
-end
-
 local function get_lsp_name()
   local msg = "No Active LSP"
 

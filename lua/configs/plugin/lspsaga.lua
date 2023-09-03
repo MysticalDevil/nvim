@@ -53,6 +53,13 @@ local opts = {
       quit_in_show = { "q", "<ESC>" },
     },
   },
+  implement = {
+    enable = true,
+    sign = true,
+    lang = {},
+    virtual_text = true,
+    priority = 100,
+  },
 }
 
 lspsage.setup(opts)

@@ -14,8 +14,23 @@ M.disable_format = function(client)
   client.server_capabilities.documentRangeFormattingProvider = false
 end
 
-M.capabilities = function()
-  return require("cmp_nvim_lsp").default_capabilities()
+M.common_capabilities = function()
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+
+  return capabilities
 end
 
 M.flags = function()
@@ -26,7 +41,7 @@ end
 
 M.default_configs = function()
   return {
-    capabilities = M.capabilities(),
+    capabilities = M.common_capabilities(),
     flags = M.flags(),
     on_attach = function(client, bufnr)
       M.disable_format(client)

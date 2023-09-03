@@ -4,17 +4,20 @@ if not status then
   return
 end
 
-local utils = require("utils.setup")
-
 local opts = {
   cmd_name = "IncRename", -- the name of the command
-  hl_group = "Substitute", -- the highlight group used for highlighting the identifier's new name
-  preview_empty_name = false, -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+  -- the highlight group used for highlighting the identifier's new name
+  hl_group = "Substitute",
+  -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+  preview_empty_name = false,
   show_message = true, -- whether to display a `Renamed m instances in n files` message after a rename operation
-  input_buffer_type = nil, -- the type of the external input buffer to use (the only supported value is currently "dressing")
+  -- the type of the external input buffer to use (the only supported value is currently "dressing")
+  input_buffer_type = nil,
   post_hook = nil, -- callback to run after renaming, receives the result table (from LSP handler) as an argument
 }
 
 inc_rename.setup(opts)
 
-utils.keymap("n", "<leader>rn", ":IncRename ")
+vim.keymap.set("n", "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })

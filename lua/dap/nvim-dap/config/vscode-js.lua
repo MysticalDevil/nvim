@@ -1,9 +1,14 @@
 -- npm install --legacy-peer-deps && npm run compile
+---@diagnostic disable-next-line
 require("dap-vscode-js").setup({
-  node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter", -- Path to vscode-js-debug installation.
-  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
+  -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  node_path = "node",
+  -- Path to vscode-js-debug installation.
+  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  -- debugger_cmd = { "js-debug-adapter" },
+  -- which adapters to register in nvim-dap
+  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
 })
 
 for _, language in ipairs({ "typescript", "javascript" }) do

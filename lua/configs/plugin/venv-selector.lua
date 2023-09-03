@@ -50,7 +50,8 @@ local opts = {
   -- name (default: venv) - The name of the venv directories to look for.
   name = "venv", -- NOTE: You can also use a lua table here for multiple names: {"venv", ".venv"}`
 
-  -- fd_binary_name (default: fd) - The name of the fd binary on your system. Some Debian based Linux Distributions like Ubuntu use ´fdfind´.
+  -- fd_binary_name (default: fd) - The name of the fd binary on your system.
+  -- Some Debian based Linux Distributions like Ubuntu use ´fdfind´.
   fd_binary_name = "fd",
 
   -- notify_user_on_activate (default: true) - Prints a message that the venv has been activated

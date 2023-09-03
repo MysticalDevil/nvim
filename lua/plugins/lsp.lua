@@ -112,6 +112,7 @@ return {
   { "hrsh7th/cmp-vsnip", lazy = true },
   { "PaterJason/cmp-conjure", lazy = true },
   { "saadparwaiz1/cmp_luasnip", lazy = true },
+  { "petertriho/cmp-git", lazy = true },
 
   ----------------- UI Import -----------------
   -- lspkind.nvim
