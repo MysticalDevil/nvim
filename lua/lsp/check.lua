@@ -25,7 +25,7 @@ end
 
 local required_cargo = { "fennel_language_server" }
 
-local required_go = { "efm", "gopls", "golangci_lint_ls" }
+local required_go = { "efm", "gopls" }
 
 local required_pip = { "cmake", "pyright" }
 
