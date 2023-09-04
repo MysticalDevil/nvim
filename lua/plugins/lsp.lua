@@ -282,9 +282,23 @@ return {
   ----------------------------------- Debug Adapter Protocol ------------------------------------
   -- nvim-dap
   -- Debug Adapter Protocol client implementation for Neovim
-  "mfussenegger/nvim-dap",
-  "rcarriga/nvim-dap-ui",
-  "theHamsta/nvim-dap-virtual-text",
+  { "mfussenegger/nvim-dap", lazy = true },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+  },
+
+  -- nvim-dap-python
+  -- An extension for nvim-dap, providing default configurations for python
+  -- and methods to debug individual test methods or classes.
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
 
   -- nvim-dap-vscode-js
   -- nvim-dap adapter for vscode-js-debug
