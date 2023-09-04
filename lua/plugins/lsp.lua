@@ -111,6 +111,8 @@ return {
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
+    version = "2.*",
+    build = "make install_jsregexp",
   },
   -- friendly-snippets
   -- Set of preconfigured snippets for different languages.
@@ -377,6 +379,15 @@ return {
     dependencies = "neovim/nvim-lspconfig",
     config = function()
       require("configs.plugin.navic")
+    end,
+  },
+
+  -- lsp_lines.nvim
+  -- A simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("configs.plugin.lsp_lines")
     end,
   },
 }

@@ -46,11 +46,11 @@ local opts = {
   },
   window = {
     completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = mapping,
   sources = cmp.config.sources({
-    { name = "luasnip", group_index = 1 },
+    { name = "luasnip" },
     {
       name = "nvim_lsp",
       entry_filter = function(entry, ctx)
