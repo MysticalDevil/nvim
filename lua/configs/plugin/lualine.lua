@@ -6,6 +6,36 @@ end
 
 local navic = require("nvim-navic")
 
+-- Color table for highlights
+-- stylua: ignore
+local colors = {
+  bg       = '#202328',
+  fg       = '#bbc2cf',
+  yellow   = '#ECBE7B',
+  cyan     = '#008080',
+  darkblue = '#081633',
+  green    = '#98be65',
+  orange   = '#FF8800',
+  violet   = '#a9a1e1',
+  magenta  = '#c678dd',
+  blue     = '#51afef',
+  red      = '#ec5f67',
+}
+
+local conditions = {
+  buffer_not_empty = function()
+    return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+  end,
+  hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
+  end,
+  check_git_workspace = function()
+    local filepath = vim.fn.expand("%:p:h")
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+  end,
+}
+
 local nvim_navic = {
   function()
     return navic.get_location()
@@ -59,26 +89,33 @@ local fileformat = {
 
 local lsp_status = {
   function()
-    local msg = "No Active LSP"
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    if #clients == 1 then
-      return clients[1].name
-    end
-
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
+    if rawget(vim, "lsp") then
+      for _, client in ipairs(vim.lsp.get_active_clients()) do
+        if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
+          return (vim.o.columns > 100 and "  LSP ~ " .. client.name .. " ") or "   LSP "
+        end
       end
     end
-    return msg
   end,
-  icon = "  LSP:",
-  color = { fg = "#aaa", gui = "bold" },
+  color = { fg = colors.magenta, gui = "bold" },
+}
+
+local branch = {
+  "branch",
+  icon = "",
+  color = { fg = colors.violet, gui = "bold" },
+}
+
+local diff = {
+  "diff",
+  -- Is it me or the symbol for modified us really weird
+  symbols = { added = " ", modified = " ", removed = " " },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red },
+  },
+  cond = conditions.hide_in_width,
 }
 
 local opts = {
@@ -96,7 +133,7 @@ local opts = {
   extensions = { "toggleterm", "aerial" },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", "diff" },
+    lualine_b = { branch, diff },
     lualine_c = { filename },
     lualine_x = {
       "filesize",
@@ -118,3 +155,20 @@ local opts = {
 }
 
 lualine.setup(opts)
+
+-- local git_status = {
+--   function()
+--     if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
+--       return ""
+--     end
+--
+--     local git_status = vim.b.gitsigns_status_dict
+--
+--     local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
+--     local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
+--     local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
+--     local branch_name = "  " .. git_status.head
+--
+--     return branch_name .. added .. changed .. removed
+--   end,
+-- }
