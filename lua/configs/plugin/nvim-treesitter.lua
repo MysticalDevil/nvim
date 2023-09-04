@@ -58,6 +58,8 @@ local opts = {
     enable = true,
     enable_autocmd = false,
   },
+  -- https://github.com/RRethy/nvim-treesitter-endwise
+  endwise = { enable = true },
   -- http://github.com/windwp/nvim-ts-autotag
   autotag = {
     enable = true,

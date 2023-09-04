@@ -244,6 +244,7 @@ return {
   -- Describe the regexp under the cursor
   {
     "bennypowers/nvim-regexplainer",
+    cmd = { "RegexplainerShow", "RegexplainerToggle" },
     config = function()
       require("configs.plugin.regexplainer")
     end,
@@ -292,6 +293,7 @@ return {
       "nvim-treesitter/nvim-tree-docs",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-ts-autotag",
+      "RRethy/nvim-treesitter-endwise",
     },
     config = function()
       require("configs.plugin.nvim-treesitter")
@@ -353,6 +355,14 @@ return {
     "ahmedkhalf/project.nvim",
     config = function()
       require("configs.plugin.project")
+    end,
+  },
+  -- rainbow-delimiters.nvim
+  -- Rainbow delimiters for Neovim with Tree-sitter
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    config = function()
+      require("configs.plugin.rainbow-delimiters")
     end,
   },
   -- rest.nvim
