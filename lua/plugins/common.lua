@@ -331,7 +331,7 @@ return {
   {
     "eraserhd/parinfer-rust",
     cmd = "ParinferOn",
-    run = "cargo build --release",
+    build = "cargo build --release",
   },
   -- plenary.nvim
   -- plenary: full; complete; entire; absolute; unqualified.

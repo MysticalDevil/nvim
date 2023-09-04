@@ -304,14 +304,6 @@ return {
   },
 
   ------------------- Helpers -------------------
-  -- lsp_signature.nvim
-  -- LSP signature hint as you type
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("configs.plugin.lsp_signature")
-    end,
-  },
   -- symbols-outline.nvim
   -- A tree like view for symbols in Neovim using the Language Server Protocol
   {

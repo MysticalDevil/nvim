@@ -46,13 +46,6 @@ M.default_configs = function()
     on_attach = function(client, bufnr)
       M.disable_format(client)
       M.key_attach(bufnr)
-
-      require("lsp_signature").on_attach({
-        bind = true,
-        handler_opts = {
-          border = "rounded",
-        },
-      }, bufnr)
     end,
   }
 end

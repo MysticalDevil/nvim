@@ -69,7 +69,7 @@ return {
   {
     "navarasu/onedark.nvim",
     lazy = false,
-    proiority = 1000,
+    priority = 1000,
     config = function()
       require("configs.colorscheme.onedark")
     end,
