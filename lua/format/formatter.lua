@@ -9,13 +9,12 @@ local util = require("formatter.util")
 local filetypes = require("formatter.filetypes")
 local config = require("formatter.config")
 
-local mason_binary = function(name)
-  return vim.fn.stdpath("data") .. "/mason/bin/" .. name
-end
+local mason_binary = vim.fn.stdpath("data") .. "/mason/bin/"
 
 local prettier_defaults = function()
   return {
-    exe = mason_binary("prettier"),
+    exe = "prettier",
+    cwd = mason_binary,
     args = {
       "--single-quote",
       "--no-semi",
@@ -26,22 +25,8 @@ local prettier_defaults = function()
   }
 end
 
-local shell_defaults = function()
-  return {
-    exe = mason_binary("beautysh"),
-    args = {
-      util.escape_path(util.get_current_buffer_file_path()),
-    },
-    stdin = true,
-  }
-end
-
 local settings = {
-  -- Formatter configurations for filetype "lua" go here
-  -- and will be executed in order
   lua = {
-    -- "formatter.filetypes.lua" defines default configurations for the
-    -- "lua" filetype
     filetypes.lua.stylua,
   },
 
@@ -66,15 +51,15 @@ local settings = {
 
   css = { filetypes.css.prettier },
   html = { filetypes.html.prettier },
-  javascript = prettier_defaults,
-  typescript = prettier_defaults,
-  javascriptreact = prettier_defaults,
-  typescriptreact = prettier_defaults,
-  vue = prettier_defaults,
+  javascript = { prettier_defaults() },
+  typescript = { prettier_defaults() },
+  javascriptreact = { prettier_defaults() },
+  typescriptreact = { prettier_defaults() },
+  vue = { prettier_defaults() },
 
   fish = { filetypes.fish.fishindent },
-  sh = shell_defaults,
-  zsh = shell_defaults,
+  sh = { filetypes.sh.shfmt },
+  zsh = { filetypes.sh.shfmt },
 
   json = { filetypes.json.fixjson },
   toml = { filetypes.toml.taplo },
