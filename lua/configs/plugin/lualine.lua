@@ -89,15 +89,25 @@ local fileformat = {
 
 local lsp_status = {
   function()
-    if rawget(vim, "lsp") then
-      for _, client in ipairs(vim.lsp.get_active_clients()) do
-        if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
-          return (vim.o.columns > 100 and "  LSP ~ " .. client.name .. " ") or "   LSP "
-        end
+    local msg = "No Active Lsp"
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return msg
+    end
+    if #clients == 1 then
+      return clients[1].name
+    end
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return client.name
       end
     end
+    return msg
   end,
-  color = { fg = colors.magenta, gui = "bold" },
+  icon = " LSP:",
+  color = { fg = "#a0a0a0", gui = "bold" },
 }
 
 local branch = {

@@ -43,7 +43,7 @@ local servers = {
   pyright = require("lsp.config.pyright"),
   rust_analyzer = require("lsp.config.rust_analyzer"),
   solargraph = require("lsp.config.solargraph"),
-  tsserver = require("lsp.config.tsserver"),
+  -- tsserver = require("lsp.config.tsserver"),
   taplo = require("lsp.config.taplo"),
   yamlls = require("lsp.config.yamlls"),
 }

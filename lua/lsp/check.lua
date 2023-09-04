@@ -14,7 +14,6 @@ local required_npm = {
   "eslint",
   "html",
   "jsonls",
-  "tsserver",
   "vimls",
   "volar",
   "yamlls",

@@ -41,7 +41,9 @@ local opts = {
   lazy_update_context = true,
   lsp = {
     auto_attach = true,
-    preference = nil,
+    preference = {
+      "tsserver",
+    },
   },
 }
 
