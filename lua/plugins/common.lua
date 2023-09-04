@@ -403,6 +403,15 @@ return {
       require("configs.plugin.styler")
     end,
   },
+  -- tabout.nvim
+  -- Supercharge your workflow and start tabbing out from parentheses, quotes, and similar contexts today.
+  {
+    "abecodes/tabout.nvim",
+    config = function()
+      require("configs.plugin.tabout")
+    end,
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
   -- telescope.nvim
   -- Find, Filter, Preview, Pick. All lua, all the time.
   {
@@ -424,6 +433,9 @@ return {
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
   { "nvim-telescope/telescope-file-browser.nvim", lazy = true },
   { "nvim-telescope/telescope-project.nvim", lazy = true },
+  -- text-case.nvim
+  -- An all in one plugin for converting text case in Neovim
+  { "johmsalas/text-case.nvim", lazy = true },
   -- todo-comments.nvim
   -- Highlight, list and search todo comments in your projects
   {
