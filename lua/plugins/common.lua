@@ -87,6 +87,16 @@ return {
       require("configs.plugin.hydra")
     end,
   },
+  -- hypersonic.nvim
+  -- A Neovim plugin that provides an explanation for regular expressions.
+  {
+    "tomiis4/Hypersonic.nvim",
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    config = function()
+      require("configs.plugin.hypersonic")
+    end,
+  },
   -- icon-picker.nvim
   -- This is a Neovim plugin that helps you pick Nerd Font Icons, Symbols & Emojis
   {
