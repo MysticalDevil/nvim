@@ -21,6 +21,13 @@ return {
       "williamboman/mason.nvim",
     },
   },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+  },
   -- neodev.nvim
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
@@ -64,14 +71,19 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     lazy = true,
   },
-  ------------------ Formatter ------------------
+  ------------------ Formatter and Linter ------------------
+  -- null-ls.nvim
+  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
   -- formatter.nvim
   -- A format runner for Neovim
   {
     "mhartington/formatter.nvim",
     dependencies = { "williamboman/mason.nvim" },
   },
-  ------------------- Linter --------------------
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
