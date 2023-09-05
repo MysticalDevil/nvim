@@ -1,5 +1,8 @@
 return {
   ----------------------------------------- Colorscheme -----------------------------------------
+  -- aurora
+  -- A vivid dark theme for (Neo)Vim. Optimized for treesitter, LSP.
+  { "ray-x/aurora", lazy = true },
   -- catppuccin
   -- Soothing pastel theme for (Neo)vim
   {
@@ -8,6 +11,27 @@ return {
     name = "catppuccin",
     config = function()
       require("configs.colorscheme.catppuccin")
+    end,
+  },
+  -- doom-one.nvim
+  -- doom-emacs' doom-one Lua port for Neovim
+  { "NTBBloodbath/doom-one.nvim", lazy = true },
+  -- dracula.nvim
+  -- Dracula colorscheme for neovim written in Lua
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.dracula")
+    end,
+  },
+  -- github-nvim-theme
+  -- Github's Neovim themes
+  {
+    "projekt0n/github-nvim-theme",
+    lazy = true, -- make sure we load this during startup if it is your main colorscheme
+    config = function()
+      require("configs.colorscheme.github-theme")
     end,
   },
   -- gruvbox.nvim
@@ -64,6 +88,9 @@ return {
       require("configs.colorscheme.nordic")
     end,
   },
+  -- nyoom.nvim
+  -- A Neovim framework and doom emacs alternative for the stubborn martian hacker. Powered by fennel and the oxocarbon theme
+  { "nyoom-engineering/nyoom.nvim", lazy = true },
   -- onedark.nvim
   -- One dark and light colorscheme for neovim
   {
@@ -72,6 +99,20 @@ return {
     priority = 1000,
     config = function()
       require("configs.colorscheme.onedark")
+    end,
+  },
+  -- poimandres.nvim
+  -- Poimandres colorscheme for Neovim written in Lua
+  {
+    "olivercederborg/poimandres.nvim",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.poimandres")
+    end,
+
+    -- optionally set the colorscheme within lazy config
+    init = function()
+      vim.cmd("colorscheme poimandres")
     end,
   },
   -- tokyonight.nvim

@@ -87,7 +87,7 @@ which_key.register({
   ["<leader>q"] = { "<CMD>q<CR>", "Quit editor" },
   ["<leader>f"] = {
     function()
-      utils.async_formatting()
+      vim.lsp.buf.format({ async = true })
     end,
     "Format file",
   },
