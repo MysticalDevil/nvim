@@ -89,13 +89,13 @@ local fileformat = {
 
 local lsp_status = {
   function()
-    local msg = "No Active Lsp"
+    local msg = "No Active LSP"
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
       return msg
     end
-    if #clients == 1 then
+    if #clients == 1 and clients[1].name ~= "null-ls" then
       return clients[1].name
     end
     for _, client in ipairs(clients) do
