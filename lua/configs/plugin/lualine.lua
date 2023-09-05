@@ -36,6 +36,14 @@ local conditions = {
   end,
 }
 
+---@param name string
+local function not_proxy_lsp(name)
+  if name == "null-ls" or name == "efm" then
+    return false
+  end
+  return true
+end
+
 local nvim_navic = {
   function()
     return navic.get_location()
@@ -95,12 +103,12 @@ local lsp_status = {
     if next(clients) == nil then
       return msg
     end
-    if #clients == 1 and clients[1].name ~= "null-ls" then
+    if #clients == 1 and not_proxy_lsp(clients[1].name) then
       return clients[1].name
     end
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and client.name ~= "null-ls" then
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and not_proxy_lsp(client.name) then
         return client.name
       end
     end
