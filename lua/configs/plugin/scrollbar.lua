@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-local colors = require("onedark.colors")
-
 local opts = {
   show = true,
   show_in_active_only = false,
@@ -16,7 +14,7 @@ local opts = {
   throttle_ms = 100,
   handle = {
     text = " ",
-    color = colors.bg_highlight,
+    color = nil,
     color_nr = nil, -- cterm
     highlight = "CursorColumn",
     hide_if_all_visible = true, -- Hides handle if all lines are visible
@@ -35,7 +33,7 @@ local opts = {
       text = { "-", "=" },
       priority = 1,
       gui = nil,
-      color = colors.orange,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "Search",
@@ -44,7 +42,7 @@ local opts = {
       text = { "-", "=" },
       priority = 2,
       gui = nil,
-      color = colors.error,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "DiagnosticVirtualTextError",
@@ -53,7 +51,7 @@ local opts = {
       text = { "-", "=" },
       priority = 3,
       gui = nil,
-      color = colors.warning,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "DiagnosticVirtualTextWarn",
@@ -62,7 +60,7 @@ local opts = {
       text = { "-", "=" },
       priority = 4,
       gui = nil,
-      color = colors.info,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "DiagnosticVirtualTextInfo",
@@ -71,7 +69,7 @@ local opts = {
       text = { "-", "=" },
       priority = 5,
       gui = nil,
-      color = colors.hint,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "DiagnosticVirtualTextHint",
@@ -80,7 +78,7 @@ local opts = {
       text = { "-", "=" },
       priority = 6,
       gui = nil,
-      color = colors.purple,
+      color = nil,
       cterm = nil,
       color_nr = nil, -- cterm
       highlight = "Normal",
