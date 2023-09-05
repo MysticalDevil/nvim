@@ -74,16 +74,6 @@ return {
       require("configs.colorscheme.onedark")
     end,
   },
-  -- onedarkpro.nvim
-  --  Atom's iconic One Dark theme, for Neovim. Fully customisable, with Treesitter,
-  --  LSP semantic token support and a light variant
-  {
-    "olimorris/onedarkpro.nvim",
-    lazy = true,
-    config = function()
-      require("configs.colorscheme.onedarkpro")
-    end,
-  },
   -- tokyonight.nvim
   -- A clean, dark Neovim theme written in Lua
   {
