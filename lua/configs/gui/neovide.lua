@@ -1,18 +1,20 @@
 local utils = require("utils.setup")
 
-vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h10"
+vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h12"
 vim.g.remember_window_size = true
 vim.g.remember_window_position = true
 
-vim.cmd("let g:neovide_cursor_animation_length=0.13")
-vim.cmd("let g:neovide_cursor_trail_size=0.8")
+vim.g.neovide_cursor_animation_length = 0.13
+vim.g.neovide_cursor_trail_size = 0.8
 
 local function toggleFullscreen()
   if vim.g.neovide_fullscreen == false then
-    vim.cmd("let g:neovide_fullscreen=v:true")
+    vim.g.neovide_fullscreen = true
   else
-    vim.cmd("let g:neovide_fullscreen=v:false")
+    vim.g.neovide_fullscreen = false
   end
 end
 
-utils.keymap("n", "<F11>", toggleFullscreen())
+utils.keymap("n", "<F11>", function()
+  toggleFullscreen()
+end)
