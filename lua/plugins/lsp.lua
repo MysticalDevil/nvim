@@ -12,6 +12,7 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
       "mhartington/formatter.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
     },
   },
   {

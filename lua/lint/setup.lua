@@ -1,1 +1,1 @@
-require("lint.lint")
+require("lint.null-ls")

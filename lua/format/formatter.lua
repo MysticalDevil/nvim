@@ -16,9 +16,10 @@ local prettier_defaults = function()
     exe = "prettier",
     cwd = mason_binary,
     args = {
+      "--stdin-filepath",
+      util.escape_path(util.get_current_buffer_file_path()),
       "--single-quote",
       "--no-semi",
-      util.escape_path(util.get_current_buffer_file_path()),
     },
     stdin = true,
     try_node_modules = true,

@@ -7,6 +7,8 @@ end
 -- Union mason and null-ls
 local mason_null_ls = require("mason-null-ls")
 
+local utils = require("utils.setup")
+
 mason_null_ls.setup({
   ensure_installed = {
     -- Opt to list sources here, when available in mason.
@@ -17,6 +19,8 @@ mason_null_ls.setup({
 
 local formatting = null_ls.builtins.formatting
 local completion = null_ls.builtins.completion
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
   debug = false,
@@ -127,7 +131,16 @@ null_ls.setup({
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
   -- #{c}: code (if available)
-  on_attach = function(_)
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()']])
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          utils.async_formatting(bufnr)
+        end,
+      })
+    end
   end,
 })
