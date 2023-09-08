@@ -69,6 +69,9 @@ null_ls.setup({
     -- Shell
     -- cabal install ShellCheck
     diagnostics.shellcheck,
+    -- VimScript
+    -- pip install vim-vint
+    diagnostics.vint,
     -- ZSH
     -- builtin zsh
     diagnostics.zsh,
@@ -83,6 +86,7 @@ null_ls.setup({
     -- go install github.com/fatih/gomodifytags@latest
     code_actions.gomodifytags,
     -- ShellCheck
+    -- cabal install ShellCheck
     code_actions.shellcheck,
   },
   -- #{m}: message
