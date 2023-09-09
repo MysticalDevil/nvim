@@ -86,6 +86,25 @@ local opts = {
         conflict = "",
       },
     },
+    file_size = {
+      enabled = true,
+      required_width = 64, -- min width of window required to show this column
+    },
+    type = {
+      enabled = true,
+      required_width = 122, -- min width of window required to show this column
+    },
+    last_modified = {
+      enabled = true,
+      required_width = 88, -- min width of window required to show this column
+    },
+    created = {
+      enabled = true,
+      required_width = 110, -- min width of window required to show this column
+    },
+    symlink_target = {
+      enabled = false,
+    },
   },
   window = {
     position = "left",
@@ -180,7 +199,7 @@ local opts = {
     follow_current_file = false, -- This will find and focus the file in the active buffer every
     -- time the current file is changed while the tree is open.
     group_empty_dirs = false, -- when true, empty folders will be grouped together
-    hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+    hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
     -- in whatever position is specified in window.position
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position
