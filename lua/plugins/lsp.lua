@@ -12,7 +12,7 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
       "mhartington/formatter.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
   },
   {
@@ -26,7 +26,7 @@ return {
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
       "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
   },
   -- neodev.nvim
@@ -76,7 +76,7 @@ return {
   -- null-ls.nvim
   -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   -- formatter.nvim
