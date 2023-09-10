@@ -4,6 +4,14 @@ return {
   "folke/lazy.nvim",
   --
   --------------------------------------- Common plugins ----------------------------------------
+  -- auto-save.nvim
+  -- Automatically save your changes in NeoVim
+  {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("configs.plugin.auto-save")
+    end,
+  },
   -- beacon.nvim
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
