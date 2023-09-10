@@ -119,16 +119,18 @@ return {
   -- Set of preconfigured snippets for different languages.
   { "rafamadriz/friendly-snippets", lazy = true },
   -- Complete Source
-  { "hrsh7th/cmp-buffer", lazy = true }, -- { name = 'buffer' }
-  { "hrsh7th/cmp-calc", lazy = true }, -- { name = 'calc' }
-  { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" }, -- { name = 'cmdline' }
-  { "hrsh7th/cmp-nvim-lsp", lazy = true }, -- { name = nvim_lsp p
-  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true }, -- { name = 'nvim_lsp_signature_help' }
-  { "hrsh7th/cmp-path", lazy = true }, -- { name = 'path' }
-  { "hrsh7th/cmp-vsnip", lazy = true },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-calc", lazy = true },
+  { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
+  { "hrsh7th/cmp-nvim-lua", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-emoji", lazy = true },
   { "PaterJason/cmp-conjure", lazy = true },
   { "saadparwaiz1/cmp_luasnip", lazy = true },
   { "petertriho/cmp-git", lazy = true },
+  { "ray-x/cmp-treesitter", lazy = true },
 
   ----------------- UI Import -----------------
   -- lspkind.nvim
