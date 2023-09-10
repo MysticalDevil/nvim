@@ -199,7 +199,13 @@ return {
   },
   -- nvim-bqf
   -- Better quickfix window in Neovim, polish old quickfix window.
-  {},
+  {
+    "kevinhwang91/nvim-bqf",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("configs.plugin.nvim-bqf")
+    end,
+  },
   -- nvim-colorizer.lua
   -- The fastest Neovim colorizer
   {
