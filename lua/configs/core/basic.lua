@@ -9,7 +9,7 @@ vim.wo.number = true
 vim.wo.relativenumber = false
 -- hightlight the row
 vim.wo.cursorline = true
--- show lwft icon guide bar
+-- show left icon guide bar
 vim.wo.signcolumn = "yes"
 -- the reference line on the right indicates the recommended length of the code
 vim.wo.colorcolumn = "130"

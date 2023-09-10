@@ -20,7 +20,7 @@ mason_null_ls.setup({
 local formatting = null_ls.builtins.formatting
 local completion = null_ls.builtins.completion
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local lspFormatting = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
 null_ls.setup({
   debug = false,
@@ -133,9 +133,9 @@ null_ls.setup({
   -- #{c}: code (if available)
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_clear_autocmds({ group = lspFormatting, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePost", {
-        group = augroup,
+        group = lspFormatting,
         buffer = bufnr,
         callback = function()
           utils.async_formatting(bufnr)

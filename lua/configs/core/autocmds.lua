@@ -1,9 +1,4 @@
-local commonAutoGroup = vim.api.nvim_create_augroup("commonAutoGroup", {
-  clear = true,
-})
-local lspAutoGroup = vim.api.nvim_create_augroup("lspAutoGroup", {
-  clear = true,
-})
+local commonAutoGroup = vim.api.nvim_create_augroup("commonAutoGroup", { clear = true })
 
 local autocmd = vim.api.nvim_create_autocmd
 
