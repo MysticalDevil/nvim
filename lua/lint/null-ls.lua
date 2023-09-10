@@ -85,6 +85,9 @@ null_ls.setup({
     -- GoModifyTags
     -- go install github.com/fatih/gomodifytags@latest
     code_actions.gomodifytags,
+    -- Impl
+    -- go install github.com/josharian/impl@latest
+    code_actions.impl,
     -- ShellCheck
     -- cabal install ShellCheck
     code_actions.shellcheck,

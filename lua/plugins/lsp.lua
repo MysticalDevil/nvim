@@ -245,6 +245,17 @@ return {
     end,
   },
 
+  -- package-info.nvim
+  --
+  {
+    "vuki656/package-info.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("configs.plugin.package-info")
+    end,
+    event = "BufRead package.json",
+  },
+
   -- hashell-tools.nvim
   -- Supercharge your Haskell experience in neovim!
   {

@@ -62,7 +62,6 @@ local opts = {
       end,
     },
     { name = "path" },
-    { name = "luasnip" },
     { name = "nvim_lua" },
     { name = "buffer" },
     { name = "calc" },
