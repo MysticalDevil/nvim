@@ -209,7 +209,6 @@ return {
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
-
   -- clangd_extensions.nvim
   -- Clangd's off-spec features for neovim's LSP client.
   {
@@ -217,6 +216,16 @@ return {
     ft = { "c", "cpp" },
     config = function()
       require("configs.plugin.clangd_extensions")
+    end,
+  },
+  -- cmake-tools.nvim
+  -- CMake integration in Neovim
+  {
+    "Civitasv/cmake-tools.nvim",
+    event = "BufRead CMakeLists.txt",
+    ft = { "cmake" },
+    config = function()
+      require("configs.plugin.cmake-tools")
     end,
   },
 
@@ -244,7 +253,6 @@ return {
       require("configs.plugin.typescript-tools")
     end,
   },
-
   -- package-info.nvim
   --
   {

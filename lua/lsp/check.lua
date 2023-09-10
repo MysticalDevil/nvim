@@ -23,7 +23,7 @@ if util.check_os() == "Linux" then
   table.insert(required_npm, "bashls")
 end
 
-local required_cargo = { "fennel_language_server" }
+local required_cargo = { "fennel_language_server", "neocmake" }
 
 local required_go = { "efm", "gopls" }
 
