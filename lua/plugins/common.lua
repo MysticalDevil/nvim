@@ -216,6 +216,15 @@ return {
       require("configs.plugin.hlslens")
     end,
   },
+  -- nvim-jqx
+  -- Populate the quickfix with json entries
+  {
+    "gennaro-tedesco/nvim-jqx",
+    ft = { "json", "yaml" },
+    config = function()
+      require("configs.plugin.jqx")
+    end,
+  },
   -- nvim-neoclip
   -- Clipboard manager neovim plugin with telescope integration
   {
@@ -337,6 +346,21 @@ return {
     config = function()
       require("configs.plugin.overseer")
     end,
+    cmd = {
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction ",
+      "OverseerClearCache",
+    },
   },
   -- painefer-rust
   -- A Rust port of parinfer.
@@ -372,6 +396,25 @@ return {
     config = function()
       require("configs.plugin.rest")
     end,
+  },
+  -- scope.nvim
+  -- Revolutionize Your Neovim Tab Workflow: Introducing Enhanced Tab Scoping!
+  {
+    "tiagovla/scope.nvim",
+    config = function()
+      require("configs.plugin.scope")
+    end,
+  },
+  -- smarkcolumn.nvim
+  -- A Neovim plugin hiding your colorcolumn when unneeded.
+  {
+    "m4xshen/smartcolumn.nvim",
+    opts = {
+      colorcolumn = "130",
+      disabled_filetypes = { "help", "text", "markdown" },
+      custom_colorcolumn = {},
+      scope = "file",
+    },
   },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code

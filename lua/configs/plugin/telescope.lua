@@ -9,7 +9,7 @@ local utils = require("utils.setup")
 local trouble = require("trouble.providers.telescope")
 local builtin = require("telescope.builtin")
 
-local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project" }
+local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project", "scope" }
 
 for _, value in pairs(extensions_list) do
   telescope.load_extension(value)

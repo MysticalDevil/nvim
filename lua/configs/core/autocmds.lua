@@ -10,25 +10,17 @@ autocmd("TermOpen", {
   command = "startinsert",
 })
 
--- Newlines with `o` do not continue comments
 autocmd("BufEnter", {
   group = commonAutoGroup,
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - "o" + "r"
   end,
+  desc = "newlines with `o` do not continue comments",
 })
 
--- Auto lint after writing to the file
--- autocmd("BufWritePost", {
---   group = lspAutoGroup,
---   callback = function()
---     require("lint").try_lint()
---   end,
--- })
-
--- Auto enable parinfer when edit lisp file
 autocmd({ "BufEnter", "BufWinEnter" }, {
   group = "commonAutoGroup",
   pattern = lispFiletypes,
   command = "ParinferOn",
+  desc = "Auto enable brackets matching for lisp files",
 })

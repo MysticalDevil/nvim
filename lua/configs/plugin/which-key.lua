@@ -146,6 +146,18 @@ which_key.register({
       },
       o = { "<CMD>SymbolsOutline<CR>", "Open symbols outlines tree" },
     },
+    -----------------------------------------------------------
+    -- tab split page shortcut key
+    -----------------------------------------------------------
+    t = {
+      name = "+tab",
+      s = { "<CMD>tab split<CR>", "Split window use tab" },
+      h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
+      l = { "<CMD>tabnext<CR>", "Switch to next tab" },
+      j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
+      k = { "<CMD>tablast<CR>", "Switch to last tab" },
+      c = { "<CMD>tabclose<CR>", "Close tab" },
+    },
     d = {
       name = "+debug",
       d = { "<CMD>RustDebuggables<CR>", "Start debugger" },
@@ -279,18 +291,5 @@ which_key.register({
     j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
     k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
     ["="] = { "<C-w>=", "Make split windows equal in size" },
-  },
-
-  -----------------------------------------------------------
-  -- tab split page shortcut key
-  -----------------------------------------------------------
-  t = {
-    name = "+tab",
-    s = { "<CMD>tab split<CR>", "Split window use tab" },
-    h = { "<CMD>tabprev<CR>", "Switch to previous tab" },
-    l = { "<CMD>tabnext<CR>", "Switch to next tab" },
-    j = { "<CMD>tabfirst<CR>", "Switch to first tab" },
-    k = { "<CMD>tablast<CR>", "Switch to last tab" },
-    c = { "<CMD>tabclose<CR>", "Close tab" },
   },
 })

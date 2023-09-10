@@ -254,7 +254,7 @@ return {
     end,
   },
   -- package-info.nvim
-  --
+  -- All the npm/yarn/pnpm commands I don't want to type
   {
     "vuki656/package-info.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
