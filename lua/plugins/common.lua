@@ -67,6 +67,15 @@ return {
   -- dressing.nvim
   -- Neovim plugin to improve the default vim.ui interfaces
   { "stevearc/dressing.nvim", event = "VeryLazy" },
+  -- flash.nvim
+  -- Navigate your code with search labels, enhanced character motions and Treesitter integration
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("configs.plugin.flash")
+    end,
+  },
   -- glow.nvim
   -- A markdown preview directly in your neovim.
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
@@ -86,6 +95,7 @@ return {
     config = function()
       require("configs.plugin.hydra")
     end,
+    lazy = true,
   },
   -- hypersonic.nvim
   -- A Neovim plugin that provides an explanation for regular expressions.
@@ -101,17 +111,20 @@ return {
   -- This is a Neovim plugin that helps you pick Nerd Font Icons, Symbols & Emojis
   {
     "ziontee113/icon-picker.nvim",
+    cmd = {
+      "IconPickerYank",
+      "IconPickerInsert",
+      "IconPickerNormal",
+    },
     config = function()
       require("configs.plugin.icon-picker")
     end,
   },
-  -- impatient.nvim
-  -- Improve startup time for Neovim
-  "lewis6991/impatient.nvim",
   -- inc-rename.nvim
   -- Incremental LSP renaming based on Neovim's command-preview feature
   {
     "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
     config = function()
       require("configs.plugin.inc-rename")
     end,
@@ -140,6 +153,7 @@ return {
   -- A better annotation generator
   {
     "danymat/neogen",
+    cmd = "Neogen",
     config = function()
       require("configs.plugin.neogen")
     end,
@@ -201,6 +215,8 @@ return {
   -- Better quickfix window in Neovim, polish old quickfix window.
   {
     "kevinhwang91/nvim-bqf",
+    ft = { "qf" },
+    event = "QuickFixCmdPre",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("configs.plugin.nvim-bqf")
@@ -210,6 +226,12 @@ return {
   -- The fastest Neovim colorizer
   {
     "norcalli/nvim-colorizer.lua",
+    cmd = {
+      "ColorizerAttachToBuffer",
+      "ColorizerDetachFromBuffer",
+      "ColorizerReloadAllBuffers",
+      "ColorizerToggle",
+    },
     config = function()
       require("configs.plugin.nvim-colorizer")
     end,
@@ -294,6 +316,7 @@ return {
   -- A Neovim wrapper for running tests
   {
     "klen/nvim-test",
+    cmd = { "TestSuite", "TestFile", "TestEdit", "TestNearest", "TestLast", "TestVisit", "TestInfo" },
     config = function()
       require("configs.plugin.nvim-test")
     end,
@@ -402,6 +425,7 @@ return {
   -- A fast Neovim http client written in Lua
   {
     "rest-nvim/rest.nvim",
+    ft = { "http", "json" },
     config = function()
       require("configs.plugin.rest")
     end,
@@ -430,6 +454,7 @@ return {
   {
     "michaelb/sniprun",
     build = "bash ./install.sh",
+    cmd = { "SnipRun" },
     config = function()
       require("configs.plugin.sniprun")
     end,
@@ -524,7 +549,7 @@ return {
   -- quickfix and location list to help you solve all the trouble your code is causing
   {
     "folke/trouble.nvim",
-    cmd = "TroubleToggle",
+    cmd = { "TroubleToggle", "Trouble", "TroubleRefresh", "TroubleClose" },
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("configs.plugin.trouble")
@@ -534,6 +559,7 @@ return {
   -- Dims inactive portions of the code you're editing using TreeSitter.
   {
     "folke/twilight.nvim",
+    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
     config = function()
       require("configs.plugin.twilight")
     end,
@@ -542,6 +568,7 @@ return {
   -- Neovim plugin for viewing all the URLs in a buffer
   {
     "axieax/urlview.nvim",
+    cmd = "UrlView",
     dependencies = "nvim-telescope/telescope.nvim",
     config = function()
       require("configs.plugin.urlview")

@@ -13,6 +13,7 @@ return {
   -- Git integration for buffers
   {
     "lewis6991/gitsigns.nvim",
+    cmd = "Gitsigns",
     config = function()
       require("configs.plugin.gitsigns")
     end,
@@ -21,6 +22,7 @@ return {
   -- magit for neovim
   {
     "NeogitOrg/neogit",
+    cmd = "Neogit",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",

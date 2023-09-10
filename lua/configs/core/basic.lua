@@ -88,3 +88,6 @@ vim.o.foldlevel = 99
 vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+
+-- improve startup time for neovim
+vim.loader.enable()

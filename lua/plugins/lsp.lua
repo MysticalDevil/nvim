@@ -376,18 +376,25 @@ return {
     end,
     tag = "legacy",
   },
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("configs.plugin.flash")
-    end,
-  },
   -- aerial.nvim
   -- Neovim plugin for a code outline window
   {
     "stevearc/aerial.nvim",
-    cmd = "AerialToggle",
+    cmd = {
+      "AerialToggle",
+      "AeriialGo",
+      "AerialInfo",
+      "AerialOpen",
+      "AerialClose",
+      "AerialOpenAll",
+      "AerialCloseAll",
+      "AerialNext",
+      "AerialPrev",
+      "AerialInfo",
+      "AerialNavOpen",
+      "AerialNavClose",
+      "AerialNavToggle",
+    },
     config = function()
       require("configs.plugin.aerial")
     end,
@@ -396,6 +403,7 @@ return {
   -- A simple popup display that provides breadcrumbs feature using LSP server
   {
     "SmiteshP/nvim-navbuddy",
+    cmd = "Navbuddy",
     dependencies = {
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim",
