@@ -210,6 +210,16 @@ return {
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 
+  -- clangd_extensions.nvim
+  -- Clangd's off-spec features for neovim's LSP client.
+  {
+    "p00f/clangd_extensions.nvim",
+    ft = { "c", "cpp" },
+    config = function()
+      require("configs.plugin.clangd_extensions")
+    end,
+  },
+
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
   {
