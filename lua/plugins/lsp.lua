@@ -331,6 +331,7 @@ return {
   -- and methods to debug individual test methods or classes.
   {
     "mfussenegger/nvim-dap-python",
+    ft = { "python" },
     dependencies = { "mfussenegger/nvim-dap" },
   },
 
@@ -338,6 +339,7 @@ return {
   -- nvim-dap adapter for vscode-js-debug
   {
     "mxsdev/nvim-dap-vscode-js",
+    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
       require("dap.nvim-dap.config.vscode-js")
@@ -348,6 +350,7 @@ return {
   -- launching go debugger (delve) and debugging individual tests
   {
     "leoluz/nvim-dap-go",
+    ft = { "go", "gomod" },
     dependencies = { "mfussenegger/nvim-dap" },
   },
 
