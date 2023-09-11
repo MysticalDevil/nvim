@@ -480,12 +480,9 @@ return {
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
     "m4xshen/smartcolumn.nvim",
-    opts = {
-      colorcolumn = "130",
-      disabled_filetypes = { "help", "text", "markdown" },
-      custom_colorcolumn = {},
-      scope = "file",
-    },
+    config = function()
+      require("configs.plugin.smartcolumn")
+    end,
   },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code
