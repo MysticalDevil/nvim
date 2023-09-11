@@ -5,7 +5,7 @@ if not status then
 end
 
 local opts = {
-  -- black space
+  show_end_of_line = true,
   space_char_blankline = " ",
   -- judge context
   show_current_context = true,

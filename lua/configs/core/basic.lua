@@ -66,8 +66,9 @@ vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
 -- show invisible characters
-vim.o.list = true
-vim.o.listchars = "space:·"
+vim.opt.list = true
+vim.opt.listchars:append("space:·")
+vim.opt.listchars:append("eol:↴")
 -- completion enhancement
 vim.o.wildmenu = true
 -- don't pass message to |ins-completion menu|
