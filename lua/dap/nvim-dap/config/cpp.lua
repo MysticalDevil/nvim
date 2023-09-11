@@ -2,14 +2,24 @@ local M = {}
 
 function M.setup()
   local dap = require("dap")
+
   dap.adapters.cppdbg = {
     id = "cppdbg",
     type = "executable",
     -- change to your path
     -- if can not find OpenDebugAD7, please install cpptools by mason
-    command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
+    command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
   }
-  dap.configurations.cpp = {
+  dap.adapters.codelldb = {
+    type = "server",
+    port = "${port}",
+    executable = {
+      command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+      args = { "--port", "${port}" },
+    },
+  }
+
+  local cpptools_config = {
     -- launch exe
     {
       name = "Launch file",
@@ -22,8 +32,8 @@ function M.setup()
       stopOnEntry = true,
       setupCommands = {
         {
-          description = "enable pretty printing",
           text = "-enable-pretty-printing",
+          description = "enable pretty printing",
           ignoreFailures = false,
         },
       },
@@ -40,8 +50,8 @@ function M.setup()
       cwd = "${workspaceFolder}",
       setupCommands = {
         {
-          description = "enable pretty printing",
           text = "-enable-pretty-printing",
+          description = "enable pretty printing",
           ignoreFailures = false,
         },
       },
@@ -58,18 +68,32 @@ function M.setup()
       program = function()
         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
       end,
-      -- setupCommands = {
-      -- {
-      -- text = '-enable-pretty-printing',
-      -- description = 'enable pretty printing',
-      -- ignoreFailures = false
-      -- },
-      -- },
+      setupCommands = {
+        {
+          text = "-enable-pretty-printing",
+          description = "enable pretty printing",
+          ignoreFailures = false,
+        },
+      },
+    },
+  }
+
+  local codelldb_config = {
+    {
+      name = "Launch File",
+      type = "codelldb",
+      request = "launch",
+      program = function()
+        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      end,
+      cwd = "${workspaceFolder}",
+      stopOnEntry = false,
     },
   }
 
   -- setup other language
-  dap.configurations.c = dap.configurations.cpp
+  dap.configurations.c = codelldb_config
+  dap.configurations.cpp = codelldb_config
 end
 
 return M

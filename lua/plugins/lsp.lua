@@ -317,13 +317,20 @@ return {
   -- nvim-dap
   -- Debug Adapter Protocol client implementation for Neovim
   { "mfussenegger/nvim-dap", lazy = true },
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
-  },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
   {
     "theHamsta/nvim-dap-virtual-text",
-    dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+    },
+  },
+  {
+    "LiadOz/nvim-dap-repl-highlights",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "mfussenegger/nvim-dap",
+    },
   },
 
   -- nvim-dap-python
