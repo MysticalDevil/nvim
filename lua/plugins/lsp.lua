@@ -433,6 +433,22 @@ return {
     config = function()
       require("configs.plugin.navic")
     end,
+    lazy = true,
+  },
+
+  -- barbecue.nvim
+  -- A VS Code like winbar for Neovim
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    config = function()
+      require("configs.plugin.barbecue")
+    end,
   },
 
   -- lsp_lines.nvim

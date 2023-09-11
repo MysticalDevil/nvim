@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-local navic = require("nvim-navic")
-
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
@@ -36,6 +34,59 @@ local conditions = {
   end,
 }
 
+local opts = {
+  options = {
+    theme = "auto",
+    component_separators = { left = "|", right = "|" },
+    -- https://github.com/ryanoasis/powerline-extra-symbols
+    section_separators = { left = "", right = "" },
+    globalstatus = true,
+    disabled_filetypes = {
+      statusline = { "alpha" },
+      winbar = {
+        "alpha",
+        "aerial",
+        "neo-tree",
+        "nerdtree",
+        "NvimTree",
+        "dashboard",
+        "Trouble",
+        "DiffViewFiles",
+        "dapui_stacks",
+        "dapui_scopes",
+        "dapui_watches",
+        "dapui_breakpoints",
+        "dapui_console",
+        "dap-repl",
+      },
+    },
+  },
+  extensions = { "toggleterm", "aerial" },
+  sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  inactive_sections = {
+    -- these are to remove the defaults
+    lualine_a = {},
+    lualine_b = {},
+    lualine_y = {},
+    lualine_z = {},
+    lualine_c = {},
+    lualine_x = {},
+  },
+}
+
+---@param component string|function|table
+---@param locate string
+local function ins_section(component, locate)
+  table.insert(opts.sections[locate], component)
+end
+
 ---@param name string
 local function not_proxy_lsp(name)
   if name == "null-ls" or name == "efm" then
@@ -44,13 +95,22 @@ local function not_proxy_lsp(name)
   return true
 end
 
-local nvim_navic = {
-  function()
-    return navic.get_location()
-  end,
-  cond = function()
-    return navic.is_available()
-  end,
+local branch = {
+  "branch",
+  icon = "",
+  color = { fg = colors.violet, gui = "bold" },
+}
+
+local diff = {
+  "diff",
+  -- Is it me or the symbol for modified us really weird
+  symbols = { added = " ", modified = " ", removed = " " },
+  diff_color = {
+    added = { fg = colors.green },
+    modified = { fg = colors.orange },
+    removed = { fg = colors.red },
+  },
+  cond = conditions.hide_in_width,
 }
 
 local diagnostics = {
@@ -127,77 +187,26 @@ local lsp_status = {
     return msg
   end,
   icon = " LSP:",
-  color = { fg = "#a0a0a0", gui = "bold" },
+  color = { fg = colors.yellow, gui = "bold" },
 }
 
-local branch = {
-  "branch",
-  icon = "",
-  color = { fg = colors.violet, gui = "bold" },
-}
+ins_section("mode", "lualine_a")
 
-local diff = {
-  "diff",
-  -- Is it me or the symbol for modified us really weird
-  symbols = { added = " ", modified = " ", removed = " " },
-  diff_color = {
-    added = { fg = colors.green },
-    modified = { fg = colors.orange },
-    removed = { fg = colors.red },
-  },
-  cond = conditions.hide_in_width,
-}
+ins_section(branch, "lualine_b")
+ins_section(diff, "lualine_b")
 
-local opts = {
-  options = {
-    theme = "auto",
-    component_separators = { left = "|", right = "|" },
-    -- https://github.com/ryanoasis/powerline-extra-symbols
-    section_separators = { left = "", right = "" },
-    globalstatus = true,
-    disabled_filetypes = {
-      statusline = { "alpha" },
-      winbar = {
-        "alpha",
-        "aerial",
-        "neo-tree",
-        "nerdtree",
-        "NvimTree",
-        "dashboard",
-        "Trouble",
-        "DiffViewFiles",
-        "dapui_stacks",
-        "dapui_scopes",
-        "dapui_watches",
-        "dapui_breakpoints",
-        "dapui_console",
-        "dap-repl",
-      },
-    },
-  },
-  extensions = { "toggleterm", "aerial" },
-  sections = {
-    lualine_a = { "mode" },
-    lualine_b = { branch, diff },
-    lualine_c = { filename },
-    lualine_x = {
-      "filesize",
-      fileformat,
-      "encoding",
-      "filetype",
-    },
-    lualine_y = { "progress" },
-    lualine_z = { "location" },
-  },
-  winbar = {
-    lualine_a = {},
-    lualine_b = { diagnostics },
-    lualine_c = { nvim_navic },
-    lualine_x = { lsp_status, "selectioncount" },
-    lualine_y = {},
-    lualine_z = {},
-  },
-}
+ins_section(filename, "lualine_c")
+ins_section(lsp_status, "lualine_c")
+
+ins_section(diagnostics, "lualine_x")
+ins_section("filesize", "lualine_x")
+ins_section(fileformat, "lualine_x")
+ins_section("encoding", "lualine_x")
+ins_section("filetype", "lualine_x")
+
+ins_section("process", "lualine_y")
+
+ins_section("location", "lualine_z")
 
 lualine.setup(opts)
 

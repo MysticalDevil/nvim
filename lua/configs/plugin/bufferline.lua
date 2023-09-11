@@ -32,18 +32,18 @@ local opts = {
       reveal = { "close" },
     },
     -- use neovim built-in LSP
-    diagnostics = "nvim_lsp",
+    -- diagnostics = "nvim_lsp",
     -- optional, show LSP diagnostic icon
     ---@diagnostic disable-next-line: unused-local
     -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
-    diagnostics_indicator = function(_, _, diagnostics_dict, _)
-      local s = ""
-      for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and "" or (e == "warning" and "" or "")
-        s = s .. n .. sym
-      end
-      return s
-    end,
+    -- diagnostics_indicator = function(_, _, diagnostics_dict, _)
+    --   local s = ""
+    --   for e, n in pairs(diagnostics_dict) do
+    --     local sym = e == "error" and "" or (e == "warning" and "" or "")
+    --     s = s .. n .. sym
+    --   end
+    --   return s
+    -- end,
     custom_areas = {
       right = function()
         local result = {}
