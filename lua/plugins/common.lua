@@ -100,7 +100,7 @@ return {
   },
   -- hop.nvim
   -- Neovim motions on speed!
-  { "phaazon/hop.nvim", lazy = true },
+  { "phaazon/hop.nvim", lazy = true, enabled = false },
   -- hydra.nvim
   -- Create custom submodes and menusCreate custom submodes and menus
   {
@@ -162,7 +162,19 @@ return {
   },
   -- leap.nvim
   -- Neovim's answer to the mouse
-  { "ggandor/leap.nvim", lazy = true },
+  { "ggandor/leap.nvim", lazy = true, enabled = false },
+  -- legendary.nvim
+  -- A legend for your keymaps, commands, and autocmds, with which-key.nvim integration
+  {
+    "mrjones2014/legendary.nvim",
+    priority = 10000,
+    lazy = false,
+    dependencies = { "kkharji/sqlite.lua" },
+    config = function()
+      require("configs.plugin.legendary")
+    end,
+    enabled = false,
+  },
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
