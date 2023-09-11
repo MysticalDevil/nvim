@@ -416,7 +416,6 @@ return {
   -- A simple popup display that provides breadcrumbs feature using LSP server
   {
     "SmiteshP/nvim-navbuddy",
-    cmd = "Navbuddy",
     dependencies = {
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim",
