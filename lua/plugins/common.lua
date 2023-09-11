@@ -42,6 +42,9 @@ return {
   {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton",
+    config = function()
+      vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+    end,
   },
   -- dashboard-nvim
   -- Fancy and Blazing Fast start screen plugin of neovim
@@ -95,6 +98,9 @@ return {
       require("configs.plugin.hlargs")
     end,
   },
+  -- hop.nvim
+  -- Neovim motions on speed!
+  { "phaazon/hop.nvim", lazy = true },
   -- hydra.nvim
   -- Create custom submodes and menusCreate custom submodes and menus
   {
@@ -144,6 +150,19 @@ return {
       require("configs.plugin.indent-blankline")
     end,
   },
+  -- iron.nvim
+  -- Interactive Repl Over Neovim
+  {
+    "Vigemus/iron.nvim",
+    cmd = "IronRepl",
+    version = "*",
+    config = function()
+      require("configs.plugin.iron")
+    end,
+  },
+  -- leap.nvim
+  -- Neovim's answer to the mouse
+  { "ggandor/leap.nvim", lazy = true },
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
