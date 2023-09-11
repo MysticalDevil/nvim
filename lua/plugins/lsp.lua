@@ -331,6 +331,9 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "mfussenegger/nvim-dap",
     },
+    config = function()
+      require("nvim-dap-repl-highlights").setup()
+    end,
   },
 
   -- nvim-dap-python
