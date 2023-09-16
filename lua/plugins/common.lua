@@ -65,6 +65,13 @@ return {
       require("configs.plugin.dial")
     end,
   },
+  {
+    "chipsenkbeil/distant.nvim",
+    branch = "v0.3",
+    config = function()
+      require("distant"):setup()
+    end,
+  },
   -- dotenv.nvim
   -- A minimalist .env support for Neovim
   {
