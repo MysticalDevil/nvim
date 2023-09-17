@@ -46,6 +46,7 @@ local servers = {
   -- tsserver = require("lsp.config.tsserver"),
   taplo = require("lsp.config.taplo"),
   yamlls = require("lsp.config.yamlls"),
+  zls = require("lsp.config.zls"),
 }
 
 -- Configure the language server. The on_setup function must be implemented in the configuration file.

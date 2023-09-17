@@ -5,6 +5,7 @@ local servers_list = {
   "clojure_lsp",
   "lua_ls",
   "taplo",
+  "zls",
 }
 
 local required_npm = {
