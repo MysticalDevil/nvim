@@ -45,6 +45,7 @@ local servers = {
   solargraph = require("lsp.config.solargraph"),
   -- tsserver = require("lsp.config.tsserver"),
   taplo = require("lsp.config.taplo"),
+  vimls = require("lsp.config.vimls"),
   yamlls = require("lsp.config.yamlls"),
   zls = require("lsp.config.zls"),
 }
