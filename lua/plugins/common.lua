@@ -144,7 +144,7 @@ return {
   -- Incremental LSP renaming based on Neovim's command-preview feature
   {
     "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
+    event = "LspAttach",
     config = function()
       require("configs.plugin.inc-rename")
     end,
