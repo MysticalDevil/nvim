@@ -1,4 +1,4 @@
-local status, ls = pcall(require, "luasnip")
+local status, luasnip = pcall(require, "luasnip")
 if not status then
   return
 end
@@ -16,7 +16,7 @@ require("luasnip.loaders.from_vscode").load({
 -- https://github.com/rafamadriz/friendly-snippets/
 require("luasnip.loaders.from_vscode").lazy_load()
 
-ls.config.set_config({
+luasnip.config.set_config({
   history = true,
   update_events = "TextChanged, TextChangedI",
   enable_autosnippets = true,
@@ -30,25 +30,25 @@ ls.config.set_config({
 })
 
 vim.keymap.set({ "i", "s" }, "<C-l>", function()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jumpable()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jumpable()
   end
 end)
 
 vim.keymap.set({ "i", "s" }, "<C-h>", function()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
   end
 end)
 
 vim.keymap.set({ "i", "s" }, "<C-j>", function()
-  if ls.choice_active() then
-    ls.choice_active(1)
+  if luasnip.choice_active() then
+    luasnip.choice_active(1)
   end
 end)
 
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
-  if ls.choice_active() then
-    ls.change_choice(-1)
+  if luasnip.choice_active() then
+    luasnip.change_choice(-1)
   end
 end)

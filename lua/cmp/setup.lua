@@ -7,10 +7,7 @@ local luasnip = require("luasnip")
 
 local util = require("cmp.util")
 
--- local has_word_before = function()
---   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
---   return col ~= 0 and vim.api.nvim_buf_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
--- end
+require("cmp.luasnip")
 
 local mapping = {
   -- completion appears
@@ -50,7 +47,6 @@ local opts = {
   },
   mapping = mapping,
   sources = cmp.config.sources({
-    { name = "luasnip" },
     {
       name = "nvim_lsp",
       entry_filter = function(entry, ctx)
@@ -61,13 +57,15 @@ local opts = {
         return true
       end,
     },
-    { name = "path" },
+    { name = "luasnip", option = { use_show_condition = false } },
     { name = "nvim_lua" },
     { name = "buffer" },
+    { name = "path" },
     { name = "calc" },
     { name = "emoji" },
     { name = "treesitter" },
     { name = "crates" },
+    { name = "npm", keyword_length = 4 },
     { name = "conjure" },
   }),
 
@@ -82,6 +80,15 @@ cmp.setup.cmdline({ "/", "?" }, {
   sources = {
     { name = "buffer" },
   },
+})
+
+---@diagnostic disable-next-line
+cmp.setup.cmdline("/", {
+  sources = cmp.config.sources({
+    { name = "nvim_lsp_document_symbol" },
+  }, {
+    { name = "buffer" },
+  }),
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -104,5 +111,3 @@ cmp.setup.filetype("gitcommit", {
     { name = "buffer" },
   }),
 })
-
-require("cmp.luasnip")

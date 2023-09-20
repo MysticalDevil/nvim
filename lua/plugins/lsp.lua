@@ -105,32 +105,47 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-calc",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-emoji",
+      "PaterJason/cmp-conjure",
+      "saadparwaiz1/cmp_luasnip",
+      "petertriho/cmp-git",
+      "ray-x/cmp-treesitter",
+      "David-Kunz/cmp-npm",
     },
   },
   -- LuaSnip
   -- Snippet Engine for Neovim written in Lua.
   {
     "L3MON4D3/LuaSnip",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "saadparwaiz1/cmp_luasnip",
+    },
     version = "2.*",
     build = "make install_jsregexp",
   },
   -- friendly-snippets
   -- Set of preconfigured snippets for different languages.
-  { "rafamadriz/friendly-snippets", lazy = true },
+  { "rafamadriz/friendly-snippets" },
   -- Complete Source
-  { "hrsh7th/cmp-buffer", lazy = true },
-  { "hrsh7th/cmp-calc", lazy = true },
   { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
-  { "hrsh7th/cmp-nvim-lsp", lazy = true },
-  { "hrsh7th/cmp-nvim-lsp-signature-help", lazy = true },
-  { "hrsh7th/cmp-nvim-lua", lazy = true },
-  { "hrsh7th/cmp-path", lazy = true },
-  { "hrsh7th/cmp-emoji", lazy = true },
-  { "PaterJason/cmp-conjure", lazy = true },
-  { "saadparwaiz1/cmp_luasnip", lazy = true },
-  { "petertriho/cmp-git", lazy = true },
-  { "ray-x/cmp-treesitter", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
+  -- cmp-npm
+  -- -- An additional source for nvim-cmp to autocomplete packages and its versions
+  {
+    "David-Kunz/cmp-npm",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    ft = "json",
+    config = function()
+      require("cmp-npm").setup({})
+    end,
+  },
 
   ----------------- UI Import -----------------
   -- lspkind.nvim
@@ -313,6 +328,28 @@ return {
       vim.g["conjure#debug"] = true
     end,
   },
+
+  -- nvim-jdtls
+  -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.l
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+    config = function()
+      require("configs.plugin.jdtls")
+    end,
+  },
+
+  -- nvim-metals
+  -- A Metals plugin for Neovim
+  {
+    "scalameta/nvim-metals",
+    ft = { "scala", "sbt" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("configs.plugin.metals")
+    end,
+  },
+
   ----------------------------------- Debug Adapter Protocol ------------------------------------
   -- nvim-dap
   -- Debug Adapter Protocol client implementation for Neovim
