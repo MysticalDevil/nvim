@@ -23,7 +23,6 @@ null_ls.setup({
   sources = {
     -- Diagnostics  -----------------------------------------------------------
     -- C/C++
-    -- pacman -S cppcheck
     diagnostics.cppcheck,
     -- ECMAScript
     -- npm install -g eslint_d
@@ -49,21 +48,15 @@ null_ls.setup({
     diagnostics.checkstyle.with({
       extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
     }),
+    -- Kotlin
+    diagnostics.ktlint,
     -- Python
     -- pip install ruff
     diagnostics.ruff,
     -- Lua
     -- luarocks install luacheck
-    -- diagnostics.luacheck,
-    -- PHP
-    -- composer require --dev phpstan/phpstan
-    diagnostics.phpstan,
-    -- Protocol Bufer
-    -- go install github.com/bufbuild/buf/cmd/buf@@latest
-    diagnostics.buf,
+    diagnostics.luacheck,
     -- Ruby
-    -- gem install rubocop
-    -- diagnostics.rubocop,
     -- gem install standard
     diagnostics.standardrb,
     -- Shell
