@@ -1,6 +1,8 @@
-local commonAutoGroup = vim.api.nvim_create_augroup("commonAutoGroup", { clear = true })
-
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+local commonAutoGroup = augroup("commonAutoGroup", { clear = true })
+local indentAutoGroup = augroup("indentAutoGroup", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 
@@ -23,4 +25,14 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = lispFiletypes,
   command = "ParinferOn",
   desc = "Auto enable brackets matching for lisp files",
+})
+
+autocmd("FileType", {
+  group = "indentAutoGroup",
+  pattern = { "java", "kotlin", "c", "cpp" },
+  callback = function()
+    vim.opt.shiftwidth = 4
+    vim.opt.tabstop = 4
+    vim.opt.expandtab = false
+  end,
 })

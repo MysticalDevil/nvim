@@ -28,7 +28,6 @@ null_ls.setup({
     completion.luasnip,
     -- Formatting -------------------------------------------------------------
     -- C/C++
-    -- pacman -S clang-format
     formatting.clang_format.with({
       filetypes = {
         "c",
@@ -47,7 +46,6 @@ null_ls.setup({
     -- dotnet tool install csharpier -g
     formatting.csharpier,
     -- Elixir
-    -- pacman -S mix
     formatting.mix,
     -- Fish
     -- builtin fish shell
@@ -59,6 +57,8 @@ null_ls.setup({
     -- Json
     -- npm install -g fixjson
     formatting.fixjson,
+    -- Kotlin
+    formatting.ktlint,
     -- Nginx
     -- npm install -g nginxbeautifier
     formatting.nginx_beautifier,
@@ -68,9 +68,6 @@ null_ls.setup({
     -- PgSQL
     -- builtin postgresql
     formatting.pg_format,
-    -- Protocol Buffer
-    -- go install github.com/bufbuild/buf/cmd/buf@@latest
-    formatting.buf,
     -- Scala
     -- builtin coursier
     formatting.scalafmt,
