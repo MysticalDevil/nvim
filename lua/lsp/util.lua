@@ -46,6 +46,10 @@ M.default_configs = function()
     on_attach = function(client, bufnr)
       M.disable_format(client)
       M.key_attach(bufnr)
+
+      vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+      vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
     end,
   }
 end

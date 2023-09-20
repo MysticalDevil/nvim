@@ -59,7 +59,7 @@ local opts = {
     },
     { name = "luasnip", option = { use_show_condition = false } },
     { name = "nvim_lua" },
-    { name = "buffer" },
+    { name = "buffer", keywords = 3 },
     { name = "path" },
     { name = "calc" },
     { name = "emoji" },
