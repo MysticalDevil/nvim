@@ -6,12 +6,11 @@ end
 
 local utils = require("utils.setup")
 
-utils.keymap("n", "<A-m>", ":Neotree toggle<CR>")
+utils.keymap("n", "<A-m>", "<cmd>Neotree toggle<CR>")
 
+utils.keymap("n", "\\", "<cmd>Neotree reveal<CR>")
 -- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
-vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+vim.g.neo_tree_remove_legacy_commands = 1
 
 -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
@@ -27,14 +26,13 @@ local opts = {
   enable_git_status = true,
   enable_diagnostics = true,
   sort_case_insensitive = false, -- used when sorting files and directories in the tree
-  sort_function = nil, -- use a custom function for sorting files and directories in the tree
-  -- sort_function = function (a,b)
-  --       if a.type == b.type then
-  --           return a.path > b.path
-  --       else
-  --           return a.type > b.type
-  --       end
-  --   end , -- this sorts files and directories descendantly
+  -- sort_function = function(a, b) -- use a custom function for sorting files and directories in the tree
+  --   if a.type == b.type then
+  --     return a.path > b.path
+  --   else
+  --     return a.type > b.type
+  --   end
+  -- end, -- this sorts files and directories descendantly
   default_component_configs = {
     container = {
       enable_character_fade = true,
@@ -74,8 +72,8 @@ local opts = {
     git_status = {
       symbols = {
         -- Change type
-        added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-        modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+        added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+        modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
         deleted = "✖", -- this can only be used in the git_status source
         renamed = "󰁕", -- this can only be used in the git_status source
         -- Status type
@@ -196,9 +194,9 @@ local opts = {
         --".null-ls_*",
       },
     },
-    follow_current_file = false, -- This will find and focus the file in the active buffer every
+    follow_current_file = true, -- This will find and focus the file in the active buffer every
     -- time the current file is changed while the tree is open.
-    group_empty_dirs = false, -- when true, empty folders will be grouped together
+    group_empty_dirs = true, -- when true, empty folders will be grouped together
     hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
     -- in whatever position is specified in window.position
     -- "open_current",  -- netrw disabled, opening a directory opens within the
