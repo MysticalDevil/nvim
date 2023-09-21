@@ -36,26 +36,3 @@ autocmd("FileType", {
     vim.opt.expandtab = false
   end,
 })
-
--- Function to set V filetype
-local function set_v_filetype()
-  local filename = vim.api.nvim_buf_get_name(0)
-  if vim.fn.fnamemodify(filename, ":e") == "v" then
-    vim.api.nvim_buf_set_option(0, "filetype", "v")
-  end
-end
-
--- Set filetype on VimEnter before reading any buffers
-autocmd("VimEnter", {
-  callback = function()
-    set_v_filetype()
-  end,
-})
-
--- Set filetype in FileType autocmd in case VimEnter is missed
-autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    set_v_filetype()
-  end,
-})

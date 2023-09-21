@@ -15,6 +15,8 @@ lsp.on_attach(function(_, bufnr)
 end)
 
 local lsp_servers = require("lsp.check")
+table.insert(lsp_servers, "rust_analyzer")
+table.insert(lsp_servers, "v_analyzer")
 
 -- :h mason-default-settings
 mason.setup({

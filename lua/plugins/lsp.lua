@@ -314,7 +314,7 @@ return {
   --Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile)
   {
     "Olical/conjure",
-    ft = { "clojure", "fennel", "hy", "scheme" }, -- etc
+    ft = { "clojure", "fennel", "hy", "python", "scheme" }, -- etc
     -- [Optional] cmp-conjure for cmp
     dependencies = {
       "PaterJason/cmp-conjure",
