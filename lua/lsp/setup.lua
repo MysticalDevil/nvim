@@ -45,6 +45,7 @@ local servers = {
   rust_analyzer = require("lsp.config.rust_analyzer"),
   solargraph = require("lsp.config.solargraph"),
   taplo = require("lsp.config.taplo"),
+  v_analyzer = require("lsp.config.v_analyzer"),
   vimls = require("lsp.config.vimls"),
   yamlls = require("lsp.config.yamlls"),
   zls = require("lsp.config.zls"),
