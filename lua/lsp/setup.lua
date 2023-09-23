@@ -17,6 +17,7 @@ end)
 local lsp_servers = require("lsp.check")
 table.insert(lsp_servers, "rust_analyzer")
 table.insert(lsp_servers, "v_analyzer")
+table.insert(lsp_servers, "racket_langserver")
 
 -- :h mason-default-settings
 mason.setup({
@@ -44,6 +45,7 @@ local servers = {
   kotlin_language_server = require("lsp.config.kotlin_language_server"),
   lua_ls = require("lsp.config.lua_ls"),
   pyright = require("lsp.config.pyright"),
+  racket_langserver = require("lsp.config.racket_langserver"),
   rust_analyzer = require("lsp.config.rust_analyzer"),
   solargraph = require("lsp.config.solargraph"),
   taplo = require("lsp.config.taplo"),
