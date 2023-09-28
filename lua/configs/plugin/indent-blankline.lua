@@ -1,49 +1,44 @@
-local status, indent_blankline = pcall(require, "ibl")
+local status, ibl = pcall(require, "ibl")
 if not status then
   vim.notify("indent-blankline.nvim not found", "error")
   return
 end
 
 local opts = {
-  show_end_of_line = true,
-  space_char_blankline = " ",
-  -- judge context
-  show_current_context = true,
-  show_current_context_start = true,
-  context_patterns = {
-    "class",
-    "function",
-    "method",
-    "element",
-    "^if",
-    "^while",
-    "^for",
-    "^object",
-    "^table",
-    "block",
-    "arguments",
+  debounce = 100,
+  indent = {
+    char = "▏",
+    tab_char = { "a", "b", "c" },
+    highlight = { "Function", "Label" },
+    smart_indent_cap = true,
+    priority = 2,
   },
-  -- echo &filetype
-  filetype_exclude = {
-    "null-ls-info",
-    "dashboard",
-    "packer",
-    "terminal",
-    "help",
-    "log",
-    "markdown",
-    "TelescopePrompt",
-    "mason",
-    "mason-lspconfig",
-    "ispinfo",
-    "toggleterm",
-    "text",
+  scope = {
+    enabled = true,
+    show_start = false,
+    show_end = true,
   },
-  -- char = '¦'
-  -- char = '┆'
-  -- char = '│'
-  -- char = "⎸",
-  char = "▏",
+  exclude = {
+    filetypes = {
+      "null-ls-info",
+      "dashboard",
+      "packer",
+      "terminal",
+      "help",
+      "log",
+      "markdown",
+      "TelescopePrompt",
+      "mason",
+      "mason-lspconfig",
+      "ispinfo",
+      "toggleterm",
+      "text",
+    },
+    buftypes = {
+      "terminal",
+      "dashboard",
+    },
+  },
 }
 
-indent_blankline.setup(opts)
+ibl.setup(opts)
