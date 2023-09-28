@@ -350,6 +350,17 @@ return {
     end,
   },
 
+  -- yaml.nvim
+  -- YAML toolkit for Neovim users
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" }, -- optional
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+  },
+
   ----------------------------------- Debug Adapter Protocol ------------------------------------
   -- nvim-dap
   -- Debug Adapter Protocol client implementation for Neovim
