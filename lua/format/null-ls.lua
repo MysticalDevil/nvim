@@ -58,7 +58,7 @@ null_ls.setup({
     -- npm install -g fixjson
     formatting.fixjson,
     -- Clojure
-    formatting.joker,
+    formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
     -- Kotlin
     formatting.ktlint,
     -- Nginx
