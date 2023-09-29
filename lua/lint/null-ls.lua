@@ -24,6 +24,8 @@ null_ls.setup({
     -- Diagnostics  -----------------------------------------------------------
     -- C/C++
     diagnostics.cppcheck,
+    -- Clojure
+    diagnostics.clj_kondo,
     -- ECMAScript
     -- npm install -g eslint_d
     diagnostics.eslint_d.with({

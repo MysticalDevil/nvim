@@ -57,6 +57,8 @@ null_ls.setup({
     -- Json
     -- npm install -g fixjson
     formatting.fixjson,
+    -- Clojure
+    formatting.joker,
     -- Kotlin
     formatting.ktlint,
     -- Nginx
