@@ -21,4 +21,4 @@ opts.settings = {
   },
 }
 
-return util.on_setup(opts, require("complete.setup").engine, "rust")
+return util.set_on_setup(opts, require("complete.setup").engine, "rust")

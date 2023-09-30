@@ -36,4 +36,4 @@ opts.settings = {
   },
 }
 
-return util.on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts, require("complete.setup").engine)

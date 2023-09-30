@@ -5,4 +5,4 @@ opts.cmd = { "racket", "--lib", "racket-langserver" }
 opts.filetypes = { "racket", "scheme" }
 opts.single_file_support = true
 
-return util.on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts, require("complete.setup").engine)

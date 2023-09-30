@@ -116,7 +116,7 @@ end
 ---@param opts table
 ---@param engine string|nil
 ---@param lang string|nil
-M.on_setup = function(opts, engine, lang)
+M.set_on_setup = function(opts, engine, lang)
   local server_config = {
     on_setup = function(server)
       server.setup(opts)
@@ -142,7 +142,5 @@ M.on_setup = function(opts, engine, lang)
 
   return server_config
 end
-
-M.on_setup({})
 
 return M

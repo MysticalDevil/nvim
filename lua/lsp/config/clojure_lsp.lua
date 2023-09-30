@@ -5,4 +5,4 @@ local opts = util.default_configs()
 opts.filetypes = { "clojure", "edn" }
 opts.root_dir = lsp_util.root_pattern("project.clj", "deps.edn", "build.boot", "shadow-cljs.edn", ".git", "bb.edn")
 
-return util.on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts, require("complete.setup").engine)
