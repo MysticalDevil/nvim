@@ -83,13 +83,21 @@ return {
   -- A format runner for Neovim
   {
     "mhartington/formatter.nvim",
+    enabled = false,
     dependencies = { "williamboman/mason.nvim" },
+  },
+  -- conform.nvim
+  -- Lightweight yet powerful formatter plugin for Neovim
+  {
+    "stevearc/conform.nvim",
+    enabled = false,
   },
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
   {
     "mfussenegger/nvim-lint",
+    enabled = false,
     dependencies = { "williamboman/mason.nvim" },
   },
 

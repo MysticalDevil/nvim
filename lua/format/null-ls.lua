@@ -120,6 +120,9 @@ null_ls.setup({
     -- Toml
     -- cargo install taplo-cli
     formatting.taplo,
+    -- XML
+    -- pip install XmlFormatter
+    formatting.xmlformat,
     -- Yaml
     -- go install github.com/google/yamlfmt/cmd/yamlfmt@latest
     formatting.yamlfmt,
