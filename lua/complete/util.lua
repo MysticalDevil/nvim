@@ -38,8 +38,8 @@ local M = {}
 -- Provide parameter format for cmp.lua
 M.formatting = {
   fields = {
-    cmp.ItemField.Kind,
     cmp.ItemField.Abbr,
+    cmp.ItemField.Kind,
     cmp.ItemField.Menu,
   },
   format = lspkind.cmp_format({
@@ -66,10 +66,16 @@ M.formatting = {
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[API]",
-        -- latex_symbols = "[LaTeX]",
-        cmp_tabnine = "[Tabnine]",
+        latex_symbols = "[LaTeX]",
         path = "[Path]",
-        -- emoji = "[Emoji]",
+        emoji = "[Emoji]",
+        treesitter = "[TreeSitter]",
+        crates = "[Crates]",
+        npm = "[NPM]",
+        cmdline = "[CMD]",
+        git = "[Git]",
+        calc = "[Calc]",
+        conjure = "[Conjure]",
       })[entry.source.name]
       return vim_item
     end,
@@ -112,6 +118,18 @@ end
 ---@return string
 function M.get_engine()
   return M.engine
+end
+
+M.under = function(entry1, entry2)
+  local _, entry1_under = entry1.completion_item.label:find("^_+")
+  local _, entry2_under = entry2.completion_item.label:find("^_+")
+  entry1_under = entry1_under or 0
+  entry2_under = entry2_under or 0
+  if entry1_under > entry2_under then
+    return false
+  elseif entry1_under < entry2_under then
+    return true
+  end
 end
 
 return M
