@@ -1,13 +1,5 @@
 -- Basic configure
-require("configs.core.basic")
--- Advanced configure
-require("configs.core.advanced")
--- Bootstrap necessary plugins
-require("configs.core.bootstrap")
--- Key bindings
-require("configs.core.keybindings")
--- Auto command
-require("configs.core.autocmds")
+require("configs.core.setup")
 -- Lazy plugins manage
 require("plugins.setup")
 -- Color scheme setting
@@ -23,3 +15,6 @@ require("format.setup")
 require("lint.setup")
 -- Debug Adapter Protocol
 require("dap.setup")
+
+-- Playground code
+-- require("playground.setup")
