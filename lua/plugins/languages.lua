@@ -454,7 +454,7 @@ return {
   -- lspkind.nvim
   -- vscode-like pictograms for neovim lsp completion items
   {
-    "onsails/lspkind-nvim",
+    "onsails/lspkind.nvim",
     config = function()
       require("configs.plugin.lspkind")
     end,

@@ -1,12 +1,48 @@
 local cmp = require("cmp")
-local types = require("cmp.types")
-local str = require("cmp.utils.str")
 
 local status, lspkind = pcall(require, "lspkind")
 if not status then
   vim.notify("lspkind.nvim not found", "error")
   return
 end
+
+local kind_icons = {
+  Text = "󰉿",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  Reference = "󰈇",
+  Folder = "󰉋",
+
+  File = "󰈙 ",
+  Module = " ",
+  Namespace = "󰌗 ",
+  Package = " ",
+  Class = "󰌗 ",
+  Method = "󰆧 ",
+  Property = " ",
+  Field = " ",
+  Constructor = " ",
+  Enum = "󰕘",
+  Interface = "󰕘",
+  Function = "󰊕 ",
+  Variable = "󰆧 ",
+  Constant = "󰏿 ",
+  String = "󰀬 ",
+  Number = "󰎠 ",
+  Boolean = "◩ ",
+  Array = "󰅪 ",
+  Object = "󰅩 ",
+  Key = "󰌋 ",
+  Null = "󰟢 ",
+  EnumMember = " ",
+  Struct = "󰌗 ",
+  Event = " ",
+  Operator = "󰆕 ",
+  TypeParameter = "󰊄 ",
+}
 
 local M = {}
 -- Provide parameter format for cmp.lua
@@ -17,42 +53,63 @@ M.formatting = {
     cmp.ItemField.Menu,
   },
   format = lspkind.cmp_format({
-    with_text = false,
-    mode = "symbol",
+    mode = "symbol_text",
 
     maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-    ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+    ellipsis_char = "...",
 
     -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
     -- The function below will be called before any actual modifications from lspkind
     -- so that you can provide more controls on popup customization.
-    -- (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+    -- (See [#30](https://github.com/onsails/lspkind.nvim/pull/30))
     before = function(entry, vim_item)
-      -- Get the full snippet (and only keep first line)
-      local word = entry:get_insert_text()
-      if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-        word = vim.lsp.util.parse_snippet(word)
+      local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
+      if shorten_abbr ~= vim_item.abbr then
+        vim_item.abbr = shorten_abbr .. "..."
       end
-      word = str.oneline(word)
-
-      -- concatenates the string
-      -- local max = 50
-      -- if string.len(word) >= max then
-      --   local before = string.sub(word, 1, math.floor((max - 3) / 2))
-      --   word = before .. "..."
-      -- end
-
-      if
-        entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-        and string.sub(vim_item.abbr, -1, -1) == "~"
-      then
-        word = word .. "~"
-      end
-      vim_item.abbr = word
-
+      -- Kind icons
+      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+      -- Source
+      vim_item.menu = ({
+        buffer = "[Buf]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[API]",
+        -- latex_symbols = "[LaTeX]",
+        cmp_tabnine = "[Tabnine]",
+        path = "[Path]",
+        -- emoji = "[Emoji]",
+      })[entry.source.name]
       return vim_item
     end,
   }),
+}
+
+M.mapping = {
+  -- completion appears
+  ["<A-.>"] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
+  -- cancel
+  ["<A-,>"] = cmp.mapping({
+    i = cmp.mapping.abort(),
+    c = cmp.mapping.close(),
+  }),
+
+  -- confirm
+  -- Accept surrently selected item. If none slected, `select` first item
+  -- Set `select` to `fasle` to only confirm explicitly slected items
+  ["<CR>"] = cmp.mapping.confirm({
+    select = true,
+    behavior = cmp.ConfirmBehavior.Replace,
+  }),
+  -- can scroll if too many items
+  ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+  ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+
+  -- previous
+  ["<C-k>"] = cmp.mapping.select_prev_item(),
+  -- next
+  ["<C-j>"] = cmp.mapping.select_next_item(),
 }
 
 return M

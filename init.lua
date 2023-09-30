@@ -7,7 +7,7 @@ require("configs.colorscheme.setup")
 
 -- Language server protocol
 require("lsp.setup")
--- Auto complete
+-- Complete engine
 require("complete.setup")
 -- Formater
 require("format.setup")

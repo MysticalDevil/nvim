@@ -1,5 +1,6 @@
 local status, cmp = pcall(require, "cmp")
 if not status then
+  vim.notify("nvim-cmp not found", "error")
   return
 end
 
@@ -8,32 +9,6 @@ local luasnip = require("luasnip")
 local util = require("complete.util")
 
 require("complete.engine.luasnip_cfg")
-
-local mapping = {
-  -- completion appears
-  ["<A-.>"] = cmp.mapping(cmp.mapping.completion, { "i", "c" }),
-  -- cancel
-  ["<A-,>"] = cmp.mapping({
-    i = cmp.mapping.abort(),
-    c = cmp.mapping.close(),
-  }),
-
-  -- confirm
-  -- Accept surrently selected item. If none slected, `select` first item
-  -- Set `select` to `fasle` to only confirm explicitly slected items
-  ["<CR>"] = cmp.mapping.confirm({
-    select = true,
-    behavior = cmp.ConfirmBehavior.Replace,
-  }),
-  -- can scroll if too many items
-  ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-  ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-
-  -- previous
-  ["<C-k>"] = cmp.mapping.select_prev_item(),
-  -- next
-  ["<C-j>"] = cmp.mapping.select_next_item(),
-}
 
 local opts = {
   formatting = util.formatting,
@@ -46,7 +21,7 @@ local opts = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  mapping = mapping,
+  mapping = util.mapping,
   sources = cmp.config.sources({
     {
       name = "nvim_lsp",
