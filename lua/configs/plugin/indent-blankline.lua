@@ -37,7 +37,7 @@ local opts = {
     max = 500,
   },
   indent = {
-    char = "│", --  "│", "¦", "┆", "┊"
+    char = "▏", -- "│",  "│", "¦", "┆", "┊"
     tab_char = { "a", "b", "c" },
     highlight = "IblIndent",
     smart_indent_cap = true,
@@ -50,12 +50,45 @@ local opts = {
   scope = {
     enabled = true,
     char = nil,
-    show_start = true,
-    show_end = true,
+    show_start = false,
+    show_end = false,
     injected_languages = false,
     highlight = highlight,
     priority = 1024,
-    include = { node_type = {} },
+    include = {
+      node_type = {
+        lua = {
+          "chunk",
+          "do_statement",
+          "while_statement",
+          "repeat_statement",
+          "if_statement",
+          "for_statement",
+          "function_declaration",
+          "function_definition",
+          "table_constructor",
+          "assignment_statement",
+        },
+        typescript = {
+          "statement_block",
+          "function",
+          "arrow_function",
+          "function_declaration",
+          "method_definition",
+          "for_statement",
+          "for_in_statement",
+          "catch_clause",
+          "object_pattern",
+          "arguments",
+          "switch_case",
+          "switch_statement",
+          "switch_default",
+          "object",
+          "object_type",
+          "ternary_expression",
+        },
+      },
+    },
     exclude = {
       languages = {},
       node_type = {
