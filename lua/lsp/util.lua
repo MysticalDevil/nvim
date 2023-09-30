@@ -100,7 +100,7 @@ M.check_os = function()
   return vim.loop.os_uname().sysname
 end
 
-local function setupRust(server, opts)
+local function setup_for_rust(server, opts)
   local ok_rt, rust_tools = pcall(require, "rust-tools")
   if not ok_rt then
     vim.notify("Failed to load rust tools, will set up `rust-analyzer` without `rust-tools`.", "warn")
@@ -124,18 +124,19 @@ M.on_setup = function(opts, engine, lang)
   }
 
   if engine == "coq" then
+    local coq_capabilities = require("coq").lsp_ensure_capabilities(opts)
     if lang == "rust" then
       server_config.on_setup = function(server)
-        setupRust(server, require("coq").lsp_ensure_capabilities(opts))
+        setup_for_rust(server, coq_capabilities)
       end
     else
       server_config.on_setup = function(server)
-        server.setup(require("coq").lsp_ensure_capabilities(opts))
+        server.setup(coq_capabilities)
       end
     end
   elseif lang == "rust" then
     server_config.on_setup = function(server)
-      setupRust(server, opts)
+      setup_for_rust(server, opts)
     end
   end
 

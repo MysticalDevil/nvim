@@ -36,6 +36,7 @@ local mapping = {
 }
 
 local opts = {
+  formatting = util.formatting,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -68,8 +69,6 @@ local opts = {
     { name = "npm", keyword_length = 4 },
     { name = "conjure" },
   }),
-
-  formatting = util.formatting,
 }
 
 cmp.setup(opts)
