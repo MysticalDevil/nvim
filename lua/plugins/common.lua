@@ -606,6 +606,17 @@ return {
       require("configs.plugin.urlview")
     end,
   },
+  -- vim-illuminate
+  -- illuminate.vim - (Neo)Vim plugin for automatically highlighting other uses of the word under
+  -- the cursor using either LSP, Tree-sitter, or regex matching.
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("configs.plugin.illuminate")
+    end,
+  },
+  -- vim-startuptime
+  -- A plugin for profiling Vim and Neovim startup time.
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
