@@ -55,9 +55,11 @@ local servers = {
   zls = require("lsp.config.zls"),
 }
 
+local common_config = require("lsp.config.common")
+
 -- Configure the language server. The on_setup function must be implemented in the configuration file.
 for _, name in ipairs(lsp_servers) do
-  local config = servers[name] or require("lsp.config.common")
+  local config = servers[name] or common_config
   if type(config) == "table" and config.on_setup ~= nil then
     config.on_setup(lspconfig[name])
   else

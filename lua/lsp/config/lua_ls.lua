@@ -29,9 +29,4 @@ opts.settings = {
   },
 }
 
-return {
-  on_setup = function(server)
-    require("neodev").setup()
-    server.setup(opts)
-  end,
-}
+return util.on_setup(opts, require("complete.setup").engine)

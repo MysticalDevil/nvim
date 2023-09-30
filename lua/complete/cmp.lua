@@ -5,9 +5,9 @@ end
 
 local luasnip = require("luasnip")
 
-local util = require("cmp.util")
+local util = require("complete.util")
 
-require("cmp.engine.luasnip")
+require("complete.engine.luasnip")
 
 local mapping = {
   -- completion appears

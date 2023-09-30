@@ -8,7 +8,7 @@ require("configs.colorscheme.setup")
 -- Language server protocol
 require("lsp.setup")
 -- Auto complete
-require("cmp.setup")
+require("complete.setup")
 -- Formater
 require("format.setup")
 -- Linter

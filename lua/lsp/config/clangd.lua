@@ -39,8 +39,5 @@ opts.on_attach = function(client, bufnr)
   inlay_hints.setup_autocmd()
   inlay_hints.set_inlay_hints()
 end
-return {
-  on_setup = function(server)
-    server.setup(opts)
-  end,
-}
+
+return util.on_setup(opts, require("complete.setup").engine)

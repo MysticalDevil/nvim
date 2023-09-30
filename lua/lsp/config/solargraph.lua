@@ -10,8 +10,4 @@ opts.settings = {
 
 opts.single_file_support = true
 
-return {
-  on_setup = function(server)
-    server.setup(opts)
-  end,
-}
+return util.on_setup(opts, require("complete.setup").engine)

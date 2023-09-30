@@ -4,8 +4,4 @@ local opts = util.default_configs()
 
 opts.filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" }
 
-return {
-  on_setup = function(server)
-    server.setup(opts)
-  end,
-}
+return util.on_setup(opts, require("complete.setup").engine)

@@ -61,6 +61,7 @@ return {
   -- docs and completion for the nvim lua API
   {
     "folke/neodev.nvim",
+    ft = { "lua" },
     config = function()
       require("configs.plugin.neodev")
     end,
