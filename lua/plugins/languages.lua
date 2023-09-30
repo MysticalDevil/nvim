@@ -1,8 +1,34 @@
 return {
   ---------------------------------- Language Server Protocol -----------------------------------
+  --
+
   -- nvim-lspconfig
   -- Quickstart configs for Nvim LSP
   { "neovim/nvim-lspconfig", proiority = 1000 },
+
+  -- lsp-zero.nvim
+  -- A starting point to setup some lsp related features in neovim.
+  {
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v2.x",
+    dependencies = {
+      -- LSP Support
+      { "neovim/nvim-lspconfig" }, -- Required
+      { -- Optional
+        "williamboman/mason.nvim",
+        build = function()
+          vim.cmd("MasonUpdate")
+        end,
+      },
+      { "williamboman/mason-lspconfig.nvim" }, -- Optional
+
+      -- Autocompletion
+      { "hrsh7th/nvim-cmp" }, -- Required
+      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      { "L3MON4D3/LuaSnip" }, -- Required
+    },
+  },
+
   -- mason.nvim
   -- Portable package manager for Neovim
   {
@@ -29,6 +55,7 @@ return {
       "nvimtools/none-ls.nvim",
     },
   },
+
   -- neodev.nvim
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
@@ -41,27 +68,16 @@ return {
   -- nlsp-settings.nvim
   -- A plugin for setting Neovim LSP with JSON or YAML files
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  -- lsp-zero.nvim
-  -- A starting point to setup some lsp related features in neovim.
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { -- Optional
-        "williamboman/mason.nvim",
-        build = function()
-          vim.cmd("MasonUpdate")
-        end,
-      },
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" }, -- Required
-    },
+  --
+  ------------------------------------- Formatter and Linter --------------------------------------
+  --
+
+  -- null-ls.nvim
+  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
 
   -- efmls-configs-nvim
@@ -72,13 +88,7 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
     lazy = true,
   },
-  ------------------ Formatter and Linter ------------------
-  -- null-ls.nvim
-  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
+
   -- formatter.nvim
   -- A format runner for Neovim
   {
@@ -86,12 +96,14 @@ return {
     enabled = false,
     dependencies = { "williamboman/mason.nvim" },
   },
+
   -- conform.nvim
   -- Lightweight yet powerful formatter plugin for Neovim
   {
     "stevearc/conform.nvim",
     enabled = false,
   },
+
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
@@ -101,7 +113,10 @@ return {
     dependencies = { "williamboman/mason.nvim" },
   },
 
-  -------------- Complete Engine --------------
+  --
+  ---------------------------------------- Complete Engine ----------------------------------------
+  --
+
   -- nvim-cmp
   -- A completion plugin for neovim coded in Lua.
   {
@@ -155,27 +170,23 @@ return {
     end,
   },
 
-  ----------------- UI Import -----------------
-  -- lspkind.nvim
-  -- vscode-like pictograms for neovim lsp completion items
+  -- coq_nvim
+  -- Fast as FUCK nvim completion. SQLite, concurrent scheduler, hundreds of hours of optimization.
   {
-    "onsails/lspkind-nvim",
-    config = function()
-      require("configs.plugin.lspkind")
-    end,
-  },
-  -- lspsage.nvim
-  -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
-  {
-    "nvimdev/lspsaga.nvim",
-    event = "BufRead",
-    config = function()
-      require("configs.plugin.lspsaga")
-    end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    "ms-jpq/coq_nvim",
+    lazy = true,
+    branch = "coq",
+    dependencies = {
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
+      { "neovim/nvim-lspconfig" },
+    },
   },
 
-  -------------- Language Import --------------
+  --
+  ---------------------------------------- Language Improve ---------------------------------------
+  --
+
+  -------------------- JSON ---------------------
   -- schemastore.nvim
   -- JSON schemas for Neovim
   {
@@ -184,6 +195,7 @@ return {
     lazy = true,
   },
 
+  -------------------- Rust ---------------------
   -- rust-tools.nvim
   -- Tools for better development in rust using neovim's builtin lsp
   {
@@ -205,6 +217,7 @@ return {
     end,
   },
 
+  ------------------- Python --------------------
   -- venv-selector.nvim
   -- Allows selection of python virtual environment from within neovim
   {
@@ -217,6 +230,7 @@ return {
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
 
+  --------------------- Go ----------------------
   -- go.nvim
   -- Modern Go plugin for Neovim
   { "ray-x/guihua.lua", lazy = true },
@@ -234,6 +248,8 @@ return {
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
+
+  -------------------- C/C++ --------------------
   -- clangd_extensions.nvim
   -- Clangd's off-spec features for neovim's LSP client.
   {
@@ -254,6 +270,7 @@ return {
     end,
   },
 
+  ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
   {
@@ -268,6 +285,7 @@ return {
     end,
   },
 
+  ----------------- TypeScript ------------------
   -- typescript-tools.nvim
   -- TypeScript integration NeoVim deserves
   {
@@ -289,6 +307,7 @@ return {
     event = "BufRead package.json",
   },
 
+  ------------------- Haskell -------------------
   -- hashell-tools.nvim
   -- Supercharge your Haskell experience in neovim!
   {
@@ -304,7 +323,9 @@ return {
     end,
   },
 
+  ------------------- Elixir --------------------
   -- elixir-tools.nvim
+  -- Neovim plugin for Elixir
   {
     "elixir-tools/elixir-tools.nvim",
     version = "*",
@@ -318,6 +339,7 @@ return {
     },
   },
 
+  -------------------- Lisp ---------------------
   -- conjure
   --Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile)
   {
@@ -337,6 +359,7 @@ return {
     end,
   },
 
+  -------------------- Java ---------------------
   -- nvim-jdtls
   -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.l
   {
@@ -347,6 +370,7 @@ return {
     end,
   },
 
+  -------------------- Scala --------------------
   -- nvim-metals
   -- A Metals plugin for Neovim
   {
@@ -358,6 +382,7 @@ return {
     end,
   },
 
+  -------------------- Yaml ---------------------
   -- yaml.nvim
   -- YAML toolkit for Neovim users
   {
@@ -420,7 +445,31 @@ return {
     dependencies = { "mfussenegger/nvim-dap" },
   },
 
-  ------------------- Helpers -------------------
+  --
+  -------------------------------------------- Helpers --------------------------------------------
+  --
+
+  ----------------- UI Improve ------------------
+  -- lspkind.nvim
+  -- vscode-like pictograms for neovim lsp completion items
+  {
+    "onsails/lspkind-nvim",
+    config = function()
+      require("configs.plugin.lspkind")
+    end,
+  },
+  -- lspsage.nvim
+  -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "BufRead",
+    config = function()
+      require("configs.plugin.lspsaga")
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
+
+  ----------------- Grammer Tree ----------------
   -- symbols-outline.nvim
   -- A tree like view for symbols in Neovim using the Language Server Protocol
   {
@@ -430,21 +479,7 @@ return {
       require("configs.plugin.symbols-outline")
     end,
   },
-  -- nvim-code-action-menu
-  -- Pop-up menu for code actions to show meta-information and diff preview
-  {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-  },
-  -- fidget.nvim
-  -- Standalone UI for nvim-lsp progress
-  {
-    "j-hui/fidget.nvim",
-    config = function()
-      require("configs.plugin.fidget")
-    end,
-    tag = "legacy",
-  },
+
   -- aerial.nvim
   -- Neovim plugin for a code outline window
   {
@@ -468,6 +503,7 @@ return {
       require("configs.plugin.aerial")
     end,
   },
+
   -- nvim-navbuddy
   -- A simple popup display that provides breadcrumbs feature using LSP server
   {
@@ -506,6 +542,16 @@ return {
     end,
   },
 
+  ----------------- LSP Improve -----------------
+  -- fidget.nvim
+  -- Standalone UI for nvim-lsp progress
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("configs.plugin.fidget")
+    end,
+    tag = "legacy",
+  },
   -- lsp_lines.nvim
   -- A simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
   {
@@ -513,5 +559,11 @@ return {
     config = function()
       require("configs.plugin.lsp_lines")
     end,
+  },
+  -- nvim-code-action-menu
+  -- Pop-up menu for code actions to show meta-information and diff preview
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
   },
 }

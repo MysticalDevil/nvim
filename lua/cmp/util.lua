@@ -1,5 +1,5 @@
 local M = {}
--- 为 cmp.lua 提供参数格式
+-- Provide parameter format for cmp.lua
 M.formatting = {
   format = require("lspkind").cmp_format({
     mode = "symbol_text",
@@ -11,7 +11,7 @@ M.formatting = {
     -- so that you can provide more controls on popup customization.
     -- (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
     before = function(entry, vim_item)
-      -- Source 显示提示来源
+      -- Source Show prompt source
       vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
       return vim_item
     end,

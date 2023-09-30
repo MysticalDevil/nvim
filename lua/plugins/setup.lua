@@ -8,7 +8,7 @@ local plugins_list = {
   require("plugins.colorscheme"),
   require("plugins.common"),
   require("plugins.git"),
-  require("plugins.lsp"),
+  require("plugins.languages"),
 }
 
 local opts = {
