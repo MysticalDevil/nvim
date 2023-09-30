@@ -171,18 +171,6 @@ return {
     end,
   },
 
-  -- coq_nvim
-  -- Fast as FUCK nvim completion. SQLite, concurrent scheduler, hundreds of hours of optimization.
-  {
-    "ms-jpq/coq_nvim",
-    lazy = true,
-    branch = "coq",
-    dependencies = {
-      { "ms-jpq/coq.artifacts", branch = "artifacts" },
-      { "neovim/nvim-lspconfig" },
-    },
-  },
-
   --
   ---------------------------------------- Language Improve ---------------------------------------
   --

@@ -17,4 +17,4 @@ opts.init_options = {
   usePlaceholders = true,
 }
 
-return util.set_on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts)

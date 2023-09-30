@@ -9,4 +9,4 @@ opts.single_file_support = false
 
 opts.autostart = false
 
-return util.set_on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts)

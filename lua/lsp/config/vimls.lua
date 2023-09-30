@@ -23,4 +23,4 @@ opts.init_options = {
 }
 opts.single_file_support = true
 
-return util.set_on_setup(opts, require("complete.setup").engine)
+return util.set_on_setup(opts)

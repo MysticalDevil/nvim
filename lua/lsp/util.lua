@@ -1,6 +1,6 @@
 local M = {}
 
-M.key_attach = function(bufnr)
+function M.key_attach(bufnr)
   local function buf_set_keymap(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
   end
@@ -9,12 +9,12 @@ M.key_attach = function(bufnr)
 end
 
 -- disable format, handle it to a dedicated plugin
-M.disable_format = function(client)
+function M.disable_format(client)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
 end
 
-M.common_capabilities = function()
+function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
     return cmp_nvim_lsp.default_capabilities()
@@ -33,13 +33,13 @@ M.common_capabilities = function()
   return capabilities
 end
 
-M.flags = function()
+function M.flags()
   return {
     debounce_text_changes = 150,
   }
 end
 
-M.default_configs = function()
+function M.default_configs()
   return {
     capabilities = M.common_capabilities(),
     flags = M.flags(),
@@ -56,7 +56,7 @@ end
 
 ---@param name string|table
 ---@return boolean
-M.find_binary_exists = function(name)
+function M.find_binary_exists(name)
   if type(name) == "table" then
     for _, bin in ipairs(name) do
       if vim.fn.executable(bin) == 1 then
@@ -71,32 +71,32 @@ M.find_binary_exists = function(name)
 end
 
 ---@return boolean
-M.node_installed = function()
+function M.node_installed()
   return M.find_binary_exists("npm")
 end
 
 ---@return boolean
-M.rust_installed = function()
+function M.rust_installed()
   return M.find_binary_exists("cargo")
 end
 
 ---@return boolean
-M.go_installed = function()
+function M.go_installed()
   return M.find_binary_exists("go")
 end
 
 ---@return boolean
-M.python_installed = function()
+function M.python_installed()
   return M.find_binary_exists({ "pip", "pip3" })
 end
 
 ---@return boolean
-M.ruby_installed = function()
+function M.ruby_installed()
   return M.find_binary_exists("gem")
 end
 
 ---@return string
-M.check_os = function()
+function M.check_os()
   return vim.loop.os_uname().sysname
 end
 
@@ -114,29 +114,24 @@ local function setup_for_rust(server, opts)
 end
 
 ---@param opts table
----@param engine string|nil
 ---@param lang string|nil
-M.set_on_setup = function(opts, engine, lang)
+function M.set_on_setup(opts, lang)
   local server_config = {
     on_setup = function(server)
       server.setup(opts)
     end,
   }
 
-  if engine == "coq" then
-    local coq_capabilities = require("coq").lsp_ensure_capabilities(opts)
-    if lang == "rust" then
-      server_config.on_setup = function(server)
-        setup_for_rust(server, coq_capabilities)
-      end
-    else
-      server_config.on_setup = function(server)
-        server.setup(coq_capabilities)
-      end
-    end
-  elseif lang == "rust" then
+  if lang == "rust" then
     server_config.on_setup = function(server)
       setup_for_rust(server, opts)
+    end
+  end
+
+  if lang == "lua" then
+    server_config.on_setup = function(server)
+      require("neodev").setup()
+      server.setup(opts)
     end
   end
 
