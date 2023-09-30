@@ -1,5 +1,7 @@
 local M = {}
 
+local complete_util = require("complete.util")
+
 function M.key_attach(bufnr)
   local function buf_set_keymap(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
@@ -14,6 +16,7 @@ function M.disable_format(client)
   client.server_capabilities.documentRangeFormattingProvider = false
 end
 
+---@return table
 function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
   if status_ok then
@@ -33,12 +36,14 @@ function M.common_capabilities()
   return capabilities
 end
 
+---@return table
 function M.flags()
   return {
     debounce_text_changes = 150,
   }
 end
 
+---@return table
 function M.default_configs()
   return {
     capabilities = M.common_capabilities(),
@@ -100,11 +105,17 @@ function M.check_os()
   return vim.loop.os_uname().sysname
 end
 
+---@param server table
+---@param opts table
 local function setup_for_rust(server, opts)
   local ok_rt, rust_tools = pcall(require, "rust-tools")
   if not ok_rt then
     vim.notify("Failed to load rust tools, will set up `rust-analyzer` without `rust-tools`.", "warn")
-    server.setup(opts)
+    if complete_util.get_engine() == "coq" then
+      server.setup(require("coq").lsp_ensure_capabilities(opts))
+    else
+      server.setup(opts)
+    end
   else
     rust_tools.setup({
       server = server,
@@ -113,14 +124,33 @@ local function setup_for_rust(server, opts)
   end
 end
 
+---@param coq_status boolean
 ---@param opts table
----@param lang string|nil
-function M.set_on_setup(opts, lang)
-  local server_config = {
+---@return table
+local function set_configs(coq_status, opts)
+  if coq_status then
+    return {
+      on_setup = function(server)
+        server.setup(require("coq").lsp_ensure_capabilities(opts))
+      end,
+    }
+  end
+
+  return {
     on_setup = function(server)
       server.setup(opts)
     end,
   }
+end
+
+---@param opts table
+---@param lang string|nil
+function M.set_on_setup(opts, lang)
+  local coq_enabled = function()
+    return complete_util.get_engine() == "coq"
+  end
+
+  local server_config = set_configs(coq_enabled(), opts)
 
   if lang == "rust" then
     server_config.on_setup = function(server)

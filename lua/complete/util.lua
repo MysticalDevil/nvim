@@ -102,4 +102,16 @@ M.mapping = {
   ["<C-j>"] = cmp.mapping.select_next_item(),
 }
 
+M.engine = ""
+
+---@param name string
+function M.set_engine(name)
+  M.engine = name
+end
+
+---@return string
+function M.get_engine()
+  return M.engine
+end
+
 return M

@@ -171,6 +171,21 @@ return {
     end,
   },
 
+  -- coq_nvim
+  -- Fast as FUCK nvim completion. SQLite, concurrent scheduler, hundreds of hours of optimization.
+  {
+    "ms-jpq/coq_nvim",
+    branch = "coq",
+    init = function()
+      vim.g.coq_settings = { auto_start = true }
+    end,
+    dependencies = {
+      { "ms-jpq/coq.artifacts", branch = "artifacts" },
+      { "neovim/nvim-lspconfig" },
+    },
+    lazy = true,
+  },
+
   --
   ---------------------------------------- Language Improve ---------------------------------------
   --
