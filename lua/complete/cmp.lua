@@ -7,7 +7,7 @@ local luasnip = require("luasnip")
 
 local util = require("complete.util")
 
-require("complete.engine.luasnip")
+require("complete.engine.luasnip_cfg")
 
 local mapping = {
   -- completion appears
