@@ -572,10 +572,13 @@ return {
       require("configs.plugin.lsp_lines")
     end,
   },
-  -- nvim-code-action-menu
-  -- Pop-up menu for code actions to show meta-information and diff preview
+  -- action-hints.nvim
+  -- A Neovim plugin that displays available actions like 'Go to Definition' and 'Go to Reference(s)'
+  -- for the highlighted word, presented in the statusline or inline as virtual text.
   {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
+    "roobert/action-hints.nvim",
+    config = function()
+      require("configs.plugin.action-hints")
+    end,
   },
 }

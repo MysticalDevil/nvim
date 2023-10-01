@@ -93,7 +93,7 @@ which_key.register({
   },
   ["<leader>e"] = { "<cmd>AerialToggle!<CR>", "Aerial Symbol Outline" },
   -- <cmd>Lspsaga code_action<CR>
-  ["<leader>ca"] = { "<CMD>CodeActionMenu<CR>", "Code action" },
+  ["<leader>ca"] = { "<CMD>Lspsaga code_action<CR>", "Code action" },
   ["<leader>vs"] = { "<CMD>:VenvSelect<CR>", "Select virtual envs" },
   ["<leader>vc"] = { "<CMD>:VenvSelectCached<CR>", "Select cached virtual envs" },
   -- <cmd>Lspsaga rename<CR>
