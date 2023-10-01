@@ -104,7 +104,7 @@ local opts = {
   },
   lsp = {
     progress = {
-      enabled = true,
+      enabled = false,
       -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
       -- See the section on formatting for more details on how to customize.
       --- @type NoiceFormat|string
@@ -130,7 +130,7 @@ local opts = {
       opts = {}, -- merged with defaults from documentation
     },
     signature = {
-      enabled = true,
+      enabled = false,
       auto_open = {
         enabled = true,
         trigger = true, -- Automatically show signature help when typing a trigger character from the LSP

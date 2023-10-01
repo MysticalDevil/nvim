@@ -556,6 +556,16 @@ return {
     end,
     tag = "legacy",
   },
+  -- lsp_signature.nvim
+  -- LSP signature hint as you type
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
   -- lsp_lines.nvim
   -- A simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
   {
