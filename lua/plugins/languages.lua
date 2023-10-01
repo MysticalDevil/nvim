@@ -584,4 +584,16 @@ return {
       require("configs.plugin.actions-preview")
     end,
   },
+  -- nvim-docs-view
+  -- A neovim plugin to display lsp hover documentation in a side panel.
+  {
+    "amrbashir/nvim-docs-view",
+    cmd = { "DocsViewToggle" },
+    config = function()
+      require("docs-view").setup({
+        position = "bottom",
+        width = 60,
+      })
+    end,
+  },
 }
