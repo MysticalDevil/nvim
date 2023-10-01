@@ -1,4 +1,4 @@
-local utils = require("utils.setup")
+local utils = require("utils")
 
 vim.opt.guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h12"
 vim.g.remember_window_size = true

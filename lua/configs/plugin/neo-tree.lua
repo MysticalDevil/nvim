@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-local utils = require("utils.setup")
+local utils = require("utils")
 
 utils.keymap("n", "<A-m>", "<cmd>Neotree toggle<CR>")
 

@@ -81,7 +81,7 @@ local opts = {
 
 which_key.setup(opts)
 
-local utils = require("utils.setup")
+local utils = require("utils")
 
 which_key.register({
   ["<leader>q"] = { "<CMD>q<CR>", "Quit editor" },

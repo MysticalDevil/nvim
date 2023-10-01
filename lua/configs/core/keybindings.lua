@@ -1,4 +1,4 @@
-local utils = require("utils.setup")
+local utils = require("utils")
 
 -- Modes
 -- normal_mode = 'n',

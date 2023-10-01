@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-local utils = require("utils.setup")
+local utils = require("utils")
 
 local trouble = require("trouble.providers.telescope")
 local builtin = require("telescope.builtin")

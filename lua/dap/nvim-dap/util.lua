@@ -8,7 +8,7 @@ if not ui_status then
   return
 end
 
-local sys_utils = require("utils.setup")
+local sys_utils = require("utils")
 
 local M = {}
 

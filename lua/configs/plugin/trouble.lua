@@ -4,7 +4,7 @@ if not status then
   return
 end
 
-local utils = require("utils.setup")
+local utils = require("utils")
 
 local opts = {
   position = "bottom", -- position of the list can be: bottom, top, left, right

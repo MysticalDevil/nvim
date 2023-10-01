@@ -7,7 +7,7 @@ end
 -- Union mason and null-ls
 local mason_null_ls = require("mason-null-ls")
 
-local utils = require("utils.setup")
+local utils = require("utils")
 
 mason_null_ls.setup({
   ensure_installed = {
