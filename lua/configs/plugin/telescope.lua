@@ -9,7 +9,8 @@ local utils = require("utils")
 local trouble = require("trouble.providers.telescope")
 local builtin = require("telescope.builtin")
 
-local extensions_list = { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project", "scope" }
+local extensions_list =
+  { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project", "scope", "agrolens" }
 
 for _, value in pairs(extensions_list) do
   telescope.load_extension(value)
@@ -82,6 +83,13 @@ local opts = {
           -- your custom normal mode mappings
         },
       },
+    },
+    agrolens = {
+      debug = false,
+      same_type = true,
+      include_hidden_buffers = false,
+      disable_indentation = false,
+      aliases = {},
     },
   },
 }

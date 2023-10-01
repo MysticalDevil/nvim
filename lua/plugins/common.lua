@@ -4,6 +4,12 @@ return {
   "folke/lazy.nvim",
   --
   --------------------------------------- Common plugins ----------------------------------------
+  -- agrolens.nvim
+  -- Telescope extentions to view pre-defined/custom treesitter queries
+  {
+    "desdic/agrolens.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
   -- beacon.nvim
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
