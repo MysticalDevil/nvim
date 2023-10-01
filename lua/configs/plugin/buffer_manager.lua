@@ -36,7 +36,7 @@ end
 -- Just the menu
 utils.keymap({ "t", "n" }, "<M-Space>", bmui.toggle_quick_menu)
 -- Open menu and search
-utils.keymap({ "t", "n" }, "<M-m>", function()
+utils.keymap({ "t", "n" }, "<M-b>", function()
   bmui.toggle_quick_menu()
   -- wait for the menu to open
   vim.defer_fn(function()

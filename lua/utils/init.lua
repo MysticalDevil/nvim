@@ -1,13 +1,5 @@
 local M = {}
 
----@param name string
-local function not_proxy_lsp(name)
-  if name == "null-ls" or name == "efm" then
-    return false
-  end
-  return true
-end
-
 function M.log(v)
   print(vim.inspect(v))
   return v
@@ -65,35 +57,131 @@ function M.async_formatting(bufnr)
   end)
 end
 
-function M.get_lsp_info()
-  local msg = "No Active LSP"
+---@param name string
+local function not_proxy_lsp(name)
+  return name ~= "null-ls" and name ~= "efm"
+end
+
+local non_proxy_clients = {}
+
+M.get_lsp_info = function()
   local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+
   local clients = vim.lsp.get_active_clients()
-  if next(clients) == nil then
-    return msg
+  if not clients then
+    non_proxy_clients = {}
+    clients = vim.lsp.get_active_clients()
   end
 
-  if #clients == 1 and not_proxy_lsp(clients[1].name) then
-    return clients[1].name
-  end
-
-  if #clients == 2 then
-    if not_proxy_lsp(clients[1].name) then
-      return clients[1].name
-    end
-    if not_proxy_lsp(clients[2].name) then
-      return clients[2].name
-    end
-    return msg
+  local cached_client = non_proxy_clients[buf_ft]
+  if cached_client then
+    return cached_client.name
   end
 
   for _, client in ipairs(clients) do
-    local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and not_proxy_lsp(client.name) then
-      return client.name
+    if client.config.filetypes and vim.tbl_contains(client.config.filetypes, buf_ft) then
+      if not_proxy_lsp(client.name) then
+        non_proxy_clients[buf_ft] = client
+        return client.name
+      end
     end
   end
-  return msg
+
+  return "No Active LSP"
+end
+
+local lsp_count = {}
+-- calculate number of references for entity under cursor asynchronously
+---@async
+local function request_lsp_ref_count()
+  if vim.fn.mode ~= "n" then
+    lsp_count = {}
+    return
+  end
+
+  local params = vim.lsp.util.make_position_params(0) ---@diagnotics disable-line: missing-parameter
+  params.context = { includeDecleration = false }
+
+  local this_file_uri = vim.uri_from_fname(vim.fn.expand("%:p"))
+
+  vim.lsp.buf_request(0, "textDocument/references", params, function(error, refs)
+    lsp_count.ref_file = 0
+    lsp_count.ref_workspace = 0
+    if not error and refs then
+      lsp_count.ref_workspace = #refs
+      for _, ref in pairs(refs) do
+        if this_file_uri == ref.uri then
+          lsp_count.ref_file = lsp_count.ref_file + 1
+        end
+      end
+    end
+  end)
+
+  vim.lsp.buf_request(0, "textDocument/defination", params, function(error, defs)
+    lsp_count.def_file = 0
+    lsp_count.def_workspace = 0
+    if not error and defs then
+      lsp_count.def_workspace = #defs
+      for _, def in pairs(defs) do
+        if this_file_uri == def.targetUri then
+          lsp_count.def_file = lsp_count.def_file + 1
+        end
+      end
+    end
+  end)
+end
+
+---shows the number of definitions/references as identified by LSP. Shows count
+---for the current file and for the whole workspace.
+---@return string statusline text
+---@nodiscard
+function M.lsp_count()
+  -- abort when lsp loading or not capable of references
+  local current_bufnr = vim.fn.bufnr()
+  local buf_clients = vim.lsp.get_active_clients({ bufnr = current_bufnr })
+  local lsp_progress = (vim.version().minor > 9 and vim.version().major == 0) and vim.lsp.status()
+    or vim.lsp.util.get_progress_messages()
+  local lsp_loading = lsp_progress.title and lsp_progress.title:find("[Ll]oad")
+  local lsp_capable = false
+  for _, client in pairs(buf_clients) do
+    local capable = client.server_capabilities
+    if capable.referencesProvider and capable.definationProvider then
+      lsp_capable = true
+    end
+  end
+  if vim.api.nvim_get_mode() ~= "n" or lsp_loading or not lsp_capable then
+    return ""
+  end
+
+  -- trigger count, abort when none
+  request_lsp_ref_count() -- needs to be separated due to lsp calls being async
+  vim.notify(lsp_count)
+  if lsp_count.ref_workspace == 0 and lsp_count.def_workspace == 0 then
+    return ""
+  end
+  if not lsp_count.ref_workspace then
+    return ""
+  end
+
+  -- format lsp references/definitions count to be displayed in the status bar
+  local defs, refs = "", ""
+  if lsp_count.def_workspace then
+    defs = tostring(lsp_count.def_file)
+    if lsp_count.def_file ~= lsp_count.def_workspace then
+      defs = defs .. "(" .. tostring(lsp_count.def_workspace) .. ")"
+    end
+    defs = defs .. "D"
+  end
+  if lsp_count.ref_workspace then
+    refs = tostring(lsp_count.ref_file)
+    if lsp_count.ref_file ~= lsp_count.ref_workspace then
+      refs = refs .. "(" .. tostring(lsp_count.ref_workspace) .. ")"
+    end
+    refs = refs .. "R"
+  end
+
+  vim.nofity("not break")
+  return "LSP: " .. defs .. " " .. refs
 end
 
 return M
