@@ -176,13 +176,13 @@ return {
   {
     "ms-jpq/coq_nvim",
     branch = "coq",
-    lazy = false,
+    lazy = true,
+    enabled = false,
     dependencies = {
       { "ms-jpq/coq.artifacts", branch = "artifacts" },
       { "ms-jpq/coq.thirdparty", branch = "3p" },
       { "neovim/nvim-lspconfig" },
     },
-    event = "LspAttach",
   },
 
   --
