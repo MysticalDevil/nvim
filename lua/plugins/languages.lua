@@ -572,4 +572,16 @@ return {
       require("configs.plugin.lsp_lines")
     end,
   },
+  -- action-preview.nvim
+  -- Fully customizable previewer for LSP code actions.
+  {
+    "aznhe21/actions-preview.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require("configs.plugin.actions-preview")
+    end,
+  },
 }
