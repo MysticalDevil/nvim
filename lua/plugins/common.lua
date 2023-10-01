@@ -28,6 +28,15 @@ return {
       require("configs.plugin.bufferline")
     end,
   },
+  -- buffer_manager.nvim
+  -- A simple plugin to easily manage Neovim buffers.
+  {
+    "j-morano/buffer_manager.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("configs.plugin.buffer_manager")
+    end,
+  },
   -- Comment.nvim
   -- Smart and powerful comment plugin for neovim
   {
