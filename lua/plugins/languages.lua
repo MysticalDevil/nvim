@@ -572,13 +572,4 @@ return {
       require("configs.plugin.lsp_lines")
     end,
   },
-  -- action-hints.nvim
-  -- A Neovim plugin that displays available actions like 'Go to Definition' and 'Go to Reference(s)'
-  -- for the highlighted word, presented in the statusline or inline as virtual text.
-  {
-    "roobert/action-hints.nvim",
-    config = function()
-      require("configs.plugin.action-hints")
-    end,
-  },
 }
