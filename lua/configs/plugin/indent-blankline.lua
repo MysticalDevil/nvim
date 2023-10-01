@@ -38,7 +38,7 @@ local opts = {
   },
   indent = {
     char = "▏", -- "│",  "│", "¦", "┆", "┊"
-    tab_char = { "a", "b", "c" },
+    tab_char = { "I", "󱂉", "󱂊" },
     highlight = "IblIndent",
     smart_indent_cap = true,
     priority = 2,
