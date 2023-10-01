@@ -31,7 +31,7 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 -- Auto disable side line number for some filetypes
 autocmd("FileType", {
   group = commonAutoGroup,
-  pattern = { "nvim-doc-view" },
+  pattern = { "nvim-docs-view" },
   callback = function()
     vim.opt.number = false
   end,

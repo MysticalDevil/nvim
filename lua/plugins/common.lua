@@ -512,6 +512,20 @@ return {
       require("configs.plugin.styler")
     end,
   },
+  -- surround-ui.nvim
+  -- A Neovim plugin which acts as a helper or training aid for kylechui/nvim-surround
+  {
+    "roobert/surround-ui.nvim",
+    dependencies = {
+      "kylechui/nvim-surround",
+      "folke/which-key.nvim",
+    },
+    config = function()
+      require("surround-ui").setup({
+        root_key = "S",
+      })
+    end,
+  },
   -- tabout.nvim
   -- Supercharge your workflow and start tabbing out from parentheses, quotes, and similar contexts today.
   {
