@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local utils = require("utils.setup")
+
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
@@ -87,14 +89,6 @@ local function ins_section(component, locate)
   table.insert(opts.sections[locate], component)
 end
 
----@param name string
-local function not_proxy_lsp(name)
-  if name == "null-ls" or name == "efm" then
-    return false
-  end
-  return true
-end
-
 local branch = {
   "branch",
   icon = "",
@@ -155,37 +149,8 @@ local fileformat = {
   },
 }
 
-local lsp_status = {
-  function()
-    local msg = "No Active LSP"
-    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return msg
-    end
-
-    if #clients == 1 and not_proxy_lsp(clients[1].name) then
-      return clients[1].name
-    end
-
-    if #clients == 2 then
-      if not_proxy_lsp(clients[1].name) then
-        return clients[1].name
-      end
-      if not_proxy_lsp(clients[2].name) then
-        return clients[2].name
-      end
-      return msg
-    end
-
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and not_proxy_lsp(client.name) then
-        return client.name
-      end
-    end
-    return msg
-  end,
+local lsp_info = {
+  utils.get_lsp_info,
   icon = " LSP:",
   color = { fg = colors.yellow, gui = "bold" },
 }
@@ -198,7 +163,7 @@ ins_section(diff, "lualine_b")
 ins_section(diagnostics, "lualine_c")
 ins_section(filename, "lualine_c")
 
-ins_section(lsp_status, "lualine_x")
+ins_section(lsp_info, "lualine_x")
 ins_section("filesize", "lualine_x")
 ins_section(fileformat, "lualine_x")
 ins_section("encoding", "lualine_x")

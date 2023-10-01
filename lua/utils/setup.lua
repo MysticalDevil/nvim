@@ -1,5 +1,13 @@
 local M = {}
 
+---@param name string
+local function not_proxy_lsp(name)
+  if name == "null-ls" or name == "efm" then
+    return false
+  end
+  return true
+end
+
 function M.log(v)
   print(vim.inspect(v))
   return v
@@ -31,7 +39,7 @@ M.deep_print = function(tbl)
   return request_headers_all
 end
 
-M.async_formatting = function(bufnr)
+function M.async_formatting(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
 
   vim.lsp.buf_request(bufnr, "textDocument/formatting", vim.lsp.util.make_formatting_params({}), function(err, res, ctx)
@@ -55,6 +63,37 @@ M.async_formatting = function(bufnr)
       end)
     end
   end)
+end
+
+function M.get_lsp_info()
+  local msg = "No Active LSP"
+  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+  local clients = vim.lsp.get_active_clients()
+  if next(clients) == nil then
+    return msg
+  end
+
+  if #clients == 1 and not_proxy_lsp(clients[1].name) then
+    return clients[1].name
+  end
+
+  if #clients == 2 then
+    if not_proxy_lsp(clients[1].name) then
+      return clients[1].name
+    end
+    if not_proxy_lsp(clients[2].name) then
+      return clients[2].name
+    end
+    return msg
+  end
+
+  for _, client in ipairs(clients) do
+    local filetypes = client.config.filetypes
+    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 and not_proxy_lsp(client.name) then
+      return client.name
+    end
+  end
+  return msg
 end
 
 return M
