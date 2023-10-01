@@ -195,10 +195,10 @@ ins_section("mode", "lualine_a")
 ins_section(branch, "lualine_b")
 ins_section(diff, "lualine_b")
 
+ins_section(diagnostics, "lualine_c")
 ins_section(filename, "lualine_c")
-ins_section(lsp_status, "lualine_c")
 
-ins_section(diagnostics, "lualine_x")
+ins_section(lsp_status, "lualine_x")
 ins_section("filesize", "lualine_x")
 ins_section(fileformat, "lualine_x")
 ins_section("encoding", "lualine_x")
