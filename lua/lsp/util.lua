@@ -43,23 +43,25 @@ function M.flags()
   }
 end
 
+function M.default_on_attach(client, bufnr)
+  M.disable_format(client)
+  M.key_attach(bufnr)
+
+  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
+
+  if vim.fn.has("nvim-0.10") == 1 then
+    M.set_inlay_hints(client, bufnr)
+  end
+end
+
 ---@return table
 function M.default_configs()
   return {
     capabilities = M.common_capabilities(),
     flags = M.flags(),
-    on_attach = function(client, bufnr)
-      M.disable_format(client)
-      M.key_attach(bufnr)
-
-      vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
-      vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
-      vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
-
-      if vim.fn.has("nvim-0.10") == 1 then
-        M.set_inlay_hints(client, bufnr)
-      end
-    end,
+    on_attach = M.default_on_attach,
   }
 end
 
@@ -169,6 +171,22 @@ local function setup_for_rust(server, opts)
   end
 end
 
+---@param server table
+---@param opts table
+local function setup_for_typescript(server, opts)
+  local ok_ts, ts_tools = pcall(require, "typescript-tools")
+  if not ok_ts then
+    vim.notify("Failed to load typescript tools, will set up `tsserver` without `typescript-tools`.", "warn")
+    if complete_util.get_engine() == "coq" then
+      server.setup(require("coq").lsp_ensure_capabilities(opts))
+    else
+      server.setup(opts)
+    end
+  else
+    require("configs.plugin.typescript-tools")
+  end
+end
+
 ---@param coq_status boolean
 ---@param opts table
 ---@return table
@@ -207,6 +225,12 @@ function M.set_on_setup(opts, lang)
     server_config.on_setup = function(server)
       require("neodev").setup()
       server.setup(opts)
+    end
+  end
+
+  if lang == "typescript" then
+    server_config.on_setup = function(server)
+      setup_for_typescript(server, opts)
     end
   end
 

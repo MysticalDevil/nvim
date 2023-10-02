@@ -4,10 +4,11 @@ if not status then
   return
 end
 
---local mason_path = vim.fn.stdpath("data") .. "/mason"
+local mason_registry = require("mason-registry")
+local tsserver_path = mason_registry.get_package("typescript-language-server"):get_install_path()
 
 local opts = {
-  on_attach = function() end,
+  on_attach = require("lsp.util").default_on_attach,
   handlers = {},
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it
@@ -19,7 +20,7 @@ local opts = {
     expose_as_code_action = {},
     -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
     -- not exists then standard path resolution strategy is applied
-    tsserver_path = "/usr/bin/tsserver",
+    tsserver_path = tsserver_path .. "/node_modules/typescript/lib/tsserver.js",
     -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
     -- (see 💅 `styled-components` support section)
     tsserver_plugins = {},
@@ -27,18 +28,19 @@ local opts = {
     -- memory limit in megabytes or "auto"(basically no limit)
     tsserver_max_memory = "auto",
     -- described below
-    tsserver_format_options = {},
+    tsserver_format_options = {
+      allowIncompleteCompletions = false,
+      allowRenameOfImportPath = false,
+    },
     tsserver_file_preferences = {
       includeInlayParameterNameHints = "all",
-      includeInlayEnumMemberValueHints = true,
-      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
       includeInlayFunctionParameterTypeHints = true,
-      includeInlayPropertyDeclarationTypeHints = true,
       includeInlayVariableTypeHints = true,
-
-      includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-
-      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
     },
     -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
     complete_function_calls = false,
