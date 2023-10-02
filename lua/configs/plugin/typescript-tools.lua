@@ -7,6 +7,8 @@ end
 local mason_registry = require("mason-registry")
 local tsserver_path = mason_registry.get_package("typescript-language-server"):get_install_path()
 
+vim.notify("I am loaded")
+
 local opts = {
   on_attach = require("lsp.util").default_on_attach,
   handlers = {},
@@ -33,6 +35,23 @@ local opts = {
       allowRenameOfImportPath = false,
     },
     tsserver_file_preferences = {
+      quotePreference = "auto",
+      importModuleSpecifierEnding = "auto",
+      jsxAttributeCompletionStyle = "auto",
+      allowTextChangesInNewFiles = true,
+      providePrefixAndSuffixTextForRename = true,
+      allowRenameOfImportPath = true,
+      includeAutomaticOptionalChainCompletions = true,
+      provideRefactorNotApplicableReason = true,
+      generateReturnInDocTemplate = true,
+      includeCompletionsForImportStatements = true,
+      includeCompletionsWithSnippetText = true,
+      includeCompletionsWithClassMemberSnippets = true,
+      includeCompletionsWithObjectLiteralMethodSnippets = true,
+      useLabelDetailsInCompletionEntries = true,
+      allowIncompleteCompletions = true,
+      displayPartsForJSDoc = true,
+      disableLineTextInReferences = true,
       includeInlayParameterNameHints = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
       includeInlayFunctionParameterTypeHints = true,
