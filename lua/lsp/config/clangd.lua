@@ -1,6 +1,8 @@
 local util = require("lsp.util")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+---@diagnostic disable-next-line
+capabilities.offsetEncoding = { "utf-16" }
 
 local inlay_hints = require("clangd_extensions.inlay_hints")
 
