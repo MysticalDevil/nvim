@@ -28,7 +28,18 @@ local opts = {
     tsserver_max_memory = "auto",
     -- described below
     tsserver_format_options = {},
-    tsserver_file_preferences = {},
+    tsserver_file_preferences = {
+      includeInlayParameterNameHints = "all",
+      includeInlayEnumMemberValueHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayVariableTypeHints = true,
+
+      includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+    },
     -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
     complete_function_calls = false,
   },

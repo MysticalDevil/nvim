@@ -572,6 +572,16 @@ return {
       require("configs.plugin.lsp_lines")
     end,
   },
+  -- lsp-inlayhints.nvim
+  -- Partial implementation of LSP inlay hint.
+  {
+    "lvimuser/lsp-inlayhints.nvim",
+    branch = "anticonceal",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("configs.plugin.lsp-inlayhints")
+    end,
+  },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
   {

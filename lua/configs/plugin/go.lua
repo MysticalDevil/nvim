@@ -4,7 +4,9 @@ if not status then
   return
 end
 
-local opts = {}
+local opts = {
+  lsp_inlay_hints = { enable = false },
+}
 
 -- Run gofmt + goimport on save
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
