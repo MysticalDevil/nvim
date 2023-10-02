@@ -1,7 +1,6 @@
 local util = require("lsp.util")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.offsetEncoding = { "utf-16" }
 
 local inlay_hints = require("clangd_extensions.inlay_hints")
 
@@ -18,6 +17,14 @@ opts.settings = {
     "objcpp",
     "proto",
     "cppm",
+  },
+  clangd = {
+    InlayHints = {
+      Designators = true,
+      Enabled = true,
+      ParameterNames = true,
+      DeducedTypes = true,
+    },
   },
 }
 opts.cmd = {
@@ -36,6 +43,10 @@ opts.init_options = {
 opts.on_attach = function(client, bufnr)
   util.disable_format(client)
   util.key_attach(bufnr)
+
+  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
 
   if vim.fn.has("nvim-0.10") == 1 then
     util.set_inlay_hints(client, bufnr)

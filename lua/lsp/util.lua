@@ -23,17 +23,7 @@ function M.common_capabilities()
     return cmp_nvim_lsp.default_capabilities()
   end
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  }
-
-  return capabilities
+  return vim.lsp.protocol.make_client_capabilities()
 end
 
 ---@return table
@@ -158,7 +148,7 @@ end
 ---@param server table
 ---@param opts table
 local function setup_for_rust(server, opts)
-  local ok_rt, rust_tools = pcall(require, "rust-tools")
+  local ok_rt, _ = pcall(require, "rust-tools")
   if not ok_rt then
     vim.notify("Failed to load rust tools, will set up `rust-analyzer` without `rust-tools`.", "warn")
     if complete_util.get_engine() == "coq" then
@@ -174,7 +164,7 @@ end
 ---@param server table
 ---@param opts table
 local function setup_for_typescript(server, opts)
-  local ok_ts, ts_tools = pcall(require, "typescript-tools")
+  local ok_ts, _ = pcall(require, "typescript-tools")
   if not ok_ts then
     vim.notify("Failed to load typescript tools, will set up `tsserver` without `typescript-tools`.", "warn")
     if complete_util.get_engine() == "coq" then
