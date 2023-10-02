@@ -9,13 +9,16 @@ local metals_config = metals.bare_config()
 metals_config.settings = {
   showImplicitArguments = true,
   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-  scala = {
-    inlayHints = {
-      parameterNames = {
-        enabled = "all",
-      },
-    },
-  },
+  --disabledMode = true,
+  --bloopVersion = "1.5.6-253-5faffd8d-SNAPSHOT",
+  showImplicitConversionsAndClasses = true,
+  showInferredType = true,
+  enableSemanticHighlighting = false,
+  --fallbackScalaVersion = "2.13.10",
+  serverVersion = "latest.snapshot",
+  --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
+  --serverVersion = "1.0.2-SNAPSHOT",
+  --testUserInterface = "Test Explorer",
 }
 
 metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
