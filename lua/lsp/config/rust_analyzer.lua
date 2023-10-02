@@ -17,6 +17,10 @@ opts.settings = {
     },
     cargo = {
       autoReload = true,
+      loadOutDirsFromCheck = true,
+    },
+    procMacro = {
+      enable = true,
     },
   },
 }

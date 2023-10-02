@@ -26,6 +26,15 @@ opts.settings = {
     telemetry = {
       enable = false,
     },
+    hint = {
+      enable = true,
+      arrayIndex = "Auto",
+      await = true,
+      paramName = "All",
+      paramType = true,
+      semicolon = "SameLine",
+      setType = false,
+    },
   },
 }
 
