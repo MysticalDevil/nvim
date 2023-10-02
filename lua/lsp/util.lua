@@ -55,8 +55,56 @@ function M.default_configs()
       vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
       vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
       vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
+
+      if vim.fn.has("nvim-0.10") == 1 then
+        M.set_inlay_hints(client, bufnr)
+      end
     end,
   }
+end
+
+function M.set_inlay_hints(client, bufnr)
+  if not client then
+    vim.notify_once("LSP Inlayhints attached failed: nil client.", vim.log.levels.ERROR)
+    return
+  end
+
+  if not client.server_capabilities.inlayHintProvider then
+    return
+  end
+
+  if setmetatable({}, { __index = nil })[bufnr] then
+    return
+  end
+
+  if client.name == "zls" then
+    vim.g.zig_fmt_autosave = 0
+  end
+
+  vim.lsp.inlay_hint(bufnr)
+end
+
+function M.enable_inlay_hints_autocmd()
+  vim.api.nvim_create_augroup("LspSetup_Inlayhints", {})
+  vim.cmd.highlight("default link LspInlayHint Comment")
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = "LspSetup_Inlayhints",
+    callback = function(args)
+      if not (args.data and args.data.client_id) then
+        return
+      end
+
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+      if vim.fn.has("nvim-0.10") == 1 then
+        M.set_inlay_hints(client, bufnr)
+      else
+        require("lsp-inlayhints").on_attach(client, bufnr)
+      end
+    end,
+  })
 end
 
 ---@param name string|table
@@ -117,10 +165,7 @@ local function setup_for_rust(server, opts)
       server.setup(opts)
     end
   else
-    rust_tools.setup({
-      server = server,
-      dap = require("dap.nvim-dap.config.rust"),
-    })
+    require("configs.plugin.rust-tools")
   end
 end
 

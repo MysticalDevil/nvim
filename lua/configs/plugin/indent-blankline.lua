@@ -90,7 +90,7 @@ local opts = {
       },
     },
     exclude = {
-      languages = {},
+      language = {},
       node_type = {
         ["*"] = {
           "source_file",

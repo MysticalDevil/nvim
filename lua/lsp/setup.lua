@@ -8,6 +8,8 @@ local lsp = lsp_zero.preset({})
 local mason = require("mason")
 local lspconfig = require("lspconfig")
 
+local util = require("lsp.util")
+
 --------------------------------------- Configures ------------------------------------------------
 
 lsp.on_attach(function(_, bufnr)
@@ -68,5 +70,7 @@ for _, name in ipairs(lsp_servers) do
 end
 
 require("lsp.ui")
+
+util.enable_inlay_hints_autocmd()
 
 lsp.setup()

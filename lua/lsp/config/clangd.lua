@@ -36,8 +36,13 @@ opts.init_options = {
 opts.on_attach = function(client, bufnr)
   util.disable_format(client)
   util.key_attach(bufnr)
-  inlay_hints.setup_autocmd()
-  inlay_hints.set_inlay_hints()
+
+  if vim.fn.has("nvim-0.10") == 1 then
+    util.set_inlay_hints(client, bufnr)
+  else
+    inlay_hints.setup_autocmd()
+    inlay_hints.set_inlay_hints()
+  end
 end
 
 return util.set_on_setup(opts)
