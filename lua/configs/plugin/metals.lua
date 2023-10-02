@@ -9,6 +9,13 @@ local metals_config = metals.bare_config()
 metals_config.settings = {
   showImplicitArguments = true,
   excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+  scala = {
+    inlayHints = {
+      parameterNames = {
+        enabled = "all",
+      },
+    },
+  },
 }
 
 metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -38,6 +45,9 @@ dap.configurations.scala = {
 ---@diagnostic disable-next-line
 metals_config.on_attach = function(client, bufnr)
   require("metals").setup_dap()
+  if vim.fn.has("nvim-0.10") == 1 then
+    vim.lsp.inlay_hint(bufnr)
+  end
 end
 
 -- Autocmd that will actually be in charging of starting the whole thing
