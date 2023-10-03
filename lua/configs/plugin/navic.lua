@@ -42,6 +42,7 @@ local opts = {
   lsp = {
     auto_attach = true,
     preference = {
+      "denols",
       "tsserver",
     },
   },

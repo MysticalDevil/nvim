@@ -56,12 +56,17 @@ function M.default_configs()
 end
 
 function M.set_inlay_hints(client, bufnr)
+  if client.name == "null-ls" then
+    return
+  end
+
   if not client then
     vim.notify_once("LSP Inlayhints attached failed: nil client.", vim.log.levels.ERROR)
     return
   end
 
   if not client.server_capabilities.inlayHintProvider then
+    vim.notify_once(client.name .. ": LSP do not have inlay hint provider")
     return
   end
 
@@ -165,14 +170,18 @@ end
 ---@param opts table
 local function setup_for_typescript(server, opts)
   local ok_ts, _ = pcall(require, "typescript-tools")
+
   if not ok_ts then
-    vim.notify("Failed to load typescript tools, will set up `tsserver` without `typescript-tools`.", "warn")
-    if complete_util.get_engine() == "coq" then
-      server.setup(require("coq").lsp_ensure_capabilities(opts))
-    else
-      server.setup(opts)
-    end
-  else
+    vim.notify("Failed to load typescript tools, setting up tsserver without typescript-tools.", "warn")
+  end
+
+  if complete_util.get_engine() == "coq" then
+    opts = require("coq").lsp_ensure_capabilities(opts)
+  end
+
+  server.setup(opts)
+
+  if ok_ts then
     require("configs.plugin.typescript-tools")
   end
 end

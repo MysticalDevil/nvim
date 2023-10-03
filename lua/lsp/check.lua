@@ -3,6 +3,7 @@ local util = require("lsp.util")
 local servers_list = {
   "clangd",
   "clojure_lsp",
+  "denols",
   "kotlin_language_server",
   "lua_ls",
   "taplo",
@@ -16,6 +17,7 @@ local required_npm = {
   "eslint",
   "html",
   "jsonls",
+  "tsserver",
   "vimls",
   "volar",
   "yamlls",

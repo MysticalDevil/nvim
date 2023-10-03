@@ -4,13 +4,12 @@ if not status then
   return
 end
 
-local mason_registry = require("mason-registry")
-local tsserver_path = mason_registry.get_package("typescript-language-server"):get_install_path()
-
 vim.notify("I am loaded")
 
 local opts = {
   on_attach = require("lsp.util").default_on_attach,
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  single_file_support = false,
   handlers = {},
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it
@@ -22,7 +21,7 @@ local opts = {
     expose_as_code_action = {},
     -- string|nil - specify a custom path to `tsserver.js` file, if this is nil or file under path
     -- not exists then standard path resolution strategy is applied
-    tsserver_path = tsserver_path .. "/node_modules/typescript/lib/tsserver.js",
+    -- tsserver_path = tsserver_path .. "/node_modules/typescript/lib/tsserver.js",
     -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
     -- (see 💅 `styled-components` support section)
     tsserver_plugins = {},

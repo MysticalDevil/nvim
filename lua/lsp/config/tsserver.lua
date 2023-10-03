@@ -2,6 +2,8 @@ local util = require("lsp.util")
 
 local opts = util.default_configs()
 
+opts.filetypes =
+  { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 opts.settings = {
   settings = {
     typescript = {
@@ -30,5 +32,6 @@ opts.settings = {
     },
   },
 }
+opts.single_file_support = false
 
 return util.set_on_setup(opts, "typescript")

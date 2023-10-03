@@ -129,7 +129,10 @@ local opts = {
   },
   lsp = {
     auto_attach = true, -- If set to true, you don't need to manually use attach function
-    preference = nil, -- list of lsp server names in order of preference
+    preference = {
+      "denols",
+      "tsserver",
+    }, -- list of lsp server names in order of preference
   },
   source_buffer = {
     follow_node = true, -- Keep the current node in focus on the source buffer
