@@ -33,7 +33,7 @@ local required_go = { "efm", "gopls" }
 
 local required_pip = { "cmake" }
 
-local required_gem = { "solargraph" }
+local required_gem = { "ruby_ls" }
 
 local insert_to = function(status, insert_list)
   if status then
