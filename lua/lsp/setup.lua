@@ -17,9 +17,12 @@ lsp.on_attach(function(_, bufnr)
 end)
 
 local lsp_servers = require("lsp.check")
-table.insert(lsp_servers, "rust_analyzer")
-table.insert(lsp_servers, "v_analyzer")
-table.insert(lsp_servers, "racket_langserver")
+vim.tbl_extend("keep", {
+  "omnisharp",
+  "racket_langserver",
+  "rust_analyzer",
+  "v_analyzer",
+}, lsp_servers)
 
 -- :h mason-default-settings
 mason.setup({
@@ -47,6 +50,7 @@ local servers = {
   jsonls = require("lsp.config.jsonls"),
   kotlin_language_server = require("lsp.config.kotlin_language_server"),
   lua_ls = require("lsp.config.lua_ls"),
+  omnisharp = require("lsp.config.omnisharp"),
   pylyzer = require("lsp.config.pylyzer"),
   racket_langserver = require("lsp.config.racket_langserver"),
   rust_analyzer = require("lsp.config.rust_analyzer"),
