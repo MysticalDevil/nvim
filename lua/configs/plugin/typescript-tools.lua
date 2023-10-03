@@ -4,8 +4,6 @@ if not status then
   return
 end
 
-vim.notify("I am loaded")
-
 local opts = {
   on_attach = require("lsp.util").default_on_attach,
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
