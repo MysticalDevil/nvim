@@ -16,13 +16,20 @@ lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
 end)
 
+local function arr_extend(origin_arr, added_arr)
+  for i = #added_arr, 1, -1 do
+    origin_arr[#origin_arr + 1] = added_arr[i]
+  end
+  return origin_arr
+end
+
 local lsp_servers = require("lsp.check")
-vim.tbl_extend("keep", {
-  "omnisharp",
+lsp_servers = arr_extend(lsp_servers, {
+  "csharp_ls",
   "racket_langserver",
   "rust_analyzer",
   "v_analyzer",
-}, lsp_servers)
+})
 
 -- :h mason-default-settings
 mason.setup({
@@ -39,6 +46,7 @@ mason.setup({
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   bashls = require("lsp.config.bashls"),
+  csharp_ls = require("lsp.config.csharp_ls"),
   clangd = require("lsp.config.clangd"),
   clojure_lsp = require("lsp.config.clojure_lsp"),
   cssls = require("lsp.config.cssls"),
@@ -50,7 +58,6 @@ local servers = {
   jsonls = require("lsp.config.jsonls"),
   kotlin_language_server = require("lsp.config.kotlin_language_server"),
   lua_ls = require("lsp.config.lua_ls"),
-  omnisharp = require("lsp.config.omnisharp"),
   pylyzer = require("lsp.config.pylyzer"),
   racket_langserver = require("lsp.config.racket_langserver"),
   rust_analyzer = require("lsp.config.rust_analyzer"),

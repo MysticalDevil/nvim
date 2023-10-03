@@ -79,7 +79,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   vim.lsp.inlay_hint(bufnr, true)
-  -- vim.notify_once(client.name .. ": LSP have enabled inlay hints", vim.log.levels.INFO)
+  vim.notify_once(client.name .. ": LSP have enabled inlay hints", vim.log.levels.INFO)
 end
 
 function M.enable_inlay_hints_autocmd()
