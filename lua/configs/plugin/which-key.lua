@@ -163,30 +163,87 @@ which_key.register({
     },
     d = {
       name = "+debug",
-      d = { "<CMD>RustDebuggables<CR>", "Start debugger" },
       e = {
-        ":lua require('dap').close()<CR>"
-          .. ":lua require('dap').terminate()<CR>"
-          .. ":lua require('dap.repl').close()<CR>"
-          .. ":lua require('dapui').close()<CR>"
-          .. ":lua require('dap').clear_breakpoints()<CR>"
-          .. "<C-w>o<CR>",
+        function()
+          local dap = require("dap")
+          local dap_ui = require("dapui")
+          dap.close()
+          dap.terminate()
+          dap.repl.close()
+          dap_ui.close()
+          dap.clear_breakpoints()
+        end,
         "End debugger",
       },
-      c = { "<CMD>lua require('dap').continue()<CR>", "Continue debug" },
-      t = { "<CMD>lua require('dap').toggle_breakpoint()<CR>", "Set breakpoint" },
-      T = { "<CMD>lua require('dap').clear_breakpoints()<CR>", "Clear breakpoint" },
-      j = { "<CMD>lua require('dap').step_over()<CR>", "Step over" },
-      k = { "<CMD>lua require('dap').step_out()<CR>", "Step out" },
-      l = { "<CMD>lua require('dap').step_into()<CR>", "Step into" },
-      h = { "<CMD>lua require('dapui').eval()<CR>", "Popups dapUI eval" },
+      c = {
+        function()
+          require("dap").continue()
+        end,
+        "Continue debug",
+      },
+      t = {
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        "Set breakpoint",
+      },
+      T = {
+        function()
+          require("dap").clear_breakpoints()
+        end,
+        "Clear breakpoint",
+      },
+      j = {
+        function()
+          require("dap").step_over()
+        end,
+        "Step over",
+      },
+      k = {
+        function()
+          require("dap").step_out()
+        end,
+        "Step out",
+      },
+      l = {
+        function()
+          require("dap").step_into()
+        end,
+        "Step into",
+      },
+      h = {
+        function()
+          require("dapui").eval()
+        end,
+        "Popups dapUI eval",
+      },
     },
     r = {
       name = "+rust",
-      r = { "<CMD>lua require('rust-tools.runnables').runnables()<CR>", "Run runnables" },
-      h = { "<CMD>lua require('rust-tools.hover_actions').hover_actions()<CR>", "Hover actions" },
-      a = { "<CMD>lua require('rust-tools.code_action_group').code_action_group()<CR>", "Code actions" },
-      d = { "<CMD> lua require('rust-tools.debuggables).debuggables()<CR>", "Start debug" },
+      r = {
+        function()
+          require("rust-tools.runnables").runnables()
+        end,
+        "Run runnables",
+      },
+      h = {
+        function()
+          require("rust-tools.hover_actions").hover_actions()
+        end,
+        "Hover actions",
+      },
+      a = {
+        function()
+          require("rust-tools.code_action_group").code_action_group()
+        end,
+        "Code actions",
+      },
+      d = {
+        function()
+          require("rust-tools.debuggables").debuggables()
+        end,
+        "Start debug",
+      },
     },
 
     -----------------------------------------------------------
@@ -253,32 +310,6 @@ which_key.register({
     },
     o = { "<CMD>foldopen<CR>", "Open fold" },
     c = { "<CMD>foldclose<CR>", "Close fold" },
-  },
-  -- LSP shortcut key
-  g = {
-    name = "+LSP",
-    -- <cmd>Lspsaga preview_definition<CR>
-    d = {
-      function()
-        require("telescope.builtin").lsp_definitions({
-          initial_mode = "normal",
-          -- ignore_filename = false,
-        })
-      end,
-      "Go to definition",
-    },
-    -- <cmd>Lspsaga lsp_finder<CR>
-    r = {
-      function()
-        require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
-      end,
-      "Go to references",
-    },
-    h = { "<CMD>Lspsaga hover_doc<CR>", "Hover function definition" },
-    p = { "<CMD>Lspsaga show_line_diagnostics<CR>", "Open float diagnostics" },
-    j = { "<CMD>Lspsaga diagnostic_jump_next<CR>", "Go to next diagnostic" },
-    k = { "<CMD>Lspsaga diagnostic_jump_prev<CR>", "Go to previous diagnostic" },
-    i = { "<cmd>Lspsafa finder imp<CR>", "" },
   },
   -----------------------------------------------------------
   -- s_windows split window shortcut key

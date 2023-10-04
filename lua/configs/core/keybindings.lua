@@ -91,7 +91,7 @@ plugin_keys.map_LSP = function(mapbuf)
 
   -- code action
   -- Lspsaga replace ca
-  mapbuf("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
+  mapbuf("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
   -- mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 
   -- go xx
@@ -102,11 +102,11 @@ plugin_keys.map_LSP = function(mapbuf)
       initial_mode = "normal",
       -- ignore_filename = false,
     })
-  end)
+  end, { desc = "Go to definition" })
 
   -- hover document
   -- Lspsaga replace gh
-  mapbuf("n", "gh", "<cmd>Lspsaga hover_doc<cr>", opt)
+  mapbuf("n", "gh", "<cmd>Lspsaga hover_doc<cr>", { desc = "Hover documentation" })
   -- mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 
   -- Go to references
@@ -115,46 +115,17 @@ plugin_keys.map_LSP = function(mapbuf)
   -- mapbuf("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opt)
   mapbuf("n", "gr", function()
     require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
-  end)
+  end, { desc = "Go to references" })
 
   -- diagnostic
   -- Lspsaga replace gp, gj, gk
-  mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>", opt)
-  mapbuf("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opt)
-  mapbuf("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opt)
+  mapbuf("n", "gp", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Show line diagnostics" })
+  mapbuf("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { desc = "Jump to next diagnostic" })
+  mapbuf("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { desc = "Jump to previous diagnostic" })
 
   -- unused
   -- mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
   -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-end
-
--- nvim-dap
-plugin_keys.map_DAP = function()
-  -- start
-  map("n", "<leader>dd", ":RustDebuggables<CR>", opt)
-  -- end
-  map(
-    "n",
-    "<leader>de",
-    ":lua require('dap').close()<CR>"
-      .. ":lua require('dap').terminate()<CR>"
-      .. ":lua require('dap.repl').close()<CR>"
-      .. ":lua require('dapui').close()<CR>"
-      .. ":lua require('dap').clear_breakpoints()<CR>"
-      .. "<C-w>o<CR>",
-    opt
-  )
-  -- continue
-  map("n", "<Leader>dc", ":lua require('dap').continue()<CR>", opt)
-  -- set breakpoint
-  map("n", "<Leader>dt", ":lua require('dap').toggle_breakpoint()<CR>", opt)
-  map("n", "<Leader>dT", ":lua require('dap').clear_breakpoints()<CR>", opt)
-  -- stepOver, stepOut, stepInfo
-  map("n", "<Leader>dj", ":lua require('dap').steo_over()<CR>", opt)
-  map("n", "<Leader>dk", ":lua require('dap').step_out()<CR>", opt)
-  map("n", "<Leader>dl", ":lua require('dap').step_into()<CR>", opt)
-  -- pop-ups
-  map("n", "<Leader>dh", ":lua require('dapui').eval()<CR>", opt)
 end
 
 -- gitsigns

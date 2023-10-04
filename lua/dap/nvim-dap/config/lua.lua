@@ -23,7 +23,7 @@ function M.setup()
   }
 
   dap.adapters.nlua = function(callback, config)
-    callback({ type = "server", host = config.host, port = config.port })
+    callback({ type = "server", host = config.host, port = config.port }) ---@diagnostic disable-line
   end
 end
 

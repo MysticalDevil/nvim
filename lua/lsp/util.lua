@@ -3,8 +3,14 @@ local M = {}
 local complete_util = require("complete.util")
 
 function M.key_attach(bufnr)
-  local function buf_set_keymap(mode, lhs, rhs)
-    vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, buffer = bufnr })
+  ---@param opts table?
+  local function buf_set_keymap(mode, lhs, rhs, opts)
+    local default_opts = {
+      noremap = true,
+      silent = true,
+      buffer = bufnr,
+    }
+    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", default_opts, opts))
   end
   -- keybingings
   require("configs.core.keybindings").map_LSP(buf_set_keymap)

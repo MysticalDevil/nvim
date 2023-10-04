@@ -24,28 +24,28 @@ autocmd("BufEnter", {
 autocmd({ "BufEnter", "BufWinEnter" }, {
   group = commonAutoGroup,
   pattern = lispFiletypes,
-  command = "ParinferOn",
   desc = "Auto enable brackets matching for lisp files",
+  command = "ParinferOn",
 })
 
 -- Auto disable side line number for some filetypes
 autocmd("FileType", {
   group = commonAutoGroup,
   pattern = { "nvim-docs-view" },
+  desc = "Auto disable side line number for some filetypes",
   callback = function()
     vim.opt.number = false
   end,
-  desc = "Auto disable side line number for some filetypes",
 })
 
 -- Auto set indent for some filetypes
 autocmd("FileType", {
   group = indentAutoGroup,
   pattern = { "java", "kotlin", "c", "cpp" },
+  desc = "Auto set indent for some languages",
   callback = function()
     vim.opt.shiftwidth = 4
     vim.opt.tabstop = 4
     vim.opt.expandtab = false
   end,
-  desc = "Auto set indent for some languages",
 })

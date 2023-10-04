@@ -19,7 +19,7 @@ function M.setup()
     },
   }
 
-  local cpptools_config = {
+  local cpptools_config = { ---@diagnostic disable-line
     -- launch exe
     {
       name = "Launch file",

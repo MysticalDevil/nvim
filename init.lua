@@ -1,3 +1,8 @@
+if vim.fn.has("nvim-0.10") ~= 1 then
+  vim.notify("This config only avaiable on >=nvim-0.10", vim.log.levels.ERROR)
+  return
+end
+
 -- Basic configure
 require("configs.core.setup")
 -- Lazy plugins manage
