@@ -7,7 +7,7 @@ end
 -- Union mason and null-ls
 local mason_null_ls = require("mason-null-ls")
 
-local utils = require("utils")
+local G_utils = require("utils")
 
 mason_null_ls.setup({
   ensure_installed = {
@@ -98,8 +98,22 @@ null_ls.setup({
       timeout = 10000,
       prefer_local = "node_modules/.bin",
       extra_args = {
-        "--single-quote",
         "--no-semi",
+      },
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "css",
+        "scss",
+        "less",
+        "html",
+        "markdown",
+        "markdown.mdx",
+        "graphql",
+        "svelte",
       },
     }),
     -- PHP
@@ -140,7 +154,7 @@ null_ls.setup({
         group = lspFormatting,
         buffer = bufnr,
         callback = function()
-          utils.async_formatting(bufnr)
+          G_utils.async_formatting(bufnr)
         end,
       })
     end
