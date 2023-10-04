@@ -93,11 +93,15 @@ null_ls.setup({
   diagnostics_format = "[#{s}] #{m}",
   diagnostic_config = {
     -- see :help vim.diagnostic.config()
-    virtual_text = true,
+    virtual_text = false,
     signs = true,
     update_in_insert = false,
-    underline = true,
-    show_header = false,
+    underline = {
+      severity = { max = vim.diagnostic.severity.WARN },
+    },
+    show_header = {
+      severity = { max = vim.diagnostic.severity.WARN },
+    },
     severity_sort = true,
     float = {
       source = "always",
