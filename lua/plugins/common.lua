@@ -625,6 +625,14 @@ return {
       require("configs.plugin.twilight")
     end,
   },
+  -- ultimate-autopair.nvim
+  -- A neovim autopair plugin designed to have all the features that an autopair plugin needs.
+  {
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    branch = "v0.6", --recomended as each new version will have breaking changes
+    config = function() end,
+  },
   -- urlview.nvim
   -- Neovim plugin for viewing all the URLs in a buffer
   {
