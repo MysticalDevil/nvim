@@ -1,6 +1,6 @@
 local status, neodev = pcall(require, "neodev")
 if not status then
-  vim.notufy("noedev.nvim not found")
+  vim.notufy("neodev.nvim not found")
   return
 end
 
