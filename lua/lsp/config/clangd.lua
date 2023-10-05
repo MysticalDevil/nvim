@@ -17,8 +17,6 @@ opts.filetypes = {
   "cuda",
   "objcpp",
   "cppm",
-  "ixx",
-  "mpp",
 }
 opts.settings = {
   clangd = {

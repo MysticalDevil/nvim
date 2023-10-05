@@ -53,22 +53,6 @@ autocmd("FileType", {
 -- Add new file types
 autocmd({ "BufRead", "BufNewFile" }, {
   group = commonAutoGroup,
-  pattern = { "*.ixx" },
-  desc = "Set *.ixx file's filetype as ixx",
-  callback = function()
-    vim.bo.filetype = "ixx"
-  end,
-})
-autocmd({ "BufRead", "BufNewFile" }, {
-  group = commonAutoGroup,
-  pattern = { "*.mpp" },
-  desc = "Set *.mpp file's filetype as mpp",
-  callback = function()
-    vim.bo.filetype = "mpp"
-  end,
-})
-autocmd({ "BufRead", "BufNewFile" }, {
-  group = commonAutoGroup,
   pattern = { "*.v", "*.vv", "*.vsh", "*.vlang" },
   desc = "Set filetype as vlang",
   callback = function()
