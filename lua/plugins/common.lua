@@ -43,14 +43,6 @@ return {
       require("configs.plugin.buffer_manager")
     end,
   },
-  -- Comment.nvim
-  -- Smart and powerful comment plugin for neovim
-  {
-    "numToStr/Comment.nvim",
-    config = function()
-      require("configs.plugin.comment")
-    end,
-  },
   -- cellular-automaton.nvim
   -- A useless plugin that might help you cope with stubbornly broken tests or overall lack of sense in life.
   -- It lets you execute aesthetically pleasing, cellular automaton animations based on the content of neovim buffer.
@@ -59,6 +51,26 @@ return {
     cmd = "CellularAutomaton",
     config = function()
       vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+    end,
+  },
+
+  -- codewindow.nvim
+  -- Codewindow.nvim is a minimap plugin for neovim, that is closely integrated with treesitter
+  -- and the builtin LSP to display more information to the user.
+  {
+    "gorbit99/codewindow.nvim",
+    config = function()
+      local codewindow = require("codewindow")
+      codewindow.setup()
+      codewindow.apply_default_keybinds()
+    end,
+  },
+  -- Comment.nvim
+  -- Smart and powerful comment plugin for neovim
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("configs.plugin.comment")
     end,
   },
   -- dashboard-nvim
