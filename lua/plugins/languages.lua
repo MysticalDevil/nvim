@@ -503,41 +503,16 @@ return {
     end,
   },
 
-  -- nvim-navbuddy
-  -- A simple popup display that provides breadcrumbs feature using LSP server
+  -- dropbar.nvim
+  -- IDE-like breadcrumbs, out of the box
   {
-    "SmiteshP/nvim-navbuddy",
+    "Bekaboo/dropbar.nvim",
+    -- optional, but required for fuzzy finder support
     dependencies = {
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
     },
     config = function()
-      require("configs.plugin.navbuddy")
-    end,
-  },
-  -- nvim-navic
-  -- Simple winbar/statusline plugin that shows your current code context
-  {
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    config = function()
-      require("configs.plugin.navic")
-    end,
-    lazy = true,
-  },
-
-  -- barbecue.nvim
-  -- A VS Code like winbar for Neovim
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    config = function()
-      require("configs.plugin.barbecue")
+      require("configs.plugin.dropbar")
     end,
   },
 

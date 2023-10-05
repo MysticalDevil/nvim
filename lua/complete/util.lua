@@ -6,33 +6,7 @@ if not status then
   return
 end
 
-local kind_icons = {
-  Text = "󰉿",
-  Unit = "󰑭",
-  Value = "󰎠",
-  Keyword = "󰌋",
-  Snippet = "",
-  Color = "󰏘",
-  Reference = "󰈇",
-  Folder = "󰉋",
-  File = "󰈙 ",
-  Module = " ",
-  Class = "󰌗 ",
-  Method = "󰆧 ",
-  Property = " ",
-  Field = " ",
-  Constructor = " ",
-  Enum = "󰕘",
-  Interface = "󰕘",
-  Function = "󰊕 ",
-  Variable = "󰆧 ",
-  Constant = "󰏿 ",
-  EnumMember = " ",
-  Struct = "󰌗 ",
-  Event = " ",
-  Operator = "󰆕 ",
-  TypeParameter = "󰊄 ",
-}
+local kind_icons = require("utils").kind_icons
 
 local M = {}
 -- Provide parameter format for cmp.lua
