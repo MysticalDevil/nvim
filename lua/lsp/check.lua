@@ -29,7 +29,7 @@ end
 
 local required_cargo = { "fennel_language_server", "neocmake", "pylyzer" }
 
-local required_go = { "efm", "gopls" }
+local required_go = { "gopls" }
 
 local required_pip = { "cmake" }
 

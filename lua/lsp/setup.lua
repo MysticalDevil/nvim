@@ -51,7 +51,6 @@ local servers = {
   clojure_lsp = require("lsp.config.clojure_lsp"),
   cssls = require("lsp.config.cssls"),
   denols = require("lsp.config.denols"),
-  efm = require("lsp.config.efm"),
   emmet_ls = require("lsp.config.emmet_ls"),
   eslint = require("lsp.config.eslint"),
   gopls = require("lsp.config.gopls"),

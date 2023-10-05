@@ -2,16 +2,13 @@ local util = require("lsp.util")
 
 local opts = util.default_configs()
 
+opts.cmd = { "bash-language-server", "start" }
 opts.settings = {
-  cmd = { "bash-language-server", "start" },
-  cmd_env = {
-    GLOB_PATTERN = "*@(.sh|.inc|.bash|.command|.zsh)",
-  },
-  filetype = {
-    "sh",
-    "zsh",
-    "bash",
+  bashIde = {
+    globPattern = "*@(.sh|.inc|.bash|.command)",
   },
 }
+opts.filetype = { "sh", "zsh", "bash" }
+opts.single_file_support = true
 
 return util.set_on_setup(opts)

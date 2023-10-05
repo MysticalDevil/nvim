@@ -2,6 +2,7 @@ local util = require("lsp.util")
 
 local opts = util.default_configs()
 
+opts.filetypes = { "go", "gomod", "gowork", "gotmpl" }
 opts.settings = {
   gopls = {
     experimentalPostfixCompletions = true,
@@ -25,5 +26,7 @@ opts.settings = {
 opts.init_options = {
   usePlaceholders = true,
 }
+opts.root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git")
+opts.single_file_support = true
 
 return util.set_on_setup(opts)

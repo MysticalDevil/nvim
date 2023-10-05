@@ -9,17 +9,17 @@ local inlay_hints = require("clangd_extensions.inlay_hints")
 local opts = util.default_configs()
 
 opts.capabilities = capabilities
+opts.filetypes = {
+  "c",
+  "cpp",
+  "h",
+  "hpp",
+  "cuda",
+  "objcpp",
+  "cppm",
+  "ixx",
+}
 opts.settings = {
-  filetypes = {
-    "c",
-    "cpp",
-    "h",
-    "hpp",
-    "cuda",
-    "objcpp",
-    "proto",
-    "cppm",
-  },
   clangd = {
     InlayHints = {
       Designators = true,
@@ -27,6 +27,7 @@ opts.settings = {
       ParameterNames = true,
       DeducedTypes = true,
     },
+    fallbackFlags = { "-std=c++20" },
   },
 }
 opts.cmd = {

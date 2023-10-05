@@ -12,5 +12,7 @@ opts.settings = {
     inlay_hints_hide_redundant_param_names_last_token = false,
   },
 }
+opts.root_dir = require("lspconfig.util").root_pattern("zls.json", ".git")
+opts.single_file_support = true
 
 return util.set_on_setup(opts)

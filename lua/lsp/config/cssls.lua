@@ -2,6 +2,7 @@ local util = require("lsp.util")
 
 local opts = util.default_configs()
 
+opts.filetypes = { "css", "scss", "less" }
 opts.settings = {
   css = {
     validate = true,
