@@ -18,6 +18,7 @@ opts.filetypes = {
   "objcpp",
   "cppm",
   "ixx",
+  "mpp",
 }
 opts.settings = {
   clangd = {
