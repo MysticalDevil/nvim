@@ -42,6 +42,15 @@ opts.init_options = {
   completeUnimported = true,
   semanticHighlighting = true,
 }
+opts.root_dir = require("lspconfig.util").root_pattern(
+  ".clangd",
+  ".clang-tidy",
+  ".clang-format",
+  "compile_commands.json",
+  "compile_flags.txt",
+  "configure.ac",
+  ".git"
+)
 opts.on_attach = function(client, bufnr)
   util.disable_format(client)
   util.key_attach(bufnr)
@@ -57,5 +66,6 @@ opts.on_attach = function(client, bufnr)
     inlay_hints.set_inlay_hints()
   end
 end
+opts.single_file_support = true
 
 return util.set_on_setup(opts)
