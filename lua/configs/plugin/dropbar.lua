@@ -7,6 +7,16 @@ end
 local utils = require("dropbar.utils")
 local sources = require("dropbar.sources")
 
+local a = "Neogi"
+print(a:match("^Neogit.*"))
+
+local function exculde_filetypes(filetype)
+  if filetype:match("^Neogit.*") == nil then
+    return true
+  end
+  return false
+end
+
 ---@class dropbar_configs_t
 local opts = {
   general = {
@@ -15,6 +25,7 @@ local opts = {
       return not vim.api.nvim_win_get_config(win).zindex
         and vim.bo[buf].buftype == ""
         and vim.bo[buf].filetype ~= ""
+        and exculde_filetypes(vim.bo[buf].filetype)
         and vim.api.nvim_buf_get_name(buf) ~= ""
         and not vim.wo[win].diff
     end,
