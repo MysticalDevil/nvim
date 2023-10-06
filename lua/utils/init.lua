@@ -62,6 +62,10 @@ local function not_proxy_lsp(name)
   return name ~= "null-ls" and name ~= "efm"
 end
 
+local function format_client_name(name)
+  return "[" .. name .. "]"
+end
+
 local non_proxy_clients = {}
 
 M.get_lsp_info = function()
@@ -75,14 +79,14 @@ M.get_lsp_info = function()
 
   local cached_client = non_proxy_clients[buf_ft]
   if cached_client then
-    return cached_client.name
+    return format_client_name(cached_client.name)
   end
 
   for _, client in ipairs(clients) do
     if client.config["filetypes"] and vim.tbl_contains(client.config["filetypes"], buf_ft) then
       if not_proxy_lsp(client.name) then
         non_proxy_clients[buf_ft] = client
-        return client.name
+        return format_client_name(client.name)
       end
     end
   end

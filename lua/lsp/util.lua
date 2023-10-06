@@ -81,7 +81,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   if client.name == "zls" then
-    vim.g.zig_fmt_autosave = 0
+    vim.g.zig_fmt_autosave = 1
   end
 
   vim.lsp.inlay_hint(bufnr, true)
