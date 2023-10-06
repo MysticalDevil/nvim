@@ -53,6 +53,7 @@ local servers = {
   denols = require("lsp.config.denols"),
   emmet_ls = require("lsp.config.emmet_ls"),
   eslint = require("lsp.config.eslint"),
+  fennel_language_server = require("lsp.config.fennel_language_server"),
   gopls = require("lsp.config.gopls"),
   jsonls = require("lsp.config.jsonls"),
   kotlin_language_server = require("lsp.config.kotlin_language_server"),
