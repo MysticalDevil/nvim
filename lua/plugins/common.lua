@@ -504,6 +504,20 @@ return {
       require("configs.plugin.scope")
     end,
   },
+  -- Shade.nvim
+  -- An Nvim lua plugin that dims your inactive windows
+  {
+    "sunjon/shade.nvim",
+    opts = {
+      overlay_opacity = 50,
+      opacity_step = 1,
+      keys = {
+        brightness_up = "<C-Up>",
+        brightness_down = "<C-Down>",
+        toggle = "<Leader>s",
+      },
+    },
+  },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
