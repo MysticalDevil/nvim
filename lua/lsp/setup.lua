@@ -7,6 +7,7 @@ end
 local lsp = lsp_zero.preset({})
 local mason = require("mason")
 local lspconfig = require("lspconfig")
+local mason_lspconfig = require("mason-lspconfig")
 
 local util = require("lsp.util")
 
@@ -39,6 +40,13 @@ mason.setup({
       package_pending = "➜",
       package_uninstalled = "✗",
     },
+  },
+})
+
+mason_lspconfig.setup({
+  ensure_installed = {},
+  handlers = {
+    lsp_zero.default_setup(),
   },
 })
 
