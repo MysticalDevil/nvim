@@ -25,6 +25,16 @@ return {
       require("configs.colorscheme.dracula")
     end,
   },
+  -- Everblush
+  -- A port of everblush.vim but written in lua
+  {
+    "Everblush/nvim",
+    as = "everblush",
+    lazy = true,
+    config = function()
+      require("configs.colorscheme.everblush")
+    end,
+  },
   -- github-nvim-theme
   -- Github's Neovim themes
   {
