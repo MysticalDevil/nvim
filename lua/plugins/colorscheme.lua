@@ -29,8 +29,8 @@ return {
   -- A port of everblush.vim but written in lua
   {
     "Everblush/nvim",
-    as = "everblush",
     lazy = true,
+    name = "everblush",
     config = function()
       require("configs.colorscheme.everblush")
     end,
