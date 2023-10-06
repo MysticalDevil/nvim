@@ -98,9 +98,9 @@ return {
       require("configs.colorscheme.nordic")
     end,
   },
-  -- nyoom.nvim
-  -- A Neovim framework and doom emacs alternative for the stubborn martian hacker. Powered by fennel and the oxocarbon theme
-  { "nyoom-engineering/nyoom.nvim", lazy = true },
+  -- oxocarbon.nvim
+  -- A dark and light Neovim theme written in fennel, inspired by IBM Carbon.
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true },
   -- onedark.nvim
   -- One dark and light colorscheme for neovim
   {
