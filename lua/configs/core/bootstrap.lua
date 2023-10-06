@@ -18,3 +18,6 @@ end
 
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 bootstrap(lazy_path, "folke/lazy.nvim")
+
+local nfnl_path = vim.fn.stdpath("data") .. "/lazy/nfnl"
+bootstrap(nfnl_path, "Olical/nfnl")
