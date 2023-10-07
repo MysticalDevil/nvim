@@ -92,17 +92,6 @@ local opts = {
           "object_type",
           "ternary_expression",
         },
-        zig = {
-          "function",
-          "function_declaration",
-          "function_definition",
-          "method_declaration",
-          "for_statement",
-          "switch_case",
-          "switch_statement",
-          "switch_default",
-          "if_statement",
-        },
       },
     },
     exclude = {
