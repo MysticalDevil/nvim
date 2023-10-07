@@ -236,6 +236,15 @@ return {
       require("configs.plugin.neoscroll")
     end,
   },
+  -- node-type.nvim
+  -- A Neovim plugin to show the currently selected node type from lsp and treesitter information
+  {
+    "roobert/node-type.nvim",
+    lazy = true,
+    config = function()
+      require("node-type").setup()
+    end,
+  },
   -- neo-tree.nvim
   -- Neovim plugin to manage the file system and other tree like structures
   {
