@@ -122,10 +122,11 @@ which_key.register({
     },
     b = {
       name = "+bufferline",
-      h = { ":BufferLineCloseLeft<CR>", "Close left bufferline" },
-      l = { ":BufferLineCloseRight<CR>", "Close right bufferline" },
-      o = { ":BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", "Close other bufferlines" },
-      p = { ":BufferLinePickClose<CR>", "Close picked bufferline" },
+      h = { "<CMD>BufferLineCloseLeft<CR>", "Close left bufferline" },
+      l = { "<CMD>BufferLineCloseRight<CR>", "Close right bufferline" },
+      o = { "<CMD>BufferLineCloseLeft<CR>:BufferLineCloseRight<CR>", "Close other bufferlines" },
+      p = { "<CMD>BufferLinePick<CR>", "Pick bufferline" },
+      c = { "<CMD>BufferLinePickClose<CR>", "Close picked bufferline" },
     },
     x = {
       name = "+trouble",
