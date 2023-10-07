@@ -174,6 +174,7 @@ return {
   -- Indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     config = function()
       require("configs.plugin.indent-blankline")
     end,
@@ -671,15 +672,6 @@ return {
     dependencies = "nvim-telescope/telescope.nvim",
     config = function()
       require("configs.plugin.urlview")
-    end,
-  },
-  -- vim-illuminate
-  -- illuminate.vim - (Neo)Vim plugin for automatically highlighting other uses of the word under
-  -- the cursor using either LSP, Tree-sitter, or regex matching.
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      require("configs.plugin.illuminate")
     end,
   },
   -- vim-startuptime

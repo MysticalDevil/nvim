@@ -38,7 +38,7 @@ local opts = {
   },
   indent = {
     char = "▏", -- "│",  "│", "¦", "┆", "┊"
-    tab_char = { "I", "󱂉", "󱂊" },
+    -- tab_char = { "I", "I", "I" },
     highlight = "IblIndent",
     smart_indent_cap = true,
     priority = 2,
@@ -50,7 +50,7 @@ local opts = {
   scope = {
     enabled = true,
     char = nil,
-    show_start = false,
+    show_start = true,
     show_end = false,
     injected_languages = false,
     highlight = highlight,
