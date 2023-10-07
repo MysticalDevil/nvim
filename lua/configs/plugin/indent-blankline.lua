@@ -38,10 +38,10 @@ local opts = {
   },
   indent = {
     char = "▏", -- "│",  "│", "¦", "┆", "┊"
-    -- tab_char = { "I", "I", "I" },
+    tab_char = { "I", "I", "I" },
     highlight = "IblIndent",
     smart_indent_cap = true,
-    priority = 2,
+    priority = 3,
   },
   whitespace = {
     highlight = "IblWhitespace",
