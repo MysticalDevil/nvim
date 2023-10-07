@@ -30,6 +30,11 @@ vim.g.rainbow_delimiters = { highlight = highlight }
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
+-- hide first line indent
+hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+
+-- ibl config
 local opts = {
   debounce = 100,
   viewport_buffer = {
