@@ -36,7 +36,7 @@ local opts = {
     open_cmd = "!google-chrome-stable",
   },
   diagnostic = {
-    on_insert = true,
+    on_insert = false,
     on_insert_follow = false,
     insert_winblend = 0,
     show_source = true,
@@ -51,7 +51,7 @@ local opts = {
     text_hl_follow = true,
     border_follow = true,
     extend_relatedInformation = false,
-    diagnostic_only_current = true,
+    diagnostic_only_current = false,
     keys = {
       exec_action = "o",
       quit = "q",
