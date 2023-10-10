@@ -27,6 +27,7 @@ end
 local lsp_servers = require("lsp.check")
 lsp_servers = arr_extend(lsp_servers, {
   "csharp_ls",
+  "perlpls",
   "racket_langserver",
   "rust_analyzer",
   "v_analyzer",
@@ -66,6 +67,7 @@ local servers = {
   jsonls = require("lsp.config.jsonls"),
   kotlin_language_server = require("lsp.config.kotlin_language_server"),
   lua_ls = require("lsp.config.lua_ls"),
+  perlpls = require("lsp.config.perlpls"),
   pylyzer = require("lsp.config.pylyzer"),
   racket_langserver = require("lsp.config.racket_langserver"),
   rust_analyzer = require("lsp.config.rust_analyzer"),
