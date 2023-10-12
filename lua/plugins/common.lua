@@ -550,7 +550,7 @@ return {
   },
   -- sqlite.lua
   -- SQLite LuaJIT binding with a very simple api.
-  { "kkharji/sqlite.lua", lazy = true },
+  { "kkharji/sqlite.lua", lazy = true, enabled = not jit.os:find("Windows") },
   -- ssr.nvim
   -- Treesitter based structural search and replace plugin for Neovim
   {
@@ -702,6 +702,14 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       require("configs.plugin.which-key")
+    end,
+  },
+  -- yanky.nvim
+  -- Improved Yank and Put functionalities for Neovim
+  {
+    "gbprod/yanky.nvim",
+    config = function()
+      require("configs.plugin.yanky")
     end,
   },
   -- zen-mode.nvim
