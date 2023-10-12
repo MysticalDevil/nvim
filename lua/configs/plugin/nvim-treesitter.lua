@@ -136,3 +136,14 @@ treesitter.setup(opts)
 -- enable Folding module
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+-- extra treesitter
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.hypr = {
+  install_info = {
+    url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+    files = { "src/parser.c" },
+    branch = "master",
+  },
+  filetype = "hypr",
+}
