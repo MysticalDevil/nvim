@@ -467,6 +467,7 @@ return {
       require("dap.nvim-dap.config.vscode-js")
     end,
   },
+
   -- nvim-dap-go
   -- An extension for nvim-dap providing configurations for
   -- launching go debugger (delve) and debugging individual tests
@@ -474,6 +475,12 @@ return {
     "leoluz/nvim-dap-go",
     ft = { "go", "gomod" },
     dependencies = { "mfussenegger/nvim-dap" },
+  },
+
+  -- jbyuki/one-small-step-for-vimkind
+  -- Debug adapter for Neovim plugins
+  {
+    "jbyuki/one-small-step-for-vimkind",
   },
 
   --
