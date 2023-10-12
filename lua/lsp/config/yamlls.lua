@@ -7,9 +7,11 @@ local url = "https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/st
 opts.filetypes = { "yaml", "yaml.docker-compose" }
 opts.settings = {
   yaml = {
+    keyOrdering = false,
     format = {
       enable = true,
     },
+    validate = true,
     schemas = {
       [url] = "conf/**/*catalog*",
       ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",

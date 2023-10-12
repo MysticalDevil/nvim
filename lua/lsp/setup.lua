@@ -94,6 +94,7 @@ for _, name in ipairs(lsp_servers) do
 end
 
 require("lsp.ui")
+require("lsp.attach")
 
 util.enable_inlay_hints_autocmd()
 

@@ -7,10 +7,13 @@ opts.settings = {
   gopls = {
     experimentalPostfixCompletions = true,
     analyses = {
-      unusedparams = true,
       shadow = true,
+      fieldalignment = true,
+      nilness = true,
+      unusedparams = true,
+      unusedwrite = true,
+      useany = true,
     },
-    staticcheck = true,
     gofumpt = true,
     hints = {
       rangeVariableTypes = true,
@@ -21,6 +24,21 @@ opts.settings = {
       compositeLiteralTypes = true,
       functionTypeParameters = true,
     },
+    codelenses = {
+      gc_details = false,
+      generate = true,
+      regenerate_cgo = true,
+      run_govulncheck = true,
+      test = true,
+      tidy = true,
+      upgrade_dependency = true,
+      vendor = true,
+    },
+    usePlaceholders = true,
+    completeUnimported = true,
+    staticcheck = true,
+    directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+    semanticTokens = true,
   },
 }
 opts.init_options = {
