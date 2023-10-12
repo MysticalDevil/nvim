@@ -28,6 +28,8 @@ opts.settings = {
     },
   },
 }
-opts.root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json")
+opts.root_dir = function(fname)
+  return require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json")(fname)
+end
 
 return util.set_on_setup(opts, "rust")

@@ -4,7 +4,9 @@ local opts = util.default_configs()
 
 opts.filetypes =
   { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
-opts.root_dir = lsp_util.root_pattern("deno.json", "deno.jsonc")
+opts.root_dir = function(fname)
+  return lsp_util.root_pattern("deno.json", "deno.jsonc")(fname)
+end
 opts.setting = {
   deno = {
     enable = true,

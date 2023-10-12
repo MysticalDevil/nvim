@@ -39,16 +39,17 @@ opts.settings = {
     },
   },
 }
-opts.root_dir = require("lspconfig.util").root_pattern(
-  ".luarc.json",
-  ".luarc.jsonc",
-  ".luacheckrc",
-  ".stylua.toml",
-  "stylua.toml",
-  "selene.toml",
-  "selene.yml",
-  ".git"
-)
+opts.root_dir = function(fname)
+  return require("lspconfig.util").root_pattern(
+    ".luarc.json",
+    ".luarc.jsonc",
+    ".luacheckrc",
+    ".stylua.toml",
+    "stylua.toml",
+    "selene.toml",
+    "selene.yml"
+  )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+end
 opts.single_file_support = true
 
 return util.set_on_setup(opts, "lua")

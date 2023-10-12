@@ -3,7 +3,9 @@ local util = require("lsp.util")
 local opts = util.default_configs()
 
 opts.filetypes = { "fennel" }
-opts.root_dir = lsp_util.root_pattern("fnl")
+opts.root_dir = function(fname)
+  return lsp_util.root_pattern("fnl")(fname)
+end
 opts.settings = {
   fennel = {
     workspace = {

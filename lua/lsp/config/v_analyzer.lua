@@ -4,6 +4,8 @@ local util = require("lsp.util")
 local opts = util.default_configs()
 
 opts.filetypes = { "v", "vsh", "vv", "vlang" }
-opts.root_dir = lsp_util.root_pattern("v.mod", ".git")
+opts.root_dir = function(fname)
+  return lsp_util.root_pattern("v.mod")(fname) or lsp_util.find_git_ancestor(fname)
+end
 
 return util.set_on_setup(opts)

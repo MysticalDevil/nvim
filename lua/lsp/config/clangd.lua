@@ -42,15 +42,24 @@ opts.init_options = {
   completeUnimported = true,
   semanticHighlighting = true,
 }
-opts.root_dir = require("lspconfig.util").root_pattern(
-  ".clangd",
-  ".clang-tidy",
-  ".clang-format",
-  "compile_commands.json",
-  "compile_flags.txt",
-  "configure.ac",
-  ".git"
-)
+opts.root_dir = function(fname)
+  return require("lspconfig.util").root_pattern(
+    "configure.ac",
+    "Makefile",
+    "configure.in",
+    "config.h.in",
+    "meson.build",
+    "meson_options.txt",
+    "build.ninja"
+  )(fname) or require("lspconfig.util").root_pattern(
+    ".clangd",
+    ".clang-tidy",
+    ".clang-format",
+    "compile_commands.json",
+    "compile_flags.txt"
+  )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+end
+
 opts.on_attach = function(client, bufnr)
   util.disable_format(client)
   util.key_attach(bufnr)
