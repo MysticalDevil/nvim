@@ -380,6 +380,17 @@ return {
       require("configs.plugin.scrollbar")
     end,
   },
+  -- nvim-spectre
+  -- Find the enemy and replace them with dark power.
+  {
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+  -- stylua: ignore
+  keys = {
+    { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+  },
+  },
   -- nvim-surrond
   -- Add/change/delete surrounding delimiter pairs with ease
   {

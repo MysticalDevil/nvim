@@ -19,32 +19,24 @@ local opts = {
       [[]],
       [[]],
     },
-    footer = {
-      "",
-      " https://github.com/MysticalDevil",
-    },
+    footer = function()
+      local stats = require("lazy").stats()
+      local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+      return {
+        "",
+        "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+        " https://github.com/MysticalDevil",
+      }
+    end,
     week_header = {
       enable = true,
     },
     shortcut = {
-      {
-        desc = "󰊳  Update",
-        group = "@property",
-        action = "Lazy update",
-        key = "u",
-      },
-      {
-        desc = "  Projects",
-        group = "Number",
-        action = "Telescope projects",
-        key = "p",
-      },
-      {
-        desc = "󰦛  Recently files",
-        group = "Label",
-        action = "Telescope oldfiles",
-        key = "r",
-      },
+      { desc = " Update", icon = "󰊳 ", action = "Lazy update", key = "u" },
+      { desc = " New file", icon = " ", action = "ene | startinsert", key = "n" },
+      { desc = " Projects", icon = " ", action = "Telescope projects", key = "p" },
+      { desc = " Recently files", icon = "󰦛 ", action = "Telescope oldfiles", key = "r" },
+      { desc = " Quit", icon = " ", action = "qa", key = "q" },
     },
   },
   hide = {
@@ -59,3 +51,14 @@ local opts = {
 }
 
 dashboard.setup(opts)
+
+-- close Lazy and re-open when the dashboard is ready
+if vim.o.filetype == "lazy" then
+  vim.cmd.close()
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "DashboardLoaded",
+    callback = function()
+      require("lazy").show()
+    end,
+  })
+end
