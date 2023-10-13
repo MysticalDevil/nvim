@@ -1,4 +1,4 @@
-local status, jqx = pcall(require, "nvim-jqx")
+local status, jqx = pcall(require, "nvim-jqx.config")
 if not status then
   vim.notify("nvim-jqx not found", "error")
   return
@@ -12,7 +12,7 @@ jqx.show_legend = true -- show key queried as first line in the jqx floating win
 jqx.use_quickfix = false -- if you prefer the location list
 
 local jqx_group = vim.api.nvim_create_augroup("Jqx", {})
-vim.api.nvim_clear_autocmds({ group = jqx })
+vim.api.nvim_clear_autocmds({ group = jqx_group })
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.json", "*.yaml" },
   desc = "preview json and yaml files on open",
