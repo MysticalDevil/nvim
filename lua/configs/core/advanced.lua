@@ -5,4 +5,8 @@ vim.filetype.add({
     vv = "vlang",
     vsh = "vlang",
   },
+  filename = {
+    ["hyprland.conf"] = "hypr",
+    ["hyprpaper.conf"] = "hypr",
+  },
 })

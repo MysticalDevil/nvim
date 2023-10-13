@@ -613,4 +613,9 @@ return {
       })
     end,
   },
+
+  ----------------- Tree sitter -----------------
+  -- tree-sitter-hypr
+  -- hyprland configuration files grammar for treesitter
+  { "luckasRanarison/tree-sitter-hypr", event = "VeryLazy" },
 }
