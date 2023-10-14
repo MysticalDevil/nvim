@@ -4,6 +4,7 @@ local augroup = vim.api.nvim_create_augroup
 local commonAutoGroup = augroup("commonAutoGroup", { clear = true })
 local indentAutoGroup = augroup("indentAutoGroup", { clear = true })
 local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
+local SemanticHighlight = augroup("SemanticHighlight", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 
@@ -74,5 +75,24 @@ autocmd("BufNewFile", {
       "use diagnostics;",
       "",
     })
+  end,
+})
+
+-- Set python semshi colors
+-- This autocmd must be defined in init to take effect
+vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+  group = SemanticHighlight,
+  callback = function()
+    -- Only add style, inherit or link to the LSP's colors
+    vim.cmd([[
+            highlight! semshiGlobal gui=italic
+            highlight! semshiImported gui=bold
+            highlight! link semshiParameter @lsp.type.parameter
+            highlight! link semshiParameterUnused DiagnosticUnnecessary
+            highlight! link semshiBuiltin @function.builtin
+            highlight! link semshiAttribute @attribute
+            highlight! link semshiSelf @lsp.type.selfKeyword
+            highlight! link semshiUnresolved @lsp.type.unresolvedReference
+            ]])
   end,
 })
