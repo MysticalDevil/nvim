@@ -230,7 +230,7 @@ return {
     end,
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
-  -- numiras/semshi
+  -- wookayin/semshi
   -- Semantic Highlighting for Python in Neovim
   {
     "wookayin/semshi", -- use a maintained fork
