@@ -3,6 +3,7 @@ local augroup = vim.api.nvim_create_augroup
 
 local commonAutoGroup = augroup("commonAutoGroup", { clear = true })
 local indentAutoGroup = augroup("indentAutoGroup", { clear = true })
+local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 
@@ -57,5 +58,21 @@ autocmd({ "BufRead", "BufNewFile" }, {
   desc = "Set filetype as vlang",
   callback = function()
     vim.bo.filetype = "vlang"
+  end,
+})
+
+-- Auto write default head for perl
+autocmd("BufNewFile", {
+  group = writeAutoGroup,
+  pattern = { "*.pl", "*.pm" },
+  desc = "Auto write default head for perl",
+  callback = function()
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, {
+      "use 5.20.0;",
+      "use strict;",
+      "use warnings;",
+      "use diagnostics;",
+      "",
+    })
   end,
 })
