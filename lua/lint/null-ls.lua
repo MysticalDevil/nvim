@@ -26,6 +26,12 @@ null_ls.setup({
     diagnostics.cppcheck,
     -- Clojure
     diagnostics.clj_kondo,
+    -- CMake
+    -- pip install cmakelang
+    diagnostics.cmake_lint,
+    -- CSS
+    -- npm install stylelint
+    diagnostics.stylelint,
     -- ECMAScript
     -- npm install -g eslint_d
     diagnostics.eslint_d.with({
@@ -40,6 +46,10 @@ null_ls.setup({
         })
       end,
     }),
+    -- Elixir
+    diagnostics.credo,
+    -- Fish
+    diagnostics.fish,
     -- Go
     -- go install github.com/mgechev/revive@latest
     -- diagnostics.revive,
@@ -50,14 +60,30 @@ null_ls.setup({
     diagnostics.checkstyle.with({
       extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
     }),
+    -- Json
+    -- npm install jsonlint -g
+    diagnostics.jsonlint,
     -- Kotlin
     diagnostics.ktlint,
+    -- Lua
+    -- luarocks install luacheck
+    -- diagnostics.luacheck,
+    -- cargo install selene
+    diagnostics.selene,
+    -- Makefile
+    -- go install github.com/mrtazz/checkmake/cmd/checkmake@latest
+    diagnostics.checkmake,
+    -- Markdown
+    -- npm install markdownlint --save-dev
+    diagnostics.markdownlint,
+    -- Perl
+    diagnostics.perlimports,
+    -- Protocol Buffer
+    -- npm install @bufbuild/buf
+    diagnostics.buf,
     -- Python
     -- pip install ruff
     diagnostics.ruff,
-    -- Lua
-    -- luarocks install luacheck
-    diagnostics.luacheck,
     -- Ruby
     -- gem install standard
     diagnostics.standardrb,
@@ -67,23 +93,26 @@ null_ls.setup({
     -- VimScript
     -- pip install vim-vint
     diagnostics.vint,
+    -- Yaml
+    -- go install github.com/rhysd/actionlint/cmd/actionlint@latest
+    diagnostics.actionlint,
+    -- pip install yamllint
+    diagnostics.yamllint,
     -- ZSH
-    -- builtin zsh
     diagnostics.zsh,
     --
     -- Code actions -----------------------------------------------------------
-    -- Git
-    code_actions.gitsigns,
-    -- ESLint_d
+    -- ECMAScript
     -- npm install -g eslint_d
     code_actions.eslint_d,
-    -- GoModifyTags
+    -- Git
+    code_actions.gitsigns,
+    -- Go
     -- go install github.com/fatih/gomodifytags@latest
     code_actions.gomodifytags,
-    -- Impl
     -- go install github.com/josharian/impl@latest
     code_actions.impl,
-    -- ShellCheck
+    -- Shell
     -- cabal install ShellCheck
     code_actions.shellcheck,
   },

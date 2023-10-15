@@ -48,6 +48,8 @@ null_ls.setup({
     -- CSharp
     -- dotnet tool install csharpier -g
     formatting.csharpier,
+    -- Dart
+    formatting.dart_format,
     -- Elixir
     formatting.mix,
     -- Fish
@@ -57,6 +59,8 @@ null_ls.setup({
     -- go install mvdan.cc/gofumpt@latest
     formatting.gofumpt,
     formatting.goimports_reviser,
+    -- Java
+    formatting.google_java_format,
     -- Json
     -- npm install -g fixjson
     formatting.fixjson,
@@ -71,12 +75,18 @@ null_ls.setup({
     -- OCaml
     -- opam install ocamlformat
     formatting.ocamlformat,
+    -- Perl
+    formatting.perlimports,
+    formatting.perltidy,
     -- PgSQL
     -- builtin postgresql
     formatting.pg_format,
     -- PHP
     -- composer global require "squizlabs/php_codesniffer=*"
     formatting.phpcsfixer,
+    -- Protocal Buffer
+    -- npm install @bufbuild/buf
+    formatting.buf,
     -- Python
     -- pip install black isort
     formatting.black.with({ extra_args = { "--fast" } }),
@@ -145,6 +155,8 @@ null_ls.setup({
         "svelte",
       },
     }),
+
+    completion.luasnip,
   },
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
