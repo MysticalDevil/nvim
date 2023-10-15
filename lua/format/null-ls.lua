@@ -39,6 +39,9 @@ null_ls.setup({
         "objcpp",
       },
     }),
+    -- Clojure
+    formatting.cljstyle,
+    -- formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
     -- CMake
     -- pip install cmake-format
     formatting.cmake_format,
@@ -57,10 +60,11 @@ null_ls.setup({
     -- Json
     -- npm install -g fixjson
     formatting.fixjson,
-    -- Clojure
-    formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
     -- Kotlin
     formatting.ktlint,
+    -- Lua
+    -- cargo install stylua
+    formatting.stylua,
     -- Nginx
     -- npm install -g nginxbeautifier
     formatting.nginx_beautifier,
@@ -70,15 +74,40 @@ null_ls.setup({
     -- PgSQL
     -- builtin postgresql
     formatting.pg_format,
+    -- PHP
+    -- composer global require "squizlabs/php_codesniffer=*"
+    formatting.phpcsfixer,
+    -- Python
+    -- pip install black isort
+    formatting.black.with({ extra_args = { "--fast" } }),
+    formatting.isort,
+    -- Ruby
+    -- gem install rubocop
+    -- formatting.rubocop,
+    -- gem install standard
+    formatting.standardrb,
+    -- Rust
+    -- rustup component add rustfmt
+    formatting.rustfmt,
     -- Scala
     -- builtin coursier
     formatting.scalafmt,
     -- Shell
     -- pip install beautysh
     formatting.beautysh,
-    -- Lua
-    -- cargo install stylua
-    formatting.stylua,
+    -- Toml
+    -- cargo install taplo-cli
+    formatting.taplo,
+    -- XML
+    -- pip install XmlFormatter
+    formatting.xmlformat,
+    -- Yaml
+    -- go install github.com/google/yamlfmt/cmd/yamlfmt@latest
+    formatting.yamlfmt,
+    -- Zig
+    -- builtin zig
+    formatting.zigfmt,
+
     -- ESLint
     -- npm install @eslint
     formatting.eslint_d.with({
@@ -116,33 +145,6 @@ null_ls.setup({
         "svelte",
       },
     }),
-    -- PHP
-    -- composer global require "squizlabs/php_codesniffer=*"
-    formatting.phpcsfixer,
-    -- Python
-    -- pip install black isort
-    formatting.black.with({ extra_args = { "--fast" } }),
-    formatting.isort,
-    -- Ruby
-    -- gem install rubocop
-    -- formatting.rubocop,
-    -- gem install standard
-    formatting.standardrb,
-    -- Rust
-    -- rustup component add rustfmt
-    formatting.rustfmt,
-    -- Toml
-    -- cargo install taplo-cli
-    formatting.taplo,
-    -- XML
-    -- pip install XmlFormatter
-    formatting.xmlformat,
-    -- Yaml
-    -- go install github.com/google/yamlfmt/cmd/yamlfmt@latest
-    formatting.yamlfmt,
-    -- Zig
-    -- builtin zig
-    formatting.zigfmt,
   },
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
