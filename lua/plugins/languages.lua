@@ -240,7 +240,7 @@ return {
       -- Disabled these features better provided by LSP or other more general plugins
       vim.g["semshi#error_sign"] = false
       vim.g["semshi#simplify_markup"] = false
-      vim.g["semshi#mark_selected_nodes"] = false
+      -- vim.g["semshi#mark_selected_nodes"] = false
 
       -- This autocmd must be defined in init to take effect
       vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
