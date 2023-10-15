@@ -31,6 +31,7 @@ lsp_servers = arr_extend(lsp_servers, {
   "racket_langserver",
   "rust_analyzer",
   "v_analyzer",
+  "vala_ls",
 })
 
 -- :h mason-default-settings
@@ -75,6 +76,7 @@ local servers = {
   taplo = require("lsp.config.taplo"),
   tsserver = require("lsp.config.tsserver"),
   v_analyzer = require("lsp.config.v_analyzer"),
+  vala_ls = require("lsp.config.vala_ls"),
   vimls = require("lsp.config.vimls"),
   yamlls = require("lsp.config.yamlls"),
   zls = require("lsp.config.zls"),
