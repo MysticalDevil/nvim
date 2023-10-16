@@ -41,7 +41,7 @@ local opts = {
       }
     end,
   },
-  flutter_path = "/opt/flutter", -- <-- this takes priority over the lookup
+  flutter_path = "/usr/bin/flutter", -- <-- this takes priority over the lookup
   flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
   root_patterns = { ".git", "pubspec.yaml" }, -- patterns to find the root of your flutter project
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
@@ -74,18 +74,6 @@ local opts = {
       foreground = false, -- highlight the foreground
       virtual_text = true, -- show the highlight using virtual text
       virtual_text_str = "■", -- the virtual text character to highlight
-    },
-    on_attach = require("lsp.util").default_on_attach,
-    capabilities = require("lsp.util").common_capabilities(), -- e.g. lsp_status capabilities
-    -- see the link below for details on each option:
-    -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
-    settings = {
-      showTodos = true,
-      completeFunctionCalls = true,
-      analysisExcludedFolders = {},
-      renameFilesWithClasses = "prompt", -- "always"
-      enableSnippets = true,
-      updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
     },
   },
 }

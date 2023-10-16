@@ -47,9 +47,7 @@ function M.default_on_attach(client, bufnr)
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
 
-  if vim.fn.has("nvim-0.10") == 1 then
-    M.set_inlay_hints(client, bufnr)
-  end
+  M.set_inlay_hints(client, bufnr)
 end
 
 ---@return table
@@ -67,16 +65,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   if not client then
-    vim.notify_once("LSP Inlayhints attached failed: nil client.", vim.log.levels.ERROR)
-    return
-  end
-
-  if not client.server_capabilities.inlayHintProvider then
-    vim.notify_once(client.name .. ": LSP do not have inlay hint provider", vim.log.levels.WARN)
-    return
-  end
-
-  if setmetatable({}, { __index = nil })[bufnr] then
+    vim.notify_once("LSP inlay hints attached failed: nil client.", vim.log.levels.ERROR)
     return
   end
 
@@ -84,12 +73,13 @@ function M.set_inlay_hints(client, bufnr)
     vim.g.zig_fmt_autosave = 1
   end
 
-  vim.lsp.inlay_hint(bufnr, true)
-  -- vim.notify_once(client.name .. ": LSP have enabled inlay hints", vim.log.levels.INFO)
+  if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint(bufnr, true)
+  end
 end
 
 function M.enable_inlay_hints_autocmd()
-  vim.api.nvim_create_augroup("LspSetup_Inlayhints", {})
+  vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
   vim.cmd.highlight("default link LspInlayHint Comment")
 
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -102,10 +92,12 @@ function M.enable_inlay_hints_autocmd()
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      if vim.fn.has("nvim-0.10") == 1 then
+      if client then
+        if client.name == "null-ls" then
+          return
+        end
+
         M.set_inlay_hints(client, bufnr)
-      else
-        require("lsp-inlayhints").on_attach(client, bufnr)
       end
     end,
   })

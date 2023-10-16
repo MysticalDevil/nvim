@@ -27,6 +27,7 @@ end
 local lsp_servers = require("lsp.check")
 lsp_servers = arr_extend(lsp_servers, {
   "csharp_ls",
+  "dartls",
   "perlpls",
   "racket_langserver",
   "rust_analyzer",
@@ -60,6 +61,7 @@ local servers = {
   clangd = require("lsp.config.clangd"),
   clojure_lsp = require("lsp.config.clojure_lsp"),
   cssls = require("lsp.config.cssls"),
+  dartls = require("lsp.config.dartls"),
   denols = require("lsp.config.denols"),
   emmet_ls = require("lsp.config.emmet_ls"),
   eslint = require("lsp.config.eslint"),
