@@ -39,7 +39,7 @@ local opts = {
   },
 }
 
-vim.keymap.set("n", "<leader>p", function()
+vim.keymap.set("n", "<leader>yp", function()
   require("telescope").extensions.yank_history.yank_history({})
 end, { desc = "Open Yank History" })
 vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)", { desc = "Yank text" })

@@ -493,6 +493,15 @@ return {
     cmd = "ParinferOn",
     build = "cargo build --release",
   },
+  -- persisted.nvim
+  -- Simple session management for Neovim, autoloading and Telescope support(forked folke/persistence.nvim)
+  {
+    "olimorris/persisted.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    config = function()
+      require("configs.plugin.persisted")
+    end,
+  },
   -- plenary.nvim
   -- plenary: full; complete; entire; absolute; unqualified.
   -- All the lua functions I don't want to write twice.

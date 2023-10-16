@@ -9,8 +9,19 @@ local utils = require("utils")
 local trouble = require("trouble.providers.telescope")
 local builtin = require("telescope.builtin")
 
-local extensions_list =
-  { "env", "ui-select", "noice", "neoclip", "aerial", "fzf", "file_browser", "project", "scope", "agrolens" }
+local extensions_list = {
+  "env",
+  "ui-select",
+  "noice",
+  "neoclip",
+  "aerial",
+  "fzf",
+  "file_browser",
+  "project",
+  "scope",
+  "agrolens",
+  "persisted",
+}
 
 for _, value in pairs(extensions_list) do
   telescope.load_extension(value)
@@ -91,6 +102,9 @@ local opts = {
       disable_indentation = false,
       aliases = {},
     },
+    persisted = {
+      layout_config = { width = 0.55, height = 0.55 },
+    },
   },
 }
 
@@ -103,3 +117,4 @@ utils.keymap("n", "<space>fb", "<CMD>Telescope file_browser<CR>")
 utils.keymap("n", "<space>no", "<CMD>Telescope noice<CR>")
 utils.keymap("n", "<space>cl", "<CMD>Telescope neoclip<CR>")
 utils.keymap("n", "<space>pj", "<CMD>Telescope project<CR>")
+utils.keymap("n", "<space>ps", "<CMD>Telescope persisted<CR>")
