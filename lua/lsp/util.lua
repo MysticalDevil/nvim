@@ -2,6 +2,8 @@ local M = {}
 
 local complete_util = require("complete.util")
 
+local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+
 function M.key_attach(bufnr)
   ---@param opts table?
   local function buf_set_keymap(mode, lhs, rhs, opts)
@@ -74,7 +76,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint(bufnr, true)
+    inlay_hint(bufnr, true)
   end
 end
 
