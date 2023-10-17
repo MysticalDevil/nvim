@@ -17,7 +17,7 @@ function M.key_attach(bufnr)
   -- keybingings
   require("configs.core.keybindings").map_LSP(buf_set_keymap, bufnr)
 
-  vim.notify("The LSP key settings is attached", vim.log.levels.INFO)
+  -- vim.notify("The LSP key settings is attached", vim.log.levels.INFO)
 end
 
 -- disable format, handle it to a dedicated plugin
@@ -49,9 +49,9 @@ function M.default_on_attach(client, bufnr)
 
   M.set_inlay_hints(client, bufnr)
 
-  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
-  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
-  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
+  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 end
 
 ---@return table
