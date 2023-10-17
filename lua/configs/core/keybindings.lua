@@ -8,11 +8,11 @@ local utils = require("utils")
 -- term_mode = 't',
 -- command_mode = 'c',
 
-local map = vim.api.nvim_set_keymap
-local opt = {
-  noremap = true,
-  silent = true,
-}
+-- local map = vim.api.nvim_set_keymap
+-- local opt = {
+--   noremap = true,
+--   silent = true,
+-- }
 -----------------------------------------------------------
 
 -- leader key is null
@@ -83,7 +83,7 @@ utils.keymap("t", "<ESC>", "<C-\\><C-n>")
 local plugin_keys = {}
 
 -- LSP callback function shortcut key setting
-plugin_keys.map_LSP = function(mapbuf)
+plugin_keys.map_LSP = function(mapbuf, bufnr)
   -- rename
   -- Lspsaga replace rn
   -- mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
@@ -103,6 +103,8 @@ plugin_keys.map_LSP = function(mapbuf)
       -- ignore_filename = false,
     })
   end, { desc = "Go to definition" })
+  mapbuf("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+  mapbuf("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 
   -- hover document
   -- Lspsaga replace gh
@@ -123,9 +125,10 @@ plugin_keys.map_LSP = function(mapbuf)
   mapbuf("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { desc = "Jump to next diagnostic" })
   mapbuf("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { desc = "Jump to previous diagnostic" })
 
-  -- unused
-  -- mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-  -- mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
+  -- toggle inlay hints
+  mapbuf("n", "<leader>L", function()
+    vim.lsp.inlay_hint(bufnr)
+  end, { desc = "Toggle LSP inlay hints" })
 end
 
 -- gitsigns

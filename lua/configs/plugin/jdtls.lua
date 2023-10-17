@@ -139,21 +139,23 @@ local config = {
     extendedClientCapabilities = extendedClientCapabilities,
   },
   handlers = {
-    ["language/status"] = function() end,
-    ["workspace/diagnostic/refresh"] = function() end,
-    ["textDocument/codeAction"] = function() end,
-    ["textDocument/rename"] = function() end,
-    ["workspace/applyEdit"] = function() end,
-    ["textDocument/documentHighlight"] = function() end,
+    -- ["language/status"] = function() end,
+    -- ["workspace/diagnostic/refresh"] = function() end,
+    -- ["textDocument/codeAction"] = function() end,
+    -- ["textDocument/rename"] = function() end,
+    -- ["workspace/applyEdit"] = function() end,
+    -- ["textDocument/documentHighlight"] = function() end,
   },
-  on_attach = function(_, bufnr)
+  on_attach = function(client, bufnr)
     if vim.fn.has("nvim-0.10") == 1 then
-      vim.lsp.inlay_hint(bufnr)
+      vim.lsp.inlay_hint(bufnr, true)
     end
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
     require("jdtls.setup").add_commands()
+    require("lsp.util").default_on_attach(client, bufnr)
   end,
+  filetypes = { "java" },
 }
 
 jdtls.start_or_attach(config)

@@ -15,7 +15,9 @@ function M.key_attach(bufnr)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", default_opts, opts))
   end
   -- keybingings
-  require("configs.core.keybindings").map_LSP(buf_set_keymap)
+  require("configs.core.keybindings").map_LSP(buf_set_keymap, bufnr)
+
+  vim.notify("The LSP key settings is attached", vim.log.levels.INFO)
 end
 
 -- disable format, handle it to a dedicated plugin
@@ -45,11 +47,11 @@ function M.default_on_attach(client, bufnr)
   M.disable_format(client)
   M.key_attach(bufnr)
 
+  M.set_inlay_hints(client, bufnr)
+
   vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
-
-  M.set_inlay_hints(client, bufnr)
 end
 
 ---@return table
@@ -62,10 +64,6 @@ function M.default_configs()
 end
 
 function M.set_inlay_hints(client, bufnr)
-  if client.name == "null-ls" then
-    return
-  end
-
   if not client then
     vim.notify_once("LSP inlay hints attached failed: nil client.", vim.log.levels.ERROR)
     return

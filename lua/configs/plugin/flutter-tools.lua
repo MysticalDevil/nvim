@@ -75,6 +75,23 @@ local opts = {
       virtual_text = true, -- show the highlight using virtual text
       virtual_text_str = "■", -- the virtual text character to highlight
     },
+    on_attach = require("lsp.util").default_on_attach,
+    settings = {
+      showTodos = true,
+      completeFunctionCalls = true,
+      analysisExcludedFolders = {},
+      renameFilesWithClasses = "prompt", -- "always"
+      enableSnippets = true,
+      updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+      enableSdkFormatter = true,
+    },
+    init_options = {
+      closingLabels = true,
+      flutterOutline = true,
+      onlyAnalyzeProjectsWithOpenFiles = true,
+      outline = true,
+      suggestFromUnimportedLibraries = true,
+    },
   },
 }
 
