@@ -40,8 +40,7 @@ null_ls.setup({
       },
     }),
     -- Clojure
-    formatting.cljstyle,
-    -- formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
+    formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
     -- CMake
     -- pip install cmake-format
     formatting.cmake_format,
