@@ -19,5 +19,5 @@ local opts = {
 inc_rename.setup(opts)
 
 vim.keymap.set("n", "<leader>rn", function()
-  return ":IncRename " .. vim.fn.expand("<cword>")
+  return (":IncRename %s"):format(vim.fn.expand("<cword>"))
 end, { expr = true })

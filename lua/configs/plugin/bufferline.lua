@@ -51,7 +51,7 @@ local opts = {
       local s = ""
       for e, n in pairs(diagnostics_dict) do
         local sym = e == "error" and "" or (e == "warning" and "" or "")
-        s = s .. n .. sym
+        s = ("%s%s%s"):format(s, n, sym)
       end
       return s
     end,
@@ -107,19 +107,19 @@ local opts = {
         local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
         if error ~= 0 then
-          table.insert(result, { text = "  " .. error, fg = "#EC5241" })
+          table.insert(result, { text = ("  %s"):format(error), fg = "#EC5241" })
         end
 
         if warning ~= 0 then
-          table.insert(result, { text = "  " .. warning, fg = "#EFB839" })
+          table.insert(result, { text = ("  %s"):format(warning), fg = "#EFB839" })
         end
 
         if hint ~= 0 then
-          table.insert(result, { text = "  " .. hint, fg = "#A3BA5E" })
+          table.insert(result, { text = ("  %s"):format(hint), fg = "#A3BA5E" })
         end
 
         if info ~= 0 then
-          table.insert(result, { text = "  " .. info, fg = "#7EA9A7" })
+          table.insert(result, { text = ("  %s"):format(info), fg = "#7EA9A7" })
         end
         return result
       end,

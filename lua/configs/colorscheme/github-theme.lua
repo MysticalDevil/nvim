@@ -3,7 +3,7 @@ local github_theme = require("github-theme")
 github_theme.setup({
   options = {
     -- Compiled file's destination location
-    compile_path = vim.fn.stdpath("cache") .. "/github-theme",
+    compile_path = ("%s/github-theme"):format(vim.fn.stdpath("cache")),
     compile_file_suffix = "_compiled", -- Compiled file suffix
     hide_end_of_buffer = true, -- Hide the '~' character at the end of the buffer for a cleaner look
     hide_nc_statusline = true, -- Override the underline style for non-active statuslines

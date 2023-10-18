@@ -30,7 +30,7 @@ M.formatting = {
     before = function(entry, vim_item)
       local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
       if shorten_abbr ~= vim_item.abbr then
-        vim_item.abbr = shorten_abbr .. "..."
+        vim_item.abbr = ("%s..."):format(shorten_abbr)
       end
       -- Kind icons
       vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)

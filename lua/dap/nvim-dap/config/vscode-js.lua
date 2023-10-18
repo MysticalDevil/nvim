@@ -4,7 +4,7 @@ require("dap-vscode-js").setup({
   -- Path of node executable. Defaults to $NODE_PATH, and then "node"
   node_path = "node",
   -- Path to vscode-js-debug installation.
-  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  debugger_path = ("%s/mason/packages/js-debug-adapter"):format(vim.fn.stdpath("data")),
   -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
   -- debugger_cmd = { "js-debug-adapter" },
   -- which adapters to register in nvim-dap

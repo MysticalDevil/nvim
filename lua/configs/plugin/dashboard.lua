@@ -24,7 +24,7 @@ local opts = {
       local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
       return {
         "",
-        "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+        ("⚡ Neovim loaded %s/%s plugins in %sms"):format(stats.loaded, stats.count, ms),
         " https://github.com/MysticalDevil",
       }
     end,

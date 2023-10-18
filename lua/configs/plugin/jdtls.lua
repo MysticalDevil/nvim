@@ -15,7 +15,7 @@ extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 extendedClientCapabilities.document_formatting = false
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = vim.fn.stdpath("cache") .. "/java/workspace/" .. project_name
+local workspace_dir = ("%s/java/workspace/%s"):format(vim.fn.stdpath("cache"), project_name)
 
 local bundles = {}
 bundles = {

@@ -4,9 +4,9 @@ if not status then
   return
 end
 
--- local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb"
--- local codelldb_path = extension_path .. "codelldb"
--- local liblldb_path = extension_path .. "extension/lldb/lib/liblldb.so"
+-- local extension_path = string.format("%s/mason/packages/codelldb", vim.fn.stdpath("data"))
+-- local codelldb_path = string.format("%s/codelldb", extension_path)
+-- local liblldb_path = string.format("%s/extension/lldb/lib/liblldb.so", extension_path)
 
 local opts = {
   tools = { -- rust-tools options

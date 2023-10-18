@@ -22,10 +22,10 @@ M.deep_print = function(tbl)
   local request_headers_all = ""
   for k, v in pairs(tbl) do
     if type(v) == "table" then
-      request_headers_all = request_headers_all .. "[" .. k .. " " .. M.deep_print(v) .. "] "
+      request_headers_all = ("%s[%s %s]"):format(request_headers_all, k, M.deep_print(v))
     else
       local rowtext = string.format("[%s %s] ", k, v)
-      request_headers_all = request_headers_all .. rowtext
+      request_headers_all = string.format("%s%s", request_headers_all, rowtext)
     end
   end
   return request_headers_all
@@ -38,7 +38,7 @@ function M.async_formatting(bufnr)
     if err then
       local err_msg = type(err) == "string" and err or err.message
       -- you can modify the log message / level (or ignore it completely)
-      vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
+      vim.notify(("formatting: %s"):format(err_msg), vim.log.levels.WARN)
       return
     end
 
@@ -63,7 +63,7 @@ local function not_proxy_lsp(name)
 end
 
 local function format_client_name(name)
-  return "[" .. name .. "]"
+  return ("[ %s ]"):format(name)
 end
 
 local non_proxy_clients = {}

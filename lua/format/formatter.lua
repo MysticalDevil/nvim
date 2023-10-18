@@ -9,7 +9,7 @@ local util = require("formatter.util")
 local filetypes = require("formatter.filetypes")
 local config = require("formatter.config")
 
-local mason_binary = vim.fn.stdpath("data") .. "/mason/bin/"
+local mason_binary = ("%s/mason/bin/"):format(vim.fn.stdpath("data"))
 
 local prettier_defaults = function()
   return {

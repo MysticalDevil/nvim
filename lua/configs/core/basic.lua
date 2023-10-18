@@ -72,7 +72,7 @@ vim.opt.listchars:append("space:·")
 -- completion enhancement
 vim.o.wildmenu = true
 -- don't pass message to |ins-completion menu|
-vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.shortmess = ("%sc"):format(vim.o.shortmess)
 -- completion can display up to 10 lines
 vim.o.pumheight = 10
 -- always show tabline

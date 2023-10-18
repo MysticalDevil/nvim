@@ -8,13 +8,13 @@ function M.setup()
     type = "executable",
     -- change to your path
     -- if can not find OpenDebugAD7, please install cpptools by mason
-    command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+    command = ("%s/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7"):format(vim.fn.stdpath("data")),
   }
   dap.adapters.codelldb = {
     type = "server",
     port = "${port}",
     executable = {
-      command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+      command = ("%s/mason/bin/codelldb"):format(vim.fn.stdpath("data")),
       args = { "--port", "${port}" },
     },
   }
@@ -26,7 +26,7 @@ function M.setup()
       type = "cppdbg",
       request = "launch",
       program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        return vim.fn.input("Path to executable: ", ("%s/"):format(vim.fn.getcwd()), "file")
       end,
       cwd = "${workspaceFolder}",
       stopOnEntry = true,
@@ -45,7 +45,7 @@ function M.setup()
       request = "attach",
       processId = require("dap.utils").pick_process,
       program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        return vim.fn.input("Path to executable: ", ("%s/"):format(vim.fn.getcwd()), "file")
       end,
       cwd = "${workspaceFolder}",
       setupCommands = {
@@ -66,7 +66,7 @@ function M.setup()
       miDebuggerPath = "/usr/bin/gdb",
       cwd = "${workspaceFolder}",
       program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        return vim.fn.input("Path to executable: ", ("%s/"):format(vim.fn.getcwd()), "file")
       end,
       setupCommands = {
         {
@@ -84,7 +84,7 @@ function M.setup()
       type = "codelldb",
       request = "launch",
       program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        return vim.fn.input("Path to executable: ", ("%s/"):format(vim.fn.getcwd()), "file")
       end,
       cwd = "${workspaceFolder}",
       stopOnEntry = false,
