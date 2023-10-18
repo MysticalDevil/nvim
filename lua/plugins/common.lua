@@ -353,6 +353,15 @@ return {
       require("configs.plugin.nvim-notify")
     end,
   },
+  -- nvim-puppeteer
+  -- Automatically convert strings to f-strings or template strings and back.
+  {
+    "chrisgrieser/nvim-puppeteer",
+    ft = { "lua", "python", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    init = function()
+      vim.g.puppeteer_lua_format_string = true
+    end,
+  },
   -- nvim-qt
   -- Neovim client library and GUI
   { "equalsraf/neovim-gui-shim", lazy = true },
