@@ -143,7 +143,7 @@ local opts = {
   sources = {
     treesitter = {
       -- Lua pattern used to extract a short name from the node text
-      name_pattern = ("[#~%*%w%._%->!@:]+%s*%s"):format(string.rep("[#~%*%w%._%->!@:]*", 3, "%s*")),
+      name_pattern = "[#~%*%w%._%->!@:]+%s*%s" .. string.rep("[#~%*%w%._%->!@:]*", 3, "%s*"),
       -- The order matters! The first match is used as the type
       -- of the treesitter symbol and used to show the icon
       -- Types listed below must have corresponding icons
