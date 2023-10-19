@@ -1,0 +1,9 @@
+{
+  "lua-dev": {
+    "library": {
+      "plugins": [
+        "plenary.nvim"
+      ]
+    }
+  }
+}
