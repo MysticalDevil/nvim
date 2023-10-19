@@ -76,3 +76,35 @@ autocmd("BufNewFile", {
     })
   end,
 })
+
+-- enter a clojure project, auto start nrepl
+local clj_nrepl = augroup("clj_nrepl", { clear = true })
+
+-- Auto start nREPL for Clojure
+autocmd("VimEnter", {
+  group = clj_nrepl,
+  pattern = { "*.clj", "deps.edn" },
+  desc = "Auto start nREPL for Clojure project",
+  callback = function()
+    require("utils").start_nrepl("clj -M:repl/conjure", "clj_job_started")
+  end,
+})
+
+-- Auto start nREPL for Leiningen
+autocmd("VimEnter", {
+  group = clj_nrepl,
+  pattern = { "*.clj" },
+  desc = "Auto start nREPL for Leiningen project",
+  callback = function()
+    require("utils").start_nrepl("lein repl", "lein_job_started")
+  end,
+})
+
+-- Auto kill background jobs on VimLeave
+autocmd("VimLeave", {
+  group = clj_nrepl,
+  desc = "Auto kill background jobs",
+  callback = function()
+    require("utils").stop_nrepl({ "clj_job_started", "lein_job_started" })
+  end,
+})

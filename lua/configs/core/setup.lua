@@ -8,3 +8,5 @@ require("configs.core.bootstrap")
 require("configs.core.keybindings")
 -- Auto command
 require("configs.core.autocmds")
+-- Customize commands
+require("configs.core.commands")
