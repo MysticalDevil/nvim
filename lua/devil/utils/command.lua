@@ -23,7 +23,7 @@ function M.start_nrepl(command, flag_var)
       detach = 1,
     })
     if job_id > 0 then
-      -- vim.notify(("Started `%s` in the background -- %s"):format(command, job_id), vim.log.levels.INFO)
+      vim.notify(("Started `%s` in the background, job id: %s"):format(command, job_id), vim.log.levels.INFO)
       vim.api.nvim_set_var("clj_background_pid", job_id)
       vim.g[flag_var] = true
     else
@@ -33,21 +33,15 @@ function M.start_nrepl(command, flag_var)
 end
 
 -- Function to stop an nREPL job
----@param flag_var string|Array
+---@param flag_var string
 function M.stop_nrepl(flag_var)
   local job_id = vim.api.nvim_get_var("clj_background_pid")
 
-  if type(flag_var) == "table" then
-    for _, v in pairs(flag_var) do
-      vim.g[v] = false
-    end
-  elseif flag_var == "string" then
-    vim.g[flag_var] = false
-  end
+  vim.g[flag_var] = false
 
   if job_id and job_id > 0 then
     vim.fn.jobstop(job_id)
-    vim.notify("Killed nREPL background task", vim.log.levels.INFO)
+    vim.notify("Killed nREPL background task: " .. job_id, vim.log.levels.INFO)
   end
 end
 

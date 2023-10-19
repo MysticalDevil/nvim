@@ -80,6 +80,19 @@ autocmd("BufNewFile", {
 -- enter a clojure project, auto start nrepl
 local clj_nrepl = augroup("clj_nrepl", { clear = true })
 
+---@return string
+local function get_project_type()
+  local cwd = vim.fn.getcwd()
+
+  if vim.fn.filereadable(cwd .. "/deps.edn") == 1 then
+    return "clj_job_started"
+  elseif vim.fn.filereadable(cwd .. "/project.clj") == 1 then
+    return "lein_job_started"
+  else
+    return ""
+  end
+end
+
 -- Auto start nREPL for Clojure
 autocmd("VimEnter", {
   group = clj_nrepl,
@@ -105,6 +118,6 @@ autocmd("VimLeave", {
   group = clj_nrepl,
   desc = "Auto kill background jobs",
   callback = function()
-    require("devil.utils").stop_nrepl({ "clj_job_started", "lein_job_started" })
+    require("devil.utils").stop_nrepl(get_project_type())
   end,
 })
