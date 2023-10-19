@@ -4,22 +4,22 @@ if vim.fn.has("nvim-0.10") ~= 1 then
 end
 
 -- Basic configure
-require("configs.core.setup")
+require("devil.configs.core.setup")
 -- Lazy plugins manage
-require("plugins.setup")
+require("devil.plugins.setup")
 -- Color scheme setting
-require("configs.colorscheme.setup")
+require("devil.configs.colorscheme.setup")
 
 -- Language server protocol
-require("lsp.setup")
+require("devil.lsp.setup")
 -- Complete engine
-require("complete.setup")
+require("devil.complete.setup")
 -- Formater
-require("format.setup")
+require("devil.format.setup")
 -- Linter
-require("lint.setup")
+require("devil.lint.setup")
 -- Debug Adapter Protocol
-require("dap.setup")
+require("devil.dap.setup")
 
 -- Playground code
 -- require("playground.setup")

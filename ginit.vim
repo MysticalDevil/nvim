@@ -1,15 +1,15 @@
 lua << EOF
 
 if vim.g.neovide then
-  require("configs.gui.neovide")
+  require("devil.configs.gui.neovide")
 end
 
 if vim.g.GuiLoaded then
-  require("configs.gui.nvim-qt")
+  require("devil.configs.gui.nvim-qt")
 end
 
 if vim.g.fvim_loaded then
-  require("configs.gui.fvim")
+  require("devil.configs.gui.fvim")
 end
 
 EOF
