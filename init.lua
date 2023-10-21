@@ -22,4 +22,4 @@ require("devil.lint.setup")
 require("devil.dap.setup")
 
 -- Playground code
--- require("playground.setup")
+-- require("devil.playground.setup")
