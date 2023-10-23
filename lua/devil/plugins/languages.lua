@@ -606,6 +606,16 @@ return {
     end,
   },
 
+  -- symbol-useage.nvim
+  -- Display references, definitions and implementations of document symbols
+  {
+    "Wansmer/symbol-usage.nvim",
+    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
+    config = function()
+      require("devil.configs.plugin.symbol-usage")
+    end,
+  },
+
   ----------------- Tree sitter -----------------
   -- tree-sitter-hypr
   -- hyprland configuration files grammar for treesitter
