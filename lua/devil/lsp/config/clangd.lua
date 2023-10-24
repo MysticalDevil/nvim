@@ -67,9 +67,9 @@ opts.on_attach = function(client, bufnr)
   util.disable_format(client)
   util.key_attach(bufnr)
 
-  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()")
-  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc")
-  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc")
+  vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
+  vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+  vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 
   if vim.fn.has("nvim-0.10") == 1 then
     util.set_inlay_hints(client, bufnr)
