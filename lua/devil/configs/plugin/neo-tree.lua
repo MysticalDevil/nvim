@@ -21,10 +21,19 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSi
 -- in the form "LspDiagnosticsSignWarning"
 
 local opts = {
+  add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
+  auto_clean_after_session_restore = false, -- Automatically clean up broken neo-tree buffers saved in sessions
+  -- popup_border_style is for input and confirmation dialogs.
+  -- Configurtaion of floating window is done in the individual source sections.
+  -- "NC" is a special style that works well with NormalNC set
+  default_source = "filesystem", -- you can choose a specific source `last` here which indicates the last used source
   close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "rounded",
   enable_git_status = true,
   enable_diagnostics = true,
+  enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs
+  -- when opening files, do not use windows containing these filetypes or buftypes
+  open_files_do_not_replace_types = { "terminal", "trouble", "qf" },
   sort_case_insensitive = false, -- used when sorting files and directories in the tree
   -- sort_function = function(a, b) -- use a custom function for sorting files and directories in the tree
   --   if a.type == b.type then
@@ -194,8 +203,11 @@ local opts = {
         --".null-ls_*",
       },
     },
-    follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
-    -- time the current file is changed while the tree is open.
+    follow_current_file = {
+      enabled = true, -- This will find and focus the file in the active buffer every
+      -- time the current file is changed while the tree is open.
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+    },
     group_empty_dirs = true, -- when true, empty folders will be grouped together
     hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
     -- in whatever position is specified in window.position
@@ -211,16 +223,37 @@ local opts = {
         ["H"] = "toggle_hidden",
         ["/"] = "fuzzy_finder",
         ["D"] = "fuzzy_finder_directory",
+        ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
+        -- ["D"] = "fuzzy_sorter_directory",
         ["f"] = "filter_on_submit",
         ["<c-x>"] = "clear_filter",
         ["[g"] = "prev_git_modified",
         ["]g"] = "next_git_modified",
+        ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+        ["oc"] = { "order_by_created", nowait = false },
+        ["od"] = { "order_by_diagnostics", nowait = false },
+        ["og"] = { "order_by_git_status", nowait = false },
+        ["om"] = { "order_by_modified", nowait = false },
+        ["on"] = { "order_by_name", nowait = false },
+        ["os"] = { "order_by_size", nowait = false },
+        ["ot"] = { "order_by_type", nowait = false },
+      },
+      fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+        ["<down>"] = "move_cursor_down",
+        ["<C-n>"] = "move_cursor_down",
+        ["<up>"] = "move_cursor_up",
+        ["<C-p>"] = "move_cursor_up",
       },
     },
+
+    commands = {}, -- Add a custom command or override a global one using the same function name
   },
   buffers = {
-    follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
-    -- time the current file is changed while the tree is open.
+    follow_current_file = {
+      enabled = true, -- This will find and focus the file in the active buffer every time
+      --              -- the current file is changed while the tree is open.
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+    },
     group_empty_dirs = true, -- when true, empty folders will be grouped together
     show_unloaded = true,
     window = {
@@ -228,17 +261,14 @@ local opts = {
         ["bd"] = "buffer_delete",
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
+        ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+        ["oc"] = { "order_by_created", nowait = false },
+        ["od"] = { "order_by_diagnostics", nowait = false },
+        ["om"] = { "order_by_modified", nowait = false },
+        ["on"] = { "order_by_name", nowait = false },
+        ["os"] = { "order_by_size", nowait = false },
+        ["ot"] = { "order_by_type", nowait = false },
       },
-    },
-  },
-  event_handlers = {
-    {
-      event = "file_opened",
-      -- handler = function(file_path)
-      handler = function(_)
-        --auto close
-        neo_tree.close_all()
-      end,
     },
   },
   git_status = {
@@ -252,7 +282,76 @@ local opts = {
         ["gc"] = "git_commit",
         ["gp"] = "git_push",
         ["gg"] = "git_commit_and_push",
+        ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+        ["oc"] = { "order_by_created", nowait = false },
+        ["od"] = { "order_by_diagnostics", nowait = false },
+        ["om"] = { "order_by_modified", nowait = false },
+        ["on"] = { "order_by_name", nowait = false },
+        ["os"] = { "order_by_size", nowait = false },
+        ["ot"] = { "order_by_type", nowait = false },
       },
+    },
+  },
+  -- If a user has a sources list it will replace this one.
+  -- Only sources listed here will be loaded.
+  -- You can also add an external source by adding it's name to this list.
+  -- The name used here must be the same name you would use in a require() call.
+  sources = {
+    "filesystem",
+    "buffers",
+    "git_status",
+    -- "document_symbols",
+  },
+  source_selector = {
+    winbar = true, -- toggle to show selector on winbar
+    statusline = false, -- toggle to show selector on statusline
+    show_scrolled_off_parent_node = false, -- this will replace the tabs with the parent path
+    -- of the top visible node when scrolled down.
+    sources = {
+      { source = "filesystem" },
+      { source = "buffers" },
+      { source = "git_status" },
+    },
+    content_layout = "start", -- only with `tabs_layout` = "equal", "focus"
+    --                start  : |/ 󰓩 bufname     \/...
+    --                end    : |/     󰓩 bufname \/...
+    --                center : |/   󰓩 bufname   \/...
+    tabs_layout = "equal", -- start, end, center, equal, focus
+    --             start  : |/  a  \/  b  \/  c  \            |
+    --             end    : |            /  a  \/  b  \/  c  \|
+    --             center : |      /  a  \/  b  \/  c  \      |
+    --             equal  : |/    a    \/    b    \/    c    \|
+    --             active : |/  focused tab    \/  b  \/  c  \|
+    truncation_character = "…", -- character to use when truncating the tab label
+    tabs_min_width = nil, -- nil | int: if int padding is added based on `content_layout`
+    tabs_max_width = nil, -- this will truncate text even if `text_trunc_to_fit = false`
+    padding = 0, -- can be int or table
+    -- padding = { left = 2, right = 0 },
+    -- separator = "▕", -- can be string or table, see below
+    separator = { left = "▏", right = "▕" },
+    -- separator = { left = "/", right = "\\", override = nil },     -- |/  a  \/  b  \/  c  \...
+    -- separator = { left = "/", right = "\\", override = "right" }, -- |/  a  \  b  \  c  \...
+    -- separator = { left = "/", right = "\\", override = "left" },  -- |/  a  /  b  /  c  /...
+    -- separator = { left = "/", right = "\\", override = "active" },-- |/  a  / b:active \  c  \...
+    -- separator = "|",                                              -- ||  a  |  b  |  c  |...
+    separator_active = nil, -- set separators around the active tab. nil falls back to `source_selector.separator`
+    show_separator_on_edge = false,
+    --                       true  : |/    a    \/    b    \/    c    \|
+    --                       false : |     a    \/    b    \/    c     |
+    highlight_tab = "NeoTreeTabInactive",
+    highlight_tab_active = "NeoTreeTabActive",
+    highlight_background = "NeoTreeTabInactive",
+    highlight_separator = "NeoTreeTabSeparatorInactive",
+    highlight_separator_active = "NeoTreeTabSeparatorActive",
+  },
+  event_handlers = {
+    {
+      event = "file_opened",
+      -- handler = function(file_path)
+      handler = function(_)
+        --auto close
+        neo_tree.close_all()
+      end,
     },
   },
 }
