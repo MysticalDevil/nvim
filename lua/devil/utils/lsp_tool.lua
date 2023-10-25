@@ -39,7 +39,7 @@ end
 ---@param name string
 ---@return string
 local function format_client_name(name)
-  return ("[ %s ]"):format(name)
+  return ("[%s]"):format(name)
 end
 
 local non_proxy_clients = {}
