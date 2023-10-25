@@ -136,6 +136,15 @@ return {
       require("devil.configs.plugin.hlargs")
     end,
   },
+  -- headlines.nvim
+  -- This plugin adds horizontal highlights for text filetypes, like markdown, orgmode, and neorg.
+  {
+    "lukas-reineke/headlines.nvim",
+    dependencies = "nvim-treesitter",
+    config = function()
+      require("devil.configs.plugin.headlines")
+    end,
+  },
   -- hlchunk.nvim
   -- This is the lua implementation of nvim-hlchunk, you can use this neovim plugin to
   -- highlight your indent line and the current chunk (context) your cursor stayed
