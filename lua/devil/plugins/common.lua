@@ -161,6 +161,15 @@ return {
       require("devil.configs.plugin.icon-picker")
     end,
   },
+  -- illuminate.vim
+  -- (Neo)Vim plugin for automatically highlighting other uses of the word under the cursor using either
+  -- LSP, Tree-sitter, or regex matching.
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("devil.connfigs.plugin.illuminate")
+    end,
+  },
   -- inc-rename.nvim
   -- Incremental LSP renaming based on Neovim's command-preview feature
   {
