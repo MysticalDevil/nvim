@@ -556,6 +556,20 @@ return {
       require("devil.configs.plugin.smartcolumn")
     end,
   },
+  -- smart-open.nvim
+  -- Neovim plugin for fast file-finding
+  {
+    "danielfalk/smart-open.nvim",
+    lazy = true,
+    branch = "0.2.x",
+    dependencies = {
+      "kkharji/sqlite.lua",
+      -- Only required if using match_algorithm fzf
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+      { "nvim-telescope/telescope-fzy-native.nvim" },
+    },
+  },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code
   {
