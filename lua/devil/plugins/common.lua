@@ -167,7 +167,7 @@ return {
   {
     "RRethy/vim-illuminate",
     config = function()
-      require("devil.connfigs.plugin.illuminate")
+      require("devil.configs.plugin.illuminate")
     end,
   },
   -- inc-rename.nvim
