@@ -104,6 +104,10 @@ local opts = {
     smart_open = {
       cwd_only = true,
       filename_first = false,
+      show_scores = false,
+      ignore_patterns = { "*.git/*", "*/tmp/*" },
+      match_algorithm = "fzy",
+      disable_devicons = false,
     },
     ["ui-select"] = {
       require("telescope.themes").get_dropdown({
