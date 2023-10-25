@@ -660,18 +660,15 @@ return {
       "LinArcX/telescope-env.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "nvim-telescope/telescope-project.nvim",
+      "debugloop/telescope-undo.nvim",
     },
     version = "0.1.x",
     config = function()
       require("devil.configs.plugin.telescope")
     end,
   },
-  { "LinArcX/telescope-env.nvim", lazy = true },
-  { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-  { "nvim-telescope/telescope-file-browser.nvim", lazy = true },
-  { "nvim-telescope/telescope-project.nvim", lazy = true },
   -- text-case.nvim
   -- An all in one plugin for converting text case in Neovim
   { "johmsalas/text-case.nvim", lazy = true },

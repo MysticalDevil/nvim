@@ -23,6 +23,7 @@ local extensions_list = {
   "scope",
   "smart_open",
   "ui-select",
+  "undo",
 }
 
 for _, value in pairs(extensions_list) do
@@ -115,6 +116,26 @@ local opts = {
         initial_mode = "normal",
       }),
     },
+    undo = {
+      use_delta = true,
+      use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
+      side_by_side = false,
+      diff_context_lines = vim.o.scrolloff,
+      entry_format = "state #$ID, $STAT, $TIME",
+      time_format = "",
+      mappings = {
+        i = {
+          -- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+          -- you want to replicate these defaults and use the following actions. This means
+          -- installing as a dependency of telescope in it's `requirements` and loading this
+          -- extension from there instead of having the separate plugin definition as outlined
+          -- above.
+          ["<cr>"] = require("telescope-undo.actions").yank_additions,
+          ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+          ["<C-cr>"] = require("telescope-undo.actions").restore,
+        },
+      },
+    },
   },
 }
 
@@ -130,3 +151,4 @@ utils.keymap("n", "<space>no", "<CMD>Telescope noice<CR>")
 utils.keymap("n", "<space>cl", "<CMD>Telescope neoclip<CR>")
 utils.keymap("n", "<space>pj", "<CMD>Telescope project<CR>")
 utils.keymap("n", "<space>ps", "<CMD>Telescope persisted<CR>")
+utils.keymap("n", "<space>u", "<CMD>Telescope undo<CR>")
