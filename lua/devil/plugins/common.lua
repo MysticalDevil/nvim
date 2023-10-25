@@ -601,6 +601,14 @@ return {
       require("devil.configs.plugin.styler")
     end,
   },
+  -- substitute.nvim
+  -- Neovim plugin introducing a new operators motions to quickly replace and exchange text.
+  {
+    "gbprod/substitute.nvim",
+    config = function()
+      require("devil.configs.plugin.substitute")
+    end,
+  },
   -- surround-ui.nvim
   -- A Neovim plugin which acts as a helper or training aid for kylechui/nvim-surround
   {

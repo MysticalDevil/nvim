@@ -246,6 +246,21 @@ which_key.register({
         "Start debug",
       },
     },
+    -----------------------------------------------------------
+    -- s_windows split window shortcut key
+    -----------------------------------------------------------
+    s = {
+      name = "+split",
+      v = { ":vsp<CR>", "Split window vertically" },
+      h = { ":sp<CR>", "Split window horizontally" },
+      c = { "<C-w>c", "Close split window" },
+      o = { "<C-w>o", "Close others split window" },
+      [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+      ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+      j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+      k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
+      ["="] = { "<C-w>=", "Make split windows equal in size" },
+    },
 
     -----------------------------------------------------------
     -- Gitsigns
@@ -311,20 +326,5 @@ which_key.register({
     },
     o = { "<CMD>foldopen<CR>", "Open fold" },
     c = { "<CMD>foldclose<CR>", "Close fold" },
-  },
-  -----------------------------------------------------------
-  -- s_windows split window shortcut key
-  -----------------------------------------------------------
-  s = {
-    name = "+split",
-    v = { ":vsp<CR>", "Split window vertically" },
-    h = { ":sp<CR>", "Split window horizontally" },
-    c = { "<C-w>c", "Close split window" },
-    o = { "<C-w>o", "Close others split window" },
-    [","] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
-    ["."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
-    j = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
-    k = { ":horizontal resize +5<CR>", "Increase horizontal window size" },
-    ["="] = { "<C-w>=", "Make split windows equal in size" },
   },
 })
