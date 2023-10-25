@@ -75,6 +75,30 @@ local function text_format_plain_text(symbol)
   return table.concat(fragments, ", ")
 end
 
+local function text_format(symbol)
+  local fragments = {}
+
+  if symbol.references then
+    local usage = symbol.references <= 1 and "usage" or "usages"
+    local num = symbol.references == 0 and "no" or symbol.references
+    table.insert(fragments, ("%s %s"):format(num, usage))
+  end
+
+  if symbol.definition then
+    table.insert(fragments, symbol.definition .. " defs")
+  end
+
+  if symbol.implementation then
+    table.insert(fragments, symbol.implementation .. " impls")
+  end
+
+  return table.concat(fragments, ", ")
+end
+
+require("symbol-usage").setup({
+  text_format = text_format,
+})
+
 local opts = {
   ---@type table<string, any> `nvim_set_hl`-like options for highlight virtual text
   hl = { link = "Comment" },
@@ -99,7 +123,7 @@ local opts = {
   implementation = { enabled = true },
   ---@type 'start'|'end' At which position of `symbol.selectionRange` the request to the lsp server should start. Default is `end` (try changing it to `start` if the symbol counting is not correct).
   symbol_request_pos = "end", -- Recommended redifine only in `filetypes` override table
-  text_format = text_format_bubbles,
+  text_format = text_format,
 }
 
 symbol_usage.setup(opts)
