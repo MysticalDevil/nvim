@@ -136,6 +136,16 @@ return {
       require("devil.configs.plugin.hlargs")
     end,
   },
+  -- hlchunk.nvim
+  -- This is the lua implementation of nvim-hlchunk, you can use this neovim plugin to
+  -- highlight your indent line and the current chunk (context) your cursor stayed
+  {
+    "shellRaining/hlchunk.nvim",
+    event = "UIEnter",
+    config = function()
+      require("devil.configs.plugin.hlchunk")
+    end,
+  },
   -- hop.nvim
   -- Neovim motions on speed!
   { "phaazon/hop.nvim", lazy = true, enabled = false },
@@ -181,13 +191,13 @@ return {
   },
   -- indent-blankline.nvim
   -- Indent guides for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = function()
-      require("devil.configs.plugin.indent-blankline")
-    end,
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   config = function()
+  --     require("devil.configs.plugin.indent-blankline")
+  --   end,
+  -- },
   -- iron.nvim
   -- Interactive Repl Over Neovim
   {
