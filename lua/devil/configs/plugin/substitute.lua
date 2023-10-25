@@ -5,7 +5,7 @@ if not status then
 end
 
 local opts = {
-  on_substitute = nil,
+  on_substitute = require("yanky.integration").substitute(),
   yank_substituted_text = false,
   preserve_cursor_position = false,
   highlight_substituted_text = {
