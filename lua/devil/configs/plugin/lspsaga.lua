@@ -1,10 +1,8 @@
-local status, lspsage = pcall(require, "lspsaga")
+local status, lspsaga = pcall(require, "lspsaga")
 if not status then
   vim.notify("lspsaga.nvim not found", "error")
   return
 end
-
-local a = {}
 
 local opts = {
   ui = {
@@ -187,4 +185,6 @@ local opts = {
   },
 }
 
-lspsage.setup(opts)
+lspsaga.setup(opts)
+
+require("devil.utils").keymap("n", "<A-t>", "<CMD>Lspsaga term_toggle<CR>", { desc = "Float term" })
