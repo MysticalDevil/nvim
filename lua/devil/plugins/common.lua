@@ -265,13 +265,14 @@ return {
       require("devil.configs.plugin.neoscroll")
     end,
   },
-  -- node-type.nvim
-  -- A Neovim plugin to show the currently selected node type from lsp and treesitter information
+  -- neorg
+  -- Modernity meets insane extensibility. The future of organizing your life in Neovim.
   {
-    "roobert/node-type.nvim",
-    lazy = true,
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("node-type").setup()
+      require("devil.configs.plugin.neorg")
     end,
   },
   -- neo-tree.nvim
@@ -286,6 +287,15 @@ return {
     },
     config = function()
       require("devil.configs.plugin.neo-tree")
+    end,
+  },
+  -- node-type.nvim
+  -- A Neovim plugin to show the currently selected node type from lsp and treesitter information
+  {
+    "roobert/node-type.nvim",
+    lazy = true,
+    config = function()
+      require("node-type").setup()
     end,
   },
   -- noice.nvim
