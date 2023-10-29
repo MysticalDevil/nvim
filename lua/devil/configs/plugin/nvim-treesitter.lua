@@ -139,7 +139,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- extra treesitter
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.hypr = {
+parser_config.hypr = { ---@diagnostic disable-line
   install_info = {
     url = "https://github.com/luckasRanarison/tree-sitter-hypr",
     files = { "src/parser.c" },

@@ -572,6 +572,17 @@ return {
       require("devil.configs.plugin.rainbow-delimiters")
     end,
   },
+  -- registers.nvim
+  -- Neovim plugin to preview the contents of the registers
+  {
+    "tversteeg/registers.nvim",
+    name = "registers",
+    keys = {
+      { '"', mode = { "n", "v" } },
+      { "<C-R>", mode = "i" },
+    },
+    cmd = "Registers",
+  },
   -- rest.nvim
   -- A fast Neovim http client written in Lua
   {
