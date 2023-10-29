@@ -17,6 +17,17 @@ lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
 end)
 
+lsp_zero.set_server_config({
+  capabilities = {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      },
+    },
+  },
+})
+
 local function arr_extend(origin_arr, added_arr)
   for i = #added_arr, 1, -1 do
     origin_arr[#origin_arr + 1] = added_arr[i]
@@ -49,7 +60,8 @@ mason.setup({
 mason_lspconfig.setup({
   ensure_installed = {},
   handlers = {
-    lsp_zero.default_setup(),
+    lsp_zero.default_setup,
+    jdtls = lsp_zero.noop,
   },
 })
 
