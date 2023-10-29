@@ -227,11 +227,13 @@ return {
     "mrjones2014/legendary.nvim",
     priority = 10000,
     lazy = false,
-    dependencies = { "kkharji/sqlite.lua" },
+    dependencies = {
+      "kkharji/sqlite.lua",
+      "mrjones2014/smart-splits.nvim",
+    },
     config = function()
       require("devil.configs.plugin.legendary")
     end,
-    enabled = false,
   },
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
@@ -608,6 +610,18 @@ return {
       -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
+  },
+  -- smart-splits.nvim
+  -- Smart, seamless, directional navigation and resizing of Neovim +
+  -- terminal multiplexer splits. Supports tmux, Wezterm, and Kitty.
+  -- Think about splits in terms of "up/down/left/right".
+  {
+    "mrjones2014/smart-splits.nvim",
+    build = "./kitty/install-kittens.bash",
+    version = ">=1.0.0",
+    config = function()
+      require("devil.configs.plugin.smart-splits")
+    end,
   },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code
