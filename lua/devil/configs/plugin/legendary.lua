@@ -34,7 +34,7 @@ local opts = {
   -- of each individual item
   default_opts = {
     -- for example, { silent = true, remap = false }
-    keymaps = {},
+    keymaps = { silent = true, remap = true },
     -- for example, { args = '?', bang = true }
     commands = {},
     -- for example, { buf = 0, once = true }
@@ -115,7 +115,7 @@ local opts = {
   lazy_nvim = {
     -- Automatically register keymaps that are defined on lazy.nvim plugin specs
     -- using the `keys = {}` property.
-    auto_register = false,
+    auto_register = true,
   },
   -- Which extensions to load; no extensions are loaded by default.
   -- Setting the plugin name to `false` disables loading the extension.
@@ -144,7 +144,7 @@ local opts = {
     which_key = {
       -- Automatically add which-key tables to legendary
       -- see ./doc/WHICH_KEY.md for more details
-      auto_register = false,
+      auto_register = true,
       -- you can put which-key.nvim tables here,
       -- or alternatively have them auto-register,
       -- see ./doc/WHICH_KEY.md

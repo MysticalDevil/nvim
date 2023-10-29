@@ -81,9 +81,8 @@ local opts = {
 
 which_key.setup(opts)
 
-local utils = require("devil.utils")
-
 which_key.register({
+  ["<A-t>"] = { "<CMD>Lspsaga term_toggle<CR>", desc = "Float term" },
   ["<leader>q"] = { "<CMD>q<CR>", "Quit editor" },
   ["<leader>f"] = {
     function()
@@ -137,7 +136,7 @@ which_key.register({
       l = { "<CMD>TroubleToggle loclist<CR>", "Open trouble loclist" },
       r = { "<CMD>TroubleToggle lsp_references<CR>", "Open LSP references" },
     },
-    s = {
+    p = {
       name = "+plugins",
       s = { "<Plug>RestNvim", "Run request under cursor" },
       p = { "<Plug>RestNvimPreview", "Preview request cURL command" },

@@ -186,5 +186,3 @@ local opts = {
 }
 
 lspsaga.setup(opts)
-
-require("devil.utils").keymap("n", "<A-t>", "<CMD>Lspsaga term_toggle<CR>", { desc = "Float term" })
