@@ -119,10 +119,15 @@ return {
     config = function()
       require("devil.configs.colorscheme.poimandres")
     end,
-
-    -- optionally set the colorscheme within lazy config
-    init = function()
-      vim.cmd("colorscheme poimandres")
+  },
+  -- rose-pine
+  -- Soho vibes for Neovim
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = true,
+    config = function()
+      require("devil.configs.colorscheme.rose-pine")
     end,
   },
   -- tokyonight.nvim
