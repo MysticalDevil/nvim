@@ -112,11 +112,6 @@ local opts = {
       max_timestamps = 10,
     },
   },
-  lazy_nvim = {
-    -- Automatically register keymaps that are defined on lazy.nvim plugin specs
-    -- using the `keys = {}` property.
-    auto_register = true,
-  },
   -- Which extensions to load; no extensions are loaded by default.
   -- Setting the plugin name to `false` disables loading the extension.
   -- Setting it to any other value will attempt to load the extension,
@@ -158,6 +153,12 @@ local opts = {
       -- matching your which-key.nvim groups; if false, all keymaps
       -- are added at toplevel instead of in a group.
       use_groups = true,
+    },
+    -- load keymaps from lazy.nvim keys options
+    lazy_nvim = {
+      -- Automatically register keymaps that are defined on lazy.nvim plugin specs
+      -- using the `keys = {}` property.
+      auto_register = true,
     },
   },
   scratchpad = {
