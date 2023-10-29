@@ -36,7 +36,7 @@ local opts = {
     { name = "luasnip", option = { use_show_condition = false } },
     { name = "nvim_lua" },
     { name = "buffer", keywords = 3 },
-    { name = "path" },
+    { name = "async_path" },
     { name = "calc" },
     { name = "emoji" },
     { name = "treesitter" },
@@ -82,7 +82,7 @@ cmp.setup.cmdline("/", {
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = "path" },
+    { name = "async_path" },
   }, {
     { name = "cmdline" },
   }),
@@ -95,5 +95,9 @@ cmp.setup.filetype("gitcommit", {
     { name = "git" },
   }, {
     { name = "buffer" },
+  }, {
+    { name = "commit" },
+  }, {
+    { name = "gitmoji" },
   }),
 })

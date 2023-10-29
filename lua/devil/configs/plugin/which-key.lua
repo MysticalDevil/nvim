@@ -104,7 +104,7 @@ which_key.register({
     function()
       vim.lsp.buf.signature_help()
     end,
-    "Toggle signature",
+    "Toggle signature help",
   },
   ["<leader>w"] = { ":w<CR>", "Save file" },
   ["<leader>z"] = { "<CMD>ZenMode<CR>", "Enter zen mode" },
