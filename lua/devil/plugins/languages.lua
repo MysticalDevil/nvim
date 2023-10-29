@@ -266,7 +266,6 @@ return {
   --------------------- Go ----------------------
   -- go.nvim
   -- Modern Go plugin for Neovim
-  { "ray-x/guihua.lua", lazy = true },
   {
     "ray-x/go.nvim",
     dependencies = { -- optional packages

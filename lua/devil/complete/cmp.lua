@@ -38,7 +38,6 @@ local opts = {
     { name = "buffer", keywords = 3 },
     { name = "async_path" },
     { name = "calc" },
-    { name = "emoji" },
     { name = "treesitter" },
     { name = "crates" },
     { name = "npm", keyword_length = 4 },
@@ -97,5 +96,7 @@ cmp.setup.filetype("gitcommit", {
     { name = "buffer" },
   }, {
     { name = "commit" },
+  }, {
+    { name = "emoji" },
   }),
 })
