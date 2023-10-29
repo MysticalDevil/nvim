@@ -7,10 +7,10 @@ local types = require("luasnip.util.types")
 
 -- custom snippets
 require("luasnip.loaders.from_lua").load({
-  paths = ("%s/lua/complete/snippets/lua"):format(vim.fn.stdpath("config")),
+  paths = ("%s/lua/devil/complete/snippets/lua"):format(vim.fn.stdpath("config")),
 })
 require("luasnip.loaders.from_vscode").load({
-  paths = ("%s/lua/complete/snippets/vscode"):format(vim.fn.stdpath("config")),
+  paths = ("%s/lua/devil/complete/snippets/vscode"):format(vim.fn.stdpath("config")),
 })
 
 -- https://github.com/rafamadriz/friendly-snippets/
