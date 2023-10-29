@@ -97,7 +97,5 @@ cmp.setup.filetype("gitcommit", {
     { name = "buffer" },
   }, {
     { name = "commit" },
-  }, {
-    { name = "gitmoji" },
   }),
 })

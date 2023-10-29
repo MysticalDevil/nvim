@@ -140,7 +140,6 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "petertriho/cmp-git",
       "Dosx001/cmp-commit",
-      "Dynge/gitmoji.nvim",
       "ray-x/cmp-treesitter",
       "David-Kunz/cmp-npm",
     },
