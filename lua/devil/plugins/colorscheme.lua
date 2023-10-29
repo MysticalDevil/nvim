@@ -35,6 +35,9 @@ return {
       require("devil.configs.colorscheme.everblush")
     end,
   },
+  -- flexoki
+  --
+  { "stevedylandev/flexoki-nvim", lazy = true, name = "flexoki" },
   -- github-nvim-theme
   -- Github's Neovim themes
   {
