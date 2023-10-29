@@ -25,7 +25,6 @@ local lspFormatting = vim.api.nvim_create_augroup("LspFormatting", { clear = tru
 null_ls.setup({
   debug = false,
   sources = {
-    completion.luasnip,
     -- Formatting -------------------------------------------------------------
     -- C/C++
     formatting.clang_format.with({
@@ -154,8 +153,6 @@ null_ls.setup({
         "svelte",
       },
     }),
-
-    completion.luasnip,
   },
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
