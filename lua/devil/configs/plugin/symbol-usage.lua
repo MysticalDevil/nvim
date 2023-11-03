@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local langs = require("symbol-usage.langs")
+
 local SymbolKind = vim.lsp.protocol.SymbolKind
 
 local function h(name)
@@ -95,9 +97,19 @@ local function text_format(symbol)
   return table.concat(fragments, ", ")
 end
 
-require("symbol-usage").setup({
-  text_format = text_format,
-})
+local filter_main_func = {
+  kinds_filter = {
+    [SymbolKind.Function] = {
+      function(data)
+        local symbol = data.symbol
+        if symbol.name:lower() == "main" then
+          return false
+        end
+        return true
+      end,
+    },
+  },
+}
 
 local opts = {
   ---@type table<string, any> `nvim_set_hl`-like options for highlight virtual text
@@ -124,6 +136,16 @@ local opts = {
   ---@type 'start'|'end' At which position of `symbol.selectionRange` the request to the lsp server should start. Default is `end` (try changing it to `start` if the symbol counting is not correct).
   symbol_request_pos = "end", -- Recommended redifine only in `filetypes` override table
   text_format = text_format,
+  filetypes = {
+    lua = langs.lua,
+    javascript = langs.javascript,
+    typescript = langs.javascript,
+    typescriptreact = langs.javascript,
+    javascriptreact = langs.javascript,
+    vue = langs.javascript,
+    go = filter_main_func,
+    java = filter_main_func,
+  },
 }
 
 symbol_usage.setup(opts)
