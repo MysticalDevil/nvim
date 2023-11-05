@@ -659,12 +659,12 @@ return {
   },
   -- styler.nvim
   -- Simple Neovim plugin to set a different colorscheme per filetype.
-  {
-    "folke/styler.nvim",
-    config = function()
-      require("devil.configs.plugin.styler")
-    end,
-  },
+  -- {
+  --"folke/styler.nvim",
+  -- config = function()
+  -- require("devil.configs.plugin.styler")
+  -- end,
+  --  },
   -- substitute.nvim
   -- Neovim plugin introducing a new operators motions to quickly replace and exchange text.
   {
