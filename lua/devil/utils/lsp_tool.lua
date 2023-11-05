@@ -28,11 +28,16 @@ function M.async_formatting(bufnr)
   end)
 end
 
+local proxy_lsps = {
+  ["null-ls"] = true,
+  ["efm"] = true,
+  ["emmet_ls"] = true,
+}
 -- Determine whether the obtained LSP is a proxy LSP
 ---@param name string
 ---@return boolean
 local function not_proxy_lsp(name)
-  return name ~= "null-ls" and name ~= "efm"
+  return not proxy_lsps[name]
 end
 
 -- Format getted LSP name

@@ -150,8 +150,11 @@ local fileformat = {
 
 local lsp_info = {
   utils.get_lsp_info,
-  icon = " LSP:",
-  color = { fg = colors.yellow, gui = "bold" },
+  icon = "󰒋 LSP:",
+  color = {
+    fg = colors.green,
+    gui = "bold",
+  },
 }
 
 ins_section("mode", "lualine_a")
