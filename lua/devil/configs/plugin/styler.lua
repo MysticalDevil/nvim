@@ -7,7 +7,7 @@ end
 local opts = {
   themes = {
     markdown = { colorscheme = "tokyonight" },
-    help = { colorscheme = "nordic", background = "dark" },
+    help = { colorscheme = "catppuccin-mocha", background = "dark" },
   },
 }
 
