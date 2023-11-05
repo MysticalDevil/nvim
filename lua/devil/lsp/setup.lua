@@ -73,7 +73,6 @@ local servers = {
   clangd = require("devil.lsp.config.clangd"),
   clojure_lsp = require("devil.lsp.config.clojure_lsp"),
   cssls = require("devil.lsp.config.cssls"),
-  -- dartls = require("devil.lsp.config.dartls"),
   denols = require("devil.lsp.config.denols"),
   emmet_ls = require("devil.lsp.config.emmet_ls"),
   eslint = require("devil.lsp.config.eslint"),
