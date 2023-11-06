@@ -372,6 +372,7 @@ return {
     config = function()
       require("devil.configs.plugin.jqx")
     end,
+    enabled = false,
   },
   -- nvim-neoclip
   -- Clipboard manager neovim plugin with telescope integration
