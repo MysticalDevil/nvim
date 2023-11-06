@@ -163,8 +163,8 @@ utils.keymap("n", "<C-l>", "<CMD>BufferLineCycleNext<CR>")
 -- close current buffer
 utils.keymap("n", "<C-w>", "<CMD>Bdelete!<CR>")
 -- move current buffer
-utils.keymap("n", "<A-<>", "<CMD>BufferLineMoveLeft<CR>")
-utils.keymap("n", "<A->>", "<CMD>BufferLineMoveRight<CR>")
+utils.keymap("n", "<A-<>", "<CMD>BufferLineMovePrev<CR>")
+utils.keymap("n", "<A->>", "<CMD>BufferLineMoveNext<CR>")
 -- goto buffer
 utils.keymap("n", "<A-1>", "<CMD>BufferLineGoToBuffer 1<CR>")
 utils.keymap("n", "<A-2>", "<CMD>BufferLineGoToBuffer 2<CR>")
