@@ -210,6 +210,7 @@
     "/home/delta/.local/share/nvim/lazy/project.nvim/lua",
     "/home/delta/.config/nvim/lua",
     "/home/delta/.config/nvim/lua",
-    "/home/delta/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/6dde68a1"
+    "/home/delta/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/6dde68a1",
+        "${3rd}/luv/library"
   ]
 }

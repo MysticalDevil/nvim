@@ -92,11 +92,7 @@ function M.enable_inlay_hints_autocmd()
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      if client then
-        if client.name == "null-ls" then
-          return
-        end
-
+      if client and require("devil.utils").not_proxy_lsp(client.name) then
         M.set_inlay_hints(client, bufnr)
       end
     end,

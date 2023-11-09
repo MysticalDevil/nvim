@@ -32,11 +32,13 @@ local proxy_lsps = {
   ["null-ls"] = true,
   ["efm"] = true,
   ["emmet_ls"] = true,
+  ["eslint"] = true,
+  ["cssmodule_ls"] = true,
 }
 -- Determine whether the obtained LSP is a proxy LSP
 ---@param name string
 ---@return boolean
-local function not_proxy_lsp(name)
+function M.not_proxy_lsp(name)
   return not proxy_lsps[name]
 end
 
@@ -67,7 +69,7 @@ function M.get_lsp_info()
 
   for _, client in ipairs(clients) do
     if client.config["filetypes"] and vim.tbl_contains(client.config["filetypes"], buf_ft) then
-      if not_proxy_lsp(client.name) then
+      if M.not_proxy_lsp(client.name) then
         non_proxy_clients[buf_ft] = client
         return format_client_name(client.name)
       end
