@@ -6,12 +6,16 @@ end
 
 lint.linters_by_ft = {
   c = { "clangtidy" },
+  clojure = { "clj-knodo" },
+  cmake = { "cmake-lint" },
   css = { "stylelint" },
   cpp = { "clangtidy" },
   go = { "golangcilint" },
   java = { "checkstyle" },
   json = { "jsonlint" },
-  lua = { "luacheck" },
+  kotlin = { "ktlint" },
+  lua = { "selene" },
+  markdown = { "markdownlint" },
   python = { "ruff" },
   ruby = { "standardrb" },
   sh = { "shellcheck" },
