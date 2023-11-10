@@ -18,7 +18,6 @@ mason_null_ls.setup({
 })
 
 local formatting = null_ls.builtins.formatting
-local completion = null_ls.builtins.completion
 
 local lspFormatting = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
