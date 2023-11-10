@@ -38,6 +38,7 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
       "mhartington/formatter.nvim",
+      "stevearc/conform.nvim",
       "nvimtools/none-ls.nvim",
     },
   },
