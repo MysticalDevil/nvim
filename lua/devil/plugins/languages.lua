@@ -562,7 +562,6 @@ return {
     config = function()
       require("devil.configs.plugin.fidget")
     end,
-    tag = "legacy",
   },
   -- lsp_signature.nvim
   -- LSP signature hint as you type
