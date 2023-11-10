@@ -49,6 +49,8 @@ null_ls.setup({
     formatting.dart_format,
     -- Elixir
     formatting.mix,
+    -- Fennel
+    formatting.fnlfmt,
     -- Fish
     -- builtin fish shell
     formatting.fish_indent,
