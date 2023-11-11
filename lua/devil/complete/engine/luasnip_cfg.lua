@@ -14,7 +14,9 @@ require("luasnip.loaders.from_vscode").load({
 })
 
 -- https://github.com/rafamadriz/friendly-snippets/
-require("luasnip.loaders.from_vscode").lazy_load()
+vim.tbl_map(function(type)
+  require("luasnip.loaders.from_" .. type).lazy_load()
+end, { "vscode", "snipmate", "lua" })
 
 luasnip.config.set_config({
   history = true,
@@ -28,6 +30,24 @@ luasnip.config.set_config({
     },
   },
 })
+
+local filetype_extend = require("luasnip").filetype_extend
+filetype_extend("typescript", { "tsdoc", "vue" })
+filetype_extend("javascript", { "jsdoc", "vue" })
+filetype_extend("lua", { "luadoc" })
+filetype_extend("python", { "pydoc" })
+filetype_extend("rust", { "rustdoc" })
+filetype_extend("cs", { "csharpdoc" })
+filetype_extend("java", { "javadoc" })
+filetype_extend("c", { "cdoc" })
+filetype_extend("cpp", { "cppdoc" })
+filetype_extend("php", { "phpdoc" })
+filetype_extend("kotlin", { "kdoc" })
+filetype_extend("ruby", { "rdoc" })
+filetype_extend("sh", { "shelldoc" })
+filetype_extend("dart", { "flutter" })
+
+-- Keybindings
 
 vim.keymap.set({ "i", "s" }, "<C-l>", function()
   if luasnip.expand_or_jumpable() then
