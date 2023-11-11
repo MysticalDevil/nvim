@@ -129,6 +129,25 @@ local opts = {
       },
     },
   },
+  -- nvim-treesitter/playground
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = "o",
+      toggle_hl_groups = "i",
+      toggle_injected_languages = "t",
+      toggle_anonymous_nodes = "a",
+      toggle_language_display = "I",
+      focus_language = "f",
+      unfocus_language = "F",
+      update = "R",
+      goto_node = "<cr>",
+      show_help = "?",
+    },
+  },
 }
 
 treesitter.setup(opts)
@@ -146,4 +165,13 @@ parser_config.hypr = { ---@diagnostic disable-line
     branch = "master",
   },
   filetype = "hypr",
+}
+
+parser_config.org = { ---@diagnostic disable-line
+  install_info = {
+    url = "https://github.com/milisims/tree-sitter-org",
+    revision = "main",
+    files = { "src/parser.c", "src/scanner.c" },
+  },
+  filetype = "org",
 }

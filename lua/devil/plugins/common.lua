@@ -475,9 +475,11 @@ return {
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-tree-docs",
+      "nvim-treesitter/playground",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-ts-autotag",
       "RRethy/nvim-treesitter-endwise",
+      "ziontee113/syntax-tree-surfer",
     },
     config = function()
       require("devil.configs.plugin.nvim-treesitter")
