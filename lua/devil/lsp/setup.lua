@@ -1,10 +1,3 @@
-local status, lsp_zero = pcall(require, "lsp-zero")
-if not status then
-  vim.notify("lsp-zero.nvim not found", "error")
-  return
-end
-
-local lsp = lsp_zero.preset({})
 local mason = require("mason")
 local lspconfig = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
@@ -12,21 +5,6 @@ local mason_lspconfig = require("mason-lspconfig")
 local util = require("devil.lsp.util")
 
 --------------------------------------- Configures ------------------------------------------------
-
-lsp.on_attach(function(_, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
-end)
-
-lsp_zero.set_server_config({
-  capabilities = {
-    textDocument = {
-      foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      },
-    },
-  },
-})
 
 local function arr_extend(origin_arr, added_arr)
   for i = #added_arr, 1, -1 do
@@ -76,11 +54,18 @@ mason.setup({
   },
 })
 
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local default_setup = function(server)
+  lspconfig[server].setup({
+    capabilities = lsp_capabilities,
+  })
+end
+
 mason_lspconfig.setup({
   ensure_installed = {},
   handlers = {
-    lsp_zero.default_setup,
-    jdtls = lsp_zero.noop,
+    default_setup,
+    jdtls = function() end,
   },
 })
 
@@ -130,5 +115,3 @@ require("devil.lsp.ui")
 require("devil.lsp.attach")
 
 util.enable_inlay_hints_autocmd()
-
-lsp.setup()

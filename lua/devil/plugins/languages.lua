@@ -6,29 +6,6 @@ return {
   -- Quickstart configs for Nvim LSP
   { "neovim/nvim-lspconfig", proiority = 1000 },
 
-  -- lsp-zero.nvim
-  -- A starting point to setup some lsp related features in neovim.
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
-    dependencies = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" }, -- Required
-      { -- Optional
-        "williamboman/mason.nvim",
-        build = function()
-          vim.cmd("MasonUpdate")
-        end,
-      },
-      { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
-      { "L3MON4D3/LuaSnip" }, -- Required
-    },
-  },
-
   -- mason.nvim
   -- Portable package manager for Neovim
   {
