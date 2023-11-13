@@ -127,7 +127,11 @@ plugin_keys.map_LSP = function(mapbuf, bufnr)
 
   -- toggle inlay hints
   mapbuf("n", "<leader>L", function()
-    vim.lsp.inlay_hint(bufnr)
+    if vim.lsp.inlay_hint.is_enabled() then
+      vim.lsp.inlay_hint.enable(nil, false)
+    else
+      vim.lsp.inlay_hint.enable(nil, true)
+    end
   end, { desc = "Toggle LSP inlay hints" })
 end
 

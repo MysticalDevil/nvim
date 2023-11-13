@@ -2,7 +2,7 @@ local M = {}
 
 local complete_util = require("devil.complete.util")
 
-local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+local inlay_hint = vim.lsp.inlay_hint
 
 function M.key_attach(bufnr)
   ---@param opts table?
@@ -74,7 +74,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
-    inlay_hint(bufnr, true)
+    inlay_hint.enable(bufnr, true)
   end
 end
 
