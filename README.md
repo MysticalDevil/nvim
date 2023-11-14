@@ -28,7 +28,7 @@
    brew install neovim
    ```
 
-   Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7，可以按照如下示例进行构建
+   Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7.2，可以按照如下进行构建
 
    ```bash
    # Install necessary library
@@ -73,14 +73,13 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - `format` 代码格式化相关配置，默认使用 [`none-ls.nvim`](https://github.com/nvimtools/none-ls.nvim)，[`conform.nvim`](https://github.com/stevearc/conform.nvim)，[`formatter.nvim`](https://github.com/mhartington/formatter.nvim) 和 [`efm`](https://github.com/mattn/efm-langserver) 作为备选项，可以通过`setup.lua`进行调整
 - `lint` 代码检查相关配置，默认使用 [`none-ls.nvim`](https://github.com/mfussenegger/none-ls.nvim)，[`nvim-lint`](https://github.com/mfussenegger/nvim-lint) 和 [`efm`](https://github.com/mattn/efm-langserver)作为备选项，可以通过`setup.lua`进行调整
 - `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) 和 [`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim) 进行 LSP 的配置
-- `playground`包含一些杂七杂八的代码
 - `utils` 常用的工具库，如全局函数，通用配置等
 
 ## 使用
 
 ### 快捷键
 
-主要按键配置在 [`keybindings.lua`](./lua/configs/core/keybindings.lua) 和 [`which-key.lua`](./lua/configs/plugin/whick-key.lua) 文件中
+主要按键配置在 [`keybindings.lua`](./lua/devil/configs/core/keybindings.lua) 和 [`which-key.lua`](./lua/devil/configs/plugin/whick-key.lua) 文件中
 
 以下是一些常用的快捷键
 
@@ -117,11 +116,11 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 
 主屏幕
 
-![image-20230310210526742](./assets/image-20230310210526742.png)
+![image-20230310210526742](./assets/main-screen.png)
 
 代码编辑页面
 
-![image-20230310210623206](./assets/image-20230310210623206.png)
+![image-20230310210623206](./assets/code-edit.png)
 
 ## 贡献
 
