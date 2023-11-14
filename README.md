@@ -116,11 +116,11 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 
 主屏幕
 
-![image-20230310210526742](./assets/main-screen.png)
+![main-screen](./assets/main-screen.png)
 
 代码编辑页面
 
-![image-20230310210623206](./assets/code-edit.png)
+![code-edit](./assets/code-edit.png)
 
 ## 贡献
 
