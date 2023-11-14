@@ -9,26 +9,41 @@
 ## 安装
 
 1. 安装 neovim：
-    我主要使用的 Linux 发行版是 Arch、Gentoo、Debian，其他发行版请自行查看官方文档。neovim 版本需要 0.8.0 及以上，因为一些插件在 0.8.0 之前无法正常工作
+   我主要使用的 Linux 发行版是 Arch、Gentoo、Debian，其他发行版请自行查看官方文档。neovim 版本需要 0.10.0(nightly) 及以上，因为inlay hints 在 0.10.0 之前无法正常工作
 
-    ```bash
-    # Arch
-    sudo pacman -S neovim
+   ```bash
+   # Arch
+   sudo pacman -S neovim
 
-    # Gentoo
-    sudo emerge -vj app-editors/neovim
+   # Gentoo
+   sudo emerge -vj app-editors/neovim
 
-    # Debian
-    sudo apt install neovim
+   # Debian
+   sudo apt install neovim
 
-    # Windows
-    scoop install neovim
+   # Windows
+   scoop install neovim
 
-    # macOS
-    brew install neovim
-    ```
+   # macOS
+   brew install neovim
+   ```
 
-    Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7
+   Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7，可以按照如下示例进行构建
+
+   ```bash
+   # Install necessary library
+   sudo apt install git cmake ninja-build gettext unzip curl
+   # Clone neovim repository
+   git clone https://github.com/neovim/neovim.git
+   # Enter neovim source directory
+   cd neovim
+   # Build neovim
+   make CMAKE_BUILD_TYPE=RelWithDebInfo
+   # Packaged as deb
+   cd build && cpack -G DEB
+   # Install
+   sudo dpkg -i nvim-linux64.deb
+   ```
 
 2. 克隆该仓库：
 
@@ -38,26 +53,28 @@
 
 3. 打开 neovim 来安装插件
 
-   ```bash
-   :Lazy install
+   ```vim
+   Lazy install
    ```
 
 ## 目录及文件说明
 
-neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` 目录中，所以该说明无特殊指定的话根目录指的就是 `./lua` 目录
+neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` 目录中，所以该说明无特殊指定的话根目录指的就是 `./lua/devil` 目录，devil目录是为了防止命名空间冲突
 
 - `init.lua` 使用纯 lua 配置 neovim 时的启动文件
 - `ginit.vim` 使用 neovim 前端时加载的额外配置，该配置支持 [`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
-- `cmp` 补全引擎相关配置，补全引擎使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，代码片段使用了 [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) 、补全图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
-- `configs/core` 核心配置，主要包括了基础配置、基本按键绑定、主题配色、插件列表和 autocmd
+- `configs/core` 核心配置，主要包括了基础配置、基本按键绑定、插件列表、自定义指令、自定义 autocmd以及第一次启动时的核心插件安装
+- `configs/colorscheme` 主题配置，包含了多种主题，可以通过 `setup.lua` 来更改预设主题
 - `configs/gui` 前端的字体、动画等配置
 - `configs/plugin` 大多数插件的配置，不包含补全、格式化、DAP、LSP
-- `dap`  Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap) 作为 dap（配置并不好，因为不懂）
-- `format` 代码格式化相关配置，主要使用 [`formatter.nvim`](https://github.com/mhartington/formatter.nvim)
-- `lint` 代码检查相关配置，主要使用 [`nvim-lint`](https://github.com/mfussenegger/nvim-lint)
+- `plugins` 默认安装的插件目录，分别为通用插件(`common.lua`)，主题(`colorscheme.lua`)，版本控制相关(`git.lua`)以及编程相关(`prog.lua`)
+- `complete` 补全引擎相关配置，补全引擎默认使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，[`coq_nvim`](https://github.com/ms-jpq/coq_nvim)作为可选项，可以通过`setup.lua`进行切换。代码片段使用了 [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) 、LSP关键字图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
+- `dap` Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap)
+- `format` 代码格式化相关配置，默认使用 [`none-ls.nvim`](https://github.com/nvimtools/none-ls.nvim)，[`conform.nvim`](https://github.com/stevearc/conform.nvim)，[`formatter.nvim`](https://github.com/mhartington/formatter.nvim) 和 [`efm`](https://github.com/mattn/efm-langserver) 作为备选项，可以通过`setup.lua`进行调整
+- `lint` 代码检查相关配置，默认使用 [`none-ls.nvim`](https://github.com/mfussenegger/none-ls.nvim)，[`nvim-lint`](https://github.com/mfussenegger/nvim-lint) 和 [`efm`](https://github.com/mattn/efm-langserver)作为备选项，可以通过`setup.lua`进行调整
 - `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) 和 [`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim) 进行 LSP 的配置
 - `playground`包含一些杂七杂八的代码
-- `utils` 常用的工具库，如全局函数、更改颜色主题等
+- `utils` 常用的工具库，如全局函数，通用配置等
 
 ## 使用
 
@@ -70,9 +87,9 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - `<leader>` 键为 `,`
 - `<leader>w + ...` 保存文件及衍生操作（如保存并退出）
 - `<leader>q + ...` 退出及衍生操作（如强制退出）
--  `Ctrl-j/k` 向下/上滚动 5 行
+- `Ctrl-j/k` 向下/上滚动 5 行
 - `Ctrl-d/u` 向下/上滚动 10 行
-- ```gcc/gcb``` 快速注释
+- `gcc/gcb` 快速注释
 - `sv` 水平分屏 `sh` 垂直分屏 `sc` 关闭分屏 `so` 关闭其他分屏
 - `Alt-h/j/k/l` 窗口之间跳转
 - `ts` 分割标签`th/l/j/k` 前后首尾标签 `tc` 关闭标签

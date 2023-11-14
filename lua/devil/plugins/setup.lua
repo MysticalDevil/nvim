@@ -8,7 +8,7 @@ local plugins_list = {
   require("devil.plugins.colorscheme"),
   require("devil.plugins.common"),
   require("devil.plugins.git"),
-  require("devil.plugins.languages"),
+  require("devil.plugins.prog"),
 }
 
 local opts = {
