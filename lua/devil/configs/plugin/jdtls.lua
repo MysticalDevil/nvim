@@ -147,9 +147,7 @@ local config = {
     -- ["textDocument/documentHighlight"] = function() end,
   },
   on_attach = function(client, bufnr)
-    if vim.fn.has("nvim-0.10") == 1 then
-      vim.lsp.inlay_hint(bufnr, true)
-    end
+    require("devil.lsp.util").set_inlay_hints(client, bufnr)
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
     require("jdtls.setup").add_commands()
