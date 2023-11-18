@@ -1,3 +1,9 @@
+if vim.g.vscode then
+  require("devil.configs.core.basic")
+  require("devil.configs.core.keybindings")
+  return
+end
+
 if vim.fn.has("nvim-0.10") ~= 1 then
   vim.notify("This config only avaiable on >=nvim-0.10", vim.log.levels.ERROR)
   return
