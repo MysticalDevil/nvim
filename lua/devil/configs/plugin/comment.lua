@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local ts_context_commentstring = require("ts_context_commentstring")
+
 local opts = {
   mappings = {
     -- disable extra shortcut key
@@ -29,11 +31,11 @@ local opts = {
     -- Determine the location where to calculate commentstring from
     local location = nil
     if ctx.ctype == U.ctype.blockwise then
-      location = require("ts_context_commentstring.utils").get_cursor_location()
+      location = ts_context_commentstring.utils.get_cursor_location()
     elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.v then
-      location = require("ts_context_commentstring.utils").get_visual_start_location()
+      location = ts_context_commentstring.utils.get_visual_start_location()
     end
-    return require("ts_context_commentstring.internal").calculate_commentstring({
+    return ts_context_commentstring.internal.calculate_commentstring({
       key = type,
       location = location,
     })

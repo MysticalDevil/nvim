@@ -53,11 +53,6 @@ local opts = {
   indent = { enable = true },
   -- nvim-treesitter/nvim-tree-docs
   tree_docs = { enable = true },
-  -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
   -- https://github.com/RRethy/nvim-treesitter-endwise
   endwise = { enable = true },
   -- http://github.com/windwp/nvim-ts-autotag

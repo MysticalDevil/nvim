@@ -476,7 +476,6 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-tree-docs",
       "nvim-treesitter/playground",
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-ts-autotag",
       "RRethy/nvim-treesitter-endwise",
       "ziontee113/syntax-tree-surfer",
@@ -491,6 +490,14 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     config = function()
       require("devil.configs.plugin.nvim-treesitter-context")
+    end,
+  },
+  -- nvim-ts-context-commentstring
+  -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    init = function()
+      vim.g.skip_ts_context_commentstring_module = true
     end,
   },
   -- nvim-ufo
