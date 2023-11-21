@@ -12,9 +12,6 @@ local opts = {
 
 neogen.setup(opts)
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>nf",
-  ":lua require('neogen').generate()<CR>",
-  { noremap = true, silent = true, desc = "Use neogeo to generate" }
-)
+vim.keymap.set("n", "<Leader>nf", function()
+  neogen.generate({ type = "any" })
+end, { noremap = true, silent = true, desc = "Use neogeo to generate" })

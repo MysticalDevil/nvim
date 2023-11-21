@@ -81,7 +81,6 @@ vim.o.showtabline = 2
 vim.o.showmode = false
 -- configure clipboard
 vim.opt.clipboard = "unnamedplus"
-vim.opt.foldtext = "v:lua.require(utils.simple_fold').simple_fold()"
 
 -- code folding configuration
 -- default is not folded

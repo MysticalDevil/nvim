@@ -8,5 +8,3 @@ require("devil.configs.core.bootstrap")
 require("devil.configs.core.keybindings")
 -- Auto command
 require("devil.configs.core.autocmds")
--- Customize commands
-require("devil.configs.core.commands")

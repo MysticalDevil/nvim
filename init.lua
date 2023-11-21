@@ -27,5 +27,8 @@ require("devil.lint.setup")
 -- Debug Adapter Protocol
 require("devil.dap.setup")
 
+-- Customize commands
+require("devil.commands.setup")
+
 -- Playground code
 -- require("devil.playground.setup")
