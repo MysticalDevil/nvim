@@ -4,7 +4,8 @@ if not status then
   return
 end
 
-local ts_context_commentstring = require("ts_context_commentstring")
+local utils = require("ts_context_commentstring.utils")
+local internal = require("ts_context_commentstring.internal")
 
 local opts = {
   mappings = {
@@ -31,13 +32,13 @@ local opts = {
     -- Determine the location where to calculate commentstring from
     local location = nil
     if ctx.ctype == U.ctype.blockwise then
-      location = ts_context_commentstring.utils.get_cursor_location()
+      location = utils.get_cursor_location()
     elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.v then
-      location = ts_context_commentstring.utils.get_visual_start_location()
+      location = utils.get_visual_start_location()
     end
-    return ts_context_commentstring.internal.calculate_commentstring({
+    return internal.calculate_commentstring({
       key = type,
-      location = location,
+      location = location, ---@diagnostic disable-line
     })
   end,
 }

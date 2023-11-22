@@ -32,6 +32,11 @@ opts.settings = {
     },
   },
 }
-opts.single_file_support = false
+opts.single_file_support = (function()
+  local current_dir = vim.fn.getcwd()
+  local deno_json_path = ("%s/deno.json"):format(current_dir)
+
+  return not (vim.fn.filereadable(deno_json_path) == 1)
+end)()
 
 return util.set_on_setup(opts, "typescript")

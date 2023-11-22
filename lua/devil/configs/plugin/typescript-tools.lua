@@ -7,7 +7,12 @@ end
 local opts = {
   on_attach = require("devil.lsp.util").default_on_attach,
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-  single_file_support = false,
+  single_file_support = (function()
+    local current_dir = vim.fn.getcwd()
+    local deno_json_path = ("%s/deno.json"):format(current_dir)
+
+    return not (vim.fn.filereadable(deno_json_path) == 1)
+  end)(),
   handlers = {},
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it

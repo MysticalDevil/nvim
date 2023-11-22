@@ -54,17 +54,10 @@ mason.setup({
   },
 })
 
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-local default_setup = function(server)
-  lspconfig[server].setup({
-    capabilities = lsp_capabilities,
-  })
-end
-
 mason_lspconfig.setup({
   ensure_installed = {},
+  automatic_installation = false,
   handlers = {
-    default_setup,
     jdtls = function() end,
   },
 })
@@ -91,7 +84,7 @@ local servers = {
   rust_analyzer = require("devil.lsp.config.rust_analyzer"),
   solargraph = require("devil.lsp.config.solargraph"),
   taplo = require("devil.lsp.config.taplo"),
-  -- tsserver = require("devil.lsp.config.tsserver"),
+  tsserver = require("devil.lsp.config.tsserver"),
   v_analyzer = require("devil.lsp.config.v_analyzer"),
   vala_ls = require("devil.lsp.config.vala_ls"),
   vimls = require("devil.lsp.config.vimls"),
