@@ -59,7 +59,7 @@ null_ls.setup({
     formatting.gofumpt,
     formatting.goimports_reviser,
     -- Java
-    formatting.google_java_format,
+    -- formatting.google_java_format,
     -- Json
     -- npm install -g fixjson
     formatting.fixjson,
