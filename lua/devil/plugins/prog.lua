@@ -281,6 +281,13 @@ return {
     end,
   },
 
+  ------------------- CSharp --------------------
+  {
+    "Hoffs/omnisharp-extended-lsp.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    ft = { "cs", "vb" },
+  },
+
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp

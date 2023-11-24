@@ -40,6 +40,10 @@ opts.sdk_include_prereleases = true
 -- true
 opts.analyze_open_documents_only = false
 
+opts.handlers = {
+  ["textDocument/definition"] = require("omnisharp_extended").handler,
+}
+
 opts.root_dir = function(fname)
   return lsp_util.root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json")(fname)
     or lsp_util.find_git_ancestor(fname)
