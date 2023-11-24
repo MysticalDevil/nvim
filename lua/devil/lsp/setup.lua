@@ -15,8 +15,9 @@ end
 
 local lsp_servers = require("devil.lsp.check")
 lsp_servers = arr_extend(lsp_servers, {
-  "csharp_ls",
+  -- "csharp_ls",
   -- "dartls",
+  "omnisharp",
   "perlpls",
   "racket_langserver",
   "rust_analyzer",
@@ -66,7 +67,7 @@ mason_lspconfig.setup({
 -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   bashls = require("devil.lsp.config.bashls"),
-  csharp_ls = require("devil.lsp.config.csharp_ls"),
+  -- csharp_ls = require("devil.lsp.config.csharp_ls"),
   clangd = require("devil.lsp.config.clangd"),
   clojure_lsp = require("devil.lsp.config.clojure_lsp"),
   cssls = require("devil.lsp.config.cssls"),
@@ -78,6 +79,7 @@ local servers = {
   jsonls = require("devil.lsp.config.jsonls"),
   kotlin_language_server = require("devil.lsp.config.kotlin_language_server"),
   lua_ls = require("devil.lsp.config.lua_ls"),
+  omnisharp = require("devil.lsp.config.omnisharp"),
   perlpls = require("devil.lsp.config.perlpls"),
   pylyzer = require("devil.lsp.config.pylyzer"),
   racket_langserver = require("devil.lsp.config.racket_langserver"),
