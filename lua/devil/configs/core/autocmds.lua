@@ -42,7 +42,7 @@ autocmd("FileType", {
 -- Auto set indent for some filetypes
 autocmd("FileType", {
   group = indentAutoGroup,
-  pattern = { "java", "kotlin" },
+  pattern = { "java", "kotlin", "php", "composer.json" },
   desc = "Auto set indent for some languages",
   callback = function()
     vim.opt.shiftwidth = 4
