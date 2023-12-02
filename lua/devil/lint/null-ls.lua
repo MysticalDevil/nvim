@@ -78,6 +78,9 @@ null_ls.setup({
     diagnostics.markdownlint,
     -- Perl
     diagnostics.perlimports,
+    -- PHP
+    -- composer require --dev phpstan/phpstan
+    diagnostics.phpstan,
     -- Protocol Buffer
     -- npm install @bufbuild/buf
     diagnostics.buf,
