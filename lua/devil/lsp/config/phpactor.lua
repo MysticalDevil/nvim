@@ -2,11 +2,14 @@ local lsp_util = require("lspconfig.util")
 local util = require("devil.lsp.util")
 local opts = util.default_configs()
 
+local mason_binary = ("%s/mason/bin/"):format(vim.fn.stdpath("data"))
+
 opts.filetypes = { "php" }
 
 opts.init_options = {
   -- Extensions
   ["language_server_php_cs_fixer.enabled"] = true,
+  ["language_server_php_cs_fixer.bin"] = mason_binary .. "php-cs-fixer",
   ["language_server_phpstan.enabled"] = true,
   ["language_server_psalm.enabled"] = false,
   ["php_code_sniffer.enabled"] = false,
