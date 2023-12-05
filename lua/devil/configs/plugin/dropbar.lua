@@ -7,7 +7,7 @@ end
 local utils = require("dropbar.utils")
 local sources = require("dropbar.sources")
 
-local a = "Neogi"
+local a = "Neogit"
 print(a:match("^Neogit.*"))
 
 local function exculde_filetypes(filetype)
@@ -111,7 +111,7 @@ local opts = {
     },
   },
   bar = {
-    ---@type dropbar_source_t[]|fun(buf: integer, win: integer): dropbar_source_t[]
+    hover = true,
     sources = function(buf, _)
       if vim.bo[buf].ft == "markdown" then
         return {
@@ -121,6 +121,11 @@ local opts = {
             sources.markdown,
             sources.lsp,
           }),
+        }
+      end
+      if vim.bo[buf].buftype == "terminal" then
+        return {
+          sources.terminal,
         }
       end
       return {
@@ -141,6 +146,26 @@ local opts = {
     truncate = true,
   },
   sources = {
+    path = {
+      ---@type string|fun(buf: integer, win: integer): string
+      relative_to = function(_, win)
+        -- Workaround for Vim:E5002: Cannot find window number
+        local ok, cwd = pcall(vim.fn.getcwd, win)
+        return ok and cwd or vim.fn.getcwd()
+      end,
+      ---Can be used to filter out files or directories
+      ---based on their name
+      ---@type fun(name: string): boolean
+      filter = function(_)
+        return true
+      end,
+      ---Last symbol from path source when current buf is modified
+      ---@param sym dropbar_symbol_t
+      ---@return dropbar_symbol_t
+      modified = function(sym)
+        return sym
+      end,
+    },
     treesitter = {
       -- Lua pattern used to extract a short name from the node text
       name_pattern = "[#~%*%w%._%->!@:]+%s*%s" .. string.rep("[#~%*%w%._%->!@:]*", 3, "%s*"),
@@ -218,6 +243,21 @@ local opts = {
         -- Number of lines to update when cursor moves out of the parsed range
         look_ahead = 200,
       },
+    },
+    terminal = {
+      ---@type string|fun(buf: integer): string
+      icon = function(buf)
+        local icon = M.opts.icons.kinds.symbols.Terminal
+        if M.opts.icons.kinds.use_devicons then
+          icon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo[buf].filetype) or icon
+        end
+        return icon
+      end,
+      ---@type string|fun(buf: integer): string
+      name = vim.api.nvim_buf_get_name,
+      ---@type boolean
+      ---Show the current terminal buffer in the menu
+      show_current = true,
     },
   },
 }
