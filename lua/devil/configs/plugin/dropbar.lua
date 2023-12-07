@@ -7,9 +7,6 @@ end
 local utils = require("dropbar.utils")
 local sources = require("dropbar.sources")
 
-local a = "Neogit"
-print(a:match("^Neogit.*"))
-
 local function exculde_filetypes(filetype)
   if filetype:match("^Neogit.*") == nil then
     return true

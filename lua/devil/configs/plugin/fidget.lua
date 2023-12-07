@@ -9,13 +9,22 @@ local opts = {
   progress = {
     poll_rate = 5, -- How frequently to poll for progress messages
     -- How to get a progress message's notification group key
+    suppress_on_insert = false, -- Suppress new messages while in insert mode
+    ignore_done_already = false, -- Ignore new tasks that are already complete
+    ignore_empty_message = false, -- Ignore new tasks that don't contain a message
+    -- Clear notification group when LSP server detaches
+    clear_on_detach = function(client_id)
+      local client = vim.lsp.get_client_by_id(client_id)
+      return client and client.name or nil
+    end,
     notification_group = function(msg)
-      return msg.lsp_name
+      return msg.lsp_client.name
     end,
     ignore = {}, -- List of LSP servers to ignore
 
     -- Options related to how LSP progress messages are displayed as notifications
     display = {
+      render_limit = 16, -- How many LSP messages to show at once
       done_ttl = 3, -- How long a message should persist after completion
       done_icon = "✔", -- Icon shown when all LSP progress tasks are complete
       done_style = "Constant", -- Highlight group for completed LSP tasks
@@ -41,14 +50,24 @@ local opts = {
         rust_analyzer = { name = "rust-analyzer" },
       },
     },
+
+    -- Options related to Neovim's built-in LSP client
+    lsp = {
+      progress_ringbuf_size = 0, -- Configure the nvim's LSP progress ring buffer size
+    },
   },
 
   -- Options related to notification subsystem
   notification = {
     poll_rate = 10, -- How frequently to poll and render notifications
+    filter = vim.log.levels.INFO, -- Minimum notifications level
+    override_vim_notify = false, -- Automatically override vim.notify() with Fidget
+    -- How to configure notification groups when instantiated
+    configs = { default = require("fidget.notification").default_config },
 
     -- Options related to how notifications are rendered as text
     view = {
+      stack_upwards = true, -- Display notification items from bottom to top
       icon_separator = " ", -- Separator between group name and icon
       group_separator = "---", -- Separator between notification groups
       -- Highlight group used for group separator
@@ -65,6 +84,8 @@ local opts = {
       max_height = 0, -- Maximum height of the notification window
       x_padding = 1, -- Padding from right edge of window boundary
       y_padding = 0, -- Padding from bottom edge of window boundary
+      align = "bottom", -- How to align the notification window
+      relative = "editor", -- What the notification window position is relative to
     },
   },
 
@@ -72,6 +93,8 @@ local opts = {
   logger = {
     level = vim.log.levels.WARN, -- Minimum logging level
     float_precision = 0.01, -- Limit the number of decimals displayed for floats
+    -- Where Fidget writes its logs to
+    path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("cache")),
   },
 }
 
