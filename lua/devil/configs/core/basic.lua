@@ -89,5 +89,8 @@ vim.o.foldcolumn = "1"
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+-- default color mode
+vim.o.termguicolors = true
+
 -- improve startup time for neovim
 vim.loader.enable()
