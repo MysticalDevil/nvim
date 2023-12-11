@@ -17,6 +17,7 @@ local lsp_servers = require("devil.lsp.check")
 lsp_servers = arr_extend(lsp_servers, {
   -- "csharp_ls",
   -- "dartls",
+  "groovyls",
   "omnisharp",
   "perlpls",
   "phpactor",
@@ -77,6 +78,7 @@ local servers = {
   eslint = require("devil.lsp.config.eslint"),
   fennel_language_server = require("devil.lsp.config.fennel_language_server"),
   gopls = require("devil.lsp.config.gopls"),
+  groovyls = require("devil.lsp.config.groovyls"),
   jsonls = require("devil.lsp.config.jsonls"),
   kotlin_language_server = require("devil.lsp.config.kotlin_language_server"),
   lua_ls = require("devil.lsp.config.lua_ls"),
