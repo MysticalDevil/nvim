@@ -104,8 +104,12 @@ local config = {
             path = "/usr/lib/jvm/openjdk-17/",
           },
           {
-            name = "JavaSE-19",
-            path = "/usr/lib/jvm/openjdk-bin-19/",
+            name = "JavaSE-21",
+            path = "/usr/lib/jvm/openjdk-21/",
+          },
+          {
+            name = "GraalVM-17",
+            path = "/usr/lib/jvm/graalvm-bin-17/",
           },
         },
       },
