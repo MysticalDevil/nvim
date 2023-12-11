@@ -468,9 +468,7 @@ return {
   -- Nvim Treesitter configurations and abstraction layer
   {
     "nvim-treesitter/nvim-treesitter",
-    build = function()
-      require("nvim-tresitter.install").update({ with_sync = true })
-    end,
+    build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/nvim-treesitter-textobjects",
