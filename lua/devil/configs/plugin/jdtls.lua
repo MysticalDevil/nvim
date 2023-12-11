@@ -107,10 +107,6 @@ local config = {
             name = "JavaSE-21",
             path = "/usr/lib/jvm/openjdk-21/",
           },
-          {
-            name = "GraalVM-17",
-            path = "/usr/lib/jvm/graalvm-bin-17/",
-          },
         },
       },
       implementationsCodeLens = { enabled = true },
