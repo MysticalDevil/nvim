@@ -288,6 +288,14 @@ return {
     ft = { "cs", "vb" },
   },
 
+  ------------------ FSharp --------------------
+  {
+    "ionide/Ionide-vim",
+    ft = { "fsharp" },
+    build = "make fsautocomplete",
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
+
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp

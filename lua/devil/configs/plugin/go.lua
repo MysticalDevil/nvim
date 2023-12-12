@@ -102,19 +102,6 @@ local opts = {
   trouble = false, -- true: use trouble to open quickfix
   test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
   luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
-  --  Do not enable this if you already added the path, that will duplicate the entries
-  on_jobstart = function(cmd)
-    _ = cmd
-  end, -- callback for stdout
-  on_stdout = function(err, data)
-    _, _ = err, data
-  end, -- callback when job started
-  on_stderr = function(err, data)
-    _, _ = err, data
-  end, -- callback for stderr
-  on_exit = function(code, signal, output)
-    _, _, _ = code, signal, output
-  end, -- callback for jobexit, output : string
   iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
 }
 
