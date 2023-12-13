@@ -23,6 +23,7 @@ local opts = {
     kotlin = { "ktlint" },
     lua = { "stylua" },
     perl = { "perlimports", "perltidy" },
+    php = { "php_cs_fixer" },
     python = { "isort", "black" },
     ruby = { "standardrb" },
     rust = { "rustfmt" },
