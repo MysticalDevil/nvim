@@ -115,6 +115,9 @@ null_ls.setup({
     code_actions.gomodifytags,
     -- go install github.com/josharian/impl@latest
     code_actions.impl,
+    -- Nix
+    -- nix build git+https://git.peppe.rs/languages/statix
+    code_actions.statix,
     -- Shell
     -- cabal install ShellCheck
     code_actions.shellcheck,

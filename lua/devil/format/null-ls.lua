@@ -54,6 +54,9 @@ null_ls.setup({
     -- Fish
     -- builtin fish shell
     formatting.fish_indent,
+    -- FSahrp
+    -- dotnet tool install fantomas -g
+    formatting.fantomas,
     -- Go
     -- go install mvdan.cc/gofumpt@latest
     formatting.gofumpt,
