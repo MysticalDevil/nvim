@@ -34,5 +34,7 @@ require("devil.dap.setup")
 -- Customize commands
 require("devil.commands.setup")
 
+vim.cmd("hi WinBar guibg=None")
+
 -- Playground code
 -- require("devil.playground.setup")

@@ -112,7 +112,6 @@ local opts = {
     sources = function(buf, _)
       if vim.bo[buf].ft == "markdown" then
         return {
-          sources.path,
           utils.source.fallback({
             sources.treesitter,
             sources.markdown,
@@ -126,7 +125,6 @@ local opts = {
         }
       end
       return {
-        sources.path,
         utils.source.fallback({
           sources.lsp,
           sources.treesitter,
