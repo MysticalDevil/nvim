@@ -76,6 +76,9 @@ null_ls.setup({
     -- Markdown
     -- npm install markdownlint --save-dev
     diagnostics.markdownlint,
+    -- Nix
+    -- nix profile install github:nerdypepper/statix
+    diagnostics.statix,
     -- Perl
     diagnostics.perlimports,
     -- PHP

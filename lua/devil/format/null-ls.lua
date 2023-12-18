@@ -71,6 +71,9 @@ null_ls.setup({
     -- Lua
     -- cargo install stylua
     formatting.stylua,
+    -- Nix
+    -- nix profile install github:serokell/nixfmt
+    formatting.nixfmt,
     -- Nginx
     -- npm install -g nginxbeautifier
     formatting.nginx_beautifier,
