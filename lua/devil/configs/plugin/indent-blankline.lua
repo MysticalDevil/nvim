@@ -28,12 +28,6 @@ end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
 
-hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-
--- hide first line indent
-hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
-hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-
 -- ibl config
 local opts = {
   debounce = 100,
@@ -58,7 +52,7 @@ local opts = {
     show_start = true,
     show_end = false,
     injected_languages = false,
-    highlight = highlight,
+    -- highlight = highlight,
     priority = 1024,
     include = {
       node_type = {
@@ -141,3 +135,9 @@ local opts = {
 }
 
 ibl.setup(opts)
+
+hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+
+-- hide first line indent
+hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
