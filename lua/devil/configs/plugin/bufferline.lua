@@ -27,7 +27,7 @@ local opts = {
       icon = "▎", -- this should be omitted if indicator style is not 'icon'
       style = "icon",
     },
-    buffer_close_icon = "",
+    buffer_close_icon = "󰅖",
     modified_icon = "●",
     close_icon = "",
     left_trunc_marker = "",
@@ -107,7 +107,7 @@ local opts = {
         local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
 
         if error ~= 0 then
-          table.insert(result, { text = ("  %s"):format(error), fg = "#EC5241" })
+          table.insert(result, { text = (" 󰅚 %s"):format(error), fg = "#EC5241" })
         end
 
         if warning ~= 0 then
