@@ -135,7 +135,7 @@ local opts = {
   implementation = { enabled = true },
   ---@type 'start'|'end' At which position of `symbol.selectionRange` the request to the lsp server should start. Default is `end` (try changing it to `start` if the symbol counting is not correct).
   symbol_request_pos = "end", -- Recommended redifine only in `filetypes` override table
-  text_format = text_format,
+  text_format = text_format_bubbles,
   filetypes = {
     lua = langs.lua,
     javascript = langs.javascript,
