@@ -145,6 +145,8 @@ local opts = {
     vue = langs.javascript,
     go = filter_main_func,
     java = filter_main_func,
+    rust = filter_main_func,
+    zig = filter_main_func,
   },
 }
 
