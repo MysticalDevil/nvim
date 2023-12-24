@@ -6,7 +6,6 @@ local lsp_util = require("lspconfig.util")
 opts.settings = {
   pylsp = {
     plugins = {
-      pycodestyle = { enabled = false },
       ruff = {
 
         enabled = true, -- Enable the plugin
@@ -25,13 +24,15 @@ opts.settings = {
         preview = false, -- Whether to enable the preview style linting and formatting.
         targetVersion = "py311", -- The minimum python version to target (applies for both linting and formatting).
       },
+      black = {
+        enabled = true,
+        line_length = 100,
+      },
+      isort = { enabled = true },
+      yapf = { enabled = false },
+      pycodestyle = { enabled = false },
+      pyflakes = { enabled = false },
     },
-    black = {
-      enabled = true,
-      line_length = 100,
-    },
-    isort = { enabled = true },
-    yapf = { enabled = false },
   },
 }
 
