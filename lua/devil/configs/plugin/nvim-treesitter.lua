@@ -162,15 +162,6 @@ parser_config.hypr = { ---@diagnostic disable-line
   filetype = "hypr",
 }
 
-parser_config.org = { ---@diagnostic disable-line
-  install_info = {
-    url = "https://github.com/milisims/tree-sitter-org",
-    revision = "main",
-    files = { "src/parser.c", "src/scanner.c" },
-  },
-  filetype = "org",
-}
-
 parser_config.fsharp = { ---@diagnostic disable-line
   install_info = {
     url = "https://github.com/Nsidorenco/tree-sitter-fsharp",
@@ -180,4 +171,15 @@ parser_config.fsharp = { ---@diagnostic disable-line
     requires_generate_from_grammer = true,
   },
   filetype = "fsharp",
+}
+
+parser_config.crystal = { ---@diagnostic disable-line
+  install_info = {
+    url = "https://github.com/keidax/tree-sitter-crystal",
+    branch = "main",
+    files = { "src/scanner.c", "src/parser.c" },
+    generate_requires_npm = true,
+    requires_generate_from_grammer = true,
+  },
+  filetype = "crystal",
 }
