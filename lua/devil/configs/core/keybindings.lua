@@ -79,6 +79,19 @@ utils.keymap("x", "p", "_dP")
 -- type `esc` to back normal mode
 utils.keymap("t", "<ESC>", "<C-\\><C-n>")
 
+-- show spaces
+local space_visible = false
+
+utils.keymap("n", "<space>t", function()
+  if space_visible then
+    vim.opt.listchars:remove("space:·")
+  else
+    vim.opt.listchars:append("space: ")
+  end
+
+  space_visible = not space_visible
+end)
+
 -----------------------------------------------------------
 local plugin_keys = {}
 
