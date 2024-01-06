@@ -5,10 +5,10 @@ if not status_ok then
 end
 
 local plugins_list = {
-  require("devil.plugins.common"),
-  require("devil.plugins.colorscheme"),
-  require("devil.plugins.git"),
-  require("devil.plugins.prog"),
+  require("devil.plugins.list.common"),
+  require("devil.plugins.list.colorscheme"),
+  require("devil.plugins.list.git"),
+  require("devil.plugins.list.prog"),
 }
 
 local opts = {

@@ -2,9 +2,6 @@ return {
   -- lazy.nvim
   -- A modern plugin manager for Neovim
   "folke/lazy.nvim",
-  -- nfnl
-  -- Enhance your Neovim with Fennel
-  { "Olical/nfnl", ft = "fennel" },
 
   --
   --------------------------------------- Common plugins ----------------------------------------
