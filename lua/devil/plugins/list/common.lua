@@ -304,7 +304,7 @@ return {
   -- Neovim plugin to manage the file system and other tree like structures
   {
     "nvim-neo-tree/neo-tree.nvim",
-    command = "Neotree",
+    lazy = false,
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -317,6 +317,17 @@ return {
     },
     opts = function()
       return require("devil.plugins.configs.neo-tree")
+    end,
+    config = function(_, opts)
+      -- If you want icons for diagnostic errors, you'll need to define them somewhere:
+      vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+      vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+      vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+      vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+      -- NOTE: this is changed from v1.x, which used the old style of highlight groups
+      -- in the form "LspDiagnosticsSignWarning"
+
+      require("neo-tree").setup(opts)
     end,
   },
   -- node-type.nvim
