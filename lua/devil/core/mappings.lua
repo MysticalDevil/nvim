@@ -663,37 +663,6 @@ M.dap = {
   },
 }
 
-M.rust_tools = {
-  plugin = true,
-
-  n = {
-    ["rr"] = {
-      function()
-        require("rust-tools.runnables").runnables()
-      end,
-      "Run runnables",
-    },
-    ["rh"] = {
-      function()
-        require("rust-tools.hover_actions").hover_actions()
-      end,
-      "Hover actions",
-    },
-    ["ra"] = {
-      function()
-        require("rust-tools.code_action_group").code_action_group()
-      end,
-      "Code actions",
-    },
-    ["rd"] = {
-      function()
-        require("rust-tools.debuggables").debuggables()
-      end,
-      "Start debug",
-    },
-  },
-}
-
 M.ufo = {
   plugin = true,
   n = {

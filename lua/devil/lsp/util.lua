@@ -2,8 +2,6 @@ local M = {}
 
 local utils = require("devil.utils")
 
-local complete_util = require("devil.complete.util")
-
 local inlay_hint = vim.lsp.inlay_hint
 
 function M.key_attach(bufnr)
@@ -44,7 +42,6 @@ function M.default_on_attach(client, bufnr)
   vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 end
 
----@return table
 function M.default_configs()
   return {
     capabilities = M.common_capabilities(),
@@ -97,138 +94,6 @@ function M.on_attach(on_attach)
       on_attach(client, buffer)
     end,
   })
-end
-
----@param name string|table
----@return boolean
-function M.find_binary_exists(name)
-  if type(name) == "table" then
-    for _, bin in ipairs(name) do
-      if vim.fn.executable(bin) == 1 then
-        return true
-      end
-    end
-    return false
-  elseif type(name) == "string" then
-    return vim.fn.executable(name) == 1
-  end
-  return false
-end
-
----@return boolean
-function M.node_installed()
-  return M.find_binary_exists("npm")
-end
-
----@return boolean
-function M.rust_installed()
-  return M.find_binary_exists("cargo")
-end
-
----@return boolean
-function M.go_installed()
-  return M.find_binary_exists("go")
-end
-
----@return boolean
-function M.python_installed()
-  return M.find_binary_exists({ "pip", "pip3" })
-end
-
----@return boolean
-function M.ruby_installed()
-  return M.find_binary_exists("gem")
-end
-
----@return string
-function M.check_os()
-  return vim.loop.os_uname().sysname
-end
-
----@param server table
----@param opts table
-local function setup_for_rust(server, opts)
-  local ok_rt, _ = pcall(require, "rust-tools")
-  if not ok_rt then
-    vim.notify("Failed to load rust tools, will set up `rust-analyzer` without `rust-tools`.", "warn")
-    if complete_util.get_engine() == "coq" then
-      server.setup(require("coq").lsp_ensure_capabilities(opts))
-    else
-      server.setup(opts)
-    end
-  else
-    require("devil.plugins.configs.rust-tools")
-  end
-end
-
----@param server table
----@param opts table
-local function setup_for_typescript(server, opts)
-  local ok_ts, _ = pcall(require, "typescript-tools")
-
-  if not ok_ts then
-    vim.notify("Failed to load typescript tools, setting up tsserver without typescript-tools.", "warn")
-  end
-
-  if complete_util.get_engine() == "coq" then
-    opts = require("coq").lsp_ensure_capabilities(opts)
-  end
-
-  server.setup(opts)
-
-  if ok_ts then
-    require("devil.plugins.configs.typescript-tools")
-  end
-end
-
----@param coq_status boolean
----@param opts table
----@return table
-local function set_configs(coq_status, opts)
-  if coq_status then
-    return {
-      on_setup = function(server)
-        server.setup(require("coq").lsp_ensure_capabilities(opts))
-      end,
-    }
-  end
-
-  return {
-    on_setup = function(server)
-      server.setup(opts)
-    end,
-  }
-end
-
----@param opts table
----@param lang string|nil
-function M.set_on_setup(opts, lang)
-  local coq_enabled = function()
-    return complete_util.get_engine() == "coq"
-  end
-
-  local server_config = set_configs(coq_enabled(), opts)
-
-  if lang == "rust" then
-    server_config.on_setup = function(server)
-      setup_for_rust(server, opts)
-    end
-  end
-
-  if lang == "lua" then
-    server_config.on_setup = function(server)
-      require("neodev").setup()
-      server.setup(opts)
-    end
-  end
-
-  if lang == "typescript" then
-    server_config.on_setup = function(server)
-      setup_for_typescript(server, opts)
-    end
-  end
-
-  return server_config
 end
 
 return M

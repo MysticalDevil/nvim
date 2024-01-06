@@ -7,28 +7,28 @@ opts.filetypes =
 opts.settings = {
   settings = {
     typescript = {
-      -- inlayHints = {
-      --   includeInlayParameterNameHints = "all",
-      --   includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-      --   includeInlayFunctionParameterTypeHints = true,
-      --   includeInlayVariableTypeHints = true,
-      --   includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-      --   includeInlayPropertyDeclarationTypeHints = true,
-      --   includeInlayFunctionLikeReturnTypeHints = true,
-      --   includeInlayEnumMemberValueHints = true,
-      -- },
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
     },
     javascript = {
-      -- inlayHints = {
-      --   includeInlayParameterNameHints = "all",
-      --   includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-      --   includeInlayFunctionParameterTypeHints = true,
-      --   includeInlayVariableTypeHints = true,
-      --   includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-      --   includeInlayPropertyDeclarationTypeHints = true,
-      --   includeInlayFunctionLikeReturnTypeHints = true,
-      --   includeInlayEnumMemberValueHints = true,
-      -- },
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
     },
   },
 }
@@ -39,4 +39,4 @@ opts.single_file_support = (function()
   return not (vim.fn.filereadable(deno_json_path) == 1)
 end)()
 
-return util.set_on_setup(opts, "typescript")
+return opts

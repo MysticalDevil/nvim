@@ -1,38 +1,41 @@
 local status, cmp = pcall(require, "cmp")
 if not status then
-  vim.notify("nvim-cmp not found", "error")
+  vim.notify("nvim-cmp not found", vim.log.levels.ERROR)
   return
 end
 
-local luasnip = require("luasnip")
-
 local util = require("devil.complete.util")
 
-require("devil.complete.engine.luasnip_cfg")
+local function border(hl_name)
+  return {
+    { "╭", hl_name },
+    { "─", hl_name },
+    { "╮", hl_name },
+    { "│", hl_name },
+    { "╯", hl_name },
+    { "─", hl_name },
+    { "╰", hl_name },
+    { "│", hl_name },
+  }
+end
 
 local opts = {
   formatting = util.formatting,
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   window = {
     completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    documentation = {
+      border = border("CmpDocBorder"),
+      winhighlight = "Normal:CmpDoc",
+    },
   },
   mapping = util.mapping,
   sources = cmp.config.sources({
-    {
-      name = "nvim_lsp",
-      entry_filter = function(entry, ctx)
-        local kind = require("cmp.types.lsp").CompletionItemKind[entry:get_kind()]
-        if kind == "Snippet" and ctx.prev_context.filetype == "java" then
-          return false
-        end
-        return true
-      end,
-    },
+    { name = "nvim_lsp" },
     { name = "luasnip", option = { use_show_condition = false } },
     { name = "nvim_lua" },
     { name = "buffer", keywords = 3 },
@@ -41,7 +44,6 @@ local opts = {
     { name = "treesitter" },
     { name = "crates" },
     { name = "npm", keyword_length = 4 },
-    { name = "conjure" },
   }),
   sorting = {
     comparators = {
@@ -58,10 +60,6 @@ local opts = {
 }
 
 cmp.setup(opts)
-
--- If you want insert `(` after select function or method item
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 ---@diagnostic disable-next-line
 cmp.setup.cmdline({ "/", "?" }, {

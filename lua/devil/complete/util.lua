@@ -56,7 +56,6 @@ M.formatting = {
         cmdline = "[CMD]",
         git = "[Git]",
         calc = "[Calc]",
-        conjure = "[Conjure]",
       })[entry.source.name]
       return vim_item
     end,
@@ -111,18 +110,6 @@ M.mapping = {
     end
   end, { "i", "s" }),
 }
-
-M.engine = ""
-
----@param name string
-function M.set_engine(name)
-  M.engine = name
-end
-
----@return string
-function M.get_engine()
-  return M.engine
-end
 
 M.under = function(entry1, entry2)
   local _, entry1_under = entry1.completion_item.label:find("^_+")

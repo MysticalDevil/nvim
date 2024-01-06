@@ -50,4 +50,4 @@ opts.root_dir = function(fname)
 end
 opts.single_file_support = true
 
-return util.set_on_setup(opts)
+return opts

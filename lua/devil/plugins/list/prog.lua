@@ -104,62 +104,54 @@ return {
     -- these dependencies will only be loaded when cmp loads
     -- dependencies are always lazy-loaded unless specified otherwise
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-calc",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lsp-document-symbol",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-emoji",
-      "FelipeLema/cmp-async-path",
-      "PaterJason/cmp-conjure",
-      "saadparwaiz1/cmp_luasnip",
-      "petertriho/cmp-git",
-      "Dosx001/cmp-commit",
-      "ray-x/cmp-treesitter",
-      "David-Kunz/cmp-npm",
-    },
-  },
-  -- LuaSnip
-  -- Snippet Engine for Neovim written in Lua.
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      "saadparwaiz1/cmp_luasnip",
-    },
-    version = "2.*",
-    build = "make install_jsregexp",
-  },
-  -- friendly-snippets
-  -- Set of preconfigured snippets for different languages.
-  { "rafamadriz/friendly-snippets" },
-  -- Complete Source
-  { "hrsh7th/cmp-cmdline", event = "CmdlineEnter" },
-  { "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
-  -- cmp-npm
-  -- -- An additional source for nvim-cmp to autocomplete packages and its versions
-  {
-    "David-Kunz/cmp-npm",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    ft = "json",
-    config = function()
-      require("cmp-npm").setup({})
-    end,
-  },
+      -- LuaSnip
+      -- Snippet Engine for Neovim written in Lua.
+      {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          "saadparwaiz1/cmp_luasnip",
+        },
+        version = "2.*",
+        build = "make install_jsregexp",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("devil.plugins.configs.others").luasnip(opts)
+        end,
+      },
 
-  -- coq_nvim
-  -- Fast as FUCK nvim completion. SQLite, concurrent scheduler, hundreds of hours of optimization.
-  {
-    "ms-jpq/coq_nvim",
-    branch = "coq",
-    lazy = true,
-    enabled = false,
-    dependencies = {
-      { "ms-jpq/coq.artifacts", branch = "artifacts" },
-      { "ms-jpq/coq.thirdparty", branch = "3p" },
-      { "neovim/nvim-lspconfig" },
+      -- autopairing of (){}[] etc
+      {
+        "windwp/nvim-autopairs",
+        opts = {
+          fast_wrap = {},
+          disable_filetype = { "TelescopePrompt", "vim" },
+        },
+        config = function(_, opts)
+          require("nvim-autopairs").setup(opts)
+
+          -- setup cmp for autopairs
+          local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end,
+      },
+
+      {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-calc",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-emoji",
+        "FelipeLema/cmp-async-path",
+        "saadparwaiz1/cmp_luasnip",
+        "petertriho/cmp-git",
+        "Dosx001/cmp-commit",
+        "ray-x/cmp-treesitter",
+        "David-Kunz/cmp-npm",
+      },
     },
   },
 
@@ -177,13 +169,14 @@ return {
   },
 
   -------------------- Rust ---------------------
-  -- rust-tools.nvim
-  -- Tools for better development in rust using neovim's builtin lsp
+  -- rustaceanvim
+  -- Supercharge your Rust experience in Neovim! A heavily modified fork of rust-tools.nvim
   {
-    "simrat39/rust-tools.nvim",
+    "mrcjkb/rustaceanvim",
+    version = "^3", -- Recommended
     ft = { "rust" },
-    lazy = true,
   },
+
   -- crates.nvim
   -- A neovim plugin that helps managing crates.io dependencies
   {

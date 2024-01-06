@@ -8,12 +8,12 @@ if vim.loop.os_uname().release:match("gentoo") then
 end
 
 -- Basic configure
-require("devil.configs.core.setup")
+require("devil.core")
+
+require("devil.core.bootstrap")
 
 -- Lazy plugins manage
 require("devil.plugins.setup")
--- Color scheme setting
-require("devil.configs.colorscheme.setup")
 
 -- Keymappings
 require("devil.utils").load_mappings()

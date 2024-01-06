@@ -31,4 +31,4 @@ opts.setting = {
 }
 opts.single_file_support = false
 
-return util.set_on_setup(opts)
+return opts

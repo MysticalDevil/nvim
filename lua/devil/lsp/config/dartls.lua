@@ -24,4 +24,4 @@ opts.root_dir = function(fname)
   require("lspconfig.util").root_pattern("pubspec.yaml")(fname)
 end
 
-return util.set_on_setup(opts)
+return opts

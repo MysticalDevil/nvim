@@ -80,4 +80,4 @@ opts.on_attach = function(client, bufnr)
 end
 opts.single_file_support = true
 
-return util.set_on_setup(opts)
+return opts

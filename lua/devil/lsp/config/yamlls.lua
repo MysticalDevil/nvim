@@ -25,4 +25,4 @@ opts.settings = {
 }
 opts.single_file_support = true
 
-return util.set_on_setup(opts)
+return opts

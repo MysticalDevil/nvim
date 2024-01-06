@@ -1,6 +1,4 @@
-local runtime_path = vim.split(package.path, ";", {})
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/>/init.lua")
+require("neodev").setup()
 
 local util = require("devil.lsp.util")
 
@@ -12,8 +10,6 @@ opts.settings = {
     runtime = {
       -- Tell the langurage server which version of Lua you're using
       version = "LuaJIT",
-      -- Setup your lua path
-      path = runtime_path,
     },
     diagnostics = {
       -- Get the language server to recognize the `vim` global
@@ -41,6 +37,9 @@ opts.settings = {
       semicolon = "SameLine",
       setType = false,
     },
+    completion = {
+      callSnippet = "Replace",
+    },
   },
 }
 opts.root_dir = function(fname)
@@ -56,4 +55,4 @@ opts.root_dir = function(fname)
 end
 opts.single_file_support = true
 
-return util.set_on_setup(opts, "lua")
+return opts

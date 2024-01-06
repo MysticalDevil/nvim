@@ -336,14 +336,6 @@ return {
       return require("devil.plugins.configs.noice")
     end,
   },
-  -- nvim-autopairs
-  -- autopairs for neovim written by lua
-  {
-    "windwp/nvim-autopairs",
-    opts = function()
-      return others_configs.autopairs
-    end,
-  },
   -- nvim-bqf
   -- Better quickfix window in Neovim, polish old quickfix window.
   {
@@ -856,8 +848,8 @@ return {
     "axieax/urlview.nvim",
     cmd = "UrlView",
     dependencies = "nvim-telescope/telescope.nvim",
-    config = function()
-      require("devil.configs.plugin.urlview")
+    opts = function()
+      return require("devil.plugins.configs.urlview")
     end,
   },
   -- vim-startuptime

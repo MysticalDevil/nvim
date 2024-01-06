@@ -13,4 +13,4 @@ opts.settings = {
 opts.filetypes = { "python" }
 opts.single_file_support = true
 
-return util.set_on_setup(opts)
+return util.on_setup(opts)
