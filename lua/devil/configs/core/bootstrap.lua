@@ -1,7 +1,8 @@
 -- Auto install lazy.nvim
 ---@param path string
 ---@param repository string
-local function bootstrap(path, repository)
+---@param branch string
+local function bootstrap(path, repository, branch)
   if not vim.loop.fs_stat(path) then
     vim.notify(("Boostrating %s is being installed, please wait..."):format(repository), vim.log.levels.INFO)
     vim.fn.system({
@@ -9,7 +10,7 @@ local function bootstrap(path, repository)
       "clone",
       "--filter=blob:none",
       ("https://github.com/%s"):format(repository),
-      "--branch=stable",
+      ("--branch=%s"):format(branch),
       path,
     })
   end
@@ -17,7 +18,4 @@ local function bootstrap(path, repository)
 end
 
 local lazy_path = ("%s/lazy/lazy.nvim"):format(vim.fn.stdpath("data"))
-bootstrap(lazy_path, "folke/lazy.nvim")
-
-local nfnl_path = ("%s/lazy/nfnl"):format(vim.fn.stdpath("data"))
-bootstrap(nfnl_path, "Olical/nfnl")
+bootstrap(lazy_path, "folke/lazy.nvim", "stable")

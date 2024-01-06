@@ -15,6 +15,9 @@ end
 
 -- Basic configure
 require("devil.configs.core.setup")
+
+-- require("devil.utils").load_mappings()
+
 -- Lazy plugins manage
 require("devil.plugins.setup")
 -- Color scheme setting

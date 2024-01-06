@@ -612,6 +612,16 @@ return {
     end,
   },
 
+  -- inc-rename.nvim
+  -- Incremental LSP renaming based on Neovim's command-preview feature
+  {
+    "smjonas/inc-rename.nvim",
+    event = "LspAttach",
+    config = function()
+      require("devil.configs.plugin.inc-rename")
+    end,
+  },
+
   ----------------- Tree sitter -----------------
   -- tree-sitter-hypr
   -- hyprland configuration files grammar for treesitter

@@ -4,11 +4,7 @@ if not status then
   return
 end
 
-local opts = {
-  stages = "slide",
-  timeout = 5000,
-  render = "default",
-}
+local opts = {}
 
 notify.setup(opts)
 
