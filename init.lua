@@ -1,9 +1,3 @@
-if vim.g.vscode then
-  require("devil.configs.core.basic")
-  require("devil.configs.core.keybindings")
-  return
-end
-
 if vim.fn.has("nvim-0.10") ~= 1 then
   vim.notify("This config only avaiable on >=nvim-0.10", vim.log.levels.ERROR)
   return
@@ -16,12 +10,13 @@ end
 -- Basic configure
 require("devil.configs.core.setup")
 
--- require("devil.utils").load_mappings()
-
 -- Lazy plugins manage
 require("devil.plugins.setup")
 -- Color scheme setting
 require("devil.configs.colorscheme.setup")
+
+-- Keymappings
+require("devil.utils").load_mappings()
 
 -- Language server protocol
 require("devil.lsp.setup")
@@ -37,7 +32,7 @@ require("devil.dap.setup")
 -- Customize commands
 require("devil.commands.setup")
 
-vim.cmd("hi WinBar guibg=None")
+require("devil.core.colorscheme")
 
 -- Playground code
 -- require("devil.playground.setup")

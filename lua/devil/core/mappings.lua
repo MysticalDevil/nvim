@@ -74,6 +74,33 @@ M.general = {
       end,
       "Toggle space visible status",
     },
+
+    ["<leader>q"] = { ":q<CR>", "Quit editor" },
+    ["<leader>w"] = { ":w<CR>", "Save file" },
+    ["<leader>z"] = { "<cmd>ZenMode<CR>", "Enter zen mode" },
+    ["<leader>o"] = { "<cmd>SymbolsOutline<CR>", "Toggle symbols outline tree" },
+
+    -- s_windows
+    ["sv"] = { ":vsp<CR>", "Split window vertically" },
+    ["sh"] = { ":sp<CR>", "Split window horizontally" },
+    ["sc"] = { "<C-w>c", "Close picked split window" },
+    ["so"] = { "<C-w>o", "Close other split window" },
+    ["s,"] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+    ["s."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+    ["sj"] = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+    ["sk"] = { ":horizontal resize +5<CR>", "Increase vertical window size" },
+    ["s="] = { "<C-w>=", "Make split windows equal in size" },
+
+    -- tabs
+    ["ts"] = { "<cmd>tab split<CR>", "Split window use tab" },
+    ["th"] = { "<cmd>tabprev<CR>", "Switch to previous tab" },
+    ["tj"] = { "<cmd>tabnext<CR>", "Switch to next tab" },
+    ["tf"] = { "<cmd>tabfirst<CR>", "Switch to first tab" },
+    ["tl"] = { "<cmd>tablast<CR>", "Switch to last tab" },
+    ["tc"] = { "<cmd>tabclose<CR>", "Close tab" },
+
+    ["zo"] = { "<CMD>foldopen<CR>", "Open fold" },
+    ["zc"] = { "<CMD>foldclose<CR>", "Close fold" },
   },
 
   v = {
@@ -570,6 +597,140 @@ M.yanky = {
     ["gP"] = {
       "<Plug>(YankyGPutBefore)",
       "Put yankyed text before selection",
+    },
+  },
+}
+
+M.dap = {
+  plugin = true,
+
+  n = {
+    -- debug
+    ["de"] = {
+      function()
+        local dap = require("dap")
+        local dap_ui = require("dapui")
+        dap.close()
+        dap.terminate()
+        dap.repl.close()
+        dap_ui.close()
+        dap.clear_breakpoints()
+      end,
+      "End debugger",
+    },
+    ["dc"] = {
+      function()
+        require("dap").continue()
+      end,
+      "Continue debug",
+    },
+    ["dt"] = {
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      "Set breakpoint",
+    },
+    ["dT"] = {
+      function()
+        require("dap").clear_breakpoints()
+      end,
+      "Clear breakpoint",
+    },
+    ["dj"] = {
+      function()
+        require("dap").step_over()
+      end,
+      "Step over",
+    },
+    ["dk"] = {
+      function()
+        require("dap").step_out()
+      end,
+      "Step out",
+    },
+    ["dl"] = {
+      function()
+        require("dap").step_into()
+      end,
+      "Step into",
+    },
+    ["dh"] = {
+      function()
+        require("dapui").eval()
+      end,
+      "Popups dapUI eval",
+    },
+  },
+}
+
+M.rust_tools = {
+  plugin = true,
+
+  n = {
+    ["rr"] = {
+      function()
+        require("rust-tools.runnables").runnables()
+      end,
+      "Run runnables",
+    },
+    ["rh"] = {
+      function()
+        require("rust-tools.hover_actions").hover_actions()
+      end,
+      "Hover actions",
+    },
+    ["ra"] = {
+      function()
+        require("rust-tools.code_action_group").code_action_group()
+      end,
+      "Code actions",
+    },
+    ["rd"] = {
+      function()
+        require("rust-tools.debuggables").debuggables()
+      end,
+      "Start debug",
+    },
+  },
+}
+
+M.ufo = {
+  plugin = true,
+  n = {
+    ["zR"] = {
+      function()
+        ufo.openAllFolds()
+      end,
+      "Open all folds",
+    },
+    ["zM"] = {
+      function()
+        ufo.closeAllFolds()
+      end,
+      "Close all folds",
+    },
+    ["zr"] = {
+      function()
+        ufo.openFoldsExceptKinds()
+      end,
+      "Open all folds except kinds",
+    },
+    ["zm"] = {
+      function()
+        ufo.closeFoldsWith()
+      end,
+      "Close fold with",
+    },
+    ["zK"] = {
+      function()
+        local winid = ufo.peekFoldedLinesUnderCursor()
+        if not winid then
+          -- choose one of coc.nvim and nvim lsp
+          vim.fn.CocActionAsync("definitionHover") -- coc.nvim
+          vim.lsp.buf.hover()
+        end
+      end,
+      "Peek folded lines under cursor",
     },
   },
 }

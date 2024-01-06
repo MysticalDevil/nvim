@@ -6,7 +6,6 @@ end
 
 local plugins_list = {
   require("devil.plugins.list.common"),
-  require("devil.plugins.list.colorscheme"),
   require("devil.plugins.list.git"),
   require("devil.plugins.list.prog"),
 }

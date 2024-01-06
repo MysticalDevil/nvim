@@ -1,10 +1,4 @@
-local status, fidget = pcall(require, "fidget")
-if not status then
-  vim.notify("fidget not found", "error")
-  return
-end
-
-local opts = {
+return {
   -- Options related to LSP progress subsystem
   progress = {
     poll_rate = 5, -- How frequently to poll for progress messages
@@ -97,5 +91,3 @@ local opts = {
     path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("cache")),
   },
 }
-
-fidget.setup(opts)

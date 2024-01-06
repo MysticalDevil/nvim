@@ -1,10 +1,4 @@
-local status, neogit = pcall(require, "neogit")
-if not status then
-  vim.notify("neogit not found", "error")
-  return
-end
-
-local opts = {
+return {
   -- Hides the hints at the top of the status buffer
   disable_hint = false,
   -- Disables changing the buffer highlights based on where the cursor is.
@@ -170,5 +164,3 @@ local opts = {
     },
   },
 }
-
-neogit.setup(opts)

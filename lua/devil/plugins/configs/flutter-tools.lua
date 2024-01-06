@@ -1,11 +1,4 @@
-local status, flutter_tools = pcall(require, "flutter-tools")
-if not status then
-  vim.notify("flutter-tools.nvim not found", "error")
-  return
-end
-
--- alternatively you can override the default configs
-local opts = {
+return {
   ui = {
     -- the border type to use for all floating windows, the same options/formats
     -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
@@ -94,5 +87,3 @@ local opts = {
     },
   },
 }
-
-flutter_tools.setup(opts)

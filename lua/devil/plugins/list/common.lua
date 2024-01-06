@@ -32,6 +32,17 @@ return {
   -- Neovim client library and GUI
   { "equalsraf/neovim-gui-shim", lazy = true },
 
+  -- onedark.nvim
+  -- One dark and light colorscheme for neovim
+  {
+    "navarasu/onedark.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = function()
+      return require("devil.plugins.configs.onedark")
+    end,
+  },
+
   --
   --------------------------------------- Common plugins ----------------------------------------
   -- agrolens.nvim
@@ -124,9 +135,42 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    keys = require("devil.plugins.configs.flash").keys,
+    keys = {
+      {
+        "S",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter_search()
+        end,
+        desc = "Treesitter Search",
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function()
+          require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search",
+      },
+    },
     opts = function()
-      return require("devil.plugins.configs.flash").opts
+      return require("devil.plugins.configs.flash")
     end,
   },
   -- glow.nvim
@@ -472,6 +516,9 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
+    init = function()
+      utils.load_mappings("ufo")
+    end,
     opts = function()
       return require("devil.plugins.configs.ufo")
     end,

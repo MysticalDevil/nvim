@@ -1,10 +1,4 @@
-local status, gitsigns = pcall(require, "gitsigns")
-if not status then
-  vim.notify("gitsigns not found", "error")
-  return
-end
-
-local opts = {
+return {
   -- Letter icon. A is add，M is modify， D is delete
   signs = {
     add = { hl = "GitSignsAdd", text = "A|", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -49,9 +43,4 @@ local opts = {
   yadm = {
     enable = false,
   },
-  on_attach = function(bufnr)
-    require("devil.configs.core.keybindings").gitsigns_on_attach(bufnr)
-  end,
 }
-
-gitsigns.setup(opts)

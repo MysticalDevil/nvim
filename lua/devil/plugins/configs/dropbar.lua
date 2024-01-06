@@ -1,8 +1,4 @@
-local status, dropbar = pcall(require, "dropbar")
-if not status then
-  vim.notify("dropbar.nvim not found", "error")
-  return
-end
+local dropbar = require("dropbar")
 
 local utils = require("dropbar.utils")
 local sources = require("dropbar.sources")
@@ -15,7 +11,7 @@ local function exculde_filetypes(filetype)
 end
 
 ---@class dropbar_configs_t
-local opts = {
+return {
   general = {
     ---@type boolean|fun(buf: integer, win: integer): boolean
     enable = function(buf, win)
@@ -256,5 +252,3 @@ local opts = {
     },
   },
 }
-
-dropbar.setup(opts)

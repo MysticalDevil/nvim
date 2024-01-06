@@ -40,8 +40,8 @@ return {
   {
     "folke/neodev.nvim",
     ft = { "lua" },
-    config = function()
-      require("devil.configs.plugin.neodev")
+    opts = function()
+      return require("devil.plugins.configs.neodev")
     end,
   },
   -- nlsp-settings.nvim
@@ -191,9 +191,18 @@ return {
     version = "v0.3.0",
     event = { "BufRead Cargo.toml" },
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("devil.configs.plugin.crates")
-    end,
+    opts = {
+      src = {
+        coq = {
+          enabled = true,
+          name = "crates.nvim",
+        },
+      },
+      null_ls = {
+        enabled = true,
+        name = "crates.nvim",
+      },
+    },
   },
 
   ------------------- Python --------------------
@@ -203,8 +212,8 @@ return {
     "linux-cultist/venv-selector.nvim",
     ft = { "python" },
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("devil.configs.plugin.venv-selector")
+    opts = function()
+      return require("devil.plugins.configs.venv-selector")
     end,
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
@@ -250,14 +259,26 @@ return {
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      require("devil.configs.plugin.go")
-    end,
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
     build = function()
       require("go.install").update_all_sync()
     end, -- if you need to install/update all binaries
+    opts = function()
+      return require("devil.plugins.configs.go")
+    end,
+    config = function(_, opts)
+      require("go").setup(opts)
+      -- Run gofmt + goimport on save
+      local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+          require("go.format").goimport()
+        end,
+        group = format_sync_grp,
+      })
+    end,
   },
 
   -------------------- C/C++ --------------------
@@ -266,8 +287,24 @@ return {
   {
     "p00f/clangd_extensions.nvim",
     ft = { "c", "cpp" },
-    config = function()
-      require("devil.configs.plugin.clangd_extensions")
+    opts = function()
+      return require("devil.plugins.configs.clangd_extensions")
+    end,
+    config = function(_, opts)
+      require("clangd_extensions").setup(opts)
+
+      -- load clangd extensions when clangd attaches
+      local augroup = vim.api.nvim_create_augroup("clangd_extensions", { clear = true })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = augroup,
+        desc = "Load clangd_extensions with clangd",
+        callback = function(args)
+          if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "clangd" then
+            require("clangd_extensions")
+            vim.api.nvim_del_augroup_by_id(augroup)
+          end
+        end,
+      })
     end,
   },
   -- cmake-tools.nvim
@@ -276,8 +313,8 @@ return {
     "Civitasv/cmake-tools.nvim",
     event = "BufRead CMakeLists.txt",
     ft = { "cmake" },
-    config = function()
-      require("devil.configs.plugin.cmake-tools")
+    opts = function()
+      return require("devil.plugins.configs.cmake-tools")
     end,
   },
 
@@ -306,8 +343,8 @@ return {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim",
     },
-    config = function()
-      require("devil.configs.plugin.flutter-tools")
+    opts = function()
+      return require("devil.plugins.configs.flutter-tools")
     end,
   },
 
@@ -319,8 +356,8 @@ return {
     lazy = true,
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    config = function()
-      require("devil.configs.plugin.typescript-tools")
+    opts = function()
+      return require("devil.plugins.configs.typescript-tools")
     end,
   },
   -- package-info.nvim
@@ -328,62 +365,28 @@ return {
   {
     "vuki656/package-info.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      require("devil.configs.plugin.package-info")
-    end,
+    opts = {
+      colors = {
+        up_to_date = "#3C4048", -- Text color for up to date dependency virtual text
+        outdated = "#d19a66", -- Text color for outdated dependency virtual text
+      },
+      icons = {
+        enable = true, -- Whether to display icons
+        style = {
+          up_to_date = "|  ", -- Icon for up to date dependencies
+          outdated = "|  ", -- Icon for outdated dependencies
+        },
+      },
+      autostart = true, -- Whether to autostart when `package.json` is opened
+      hide_up_to_date = false, -- It hides up to date versions when displaying virtual text
+      hide_unstable_versions = false, -- It hides unstable versions from version list e.g next-11.1.3-canary3
+      -- Can be `npm`, `yarn`, or `pnpm`. Used for `delete`, `install` etc...
+      -- The plugin will try to auto-detect the package manager based on
+      -- `yarn.lock` or `package-lock.json`. If none are found it will use the
+      -- provided one, if nothing is provided it will use `yarn`
+      package_manager = "yarn",
+    },
     event = "BufRead package.json",
-  },
-
-  ------------------- Haskell -------------------
-  -- hashell-tools.nvim
-  -- Supercharge your Haskell experience in neovim!
-  {
-    "mrcjkb/haskell-tools.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim", -- Optional
-    },
-    branch = "2.x.x", -- Recommended
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    config = function()
-      require("devil.configs.plugin.haskell-tools")
-    end,
-  },
-
-  ------------------- Elixir --------------------
-  -- elixir-tools.nvim
-  -- Neovim plugin for Elixir
-  {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    ft = { "elixir", "eelixir", "heex", "surface" },
-    config = function()
-      require("devil.configs.plugin.elixir-tools")
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-
-  -------------------- Lisp ---------------------
-  -- conjure
-  --Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile)
-  {
-    "Olical/conjure",
-    ft = { "clojure", "fennel", "hy", "python", "scheme" }, -- etc
-    -- [Optional] cmp-conjure for cmp
-    dependencies = {
-      "PaterJason/cmp-conjure",
-    },
-    config = function(_, _)
-      require("conjure.main").main()
-      require("conjure.mapping")["on-filetype"]()
-    end,
-    init = function()
-      -- Set configuration options here
-      vim.g["conjure#debug"] = true
-    end,
   },
 
   -------------------- Java ---------------------
@@ -393,7 +396,7 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
     config = function()
-      require("devil.configs.plugin.jdtls")
+      require("devil.plugins.configs.jdtls")
     end,
   },
 
@@ -405,7 +408,7 @@ return {
     ft = { "scala", "sbt" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("devil.configs.plugin.metals")
+      require("devil.plugins.configs.metals")
     end,
   },
 
@@ -489,18 +492,25 @@ return {
   {
     "onsails/lspkind.nvim",
     config = function()
-      require("devil.configs.plugin.lspkind")
+      require("lspkind").init({
+        -- default: true
+        -- with_text = true,
+        -- defines how annotations are shown
+        -- default: symbol
+        -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+        mode = "symbol_text",
+        -- default symbol map
+        -- can be either 'default' (requires nerd-fonts font) or
+        -- 'codicons' for codicon preset (requires vscode-codicons font)
+        --
+        -- default: 'default'
+        preset = "default",
+        -- override preset symbols
+        --
+        -- default: {}
+        symbol_map = require("devil.utils").kind_icons,
+      })
     end,
-  },
-  -- lspsage.nvim
-  -- A lightweight LSP plugin based on Neovim's built-in LSP with a highly performant UI
-  {
-    "nvimdev/lspsaga.nvim",
-    event = "BufRead",
-    config = function()
-      require("devil.configs.plugin.lspsaga")
-    end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
 
   ----------------- Grammer Tree ----------------
@@ -509,32 +519,8 @@ return {
   {
     "simrat39/symbols-outline.nvim",
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
-    config = function()
-      require("devil.configs.plugin.symbols-outline")
-    end,
-  },
-
-  -- aerial.nvim
-  -- Neovim plugin for a code outline window
-  {
-    "stevearc/aerial.nvim",
-    cmd = {
-      "AerialToggle",
-      "AeriialGo",
-      "AerialInfo",
-      "AerialOpen",
-      "AerialClose",
-      "AerialOpenAll",
-      "AerialCloseAll",
-      "AerialNext",
-      "AerialPrev",
-      "AerialInfo",
-      "AerialNavOpen",
-      "AerialNavClose",
-      "AerialNavToggle",
-    },
-    config = function()
-      require("devil.configs.plugin.aerial")
+    opts = function()
+      return require("devil.plugins.configs.symbols-outline")
     end,
   },
 
@@ -546,8 +532,8 @@ return {
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
     },
-    config = function()
-      require("devil.configs.plugin.dropbar")
+    opts = function()
+      return require("devil.plugins.configs.dropbar")
     end,
   },
 
@@ -556,26 +542,23 @@ return {
   -- Standalone UI for nvim-lsp progress
   {
     "j-hui/fidget.nvim",
-    config = function()
-      require("devil.configs.plugin.fidget")
-    end,
-  },
-  -- lsp_signature.nvim
-  -- LSP signature hint as you type
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("devil.configs.plugin.lsp_signature")
+    opts = function()
+      return require("devil.plugins.configs.fidget")
     end,
   },
   -- lsp_lines.nvim
   -- A simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("devil.configs.plugin.lsp_lines")
-    end,
+    keys = {
+      {
+        "<Leader>l",
+        function()
+          require("lsp_lines").toggle()
+        end,
+        desc = "Toggle lsp_lines",
+      },
+    },
   },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
@@ -585,8 +568,8 @@ return {
       "nvim-telescope/telescope.nvim",
       "MunifTanjim/nui.nvim",
     },
-    config = function()
-      require("devil.configs.plugin.actions-preview")
+    opts = function()
+      return require("devil.plugins.configs.actions-preview")
     end,
   },
   -- nvim-docs-view
@@ -607,8 +590,8 @@ return {
   {
     "Wansmer/symbol-usage.nvim",
     event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-    config = function()
-      require("devil.configs.plugin.symbol-usage")
+    opts = function()
+      return require("devil.plugins.configs.symbol-usage")
     end,
   },
 
@@ -617,9 +600,25 @@ return {
   {
     "smjonas/inc-rename.nvim",
     event = "LspAttach",
-    config = function()
-      require("devil.configs.plugin.inc-rename")
-    end,
+    keys = {
+      {
+        "<leader>rn",
+        function()
+          return (":IncRename %s"):format(vim.fn.expand("<cword>"))
+        end,
+      },
+    },
+    opts = {
+      cmd_name = "IncRename", -- the name of the command
+      -- the highlight group used for highlighting the identifier's new name
+      hl_group = "Substitute",
+      -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+      preview_empty_name = false,
+      show_message = true, -- whether to display a `Renamed m instances in n files` message after a rename operation
+      -- the type of the external input buffer to use (the only supported value is currently "dressing")
+      input_buffer_type = nil,
+      post_hook = nil, -- callback to run after renaming, receives the result table (from LSP handler) as an argument
+    },
   },
 
   ----------------- Tree sitter -----------------

@@ -1,10 +1,4 @@
-local status, typescript_tools = pcall(require, "typescript-tools")
-if not status then
-  vim.notify("typescript-tools.nvim not found", "error")
-  return
-end
-
-local opts = {
+return {
   on_attach = require("devil.lsp.util").default_on_attach,
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   single_file_support = (function()
@@ -108,5 +102,3 @@ local opts = {
     },
   },
 }
-
-typescript_tools.setup(opts)

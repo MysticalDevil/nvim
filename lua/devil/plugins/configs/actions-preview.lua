@@ -1,10 +1,4 @@
-local status, actions_preview = pcall(require, "actions-preview")
-if not status then
-  vim.notify("actions-preview.nvim not found", "error")
-  return
-end
-
-local opts = {
+return {
   -- options for vim.diff(): https://neovim.io/doc/user/lua.html#vim.diff()
   diff = {
     ctxlen = 3,
@@ -66,5 +60,3 @@ local opts = {
     },
   },
 }
-
-actions_preview.setup(opts)

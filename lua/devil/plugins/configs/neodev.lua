@@ -1,10 +1,4 @@
-local status, neodev = pcall(require, "neodev")
-if not status then
-  vim.notufy("neodev.nvim not found")
-  return
-end
-
-local opts = {
+return {
   library = {
     enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
     -- these settings will be used for your Neovim config directory
@@ -33,5 +27,3 @@ local opts = {
   -- needs lua-language-server >= 3.6.0
   pathStrict = true,
 }
-
-neodev.setup(opts)

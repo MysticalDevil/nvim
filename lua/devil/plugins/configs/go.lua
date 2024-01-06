@@ -1,10 +1,4 @@
-local status, go = pcall(require, "go")
-if not status then
-  vim.notify("Go.nvim not found", "error")
-  return
-end
-
-local opts = {
+return {
   disable_defaults = false, -- true|false when true set false to all boolean settings and replace all table
   -- settings with {}
   go = "go", -- go command, can be go[default] or go1.18beta1
@@ -104,15 +98,3 @@ local opts = {
   luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
   iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
 }
-
-go.setup(opts)
-
--- Run gofmt + goimport on save
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    require("go.format").goimport()
-  end,
-  group = format_sync_grp,
-})

@@ -20,9 +20,13 @@ opts.settings = {
       globals = { "vim" },
     },
     workspace = {
-      -- Make the server aware of Neovim runtimne files
-      libiary = { vim.api.nvim_get_runtime_file("", true), vim.env.VIMRUNTIME },
-      checkThirdParty = false,
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+      },
+      maxPreload = 100000,
+      preloadFileSize = 10000,
     },
     -- Do not send telemetry data containing a randomized but unique identifier
     telemetry = {

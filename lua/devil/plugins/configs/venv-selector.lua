@@ -1,10 +1,4 @@
-local status, venv_selector = pcall(require, "venv-selector")
-if not status then
-  vim.notify("venv-selector not found", "error")
-  return
-end
-
-local opts = {
+return {
   -- auto_refresh (default: false). Will automatically start a new search every time VenvSelect is opened.
   -- When its set to false, you can refresh the search manually by pressing ctrl-r. For most users this
   -- is probably the best default setting since it takes time to search and you usually work within the same
@@ -57,5 +51,3 @@ local opts = {
   -- notify_user_on_activate (default: true) - Prints a message that the venv has been activated
   notify_user_on_activate = true,
 }
-
-venv_selector.setup(opts)

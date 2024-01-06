@@ -46,7 +46,6 @@ local opts = {
       statusline = { "alpha" },
       winbar = {
         "alpha",
-        "aerial",
         "neo-tree",
         "nerdtree",
         "NvimTree",
@@ -62,7 +61,7 @@ local opts = {
       },
     },
   },
-  extensions = { "toggleterm", "aerial" },
+  extensions = { "toggleterm" },
   sections = {
     lualine_a = {},
     lualine_b = {},

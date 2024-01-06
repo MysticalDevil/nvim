@@ -111,7 +111,7 @@ local filter_main_func = {
   },
 }
 
-local opts = {
+return {
   ---@type table<string, any> `nvim_set_hl`-like options for highlight virtual text
   hl = { link = "Comment" },
   kinds = { SymbolKind.Function, SymbolKind.Method },
@@ -149,5 +149,3 @@ local opts = {
     zig = filter_main_func,
   },
 }
-
-symbol_usage.setup(opts)

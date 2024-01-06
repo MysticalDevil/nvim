@@ -1,10 +1,4 @@
-local status, symbols_outline = pcall(require, "symbols-outline")
-if not status then
-  vim.notify("symbols-outline not found", "error")
-  return
-end
-
-local opts = {
+return {
   highlight_hovered_item = true,
   show_guides = true,
   auto_preview = false,
@@ -67,5 +61,3 @@ local opts = {
     Fragment = { icon = "", hl = "@constant" },
   },
 }
-
-symbols_outline.setup(opts)

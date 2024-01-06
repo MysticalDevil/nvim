@@ -1,23 +1,13 @@
 local M = {}
 
+local utils = require("devil.utils")
+
 local complete_util = require("devil.complete.util")
 
 local inlay_hint = vim.lsp.inlay_hint
 
 function M.key_attach(bufnr)
-  ---@param opts table?
-  local function buf_set_keymap(mode, lhs, rhs, opts)
-    local default_opts = {
-      noremap = true,
-      silent = true,
-      buffer = bufnr,
-    }
-    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", default_opts, opts))
-  end
-  -- keybingings
-  require("devil.configs.core.keybindings").map_LSP(buf_set_keymap, bufnr)
-
-  -- vim.notify("The LSP key settings is attached", vim.log.levels.INFO)
+  utils.load_mappings("lspconfig", { buffer = bufnr })
 end
 
 -- disable format, handle it to a dedicated plugin
@@ -167,7 +157,7 @@ local function setup_for_rust(server, opts)
       server.setup(opts)
     end
   else
-    require("devil.configs.plugin.rust-tools")
+    require("devil.plugins.configs.rust-tools")
   end
 end
 
@@ -187,7 +177,7 @@ local function setup_for_typescript(server, opts)
   server.setup(opts)
 
   if ok_ts then
-    require("devil.configs.plugin.typescript-tools")
+    require("devil.plugins.configs.typescript-tools")
   end
 end
 
