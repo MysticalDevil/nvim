@@ -21,14 +21,14 @@ lspconfig.clangd.setup(require("devil.lsp.config.clangd"))
 lspconfig.dartls.setup(require("devil.lsp.config.dartls"))
 lspconfig.dartls.setup(require("devil.lsp.config.denols"))
 lspconfig.eslint.setup(require("devil.lsp.config.eslint"))
-lspconfig.gopls.setup(require("devil.lsp.config.gopls"))
 lspconfig.lua_ls.setup(require("devil.lsp.config.lua_ls"))
--- lspconfig.rust_analyzer.setup(require("devil.lsp.config.rust_analyzer"))
-lspconfig.tsserver.setup(require("devil.lsp.config.tsserver"))
 lspconfig.pylsp.setup(require("devil.lsp.config.pylsp"))
 lspconfig.vimls.setup(require("devil.lsp.config.vimls"))
 lspconfig.yamlls.setup(require("devil.lsp.config.yamlls"))
 lspconfig.zls.setup(require("devil.lsp.config.zls"))
+lspconfig.gopls.setup(require("devil.lsp.config.gopls"))
+-- lspconfig.rust_analyzer.setup(require("devil.lsp.config.rust_analyzer"))
+-- lspconfig.tsserver.setup(require("devil.lsp.config.tsserver"))
 
 lspconfig.cssls.setup({
   capabilities = util.common_capabilities(),
