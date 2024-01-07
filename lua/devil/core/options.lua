@@ -37,7 +37,7 @@ local options = {
   linebreak = true, -- companion to wrap, don't split words
   scrolloff = 8, -- minimal number if screen lines to keep above and below the cursor
   sidescrolloff = 8, -- minimal number of screen columns either of cursor if wrap is `false`
-  guifont = "JetBrains Mono Nerd Font:h13", -- the font used in graphical neovim applications
+  guifont = "Fira Code,Noto Color Emoji,FiraCode Nerd Font,Hack Nerd Font:h12",
   whichwrap = "bs<>[]hl", -- which "horizontal" keys are allowed to travel to prev/next line
 
   -- fold
