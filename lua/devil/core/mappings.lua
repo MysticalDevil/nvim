@@ -168,7 +168,7 @@ M.lspconfig = {
 
     ["gd"] = {
       function()
-        require("telescope.builtin").lsp_definations(require("telescope.themes").get_dropdown())
+        require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
       end,
       "LSP definition",
     },
