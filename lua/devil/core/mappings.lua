@@ -168,7 +168,7 @@ M.lspconfig = {
 
     ["gd"] = {
       function()
-        vim.lsp.buf.definition()
+        require("telescope.builtin").lsp_definations(require("telescope.themes").get_dropdown())
       end,
       "LSP definition",
     },
@@ -182,7 +182,7 @@ M.lspconfig = {
 
     ["gi"] = {
       function()
-        vim.lsp.buf.implementation()
+        require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown())
       end,
       "LSP implementation",
     },
@@ -196,16 +196,9 @@ M.lspconfig = {
 
     ["<leader>D"] = {
       function()
-        vim.lsp.buf.type_definition()
+        require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_dropdown())
       end,
       "LSP definition type",
-    },
-
-    ["<leader>ra"] = {
-      function()
-        require("nvchad.renamer").open()
-      end,
-      "LSP rename",
     },
 
     ["<leader>ca"] = {
@@ -666,31 +659,31 @@ M.ufo = {
   n = {
     ["zR"] = {
       function()
-        ufo.openAllFolds()
+        require("ufo").openAllFolds()
       end,
       "Open all folds",
     },
     ["zM"] = {
       function()
-        ufo.closeAllFolds()
+        require("ufo").closeAllFolds()
       end,
       "Close all folds",
     },
     ["zr"] = {
       function()
-        ufo.openFoldsExceptKinds()
+        require("ufo").openFoldsExceptKinds()
       end,
       "Open all folds except kinds",
     },
     ["zm"] = {
       function()
-        ufo.closeFoldsWith()
+        require("ufo").closeFoldsWith()
       end,
       "Close fold with",
     },
     ["zK"] = {
       function()
-        local winid = ufo.peekFoldedLinesUnderCursor()
+        local winid = require("ufo").peekFoldedLinesUnderCursor()
         if not winid then
           -- choose one of coc.nvim and nvim lsp
           vim.fn.CocActionAsync("definitionHover") -- coc.nvim

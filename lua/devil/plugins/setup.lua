@@ -4,8 +4,11 @@ if not status_ok then
   return
 end
 
-local plugins_list =
-  { require("devil.plugins.list.common"), require("devil.plugins.list.git"), require("devil.plugins.list.prog") }
+local plugins_list = {
+  require("devil.plugins.list.common"),
+  require("devil.plugins.list.git"),
+  require("devil.plugins.list.prog"),
+}
 
 local opts = {
   diff = {

@@ -507,16 +507,16 @@ return {
   },
 
   ----------------- Grammer Tree ----------------
-  -- symbols-outline.nvim
-  -- A tree like view for symbols in Neovim using the Language Server Protocol
+  -- outline.nvim
+  -- Code outline sidebar powered by LSP. Significantly enhanced & refactored fork of symbols-outline.nvim
   {
-    "simrat39/symbols-outline.nvim",
-    cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+    "hedyhli/outline.nvim",
+    cmd = { "Outline", "OutlineOpen" },
     keys = {
-      { "<leader>o", "<cmd>SymbolsOutline<CR>", desc = "Toggle symbols outline tree" },
+      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle symbols outline tree" },
     },
     opts = function()
-      return require("devil.plugins.configs.symbols-outline")
+      return require("devil.plugins.configs.outline")
     end,
   },
 
