@@ -900,6 +900,9 @@ return {
   -- Distraction-free coding for Neovim
   {
     "folke/zen-mode.nvim",
+    keys = {
+      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Enter zen mode" },
+    },
     cmd = "Zen",
     opts = function()
       return require("devil.plugins.configs.zen-mode")

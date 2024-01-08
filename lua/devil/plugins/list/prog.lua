@@ -512,6 +512,9 @@ return {
   {
     "simrat39/symbols-outline.nvim",
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
+    keys = {
+      { "<leader>o", "<cmd>SymbolsOutline<CR>", desc = "Toggle symbols outline tree" },
+    },
     opts = function()
       return require("devil.plugins.configs.symbols-outline")
     end,

@@ -77,8 +77,6 @@ M.general = {
 
     ["<leader>q"] = { ":q<CR>", "Quit editor" },
     ["<leader>w"] = { ":w<CR>", "Save file" },
-    ["<leader>z"] = { "<cmd>ZenMode<CR>", "Enter zen mode" },
-    ["<leader>o"] = { "<cmd>SymbolsOutline<CR>", "Toggle symbols outline tree" },
 
     -- s_windows
     ["sv"] = { ":vsp<CR>", "Split window vertically" },
