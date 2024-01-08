@@ -30,8 +30,10 @@ end
 
 local proxy_lsps = {
   ["null-ls"] = true,
+  ["ast_grep"] = true,
   ["efm"] = true,
   ["emmet_ls"] = true,
+  ["emmet_language_server"] = true,
   ["eslint"] = true,
   ["cssmodule_ls"] = true,
 }
