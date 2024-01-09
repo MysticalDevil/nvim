@@ -1,7 +1,7 @@
 local utils = require("devil.utils")
 
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local opts = { enable_magic_search = true, enable_space_visible = false }
 
