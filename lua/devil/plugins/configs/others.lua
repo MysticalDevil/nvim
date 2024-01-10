@@ -59,22 +59,6 @@ M.autopairs = {
   disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" },
 }
 
-M.project = {
-  detection_methods = { "pattern" },
-  patterns = {
-    "README.md",
-    "Cargo.toml",
-    ".git",
-    "_darcs",
-    ".hg",
-    ".bzr",
-    ".svn",
-    "Makefile",
-    "package.json",
-    ".sln",
-  },
-}
-
 M.smartcolumn = {
   colorcolumn = "130",
   disabled_filetypes = {

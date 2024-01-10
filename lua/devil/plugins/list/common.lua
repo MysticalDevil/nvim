@@ -599,17 +599,6 @@ return {
       return require("devil.plugins.configs.persisted")
     end,
   },
-  -- project.nvim
-  -- The superior project management solution for neovim
-  {
-    "ahmedkhalf/project.nvim",
-    opts = function()
-      return others_configs.project
-    end,
-    config = function(_, opts)
-      require("project_nvim").setup(opts)
-    end,
-  },
   -- rainbow-delimiters.nvim
   -- Rainbow delimiters for Neovim with Tree-sitter
   {
@@ -778,6 +767,7 @@ return {
       "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-project.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
 
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },

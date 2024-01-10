@@ -12,6 +12,7 @@ local extensions_list = {
   "smart_open",
   "ui-select",
   "undo",
+  "live_grep_args",
 }
 
 for _, value in pairs(extensions_list) do
@@ -103,15 +104,8 @@ return {
     },
     file_browser = {
       -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = true,
-      mappings = {
-        ["i"] = {
-          -- your custom insert mode mappings
-        },
-        ["n"] = {
-          -- your custom normal mode mappings
-        },
-      },
+      hijack_netrw = false,
+      mappings = {},
     },
     fzf = {
       fuzzy = true, -- false will only do exact matching
