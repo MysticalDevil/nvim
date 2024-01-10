@@ -797,7 +797,7 @@ return {
     "akinsho/toggleterm.nvim",
     cmd = "ToggleTerm",
     opts = function()
-      return others_configs.toggleterm
+      return require("devil.plugins.configs.toggleterm")
     end,
   },
   -- treesj

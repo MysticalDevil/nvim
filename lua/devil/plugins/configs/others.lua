@@ -116,17 +116,6 @@ M.todo_comments = {
   },
 }
 
-M.toggleterm = {
-  size = function(term)
-    if term.direction == "horizontal" then
-      return 15
-    elseif term.direction == "vertical" then
-      return vim.o.columns * 0.3
-    end
-  end,
-  start_in_insert = true,
-}
-
 M.treesj = {
   ---@type boolean Use default keymaps (<space>m - toggle, <space>j - join, <space>s - split)
   use_default_keymaps = false,
