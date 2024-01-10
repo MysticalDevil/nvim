@@ -28,7 +28,7 @@ return {
     shortcut = {
       { desc = " Update", icon = "󰊳 ", action = "Lazy update", key = "u" },
       { desc = " New file", icon = " ", action = "ene | startinsert", key = "n" },
-      { desc = " Projects", icon = " ", action = "Telescope projects", key = "p" },
+      { desc = " Projects", icon = " ", action = "Telescope project", key = "p" },
       { desc = " Recently files", icon = "󰦛 ", action = "Telescope oldfiles", key = "r" },
       { desc = " Quit", icon = " ", action = "qa", key = "q" },
     },

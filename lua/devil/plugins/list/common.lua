@@ -875,6 +875,27 @@ return {
       return require("devil.plugins.configs.which-key")
     end,
   },
+  -- workspaces.nvim
+  -- a simple plugin to manage workspace directories in neovim
+  {
+    "natecraddock/workspaces.nvim",
+    cmd = {
+      "WorkspacesAdd",
+      "WorkspacesAddDir",
+      "WorkspacesRemove",
+      "WorkspacesRemoveDir",
+      "WorkspacesRename",
+      "WorkspacesList",
+      "WorkspacesListDirs",
+      "WorkspacesOpen",
+      "WorkspacesSyncDirs",
+    },
+    opts = {
+      hooks = {
+        open = { "Telescope find_files" },
+      },
+    },
+  },
   -- yanky.nvim
   -- Improved Yank and Put functionalities for Neovim
   {

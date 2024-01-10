@@ -13,6 +13,7 @@ local extensions_list = {
   "ui-select",
   "undo",
   "live_grep_args",
+  "workspaces",
 }
 
 for _, value in pairs(extensions_list) do
@@ -150,6 +151,10 @@ return {
           ["<C-cr>"] = require("telescope-undo.actions").restore,
         },
       },
+    },
+    workspaces = {
+      -- keep insert mode after selection in the picker, default is false
+      keep_insert = true,
     },
   },
 }
