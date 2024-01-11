@@ -61,7 +61,6 @@ local opts = {
 
 cmp.setup(opts)
 
----@diagnostic disable-next-line
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -69,7 +68,6 @@ cmp.setup.cmdline({ "/", "?" }, {
   },
 })
 
----@diagnostic disable-next-line
 cmp.setup.cmdline("/", {
   sources = cmp.config.sources({
     { name = "nvim_lsp_document_symbol" },
@@ -79,7 +77,6 @@ cmp.setup.cmdline("/", {
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
----@diagnostic disable-next-line
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -89,7 +86,6 @@ cmp.setup.cmdline(":", {
   }),
 })
 
----@diagnostic disable-next-line
 cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
     -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).

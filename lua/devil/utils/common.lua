@@ -109,6 +109,38 @@ M.kind_icons = {
   TypeParameter = "󰊄 ",
 }
 
+M.exclude_filetypes = {
+  "lazy",
+  "null-ls-info",
+  "dashboard",
+  "packer",
+  "terminal",
+  "help",
+  "log",
+  "markdown",
+  "TelescopePrompt",
+  "mason",
+  "mason-lspconfig",
+  "lspinfo",
+  "toggleterm",
+  "text",
+  "checkhealth",
+  "man",
+  "gitcommit",
+  "TelescopePrompt",
+  "TelescopeResults",
+}
+
+function M.arr_has_value(arr, val)
+  for _, value in ipairs(arr) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 function M.load_mappings(section, mapping_opt)
   vim.schedule(function()
     local function set_section_map(section_values)
