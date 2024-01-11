@@ -1,4 +1,4 @@
-require("dap-go").setup({
+return {
   -- Additional dap configurations can be added.
   -- dap_configurations accepts a list of tables where each entry
   -- represents a dap configuration. For more details do:
@@ -34,4 +34,4 @@ require("dap-go").setup({
     -- ignored by delve in dap mode.
     build_flags = "",
   },
-})
+}

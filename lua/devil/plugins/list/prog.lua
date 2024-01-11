@@ -420,24 +420,17 @@ return {
   ----------------------------------- Debug Adapter Protocol ------------------------------------
   -- nvim-dap
   -- Debug Adapter Protocol client implementation for Neovim
-  { "mfussenegger/nvim-dap", lazy = true },
-  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
   {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "rcarriga/nvim-dap-ui",
-    },
-  },
-  {
-    "LiadOz/nvim-dap-repl-highlights",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "mfussenegger/nvim-dap",
-    },
-    config = function()
-      require("nvim-dap-repl-highlights").setup()
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    init = function()
+      require("devil.utils").load_mappings("dap")
     end,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "LiadOz/nvim-dap-repl-highlights",
+    },
   },
 
   -- nvim-dap-python
@@ -456,7 +449,7 @@ return {
     ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      require("devil.dap.nvim-dap.config.vscode-js")
+      require("devil.dap.config.vscode-js")
     end,
   },
 
