@@ -1,11 +1,7 @@
 -- Customize icon
 vim.diagnostic.config({
-  -- virtual_text = {
-  --   severity = { min = vim.diagnostic.severity.WARN },
-  -- },
-  virtual_text = false,
-  virtual_lines = {
-    only_current_line = true,
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN },
   },
   underline = {
     severity = { max = vim.diagnostic.severity.WARN },

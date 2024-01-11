@@ -535,20 +535,6 @@ return {
       return require("devil.plugins.configs.fidget")
     end,
   },
-  -- lsp_lines.nvim
-  -- A simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    keys = {
-      {
-        "<Leader>l",
-        function()
-          require("lsp_lines").toggle()
-        end,
-        desc = "Toggle lsp_lines",
-      },
-    },
-  },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
   {
