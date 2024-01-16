@@ -181,7 +181,7 @@ return {
   -- A neovim plugin that helps managing crates.io dependencies
   {
     "saecki/crates.nvim",
-    version = "v0.3.0",
+    tag = "stable",
     event = { "BufRead Cargo.toml" },
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {

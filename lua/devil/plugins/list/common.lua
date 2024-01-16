@@ -602,7 +602,7 @@ return {
   -- rainbow-delimiters.nvim
   -- Rainbow delimiters for Neovim with Tree-sitter
   {
-    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+    "HiPhish/rainbow-delimiters.nvim",
     config = function()
       local rainbow_delimiters = require("rainbow-delimiters")
 
