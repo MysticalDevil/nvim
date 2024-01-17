@@ -453,15 +453,6 @@ return {
     end,
   },
 
-  -- nvim-dap-go
-  -- An extension for nvim-dap providing configurations for
-  -- launching go debugger (delve) and debugging individual tests
-  {
-    "leoluz/nvim-dap-go",
-    ft = { "go", "gomod" },
-    dependencies = { "mfussenegger/nvim-dap" },
-  },
-
   -- jbyuki/one-small-step-for-vimkind
   -- Debug adapter for Neovim plugins
   {

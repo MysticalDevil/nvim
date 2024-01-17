@@ -6,4 +6,3 @@ require("nvim-dap-virtual-text").setup({
 
 require("devil.dap.config.lua").setup()
 require("devil.dap.config.cxx").setup()
-require("dap-go").setup(require("devil.dap.config.go"))
