@@ -517,6 +517,47 @@ return {
     end,
   },
 
+  ------------------ Unit test ------------------
+  -- neotest
+  -- An extensible framework for interacting with tests within NeoVim.
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+
+      -- Languages impl
+      "nvim-neotest/neotest-vim-test",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-go",
+      "nvim-neotest/neotest-jest",
+      "nvim-neotest/neotest-plenary",
+      "marilari88/neotest-vitest",
+      "rouge8/neotest-rust",
+      "lawrence-laz/neotest-zig",
+      "sidlatau/neotest-dart",
+    },
+
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-python"),
+          require("neotest-plenary"),
+          require("neotest-jest"),
+          require("neotest-vitest"),
+          require("neotest-go"),
+          require("neotest-rust"),
+          require("neotest-zig"),
+          require("neotest-dart"),
+          require("neotest-vim-test")({
+            ignore_file_types = { "python", "vim", "lua" },
+          }),
+        },
+      })
+    end,
+  },
+
   ----------------- LSP Improve -----------------
   -- fidget.nvim
   -- Standalone UI for nvim-lsp progress

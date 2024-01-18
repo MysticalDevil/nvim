@@ -461,15 +461,6 @@ return {
       return require("devil.plugins.configs.surround")
     end,
   },
-  -- nvim-test
-  -- A Neovim wrapper for running tests
-  {
-    "klen/nvim-test",
-    cmd = { "TestSuite", "TestFile", "TestEdit", "TestNearest", "TestLast", "TestVisit", "TestInfo" },
-    config = function()
-      require("devil.plugins.configs.nvim-test")
-    end,
-  },
   -- nvim-treesitter
   -- Nvim Treesitter configurations and abstraction layer
   {
