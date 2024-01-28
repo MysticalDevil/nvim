@@ -135,7 +135,7 @@ return {
     -- Options include: single/double/rounded/solid/shadow or an array of border
     -- characters.
     -- See :help nvim_open_win() and search for "border" option.
-    border = "single",
+    border = "rounded",
     -- winhl options for the preview window, see ':h winhl'
     winhl = "NormalFloat:",
     -- Pseudo-transparency of the preview window, see ':h winblend'
