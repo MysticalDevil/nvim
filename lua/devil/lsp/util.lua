@@ -35,6 +35,13 @@ function M.default_on_attach(client, bufnr)
   M.disable_format(client)
   M.key_attach(bufnr)
 
+  require("lsp_signature").on_attach({
+    bind = true,
+    handler_opts = {
+      border = "rounded",
+    },
+  }, bufnr)
+
   M.set_inlay_hints(client, bufnr)
 
   vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })

@@ -601,6 +601,22 @@ return {
     end,
   },
 
+  -- lsp_signature.nvim
+  -- LSP signature hint as you type
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    },
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
+
   -- symbol-useage.nvim
   -- Display references, definitions and implementations of document symbols
   {
