@@ -1,9 +1,3 @@
-local status, lualine = pcall(require, "lualine")
-if not status then
-  vim.notify("lualine not found", "error")
-  return
-end
-
 local utils = require("devil.utils")
 
 -- Color table for highlights
@@ -37,10 +31,12 @@ local conditions = {
 
 local opts = {
   options = {
-    theme = "auto",
-    component_separators = { left = "|", right = "|" },
-    -- https://github.com/ryanoasis/powerline-extra-symbols
-    section_separators = { left = "", right = "" },
+    theme = {
+      normal = { c = { fg = colors.fg, bg = colors.bg } },
+      inactive = { c = { fg = colors.fg, bg = colors.bg } },
+    },
+    component_separators = "",
+    section_separators = "",
     globalstatus = true,
     disabled_filetypes = {
       statusline = { "alpha" },
@@ -86,6 +82,45 @@ local opts = {
 local function ins_section(component, locate)
   table.insert(opts.sections[locate], component)
 end
+
+local head = {
+  function()
+    return "▊"
+  end,
+  color = { fg = colors.blue }, -- Sets highlighting of component
+  padding = { left = 0, right = 1 }, -- We don't need space before this
+}
+
+local mode_color = {
+  n = colors.red,
+  i = colors.green,
+  v = colors.blue,
+  [""] = colors.blue,
+  V = colors.blue,
+  c = colors.magenta,
+  no = colors.red,
+  s = colors.orange,
+  S = colors.orange,
+  [""] = colors.orange,
+  ic = colors.yellow,
+  R = colors.violet,
+  Rv = colors.violet,
+  cv = colors.red,
+  ce = colors.red,
+  r = colors.cyan,
+  rm = colors.cyan,
+  ["r?"] = colors.cyan,
+  ["!"] = colors.red,
+  t = colors.red,
+}
+
+local mode = {
+  function()
+    return " " .. tostring(vim.fn.mode()):upper()
+  end,
+  color = { fg = mode_color[vim.fn.mode()] },
+  padding = { right = 1 },
+}
 
 local branch = {
   "branch",
@@ -136,15 +171,19 @@ local filename = {
     unnamed = "[No Name]", -- Text to show for unnamed buffers.
     newfile = "[New]", -- Text to show for new created file before first writting
   },
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.magentam, gui = "bold" },
 }
 
-local fileformat = {
-  "fileformat",
-  symbols = {
-    unix = "LF",
-    dos = "CRLF",
-    mac = "CR",
-  },
+local current_signature = {
+  function()
+    if not pcall(require, "lsp_signature") then
+      return
+    end
+    local sig = require("lsp_signature").status_line()
+    return sig.label .. "🐼" .. sig.hint
+  end,
+  color = { fg = colors.yellow, gui = "italic" },
 }
 
 local lsp_info = {
@@ -156,18 +195,41 @@ local lsp_info = {
   },
 }
 
-ins_section("mode", "lualine_a")
+local filesize = {
+  "filesize",
+  cond = conditions.buffer_not_empty,
+}
+
+local fileformat = {
+  "fileformat",
+  symbols = {
+    unix = "LF",
+    dos = "CRLF",
+    mac = "CR",
+  },
+}
+
+local encoding = {
+  "o:encoding",
+  fmt = string.upper,
+  cond = conditions.hide_in_width,
+  color = { fg = colors.blue, gui = "bold" },
+}
+
+ins_section(head, "lualine_a")
+ins_section(mode, "lualine_a")
 
 ins_section(branch, "lualine_b")
 ins_section(diff, "lualine_b")
 
 ins_section(diagnostics, "lualine_c")
 ins_section(filename, "lualine_c")
+ins_section(current_signature, "lualine_c")
 
 ins_section(lsp_info, "lualine_x")
-ins_section("filesize", "lualine_x")
+ins_section(filesize, "lualine_x")
 ins_section(fileformat, "lualine_x")
-ins_section("encoding", "lualine_x")
+ins_section(encoding, "lualine_x")
 ins_section("filetype", "lualine_x")
 
 ins_section("process", "lualine_y")
