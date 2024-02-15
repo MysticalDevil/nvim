@@ -1,18 +1,20 @@
 local utils = require("devil.utils")
 
+local get_highlight = require("lualine.utils.utils").extract_highlight_colors
+
 -- Color table for highlights
 local colors = {
-  bg = "#202328",
-  fg = "#bbc2cf",
-  yellow = "#ECBE7B",
-  cyan = "#008080",
-  darkblue = "#081633",
-  green = "#98be65",
-  orange = "#FF8800",
-  violet = "#a9a1e1",
-  magenta = "#c678dd",
-  blue = "#51afef",
-  red = "#ec5f67",
+  bg = get_highlight("Folded", "bg"),
+  fg = get_highlight("Folded", "fg"),
+  yellow = get_highlight("DiagnosticWarn", "fg"),
+  green = get_highlight("String", "fg"),
+  blue = get_highlight("Function", "fg"),
+  red = get_highlight("DiagnosticError", "fg"),
+  orange = get_highlight("Number", "fg"),
+  cyan = get_highlight("Constant", "fg"),
+  darkblue = get_highlight("DiffFile", "fg"),
+  violet = "#e5d0ff",
+  magenta = "#ff00ff",
 }
 
 local conditions = {
