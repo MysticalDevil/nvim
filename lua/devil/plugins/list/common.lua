@@ -32,8 +32,6 @@ return {
   -- Neovim client library and GUI
   { "equalsraf/neovim-gui-shim", lazy = true },
 
-  -- onedark.nvim
-  -- One dark and light colorscheme for neovim
   {
     "navarasu/onedark.nvim",
     lazy = false,
@@ -42,6 +40,8 @@ return {
       return require("devil.plugins.configs.onedark")
     end,
   },
+  { "EdenEast/nightfox.nvim", opts = {} },
+  { "folke/tokyonight.nvim", opts = {} },
 
   --
   --------------------------------------- Common plugins ----------------------------------------
