@@ -318,14 +318,6 @@ return {
     ft = { "cs", "vb" },
   },
 
-  ------------------ FSharp --------------------
-  {
-    "ionide/Ionide-vim",
-    ft = { "fsharp" },
-    build = "make fsautocomplete",
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
-
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
@@ -652,9 +644,4 @@ return {
       post_hook = nil, -- callback to run after renaming, receives the result table (from LSP handler) as an argument
     },
   },
-
-  ----------------- Tree sitter -----------------
-  -- tree-sitter-hypr
-  -- hyprland configuration files grammar for treesitter
-  { "luckasRanarison/tree-sitter-hypr", event = "VeryLazy" },
 }
