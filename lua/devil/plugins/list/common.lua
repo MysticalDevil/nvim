@@ -485,8 +485,6 @@ return {
       -- enable Folding module
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
-      require("devil.core.extra-parser")
     end,
   },
   -- nvim-treesitter-context
