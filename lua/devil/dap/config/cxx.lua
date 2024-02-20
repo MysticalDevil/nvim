@@ -63,7 +63,7 @@ function M.setup()
       request = "launch",
       MIMode = "gdb",
       miDebuggerServerAddress = "localhost:1234",
-      miDebuggerPath = "/usr/bin/gdb",
+      miDebuggerPath = vim.fn.exepath("gdb") or "/usr/bin/gdb",
       cwd = "${workspaceFolder}",
       program = function()
         return vim.fn.input("Path to executable: ", ("%s/"):format(vim.fn.getcwd()), "file")
