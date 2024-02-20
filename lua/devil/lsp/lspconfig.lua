@@ -1,5 +1,4 @@
 local lspconfig = require("lspconfig")
-local lsp_utils = require("lspconfig.util")
 
 local util = require("devil.lsp.util")
 
@@ -19,7 +18,7 @@ lspconfig.bashls.setup({
 
 lspconfig.clangd.setup(require("devil.lsp.config.clangd"))
 lspconfig.dartls.setup(require("devil.lsp.config.dartls"))
-lspconfig.dartls.setup(require("devil.lsp.config.denols"))
+lspconfig.denols.setup(require("devil.lsp.config.denols"))
 lspconfig.eslint.setup(require("devil.lsp.config.eslint"))
 lspconfig.lua_ls.setup(require("devil.lsp.config.lua_ls"))
 lspconfig.pylsp.setup(require("devil.lsp.config.pylsp"))

@@ -21,7 +21,8 @@ opts.init_options = {
   suggestFromUnimportedLibraries = true,
 }
 opts.root_dir = function(fname)
-  require("lspconfig.util").root_pattern("pubspec.yaml")(fname)
+  return require("lspconfig.util").root_pattern("pubspec.yaml")(fname)
+    or require("lspconfig.util").find_git_ancestor(fname)
 end
 
 return opts
