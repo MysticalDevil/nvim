@@ -37,11 +37,15 @@ for _, name in ipairs(noconfig_servers) do
 end
 
 local lsp_servers = {
+  "bashls",
   "clangd",
+  "cssls",
   "dartls",
   "denols",
+  "emmet_language_server",
   "eslint",
   "gopls",
+  "jsonls",
   "lua_ls",
   "pylsp",
   -- "rust_analyzer",
@@ -54,88 +58,3 @@ local lsp_servers = {
 for _, server in ipairs(lsp_servers) do
   lspconfig[server].setup(require(("devil.lsp.config.%s"):format(server)))
 end
-
-lspconfig.bashls.setup({
-  capabilities = util.common_capabilities(),
-  flags = util.flags(),
-  on_attach = util.default_on_attach,
-
-  settings = {
-    bashIde = {
-      globPattern = "*@(.sh|.inc|.bash|.command)",
-    },
-  },
-
-  filetypes = { "sh", "zsh", "bash" },
-})
-
-lspconfig.cssls.setup({
-  capabilities = util.common_capabilities(),
-  flags = util.flags(),
-  on_attach = util.default_on_attach,
-
-  settings = {
-    css = {
-      validate = true,
-      -- tailwindcss
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-    less = {
-      validate = true,
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-    scss = {
-      validate = true,
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-  },
-
-  filetypes = { "css", "scss", "less" },
-})
-
-lspconfig.emmet_ls.setup({
-  capabilities = util.common_capabilities(),
-  flags = util.flags(),
-  on_attach = util.default_on_attach,
-
-  filetypes = {
-    "astro",
-    "css",
-    "eruby",
-    "html",
-    "htmldjango",
-    "javascriptreact",
-    "less",
-    "pug",
-    "sass",
-    "scss",
-    "svelte",
-    "typescriptreact",
-    "vue",
-  },
-})
-
-lspconfig.jsonls.setup({
-  capabilities = util.common_capabilities(),
-  flags = util.flags(),
-  on_attach = util.default_on_attach,
-
-  filetypes = { "json", "jsonc" },
-  settings = {
-    json = {
-      schemas = require("schemastore").json.schemas(),
-      format = { enable = true },
-      validate = { enable = true },
-    },
-  },
-  init_options = {
-    provideFormatter = true,
-  },
-  single_file_support = true,
-})

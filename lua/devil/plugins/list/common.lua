@@ -435,6 +435,7 @@ return {
     "petertriho/nvim-scrollbar",
     opts = function()
       require("devil.plugins.configs.scrollbar")
+      require("scrollbar.handlers.gitsigns").setup()
     end,
   },
   -- nvim-spectre

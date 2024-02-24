@@ -16,6 +16,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     cmd = "Gitsigns",
+    event = "BufReadPre",
     init = function()
       utils.load_mappings("gitsigns")
     end,

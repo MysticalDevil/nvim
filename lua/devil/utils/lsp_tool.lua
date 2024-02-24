@@ -32,10 +32,6 @@ local proxy_lsps = {
   ["null-ls"] = true,
   ["ast_grep"] = true,
   ["efm"] = true,
-  ["emmet_ls"] = true,
-  ["emmet_language_server"] = true,
-  ["eslint"] = true,
-  ["cssmodule_ls"] = true,
 }
 -- Determine whether the obtained LSP is a proxy LSP
 ---@param name string
@@ -51,8 +47,6 @@ local function format_client_name(name)
   return ("[%s]"):format(name)
 end
 
-local non_proxy_clients = {}
-
 -- Function to get current activated LSP name
 ---@return string
 function M.get_lsp_info()
@@ -60,25 +54,23 @@ function M.get_lsp_info()
 
   local clients = vim.lsp.get_clients()
   if not clients then
-    non_proxy_clients = {}
-    clients = vim.lsp.get_clients()
+    return "No Active LSP"
   end
 
-  local cached_client = non_proxy_clients[buf_ft]
-  if cached_client then
-    return format_client_name(cached_client.name)
-  end
-
+  local lsp_names = {}
   for _, client in ipairs(clients) do
     if client.config["filetypes"] and vim.tbl_contains(client.config["filetypes"], buf_ft) then
       if M.not_proxy_lsp(client.name) then
-        non_proxy_clients[buf_ft] = client
-        return format_client_name(client.name)
+        table.insert(lsp_names, client.name)
       end
     end
   end
 
-  return "No Active LSP"
+  if #lsp_names > 0 then
+    return format_client_name(table.concat(lsp_names, " "))
+  else
+    return "No Active LSP"
+  end
 end
 
 return M
