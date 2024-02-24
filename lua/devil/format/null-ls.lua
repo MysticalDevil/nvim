@@ -25,18 +25,6 @@ null_ls.setup({
   debug = false,
   sources = {
     -- Formatting -------------------------------------------------------------
-    -- C/C++
-    formatting.clang_format.with({
-      filetypes = {
-        "c",
-        "h",
-        "cpp",
-        "cppm",
-        "hpp",
-        "cuda",
-        "objcpp",
-      },
-    }),
     -- Clojure
     formatting.joker.with({ filetypes = { "clj", "clojure", "edn" } }),
     -- CMake
@@ -63,9 +51,6 @@ null_ls.setup({
     formatting.goimports_reviser,
     -- Java
     -- formatting.google_java_format,
-    -- Json
-    -- npm install -g fixjson
-    formatting.fixjson,
     -- Kotlin
     formatting.ktlint,
     -- Lua
@@ -80,9 +65,6 @@ null_ls.setup({
     -- OCaml
     -- opam install ocamlformat
     formatting.ocamlformat,
-    -- Perl
-    formatting.perlimports,
-    formatting.perltidy,
     -- PgSQL
     -- builtin postgresql
     formatting.pg_format,
@@ -92,50 +74,13 @@ null_ls.setup({
     -- Protocal Buffer
     -- npm install @bufbuild/buf
     formatting.buf,
-    -- Python
-    -- pip install black isort
-    formatting.black.with({ extra_args = { "--fast" } }),
-    formatting.isort,
-    -- Ruby
-    -- gem install rubocop
-    -- formatting.rubocop,
-    -- gem install standard
-    formatting.standardrb,
-    -- Rust
-    -- rustup component add rustfmt
-    formatting.rustfmt,
     -- Scala
     -- builtin coursier
     formatting.scalafmt,
-    -- Shell
-    -- pip install beautysh
-    formatting.beautysh,
-    -- Toml
-    -- cargo install taplo-cli
-    formatting.taplo,
-    -- XML
-    -- pip install XmlFormatter
-    formatting.xmlformat,
     -- Yaml
     -- go install github.com/google/yamlfmt/cmd/yamlfmt@latest
     formatting.yamlfmt,
-    -- Zig
-    -- builtin zig
-    formatting.zigfmt,
 
-    -- ESLint
-    -- npm install @eslint
-    formatting.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({
-          ".eslintrc.js",
-          ".eslintrc.cjs",
-          ".eslintrc.yaml",
-          ".eslintrc.yml",
-          ".eslintrc.json",
-        })
-      end,
-    }),
     -- ECMAScript HTML CSS
     -- npm install prettier
     formatting.prettier.with({

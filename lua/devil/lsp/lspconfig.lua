@@ -2,6 +2,59 @@ local lspconfig = require("lspconfig")
 
 local util = require("devil.lsp.util")
 
+local noconfig_servers = {
+  "clojure_lsp",
+  "dockerls",
+  "eslint",
+  "golangci_lint_ls",
+  "groovyls",
+  "html",
+  "jsonls",
+  "kotlin_language_server",
+  "lemminx", -- XML
+  "nil_ls", -- Nix
+  "omnisharp",
+  "perlnavigator",
+  "phpactor",
+  "racket_langserver",
+  "ruff_lsp",
+  "solargraph",
+  "standardrb",
+  "taplo",
+  "v_analyzer",
+  "vala_ls",
+  "vimls",
+  "volar",
+}
+
+-- Configure the language server. The on_setup function must be implemented in the configuration file.
+for _, name in ipairs(noconfig_servers) do
+  lspconfig[name].setup({
+    capabilities = util.common_capabilities(),
+    flags = util.flags(),
+    on_attach = util.default_on_attach,
+  })
+end
+
+local lsp_servers = {
+  "clangd",
+  "dartls",
+  "denols",
+  "eslint",
+  "gopls",
+  "lua_ls",
+  "pylsp",
+  -- "rust_analyzer",
+  -- "tsserver",
+  "vimls",
+  "yamlls",
+  "zls",
+}
+
+for _, server in ipairs(lsp_servers) do
+  lspconfig[server].setup(require(("devil.lsp.config.%s"):format(server)))
+end
+
 lspconfig.bashls.setup({
   capabilities = util.common_capabilities(),
   flags = util.flags(),
@@ -15,19 +68,6 @@ lspconfig.bashls.setup({
 
   filetypes = { "sh", "zsh", "bash" },
 })
-
-lspconfig.clangd.setup(require("devil.lsp.config.clangd"))
-lspconfig.dartls.setup(require("devil.lsp.config.dartls"))
-lspconfig.denols.setup(require("devil.lsp.config.denols"))
-lspconfig.eslint.setup(require("devil.lsp.config.eslint"))
-lspconfig.lua_ls.setup(require("devil.lsp.config.lua_ls"))
-lspconfig.pylsp.setup(require("devil.lsp.config.pylsp"))
-lspconfig.vimls.setup(require("devil.lsp.config.vimls"))
-lspconfig.yamlls.setup(require("devil.lsp.config.yamlls"))
-lspconfig.zls.setup(require("devil.lsp.config.zls"))
-lspconfig.gopls.setup(require("devil.lsp.config.gopls"))
--- lspconfig.rust_analyzer.setup(require("devil.lsp.config.rust_analyzer"))
--- lspconfig.tsserver.setup(require("devil.lsp.config.tsserver"))
 
 lspconfig.cssls.setup({
   capabilities = util.common_capabilities(),

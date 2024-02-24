@@ -1,37 +1,9 @@
 local mason = require("mason")
-local lspconfig = require("lspconfig")
 local mason_lspconfig = require("mason-lspconfig")
 
 local util = require("devil.lsp.util")
 
 --------------------------------------- Configures ------------------------------------------------
-
-local function arr_extend(origin_arr, added_arr)
-  for i = #added_arr, 1, -1 do
-    origin_arr[#origin_arr + 1] = added_arr[i]
-  end
-  return origin_arr
-end
-
-local noconfig_servers = {
-  "clojure_lsp",
-  "kotlin_language_server",
-  "taplo",
-  "nil_ls",
-  "perlpls",
-  "phpactor",
-  "racket_langserver",
-  "v_analyzer",
-  "vala_ls",
-  "dockerls",
-  "eslint",
-  "html",
-  "vimls",
-  "volar",
-  "solargraph",
-  "groovyls",
-  "omnisharp",
-}
 
 -- :h mason-default-settings
 mason.setup({
@@ -70,15 +42,6 @@ mason_lspconfig.setup({
     jdtls = function() end,
   },
 })
-
--- Configure the language server. The on_setup function must be implemented in the configuration file.
-for _, name in ipairs(noconfig_servers) do
-  lspconfig[name].setup({
-    capabilities = util.common_capabilities(),
-    flags = util.flags(),
-    on_attach = util.default_on_attach,
-  })
-end
 
 require("devil.lsp.ui")
 require("devil.lsp.attach")

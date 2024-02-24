@@ -22,8 +22,6 @@ null_ls.setup({
   debug = false,
   sources = {
     -- Diagnostics  -----------------------------------------------------------
-    -- C/C++
-    diagnostics.cppcheck,
     -- Clojure
     diagnostics.clj_kondo,
     -- CMake
@@ -32,37 +30,15 @@ null_ls.setup({
     -- CSS
     -- npm install stylelint
     diagnostics.stylelint,
-    -- ECMAScript
-    -- npm install -g eslint_d
-    diagnostics.eslint_d.with({
-      prefer_local = "node_modules/.bin",
-      condition = function(utils)
-        return utils.root_has_file({
-          ".eslintrc.js",
-          ".eslintrc.cjs",
-          ".eslintrc.yaml",
-          ".eslintrc.yml",
-          ".eslintrc.json",
-        })
-      end,
-    }),
     -- Elixir
     diagnostics.credo,
     -- Fish
     diagnostics.fish,
-    -- Go
-    -- go install github.com/mgechev/revive@latest
-    -- diagnostics.revive,
-    -- go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.51.1
-    diagnostics.golangci_lint,
     -- Java
     -- checkstyle.jar
     diagnostics.checkstyle.with({
       extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
     }),
-    -- Json
-    -- npm install jsonlint -g
-    diagnostics.jsonlint,
     -- Kotlin
     diagnostics.ktlint,
     -- Lua
@@ -87,15 +63,6 @@ null_ls.setup({
     -- Protocol Buffer
     -- npm install @bufbuild/buf
     diagnostics.buf,
-    -- Python
-    -- pip install ruff
-    diagnostics.ruff,
-    -- Ruby
-    -- gem install standard
-    diagnostics.standardrb,
-    -- Shell
-    -- cabal install ShellCheck
-    diagnostics.shellcheck,
     -- VimScript
     -- pip install vim-vint
     diagnostics.vint,
@@ -108,9 +75,6 @@ null_ls.setup({
     diagnostics.zsh,
     --
     -- Code actions -----------------------------------------------------------
-    -- ECMAScript
-    -- npm install -g eslint_d
-    code_actions.eslint_d,
     -- Git
     code_actions.gitsigns,
     -- Go
@@ -121,9 +85,6 @@ null_ls.setup({
     -- Nix
     -- nix build git+https://git.peppe.rs/languages/statix
     code_actions.statix,
-    -- Shell
-    -- cabal install ShellCheck
-    code_actions.shellcheck,
   },
   -- #{m}: message
   -- #{s}: source name (defaults to null-ls if not specified)
