@@ -333,7 +333,7 @@ M.gitsigns = {
 
     ["<leader>gb"] = {
       function()
-        package.loaded.gitsigns.blame_line()
+        require("gitsigns").blame_line()
       end,
       "Blame line",
     },
@@ -343,6 +343,21 @@ M.gitsigns = {
         require("gitsigns").toggle_deleted()
       end,
       "Toggle deleted",
+    },
+
+    ["<leader>tl"] = {
+      function()
+        require("gitsigns").toggle_numhl()
+        require("gitsigns").toggle_linehl()
+      end,
+      "Toggle line hightlight",
+    },
+
+    ["<leader>tw"] = {
+      function()
+        require("gitsigns").toggle_word_diff()
+      end,
+      "Toggle different word",
     },
   },
 }
