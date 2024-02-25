@@ -14,7 +14,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
-      "mhartington/formatter.nvim",
       "stevearc/conform.nvim",
       "nvimtools/none-ls.nvim",
     },
@@ -80,14 +79,6 @@ return {
     version = "v1.x.x", -- version is optional, but recommended
     dependencies = { "neovim/nvim-lspconfig" },
     lazy = true,
-  },
-
-  -- formatter.nvim
-  -- A format runner for Neovim
-  {
-    "mhartington/formatter.nvim",
-    enabled = false,
-    dependencies = { "williamboman/mason.nvim" },
   },
 
   -- conform.nvim

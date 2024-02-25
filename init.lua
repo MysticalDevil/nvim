@@ -22,10 +22,8 @@ require("devil.utils").load_mappings()
 require("devil.lsp.setup")
 -- Complete engine
 require("devil.complete.setup")
--- Formater
-require("devil.format.setup")
--- Linter
-require("devil.lint.setup")
+-- Formater and Linter
+require("devil.fmt-lint.setup")
 -- Debug Adapter Protocol
 require("devil.dap.setup")
 
