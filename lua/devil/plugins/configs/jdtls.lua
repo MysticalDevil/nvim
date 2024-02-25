@@ -201,4 +201,4 @@ local config = {
   end,
 }
 
-jdtls.start_or_attach(config)
+return config
