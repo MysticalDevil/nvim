@@ -32,6 +32,20 @@ return {
       "williamboman/mason.nvim",
       "nvimtools/none-ls.nvim",
     },
+    opts = {
+      ensure_installed = {
+        -- Opt to list sources here, when available in mason.
+      },
+      automatic_installation = false,
+      automatic_setup = true, -- Recommended, but optional
+      ignore_methods = {
+        diagnostics = true,
+        formatting = true,
+        code_actions = true,
+        completion = true,
+        hover = true,
+      },
+    },
   },
 
   -- neodev.nvim

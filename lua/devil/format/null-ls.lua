@@ -4,18 +4,7 @@ if not status then
   return
 end
 
--- Union mason and null-ls
-local mason_null_ls = require("mason-null-ls")
-
 local G_utils = require("devil.utils")
-
-mason_null_ls.setup({
-  ensure_installed = {
-    -- Opt to list sources here, when available in mason.
-  },
-  automatic_installation = false,
-  automatic_setup = true, -- Recommended, but optional
-})
 
 local formatting = null_ls.builtins.formatting
 
@@ -49,8 +38,6 @@ null_ls.setup({
     -- go install mvdan.cc/gofumpt@latest
     formatting.gofumpt,
     formatting.goimports_reviser,
-    -- Java
-    -- formatting.google_java_format,
     -- Kotlin
     formatting.ktlint,
     -- Lua

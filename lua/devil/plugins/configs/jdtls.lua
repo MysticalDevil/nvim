@@ -4,52 +4,94 @@ if not status then
   return
 end
 
-local root_dir = require("jdtls.setup").find_root({ ".git", "gradlew", "settings.gradle", "build.gradle" })
-if root_dir == "" then
-  root_dir = vim.fn.getcwd()
+local mason_registry = require("mason-registry")
+
+--------- utils function ----------
+---@param version string
+---@return table
+local function get_jvms(version)
+  return { ("openjdk-%s"):format(version), ("java-%s"):format(version) }
 end
 
+---@param jvm_version string
+---@return string
+local function find_jvm_path(jvm_version)
+  local jvm_paths = get_jvms(jvm_version)
+  for _, path in ipairs(jvm_paths) do
+    if vim.fn.executable(("/usr/bin/jvm/%s/bin/java"):format(path)) == 1 then
+      return ("/usr/bin/jvm/%s"):format(path)
+    end
+  end
+  return ""
+end
+
+local operative_system
+if vim.fn.has("linux") then
+  operative_system = "linux"
+elseif vim.fn.has("win32") then
+  operative_system = "win"
+elseif vim.fn.has("macunix") then
+  operative_system = "mac"
+end
+
+--------- configurations ----------
+
+local root_dir =
+  require("jdtls.setup").find_root({ ".git", "gradlew", "settings.gradle", "build.gradle", "mvnw", "pom.xml" })
+
+local jdtls_path = mason_registry.get_package("jdtls"):get_install_path()
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local extendedClientCapabilities = jdtls.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-extendedClientCapabilities.document_formatting = false
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = ("%s/java/workspace/%s"):format(vim.fn.stdpath("cache"), project_name)
 
+local java_test_path = mason_registry.get_package("java-test"):get_install_path()
+local java_debug_adapter_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
 local bundles = {}
-bundles = {
-  vim.fn.expand(
-    "~/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
-  ),
-}
-
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
 vim.list_extend(
   bundles,
-  vim.split(vim.fn.glob("~/.local/share/nvim/mason/packages/java-test/extension/server/*.jar"), "\n")
+  vim.split(vim.fn.glob(java_debug_adapter_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
 )
 
 local config = {
+  filetypes = { "java" },
+  autostart = true,
   cmd = {
-    "java",
+    -- 💀
+    "java", -- or '/path/to/java17_or_newer/bin/java'
+    -- depends on if `java` is in your $PATH env variable and if it points to the right version.
+
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
-    "-Xms1g",
+    "-Xmx1g",
     "--add-modules=ALL-SYSTEM",
     "--add-opens",
     "java.base/java.util=ALL-UNNAMED",
     "--add-opens",
     "java.base/java.lang=ALL-UNNAMED",
+    "-javaagent:" .. jdtls_path .. "/lombok.jar",
 
+    -- 💀
     "-jar",
-    vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
+    vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+    -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                           ^^^^^^^^^^^^^^
+    -- Must point to the                                                         Change this to
+    -- eclipse.jdt.ls installation                                               the actual version, with vim.fn.glob() is not necessary
 
+    -- 💀
     "-configuration",
-    vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls/config_mac"),
+    jdtls_path .. "/config_" .. operative_system,
+    -- ^^^^^^^^^^^^^^^^^^^                  ^^^^^^
+    -- Must point to the                    Change to one of `linux`, `win` or `mac`
+    -- eclipse.jdt.ls installation          Depending on your system.
 
+    -- 💀
+    -- See `data directory configuration` section in the README
     "-data",
     workspace_dir,
   },
@@ -97,15 +139,15 @@ local config = {
         runtimes = {
           {
             name = "JavaSE-11",
-            path = "/usr/lib/jvm/openjdk-11/",
+            path = find_jvm_path("11"),
           },
           {
             name = "JavaSE-17",
-            path = "/usr/lib/jvm/openjdk-17/",
+            path = find_jvm_path("17"),
           },
           {
             name = "JavaSE-21",
-            path = "/usr/lib/jvm/openjdk-21/",
+            path = find_jvm_path("21"),
           },
         },
       },
@@ -136,7 +178,10 @@ local config = {
   end,
   init_options = {
     bundles = bundles,
-    extendedClientCapabilities = extendedClientCapabilities,
+    extendedClientCapabilities = {
+      resolveAdditionalTextEditsSupport = true,
+      progressReportProvider = false,
+    },
   },
   handlers = {
     -- ["language/status"] = function() end,
@@ -147,13 +192,13 @@ local config = {
     -- ["textDocument/documentHighlight"] = function() end,
   },
   on_attach = function(client, bufnr)
+    require("devil.utils").load_mappings("lspconfig", { buffer = bufnr })
+
     require("devil.lsp.util").set_inlay_hints(client, bufnr)
     jdtls.setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
-    require("jdtls.setup").add_commands()
     require("devil.lsp.util").default_on_attach(client, bufnr)
   end,
-  filetypes = { "java" },
 }
 
 jdtls.start_or_attach(config)
