@@ -164,7 +164,11 @@ M.lspconfig = {
 
     ["gd"] = {
       function()
-        require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
+        if vim.bo.filetype == "cs" then
+          require("omnisharp_extended").telescope_lsp_definitions()
+        else
+          require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
+        end
       end,
       "LSP definition",
     },
