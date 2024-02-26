@@ -658,6 +658,9 @@ return {
     opts = function()
       return require("devil.plugins.configs.rest")
     end,
+    config = function(_, opts)
+      require("rest-nvim").setup(opts)
+    end,
   },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
