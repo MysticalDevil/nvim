@@ -12,6 +12,7 @@ local noconfig_servers = {
   "jsonls",
   "kotlin_language_server",
   "lemminx", -- XML
+  "neocmake",
   "nil_ls", -- Nix
   "omnisharp",
   "perlnavigator",
