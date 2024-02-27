@@ -4,6 +4,7 @@ local util = require("devil.lsp.util")
 
 local noconfig_servers = {
   "clojure_lsp",
+  "cssmodules_ls",
   "dockerls",
   "eslint",
   "golangci_lint_ls",
@@ -21,6 +22,7 @@ local noconfig_servers = {
   "ruff_lsp",
   "solargraph",
   "standardrb",
+  "tailwindcss",
   "taplo",
   "v_analyzer",
   "vala_ls",
