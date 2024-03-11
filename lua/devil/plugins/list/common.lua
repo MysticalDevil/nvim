@@ -239,7 +239,7 @@ return {
 
   -- legendary.nvim
   -- A legend for your keymaps, commands, and autocmds, with which-key.nvim integration
-  {
+  --[[{
     "mrjones2014/legendary.nvim",
     priority = 10000,
     lazy = false,
@@ -250,7 +250,7 @@ return {
     opts = function()
       return require("devil.plugins.configs.legendary")
     end,
-  },
+  },]]
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
@@ -788,6 +788,9 @@ return {
   -- A neovim lua plugin to help easily manage multiple terminal windows
   {
     "akinsho/toggleterm.nvim",
+    keys = {
+      { "<C-\\>", "<cmd>ToggleTerm<cr>", desc = "Open ToggleTerm" },
+    },
     cmd = "ToggleTerm",
     opts = function()
       return require("devil.plugins.configs.toggleterm")
