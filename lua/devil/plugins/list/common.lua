@@ -45,12 +45,6 @@ return {
 
   --
   --------------------------------------- Common plugins ----------------------------------------
-  -- agrolens.nvim
-  -- Telescope extentions to view pre-defined/custom treesitter queries
-  {
-    "desdic/agrolens.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-  },
   -- beacon.nvim
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
@@ -66,10 +60,7 @@ return {
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "famiu/bufdelete.nvim",
-    },
+    dependencies = { "famiu/bufdelete.nvim" },
     version = "v4.*",
     init = function()
       utils.load_mappings("bufferline")
@@ -256,9 +247,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
       return require("devil.plugins.configs.lualine")
     end,
@@ -388,7 +377,6 @@ return {
     "AckslD/nvim-neoclip.lua",
     dependencies = {
       { "kkharji/sqlite.lua", module = "sqlite" },
-      { "nvim-telescope/telescope.nvim" },
     },
   },
   -- nvim-notify
@@ -531,7 +519,6 @@ return {
     "stevearc/overseer.nvim",
     dependencies = {
       "stevearc/dressing.nvim",
-      "nvim-telescope/telescope.nvim",
       "rcarriga/nvim-notify",
     },
     cmd = {
@@ -761,6 +748,7 @@ return {
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
+      "desdic/agrolens.nvim",
 
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
@@ -844,7 +832,6 @@ return {
   {
     "axieax/urlview.nvim",
     cmd = "UrlView",
-    dependencies = "nvim-telescope/telescope.nvim",
     opts = function()
       return require("devil.plugins.configs.urlview")
     end,
