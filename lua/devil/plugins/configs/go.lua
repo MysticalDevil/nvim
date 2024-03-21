@@ -2,7 +2,7 @@ return {
   disable_defaults = false, -- true|false when true set false to all boolean settings and replace all table
   -- settings with {}
   go = "go", -- go command, can be go[default] or go1.18beta1
-  goimport = "gopls", -- goimport command, can be gopls[default] or goimport
+  goimports = "gopls", -- goimport command, can be gopls[default] or goimport
   fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls
   gofmt = "gofumpt", --gofmt cmd,
   tag_transform = false, -- can be transform option("snakecase", "camelcase", etc) check gomodifytags for details and more options
