@@ -279,16 +279,6 @@ return {
       return others_configs.neoscroll
     end,
   },
-  -- neorg
-  -- Modernity meets insane extensibility. The future of organizing your life in Neovim.
-  {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = function()
-      return others_configs.neorg
-    end,
-  },
   -- neo-tree.nvim
   -- Neovim plugin to manage the file system and other tree like structures
   {
