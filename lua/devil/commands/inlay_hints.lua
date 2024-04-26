@@ -4,21 +4,21 @@ local inlay_hint = vim.lsp.inlay_hint
 
 local function toggle_inlay_hints()
   if inlay_hint.is_enabled() then
-    inlay_hint.enable(nil, false)
+    inlay_hint.enable(false, nil)
   else
-    inlay_hint.enable(nil, true)
+    inlay_hint.enable(true, nil)
   end
 end
 
 local function enable_inlay_hints()
   if not inlay_hint.is_enabled() then
-    inlay_hint.enable(nil, true)
+    inlay_hint.enable(true, nil)
   end
 end
 
 local function disable_inlay_hints()
   if inlay_hint.is_enabled() then
-    inlay_hint.enable(nil, false)
+    inlay_hint.enable(false, nil)
   end
 end
 

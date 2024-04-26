@@ -61,7 +61,8 @@ return {
   {
     "akinsho/bufferline.nvim",
     dependencies = { "famiu/bufdelete.nvim" },
-    version = "v4.*",
+    -- version = "v4.*",
+    branch = "main",
     init = function()
       utils.load_mappings("bufferline")
     end,

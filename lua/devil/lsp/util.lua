@@ -68,7 +68,7 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
-    inlay_hint.enable(bufnr, true)
+    inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
 
