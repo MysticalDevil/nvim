@@ -628,18 +628,6 @@ return {
     },
     cmd = "Registers",
   },
-  -- rest.nvim
-  -- A fast Neovim http client written in Lua
-  {
-    "rest-nvim/rest.nvim",
-    ft = { "http", "json" },
-    opts = function()
-      return require("devil.plugins.configs.rest")
-    end,
-    config = function(_, opts)
-      require("rest-nvim").setup(opts)
-    end,
-  },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
