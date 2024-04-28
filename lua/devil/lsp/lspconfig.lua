@@ -15,7 +15,6 @@ local noconfig_servers = {
   "lemminx", -- XML
   "neocmake",
   "nil_ls", -- Nix
-  "omnisharp",
   "perlnavigator",
   "phpactor",
   "racket_langserver",
@@ -50,6 +49,7 @@ local lsp_servers = {
   "gopls",
   "jsonls",
   "lua_ls",
+  "omnisharp",
   "pylsp",
   -- "rust_analyzer",
   -- "tsserver",
