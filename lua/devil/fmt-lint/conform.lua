@@ -18,7 +18,6 @@ local opts = {
     fish = { "fish_indent" },
     go = { "gofumpt", "goimports-reviser", "golines" },
     java = { "google-java-format" },
-    javascript = { { "prettierd", "prettier" } },
     json = { "jq" },
     kotlin = { "ktlint" },
     lua = { "stylua" },
@@ -58,15 +57,7 @@ local opts = {
   -- Conform will notify you when a formatter errors
   notify_on_error = true,
   -- Define custom formatters here
-  formatters = {
-    prettier = {
-      command = require("conform.util").find_executable({ "node_modules/.bin/prettier" }, "prettier"),
-      args = { "--no-semi" },
-      stdin = true,
-      cwd = require("conform.util").root_file({ ".editorconfig", "package.json" }),
-      require_cwd = true,
-    },
-  },
+  formatters = {},
 }
 
 conform.setup(opts)

@@ -5,26 +5,11 @@ if not status then
 end
 
 -- Utilities for creating configurations
-local util = require("devil.formatter.util")
+-- local util = require("devil.formatter.util")
 local filetypes = require("formatter.filetypes")
 local config = require("formatter.config")
 
-local mason_binary = ("%s/mason/bin/"):format(vim.fn.stdpath("data"))
-
-local prettier_defaults = function()
-  return {
-    exe = "prettier",
-    cwd = mason_binary,
-    args = {
-      "--stdin-filepath",
-      util.escape_path(util.get_current_buffer_file_path()),
-      "--single-quote",
-      "--no-semi",
-    },
-    stdin = true,
-    try_node_modules = true,
-  }
-end
+-- local mason_binary = ("%s/mason/bin/"):format(vim.fn.stdpath("data"))
 
 local settings = {
   lua = {
@@ -49,14 +34,6 @@ local settings = {
   c = { filetypes.c.clangformat },
   cpp = { filetypes.c.clangformat },
   cmake = { filetypes.cmake.cmakeformat },
-
-  css = { filetypes.css.prettier },
-  html = { filetypes.html.prettier },
-  javascript = { prettier_defaults() },
-  typescript = { prettier_defaults() },
-  javascriptreact = { prettier_defaults() },
-  typescriptreact = { prettier_defaults() },
-  vue = { prettier_defaults() },
 
   fish = { filetypes.fish.fishindent },
   sh = { filetypes.sh.shfmt },

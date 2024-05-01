@@ -3,10 +3,10 @@ local lspconfig = require("lspconfig")
 local util = require("devil.lsp.util")
 
 local noconfig_servers = {
+  "biome",
   "clojure_lsp",
   "cssmodules_ls",
   "dockerls",
-  "eslint",
   "golangci_lint_ls",
   "groovyls",
   "html",
@@ -40,12 +40,12 @@ end
 
 local lsp_servers = {
   "bashls",
+  "biome",
   "clangd",
   "cssls",
   "dartls",
   "denols",
   "emmet_language_server",
-  "eslint",
   "gopls",
   "jsonls",
   "lua_ls",

@@ -2,11 +2,8 @@ local formatters = require("efmls-configs.formatters")
 local linters = require("efmls-configs.linters")
 
 local use_clang_tidy = { "c", "cpp" }
-local use_prettier =
-  { "css", "less", "sass", "scss", "html", "javascript", "typescript", "javascriptreact", "typescriptreact", "vue" }
 local use_beautysh = { "sh", "zsh" }
 local use_cppcheck = { "c", "cpp" }
-local use_eslint = { "javascript", "typescript", "javascriptreact", "typescriptreact", "vue" }
 local use_shellcheck = { "sh", "zsh" }
 local use_stylelint = { "css", "less", "sass", "scss" }
 
@@ -28,10 +25,8 @@ local insert_multi_keys = function(keys, value)
 end
 
 insert_multi_keys(use_clang_tidy, { formatters.clang_tidy })
-insert_multi_keys(use_prettier, { formatters.prettier })
 insert_multi_keys(use_beautysh, { formatters.beautysh })
 insert_multi_keys(use_cppcheck, { linters.cppcheck })
-insert_multi_keys(use_eslint, { linters.eslint })
 insert_multi_keys(use_stylelint, { linters.stylelint })
 insert_multi_keys(use_shellcheck, { linters.shellcheck })
 
