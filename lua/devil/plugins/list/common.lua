@@ -461,6 +461,7 @@ return {
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
+      require("nvim-dap-repl-highlights").setup()
 
       -- enable Folding module
       vim.opt.foldmethod = "expr"
