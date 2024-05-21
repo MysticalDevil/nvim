@@ -39,6 +39,7 @@ for _, name in ipairs(noconfig_servers) do
 end
 
 local lsp_servers = {
+  "basedpyright",
   "bashls",
   "biome",
   "clangd",
@@ -50,7 +51,7 @@ local lsp_servers = {
   "jsonls",
   "lua_ls",
   "omnisharp",
-  "pylsp",
+  -- "pylsp",
   -- "rust_analyzer",
   -- "tsserver",
   "vimls",
