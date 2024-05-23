@@ -44,7 +44,6 @@ local lsp_servers = {
   "biome",
   "clangd",
   "cssls",
-  "dartls",
   "denols",
   "emmet_language_server",
   "gopls",
