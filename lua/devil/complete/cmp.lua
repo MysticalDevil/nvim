@@ -23,7 +23,7 @@ local opts = {
   formatting = util.formatting,
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      vim.snippet.expand(args.body)
     end,
   },
   window = {
@@ -35,8 +35,8 @@ local opts = {
   },
   mapping = util.mapping,
   sources = cmp.config.sources({
+    { name = "snippets", max_item_count = 10 },
     { name = "nvim_lsp" },
-    { name = "luasnip", option = { use_show_condition = false } },
     { name = "nvim_lua" },
     { name = "buffer", keywords = 3 },
     { name = "async_path" },

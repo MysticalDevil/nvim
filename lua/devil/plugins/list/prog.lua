@@ -109,20 +109,13 @@ return {
     -- these dependencies will only be loaded when cmp loads
     -- dependencies are always lazy-loaded unless specified otherwise
     dependencies = {
-      -- LuaSnip
-      -- Snippet Engine for Neovim written in Lua.
       {
-        "L3MON4D3/LuaSnip",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-          "saadparwaiz1/cmp_luasnip",
+        "garymjr/nvim-snippets",
+        dependencies = "rafamadriz/friendly-snippets",
+        opts = {
+          create_cmp_source = true,
+          friendly_snippets = true,
         },
-        version = "2.*",
-        build = "make install_jsregexp",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("devil.plugins.configs.others").luasnip(opts)
-        end,
       },
 
       -- autopairing of (){}[] etc
@@ -151,7 +144,6 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-emoji",
         "FelipeLema/cmp-async-path",
-        "saadparwaiz1/cmp_luasnip",
         "petertriho/cmp-git",
         "Dosx001/cmp-commit",
         "ray-x/cmp-treesitter",

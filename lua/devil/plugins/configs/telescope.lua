@@ -40,10 +40,10 @@ return {
         ["<C-u>"] = "preview_scrolling_up",
         ["<C-d>"] = "preview_scrolling_down",
         -- trouble.nvim support
-        ["<C-T>"] = trouble.open_with_trouble,
+        -- ["<C-T>"] = trouble.open_with_trouble,
       },
       n = {
-        ["<C-t>"] = trouble.open_with_trouble,
+        -- ["<C-t>"] = trouble.open_with_trouble,
       },
     },
     vimgrep_arguments = {

@@ -7,7 +7,6 @@ if not status then
 end
 
 local kind_icons = require("devil.utils").kind_icons
-local luasnip = require("luasnip")
 
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -45,7 +44,7 @@ M.formatting = {
       vim_item.menu = ({
         buffer = "[Buf]",
         nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
+        snippets = "[Snip]",
         nvim_lua = "[API]",
         latex_symbols = "[LaTeX]",
         path = "[Path]",
@@ -91,8 +90,10 @@ M.mapping = {
       cmp.select_next_item()
       -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
       -- that way you will only jump inside the snippet region
-    elseif luasnip.expand_or_jumpable() then
-      luasnip.expand_or_jump()
+    elseif vim.snippet.active({ direction = 1 }) then
+      vim.schedule(function()
+        vim.snippet.jump(1)
+      end)
     elseif has_words_before() then
       cmp.complete()
     else
@@ -103,8 +104,10 @@ M.mapping = {
   ["<S-Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_prev_item()
-    elseif luasnip.jumpable(-1) then
-      luasnip.jump(-1)
+    elseif vim.snippet.active({ direction = -1 }) then
+      vim.schedule(function()
+        vim.snippet.jump(-1)
+      end)
     else
       fallback()
     end

@@ -16,13 +16,11 @@ M.beacon = {
 M.neogen = {
   enabled = true, --if you want to disable Neogen
   input_after_comment = true, -- (default: true) automatic jump (with insert mode) on inserted annotation
-  snippet_engine = "luasnip",
 }
 
 M.neoscroll = {
   -- All these keys will be mapped to their corresponding default scrolling animation
   -- mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
-  mappings = { "<C-u>", "<C-d>", "<A-b>", "<A-f>" },
   hide_cursor = true, -- Hide cursor while scrolling
   stop_eof = true, -- Stop at <EOF> when scrolling downwards
   respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
@@ -137,32 +135,5 @@ M.treesj = {
   ---@type nil|function Callback for treesj error handler. func (err_text, level, ...other_text)
   on_error = nil,
 }
-
-M.luasnip = function(opts)
-  require("luasnip").config.set_config(opts)
-
-  -- vscode format
-  require("luasnip.loaders.from_vscode").lazy_load()
-  require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
-
-  -- snipmate format
-  require("luasnip.loaders.from_snipmate").load()
-  require("luasnip.loaders.from_snipmate").lazy_load({ paths = vim.g.snipmate_snippets_path or "" })
-
-  -- lua format
-  require("luasnip.loaders.from_lua").load()
-  require("luasnip.loaders.from_lua").lazy_load({ paths = vim.g.lua_snippets_path or "" })
-
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    callback = function()
-      if
-        require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-        and not require("luasnip").session.jump_active
-      then
-        require("luasnip").unlink_current()
-      end
-    end,
-  })
-end
 
 return M

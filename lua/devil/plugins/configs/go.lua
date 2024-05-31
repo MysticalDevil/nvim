@@ -94,6 +94,5 @@ return {
   },
   trouble = false, -- true: use trouble to open quickfix
   test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
-  luasnip = true, -- enable included luasnip snippets. you can also disable while add lua/snips folder to luasnip load
   iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
 }
