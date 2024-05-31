@@ -52,6 +52,7 @@ local lsp_servers = {
   "omnisharp",
   -- "pylsp",
   -- "rust_analyzer",
+  "svelte",
   -- "tsserver",
   "vimls",
   "yamlls",
