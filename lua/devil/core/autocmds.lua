@@ -2,7 +2,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 local commonAutoGroup = augroup("commonAutoGroup", { clear = true })
-local indentAutoGroup = augroup("indentAutoGroup", { clear = true })
 local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
@@ -36,28 +35,6 @@ autocmd("FileType", {
   desc = "Auto disable side line number for some filetypes",
   callback = function()
     vim.opt.number = false
-  end,
-})
-
--- Auto set indent for some filetypes
-autocmd("FileType", {
-  group = indentAutoGroup,
-  pattern = { "java", "kotlin", "php", "composer.json" },
-  desc = "Auto set indent for some languages",
-  callback = function()
-    vim.opt.shiftwidth = 4
-    vim.opt.tabstop = 4
-    vim.opt.expandtab = false
-  end,
-})
-
--- Add new file types
-autocmd({ "BufRead", "BufNewFile" }, {
-  group = commonAutoGroup,
-  pattern = { "*.v", "*.vv", "*.vsh", "*.vlang" },
-  desc = "Set filetype as vlang",
-  callback = function()
-    vim.bo.filetype = "vlang"
   end,
 })
 
