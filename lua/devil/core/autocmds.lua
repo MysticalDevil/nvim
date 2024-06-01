@@ -37,19 +37,3 @@ autocmd("FileType", {
     vim.opt.number = false
   end,
 })
-
--- Auto write default head for perl
-autocmd("BufNewFile", {
-  group = writeAutoGroup,
-  pattern = { "*.pl", "*.pm" },
-  desc = "Auto write default head for perl",
-  callback = function()
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, {
-      "use 5.20.0;",
-      "use strict;",
-      "use warnings;",
-      "use diagnostics;",
-      "",
-    })
-  end,
-})
