@@ -1,1 +1,2 @@
-require("devil.fmt-lint.null-ls")
+require("devil.fmt-lint.conform")
+require("devil.fmt-lint.lint")

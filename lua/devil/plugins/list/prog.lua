@@ -15,7 +15,6 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
       "stevearc/conform.nvim",
-      "nvimtools/none-ls.nvim",
     },
   },
   {
@@ -23,27 +22,6 @@ return {
     dependencies = {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
-    },
-  },
-  {
-    "jay-babu/mason-null-ls.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        -- Opt to list sources here, when available in mason.
-      },
-      automatic_installation = false,
-      automatic_setup = true, -- Recommended, but optional
-      ignore_methods = {
-        diagnostics = true,
-        formatting = true,
-        code_actions = true,
-        completion = true,
-        hover = true,
-      },
     },
   },
 
@@ -65,37 +43,15 @@ return {
   ------------------------------------- Formatter and Linter --------------------------------------
   --
 
-  -- null-ls.nvim
-  -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-
-  -- efmls-configs-nvim
-  -- An unofficial collection of linters and formatters configured for efm-langserver for neovim.
-  {
-    "creativenull/efmls-configs-nvim",
-    version = "v1.x.x", -- version is optional, but recommended
-    dependencies = { "neovim/nvim-lspconfig" },
-    lazy = true,
-  },
-
   -- conform.nvim
   -- Lightweight yet powerful formatter plugin for Neovim
-  {
-    "stevearc/conform.nvim",
-    enabled = false,
-  },
+  { "stevearc/conform.nvim" },
+  { "zapling/mason-conform.nvim" },
 
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
-  {
-    "mfussenegger/nvim-lint",
-    enabled = false,
-    dependencies = { "williamboman/mason.nvim" },
-  },
+  { "mfussenegger/nvim-lint" },
 
   --
   ---------------------------------------- Complete Engine ----------------------------------------

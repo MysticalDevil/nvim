@@ -19,7 +19,7 @@ return {
   scope = "line", -- 'cursor', 'line' this changes the scope, so instead of showing errors under the cursor, it shows errors on the entire line.
   padding_top = 0,
   padding_right = 0,
-  text_align = "right", -- 'left', 'right'
+  text_align = "left", -- 'left', 'right'
   placement = "top", -- 'top', 'inline'
   inline_padding_left = 0, -- the padding left when the placement is inline
   update_event = { "DiagnosticChanged", "BufReadPost" }, -- the event that updates the diagnostics cache
