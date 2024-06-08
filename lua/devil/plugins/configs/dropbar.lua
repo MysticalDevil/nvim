@@ -1,7 +1,6 @@
-local dropbar = require("dropbar")
-
 local utils = require("dropbar.utils")
 local sources = require("dropbar.sources")
+local configs = require("dropbar.configs")
 
 local function exculde_filetypes(filetype)
   if filetype:match("^Neogit.*") == nil then
@@ -151,8 +150,6 @@ return {
         return true
       end,
       ---Last symbol from path source when current buf is modified
-      ---@param sym dropbar_symbol_t
-      ---@return dropbar_symbol_t
       modified = function(sym)
         return sym
       end,
@@ -238,8 +235,8 @@ return {
     terminal = {
       ---@type string|fun(buf: integer): string
       icon = function(buf)
-        local icon = M.opts.icons.kinds.symbols.Terminal
-        if M.opts.icons.kinds.use_devicons then
+        local icon = configs.opts.icons.kinds.symbols.Terminal
+        if configs.opts.icons.kinds.use_devicons then
           icon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo[buf].filetype) or icon
         end
         return icon

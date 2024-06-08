@@ -790,14 +790,12 @@ return {
   -- quickfix and location list to help you solve all the trouble your code is causing
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble", "TroubleRefresh", "TroubleClose" },
+    cmd = "Trouble",
     dependencies = "nvim-tree/nvim-web-devicons",
     init = function()
       utils.load_mappings("trouble")
     end,
-    opts = function()
-      return require("devil.plugins.configs.trouble")
-    end,
+    opts = {},
   },
   -- twilight.nvim
   -- Dims inactive portions of the code you're editing using TreeSitter.

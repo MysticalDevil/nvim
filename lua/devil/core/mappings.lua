@@ -481,12 +481,31 @@ M.hlslens = {
 M.trouble = {
   plugin = true,
   n = {
-    ["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "Toggle trouble panel" },
-    ["<leader>xw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Toggle workspace diagnostics" },
-    ["<leader>xd"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Toggle document diagnostics" },
-    ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", "Toggle quick fix" },
-    ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", "Toggle loc list" },
-    ["<leader>xr"] = { "<cmd>TroubleToggle lsp_references<cr>", "Toggle LSP references" },
+    ["<leader>xx"] = {
+      "<cmd>Trouble diagnostics toggle<cr>",
+      "Diagnostics (Trouble)",
+    },
+    ["<leader>xX"] = {
+      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      "Buffer Diagnostics (Trouble)",
+    },
+    ["<leader>cs"] = {
+      "<cmd>Trouble symbols toggle focus=false<cr>",
+      "Symbols (Trouble)",
+    },
+    ["<leader>cl"] = {
+      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+      "LSP Definitions / references / ... (Trouble)",
+    },
+
+    ["<leader>xL"] = {
+      "<cmd>Trouble loclist toggle<cr>",
+      "Location List (Trouble)",
+    },
+    ["<leader>xQ"] = {
+      "<cmd>Trouble qflist toggle<cr>",
+      "Quickfix List (Trouble)",
+    },
   },
 }
 
