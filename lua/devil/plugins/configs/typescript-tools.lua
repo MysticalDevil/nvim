@@ -1,6 +1,13 @@
 return {
   on_attach = require("devil.lsp.util").default_on_attach,
-  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+  },
   single_file_support = not (vim.fn.filereadable(("%s/deno.json"):format(vim.fn.getcwd())) == 1),
   handlers = {},
   settings = {
@@ -21,7 +28,7 @@ return {
     -- tsserver_path = tsserver_path .. "/node_modules/typescript/lib/tsserver.js",
     -- specify a list of plugins to load by tsserver, e.g., for support `styled-components`
     -- (see 💅 `styled-components` support section)
-    tsserver_plugins = {},
+    tsserver_plugins = { "@vue/typescript-plugin" },
     -- this value is passed to: https://nodejs.org/api/cli.html#--max-old-space-sizesize-in-megabytes
     -- memory limit in megabytes or "auto"(basically no limit)
     tsserver_max_memory = "auto",
