@@ -590,9 +590,8 @@ return {
     keys = {
       {
         "<leader>rn",
-        function()
-          return (":IncRename %s"):format(vim.fn.expand("<cword>"))
-        end,
+        ":IncRename ",
+        desc = "Rename symbols",
       },
     },
     opts = {

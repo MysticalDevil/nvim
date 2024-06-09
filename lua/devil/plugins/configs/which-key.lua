@@ -1,5 +1,3 @@
-local ufo = require("ufo")
-
 return {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
