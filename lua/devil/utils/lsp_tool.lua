@@ -60,7 +60,7 @@ function M.get_lsp_info()
   local lsp_names = {}
   for _, client in ipairs(clients) do
     if client.config["filetypes"] and vim.tbl_contains(client.config["filetypes"], buf_ft) then
-      if M.not_proxy_lsp(client.name) then
+      if M.not_proxy_lsp(client.name) and not vim.tbl_contains(lsp_names, client.name) then
         table.insert(lsp_names, client.name)
       end
     end
