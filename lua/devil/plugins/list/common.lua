@@ -386,15 +386,6 @@ return {
       vim.notyfy = notify
     end,
   },
-  -- nvim-puppeteer
-  -- Automatically convert strings to f-strings or template strings and back.
-  {
-    "chrisgrieser/nvim-puppeteer",
-    ft = { "lua", "python", "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    init = function()
-      vim.g.puppeteer_lua_format_string = true
-    end,
-  },
   -- nvim-regexplainer
   -- Describe the regexp under the cursor
   {
