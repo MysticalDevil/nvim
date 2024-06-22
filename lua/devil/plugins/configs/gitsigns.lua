@@ -1,11 +1,12 @@
 return {
   -- Letter icon. A is add，M is modify， D is delete
   signs = {
-    add = { hl = "GitSignsAdd", text = "A|", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-    change = { hl = "GitSignsChange", text = "M|", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    delete = { hl = "GitSignsDelete", text = "D_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-    topdelete = { hl = "GitSignsDelete", text = "D‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-    changedelete = { hl = "GitSignsChange", text = "D~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    add = { text = "A|" },
+    change = { text = "M|" },
+    delete = { text = "D_" },
+    topdelete = { text = "D‾" },
+    changedelete = { text = "D~" },
+    untracked = { text = "U|" },
   },
   -- show icon
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -22,14 +23,12 @@ return {
   current_line_blame = false, -- Toggle with `LGitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
-    virt_text_pos = "eol", -- 'eol' | 'overlat' | 'right_align'
+    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
     delay = 1000,
     ignore_whitespace = false,
     virt_text_priority = 100,
   },
-  current_line_blame_formatter_opts = {
-    relative_time = false,
-  },
+  current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -41,8 +40,5 @@ return {
     relative = "cursor",
     row = 0,
     col = 1,
-  },
-  yadm = {
-    enable = false,
   },
 }
