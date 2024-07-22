@@ -186,7 +186,7 @@ return {
   },
 
   providers = {
-    priority = { "lsp", "coc", "markdown", "norg" },
+    priority = { "lsp", "coc", "markdown" },
     lsp = {
       -- Lsp client names to ignore
       blacklist_clients = {},
