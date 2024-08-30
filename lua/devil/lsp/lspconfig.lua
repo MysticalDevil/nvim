@@ -20,6 +20,7 @@ local noconfig_servers = {
   "racket_langserver",
   "ruff_lsp",
   "solargraph",
+  "sourcekit",
   "standardrb",
   "tailwindcss",
   "taplo",
