@@ -2,6 +2,8 @@ local lspconfig = require("lspconfig")
 
 local util = require("devil.lsp.util")
 
+require("devil.lsp.config.carbon")
+
 local noconfig_servers = {
   "biome",
   "clojure_lsp",

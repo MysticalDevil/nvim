@@ -21,12 +21,17 @@ opts.filetypes = {
 opts.settings = {
   clangd = {
     InlayHints = {
+      BlockEnd = false,
       Designators = true,
       Enabled = true,
       ParameterNames = true,
       DeducedTypes = true,
+      TypeNameLimit = 24,
     },
-    fallbackFlags = { "-std=c++20" },
+    CompileFlags = {
+      Add = { "-Wall", "" },
+      Compiler = "clang++",
+    },
   },
 }
 opts.cmd = {
