@@ -11,52 +11,9 @@ end
 
 ---@class dropbar_configs_t
 return {
-  general = {
-    ---@type boolean|fun(buf: integer, win: integer): boolean
-    enable = function(buf, win)
-      return not vim.api.nvim_win_get_config(win).zindex
-        and vim.bo[buf].buftype == ""
-        and vim.bo[buf].filetype ~= ""
-        and exculde_filetypes(vim.bo[buf].filetype)
-        and vim.api.nvim_buf_get_name(buf) ~= ""
-        and not vim.wo[win].diff
-    end,
-    attach_events = {
-      "OptionSet",
-      "BufWinEnter",
-      "BufWritePost",
-    },
-    -- Wait for a short time before updating the winbar, if another update
-    -- request is received within this time, the previous request will be
-    -- cancelled, this improves the performance when the user is holding
-    -- down a key (e.g. 'j') to scroll the window, default to 0 ms
-    -- If you encounter performance issues when scrolling the window, try
-    -- setting this option to a number slightly larger than
-    -- 1000 / key_repeat_rate
-    update_interval = 0,
-    update_events = {
-      win = {
-        "CursorMoved",
-        "CursorMovedI",
-        "WinEnter",
-        "WinResized",
-      },
-      buf = {
-        "BufModifiedSet",
-        "FileChangedShellPost",
-        "TextChanged",
-        "TextChangedI",
-      },
-      global = {
-        "DirChanged",
-        "VimResized",
-      },
-    },
-  },
   icons = {
     enable = true,
     kinds = {
-      use_devicons = true,
       symbols = require("devil.utils").kind_icons,
     },
     ui = {
@@ -103,6 +60,46 @@ return {
     },
   },
   bar = {
+    ---@type boolean|fun(buf: integer, win: integer): boolean
+    enable = function(buf, win)
+      return not vim.api.nvim_win_get_config(win).zindex
+        and vim.bo[buf].buftype == ""
+        and vim.bo[buf].filetype ~= ""
+        and exculde_filetypes(vim.bo[buf].filetype)
+        and vim.api.nvim_buf_get_name(buf) ~= ""
+        and not vim.wo[win].diff
+    end,
+    attach_events = {
+      "OptionSet",
+      "BufWinEnter",
+      "BufWritePost",
+    },
+    -- Wait for a short time before updating the winbar, if another update
+    -- request is received within this time, the previous request will be
+    -- cancelled, this improves the performance when the user is holding
+    -- down a key (e.g. 'j') to scroll the window, default to 0 ms
+    -- If you encounter performance issues when scrolling the window, try
+    -- setting this option to a number slightly larger than
+    -- 1000 / key_repeat_rate
+    update_debounc = 0,
+    update_events = {
+      win = {
+        "CursorMoved",
+        "CursorMovedI",
+        "WinEnter",
+        "WinResized",
+      },
+      buf = {
+        "BufModifiedSet",
+        "FileChangedShellPost",
+        "TextChanged",
+        "TextChangedI",
+      },
+      global = {
+        "DirChanged",
+        "VimResized",
+      },
+    },
     hover = true,
     sources = function(buf, _)
       if vim.bo[buf].ft == "markdown" then
