@@ -17,16 +17,13 @@ local noconfig_servers = {
   "lemminx", -- XML
   "neocmake",
   "nil_ls", -- Nix
-  "perlnavigator",
   "phpactor",
-  "racket_langserver",
-  "ruff_lsp",
+  "ruff",
   "solargraph",
   "sourcekit",
   "standardrb",
   "tailwindcss",
   "taplo",
-  "v_analyzer",
   "vala_ls",
   "vimls",
   "volar",
