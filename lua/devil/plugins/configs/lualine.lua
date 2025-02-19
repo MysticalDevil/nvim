@@ -39,6 +39,7 @@ local opts = {
     },
     component_separators = "",
     section_separators = "",
+    ignore_focus = { "neo-tree", "dropbar_menu" },
     globalstatus = true,
     disabled_filetypes = {
       statusline = { "alpha" },
@@ -72,10 +73,32 @@ local opts = {
     -- these are to remove the defaults
     lualine_a = {},
     lualine_b = {},
-    lualine_y = {},
-    lualine_z = {},
     lualine_c = {},
     lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  winbar = {
+    lualine_a = {
+      {
+        "%{%v:lua.dropbar()%}",
+        separator = { left = "", right = "" },
+        color = "nil",
+        padding = { left = 0, right = 0 },
+      },
+    },
+    lualine_x = {
+      {
+        function()
+          if not pcall(require, "lsp_signature") then
+            return
+          end
+          local sign = require("lsp_signature").status_line()
+          return sign.label .. "🐼" .. sign.hint
+        end,
+        color = { fg = colors.yellow, gui = "italic" },
+      },
+    },
   },
 }
 
@@ -177,17 +200,6 @@ local filename = {
   color = { fg = colors.magentam, gui = "bold" },
 }
 
-local current_signature = {
-  function()
-    if not pcall(require, "lsp_signature") then
-      return
-    end
-    local sig = require("lsp_signature").status_line()
-    return sig.label .. "🐼" .. sig.hint
-  end,
-  color = { fg = colors.yellow, gui = "italic" },
-}
-
 local lsp_info = {
   utils.get_lsp_info,
   icon = "󰒋 LSP:",
@@ -226,7 +238,6 @@ ins_section(diff, "lualine_b")
 
 ins_section(diagnostics, "lualine_c")
 ins_section(filename, "lualine_c")
-ins_section(current_signature, "lualine_c")
 
 ins_section(lsp_info, "lualine_x")
 ins_section(filesize, "lualine_x")

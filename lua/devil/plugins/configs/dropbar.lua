@@ -11,6 +11,12 @@ end
 
 ---@class dropbar_configs_t
 return {
+  general = {
+    attach_events = { "BufWinEnter", "BufWritePost" },
+    update_events = {
+      win = { "CursorMoved", "CursorMovedI", "WinResized" },
+    },
+  },
   icons = {
     enable = true,
     kinds = {
