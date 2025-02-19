@@ -4,8 +4,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 ---@diagnostic disable-next-line
 capabilities.offsetEncoding = { "utf-16" }
 
-local inlay_hints = require("clangd_extensions.inlay_hints")
-
 local opts = util.default_configs()
 
 opts.capabilities = capabilities
@@ -83,12 +81,7 @@ opts.on_attach = function(client, bufnr)
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 
-  if vim.fn.has("nvim-0.10") == 1 then
-    util.set_inlay_hints(client, bufnr)
-  else
-    inlay_hints.setup_autocmd()
-    inlay_hints.set_inlay_hints()
-  end
+  util.set_inlay_hints(client, bufnr)
 end
 opts.single_file_support = true
 

@@ -198,31 +198,6 @@ return {
   },
 
   -------------------- C/C++ --------------------
-  -- clangd_extensions.nvim
-  -- Clangd's off-spec features for neovim's LSP client.
-  {
-    "p00f/clangd_extensions.nvim",
-    ft = { "c", "cpp" },
-    opts = function()
-      return require("devil.plugins.configs.clangd_extensions")
-    end,
-    config = function(_, opts)
-      require("clangd_extensions").setup(opts)
-
-      -- load clangd extensions when clangd attaches
-      local augroup = vim.api.nvim_create_augroup("clangd_extensions", { clear = true })
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = augroup,
-        desc = "Load clangd_extensions with clangd",
-        callback = function(args)
-          if assert(vim.lsp.get_client_by_id(args.data.client_id)).name == "clangd" then
-            require("clangd_extensions")
-            vim.api.nvim_del_augroup_by_id(augroup)
-          end
-        end,
-      })
-    end,
-  },
   -- cmake-tools.nvim
   -- CMake integration in Neovim
   {
