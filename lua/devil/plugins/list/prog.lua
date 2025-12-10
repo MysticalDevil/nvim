@@ -225,17 +225,6 @@ return {
   },
 
   ----------------- TypeScript ------------------
-  -- typescript-tools.nvim
-  -- TypeScript integration NeoVim deserves
-  {
-    "pmizio/typescript-tools.nvim",
-    lazy = true,
-    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = function()
-      return require("devil.plugins.configs.typescript-tools")
-    end,
-  },
   -- package-info.nvim
   -- All the npm/yarn/pnpm commands I don't want to type
   {
