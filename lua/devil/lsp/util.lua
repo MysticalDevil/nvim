@@ -67,7 +67,7 @@ function M.set_inlay_hints(client, bufnr)
     vim.g.zig_fmt_autosave = 1
   end
 
-  if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+  if client:supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
     inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
