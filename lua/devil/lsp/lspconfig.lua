@@ -2,18 +2,11 @@ local lspconfig = require("lspconfig")
 
 local util = require("devil.lsp.util")
 
-require("devil.lsp.config.carbon")
-
 local noconfig_servers = {
-  "biome",
-  "clojure_lsp",
-  "cssmodules_ls",
   "dockerls",
   "golangci_lint_ls",
-  "groovyls",
   "html",
   "jsonls",
-  "kotlin_language_server",
   "lemminx", -- XML
   "neocmake",
   "nil_ls", -- Nix
@@ -49,7 +42,6 @@ local lsp_servers = {
   "gopls",
   "jsonls",
   "lua_ls",
-  "omnisharp",
   -- "pylsp",
   -- "rust_analyzer",
   "svelte",
