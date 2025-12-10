@@ -1,4 +1,4 @@
-local lspconfig = require("lspconfig")
+local lspconfig = vim.lsp.config
 
 local util = require("devil.lsp.util")
 
@@ -24,11 +24,12 @@ local noconfig_servers = {
 
 -- Configure the language server. The on_setup function must be implemented in the configuration file.
 for _, name in ipairs(noconfig_servers) do
-  lspconfig[name].setup({
+  lspconfig[name] = {
     capabilities = util.common_capabilities(),
     flags = util.flags(),
     on_attach = util.default_on_attach,
-  })
+  }
+  vim.lsp.enable(name)
 end
 
 local lsp_servers = {
@@ -52,5 +53,6 @@ local lsp_servers = {
 }
 
 for _, server in ipairs(lsp_servers) do
-  lspconfig[server].setup(require(("devil.lsp.config.%s"):format(server)))
+  lspconfig[server] = require(("devil.lsp.config.%s"):format(server))
+  vim.lsp.enable(server)
 end
