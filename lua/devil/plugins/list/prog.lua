@@ -209,13 +209,6 @@ return {
     end,
   },
 
-  ------------------- CSharp --------------------
-  {
-    "Hoffs/omnisharp-extended-lsp.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-    ft = { "cs", "vb" },
-  },
-
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
@@ -270,37 +263,6 @@ return {
       package_manager = "yarn",
     },
     event = "BufRead package.json",
-  },
-
-  -------------------- Java ---------------------
-  -- nvim-jdtls
-  -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.l
-  {
-    "mfussenegger/nvim-jdtls",
-    ft = { "java" },
-    config = function()
-      local config = require("devil.plugins.configs.jdtls")
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("AttachJDTLS", { clear = true }),
-        pattern = "java",
-        callback = function()
-          require("jdtls").start_or_attach(config)
-        end,
-      })
-    end,
-  },
-
-  -------------------- Scala --------------------
-  -- nvim-metals
-  -- A Metals plugin for Neovim
-  {
-    "scalameta/nvim-metals",
-    ft = { "scala", "sbt" },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("devil.plugins.configs.metals")
-    end,
   },
 
   -------------------- Yaml ---------------------
@@ -430,7 +392,6 @@ return {
       "nvim-neotest/neotest-vim-test",
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-go",
-      "nvim-neotest/neotest-jest",
       "nvim-neotest/neotest-plenary",
       "marilari88/neotest-vitest",
       "rouge8/neotest-rust",
@@ -443,7 +404,6 @@ return {
         adapters = {
           require("neotest-python"),
           require("neotest-plenary"),
-          require("neotest-jest"),
           require("neotest-vitest"),
           require("neotest-go"),
           require("neotest-rust"),
