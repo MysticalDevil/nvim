@@ -158,7 +158,7 @@ return {
     "linux-cultist/venv-selector.nvim",
     ft = { "python" },
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    branch = "regexp",
+    branch = "main",
     opts = function()
       return require("devil.plugins.configs.venv-selector")
     end,

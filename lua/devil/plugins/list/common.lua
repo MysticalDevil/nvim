@@ -317,6 +317,7 @@ return {
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
   {
     "folke/noice.nvim",
+    event = "VeryLazy",
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
