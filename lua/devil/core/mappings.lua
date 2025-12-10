@@ -267,11 +267,7 @@ M.lspconfig = {
 
     ["<leader>L"] = {
       function()
-        if vim.lsp.inlay_hint.is_enabled({}) then
-          vim.lsp.inlay_hint.enable(false, nil)
-        else
-          vim.lsp.inlay_hint.enable(true, nil)
-        end
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
       end,
       "Toggle LSP inlay hints",
     },

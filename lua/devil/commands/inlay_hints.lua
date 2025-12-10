@@ -3,11 +3,7 @@ local create_user_command = vim.api.nvim_create_user_command
 local inlay_hint = vim.lsp.inlay_hint
 
 local function toggle_inlay_hints()
-  if inlay_hint.is_enabled() then
-    inlay_hint.enable(false, nil)
-  else
-    inlay_hint.enable(true, nil)
-  end
+  inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
 end
 
 local function enable_inlay_hints()
