@@ -63,13 +63,33 @@ function M.set_inlay_hints(client, bufnr)
     return
   end
 
-  if client.name == "zls" then
-    vim.g.zig_fmt_autosave = 1
+  -- Filtering unstable LSPs
+  local unstableLSP = {
+    phpactor = true,
+    tsserver = false,
+  }
+  if unstableLSP[client.name] then
+    vim.notify("Skip inlay hints for LSP: " .. client.name, vim.log.levels.WARN)
+    return
   end
 
-  if client:supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
-    inlay_hint.enable(true, { bufnr = bufnr })
+  -- Enabled only it supported
+  local ok = client:supports_method("textDocument/inlayHint")
+    or (client.server_Capabilities and client.server_capabilities.inlayHintProvider)
+  if not ok then
+    return
   end
+
+  -- Defense: Some LSPs are triggered twice
+  if vim.b[bufnr].inlay_hint_enabled then
+    return
+  end
+  vim.b[bufnr].inlay_hint_enabled = true
+
+  -- Enable inlay hint
+  pcall(function()
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end)
 end
 
 function M.enable_inlay_hints_autocmd()
