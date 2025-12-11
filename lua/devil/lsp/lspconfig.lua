@@ -3,24 +3,23 @@ local lspconfig = vim.lsp.config
 local util = require("devil.lsp.util")
 
 local noconfig_servers = {
+  "biome",
+  "denols",
   "dockerls",
+  "emmet_language_server",
   "golangci_lint_ls",
   "html",
   "jsonls",
   "lemminx", -- XML
   "neocmake",
   "nil_ls", -- Nix
-  "phpactor",
   "ruff",
-  "solargraph",
   "sourcekit",
-  "standardrb",
   "tailwindcss",
   "taplo",
   "tsgo",
-  "vala_ls",
   "vimls",
-  "volar",
+  "vue_ls",
 }
 
 -- Configure the language server. The on_setup function must be implemented in the configuration file.
@@ -36,11 +35,8 @@ end
 local lsp_servers = {
   "basedpyright",
   "bashls",
-  "biome",
   "clangd",
   "cssls",
-  "denols",
-  "emmet_language_server",
   "gopls",
   "jsonls",
   "lua_ls",
