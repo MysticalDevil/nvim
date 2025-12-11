@@ -17,7 +17,6 @@ local noconfig_servers = {
   "sourcekit",
   "tailwindcss",
   "taplo",
-  "tsgo",
   "vimls",
   "vue_ls",
 }
@@ -40,9 +39,8 @@ local lsp_servers = {
   "gopls",
   "jsonls",
   "lua_ls",
-  -- "pylsp",
-  -- "rust_analyzer",
   "svelte",
+  "tsgo",
   "vimls",
   "yamlls",
   "zls",
