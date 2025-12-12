@@ -9,7 +9,7 @@
 ## 安装
 
 1. 安装 neovim：
-   我主要使用的 Linux 发行版是 Arch、Gentoo、Debian，其他发行版请自行查看官方文档。neovim 版本需要 0.10.0(nightly) 及以上，因为inlay hints 在 0.10.0 之前无法正常工作
+   我主要使用的 Linux 发行版是 Arch、Gentoo、Fedora、Debian，其他发行版请自行查看官方文档。neovim 版本需要 0.10.0 及以上，因为inlay hints 在 0.10.0 之前无法正常工作
 
    ```bash
    # Arch
@@ -17,6 +17,9 @@
 
    # Gentoo
    sudo emerge -vj app-editors/neovim
+
+   # Fedora
+   sudo dnf install neovim
 
    # Debian
    sudo apt install neovim
@@ -28,7 +31,7 @@
    brew install neovim
    ```
 
-   Debian 建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7.2，可以按照如下进行构建
+   Debian 12 及以下版本建议自行构建，因为 Debian 官方仓库的 neovim 最新版本为 0.7.2，可以按照如下进行构建
 
    ```bash
    # Install necessary library
@@ -71,7 +74,7 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - `complete` 补全引擎相关配置，补全引擎默认使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，[`coq_nvim`](https://github.com/ms-jpq/coq_nvim)作为可选项，可以通过`setup.lua`进行切换。代码片段使用了 [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) 、LSP关键字图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
 - `dap` Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap)
 - `format` 代码格式化相关配置，默认使用 [`none-ls.nvim`](https://github.com/nvimtools/none-ls.nvim)，[`conform.nvim`](https://github.com/stevearc/conform.nvim)，[`formatter.nvim`](https://github.com/mhartington/formatter.nvim) 和 [`efm`](https://github.com/mattn/efm-langserver) 作为备选项，可以通过`setup.lua`进行调整
-- `lint` 代码检查相关配置，默认使用 [`none-ls.nvim`](https://github.com/mfussenegger/none-ls.nvim)，[`nvim-lint`](https://github.com/mfussenegger/nvim-lint) 和 [`efm`](https://github.com/mattn/efm-langserver)作为备选项，可以通过`setup.lua`进行调整
+- `lint` 代码检查相关配置，默认使用 [`nvim-lint`](https://github.com/mfussenegger/nvim-lint) ， [`efm`](https://github.com/mattn/efm-langserver)作为备选项，可以通过`setup.lua`进行调整
 - `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) 和 [`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim) 进行 LSP 的配置
 - `utils` 常用的工具库，如全局函数，通用配置等
 
@@ -106,8 +109,8 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim) 更美观的 neovim 的欢迎屏幕，配合 [`project.nvim`](https://github.com/ahmedkhalf/project.nvim) 来快速打开最近项目或文件
 - [`leap.nvim`](https://github.com/ggandor/leap.nvim) 文本快速跳转插件，快捷键为 `-` 和 `_`
 - [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim) 状态栏插件
-- [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim) 文件管理器，之前使用的是 [`nvim-tree.lua`](https://github.com/nvim-tree/nvim-tree.lua)
-- [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件，有点不稳定
+- [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim) 文件管理器
+- [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件
 - [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) 语法树、语法高亮
 - [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim) 查找、筛选、预览、选择插件
 - [`gitsigns.nvim`](https://github.com/lewis6991/gitsigns.nvim) 将 git 集成到缓冲区中
