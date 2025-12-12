@@ -2,7 +2,7 @@ return {
   disable_defaults = false, -- true|false when true set false to all boolean settings and replace all table
   -- settings with {}
   go = "go", -- go command, can be go[default] or go1.18beta1
-  goimports = "gopls", -- goimport command, can be gopls[default] or goimport
+  goimports = "goimports", -- goimport command, can be gopls[default] or goimport
   fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls
   gofmt = "gofumpt", --gofmt cmd,
   tag_transform = false, -- can be transform option("snakecase", "camelcase", etc) check gomodifytags for details and more options
@@ -12,12 +12,12 @@ return {
   comment_placeholder = "", -- comment_placeholder your cool placeholder e.g. 󰟓       
   icons = { breakpoint = "🧘", currentpos = "🏃" }, -- setup to `false` to disable icons setup
   verbose = false, -- output loginf in messages
-  lsp_cfg = false, -- true: use non-default gopls setup specified in go/lsp.lua
+  lsp_cfg = require("devil.lsp.config.gopls"), -- true: use non-default gopls setup specified in go/lsp.lua
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-  lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
-  lsp_on_attach = nil, -- nil: use on_attach function defined in go/lsp.lua,
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
+  lsp_on_attach = require("devil.lsp.util").default_on_attach, -- nil: use on_attach function defined in go/lsp.lua,
   --      when lsp_cfg is true
   -- if lsp_on_attach is a function: use this function as on_attach function for gopls
   lsp_keymaps = true, -- set to false to disable gopls/lsp keymap
@@ -38,7 +38,7 @@ return {
   -- set to true: use gopls to format
   -- false if you want to use other formatter tool(e.g. efm, nulls)
   lsp_inlay_hints = {
-    enable = false,
+    enable = true,
     -- Only show inlay hints for the current line
     only_current_line = false,
     -- Event which triggers a refersh of the inlay hints.
