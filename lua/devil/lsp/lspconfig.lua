@@ -7,7 +7,6 @@ local noconfig_servers = {
   "denols",
   "dockerls",
   "emmet_language_server",
-  "golangci_lint_ls",
   "html",
   "jsonls",
   "lemminx", -- XML
@@ -23,11 +22,11 @@ local noconfig_servers = {
 
 -- Configure the language server. The on_setup function must be implemented in the configuration file.
 for _, name in ipairs(noconfig_servers) do
-  lspconfig[name] = {
+  lspconfig(name, {
     capabilities = util.common_capabilities(),
     flags = util.flags(),
     on_attach = util.default_on_attach,
-  }
+  })
   vim.lsp.enable(name)
 end
 
@@ -36,7 +35,7 @@ local lsp_servers = {
   "bashls",
   "clangd",
   "cssls",
-  "gopls",
+  -- "gopls",
   "jsonls",
   "lua_ls",
   "svelte",
@@ -47,6 +46,8 @@ local lsp_servers = {
 }
 
 for _, server in ipairs(lsp_servers) do
-  lspconfig[server] = require(("devil.lsp.config.%s"):format(server))
+  local user_opts_ok, user_opts = pcall(require, ("devil.lsp.config."):format(server))
+  user_opts = user_opts_ok and user_opts or {}
+  lspconfig(server, user_opts)
   vim.lsp.enable(server)
 end
