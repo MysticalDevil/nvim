@@ -66,17 +66,16 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 
 - `init.lua` 使用纯 lua 配置 neovim 时的启动文件
 - `ginit.vim` 使用 neovim 前端时加载的额外配置，该配置支持 [`neovide`](https://github.com/neovide/neovide)、[`neovim-qt`](https://github.com/equalsraf/neovim-qt)
-- `configs/core` 核心配置，主要包括了基础配置、基本按键绑定、插件列表、自定义指令、自定义 autocmd以及第一次启动时的核心插件安装
-- `configs/colorscheme` 主题配置，包含了多种主题，可以通过 `setup.lua` 来更改预设主题
-- `configs/gui` 前端的字体、动画等配置
+- `commands` 一些自定义指令
+- `core` 不依赖插件的一些核心配置（AutoCMD，主题，非插件按键配置，启动时的自动动作）
 - `configs/plugin` 大多数插件的配置，不包含补全、格式化、DAP、LSP
-- `plugins` 默认安装的插件目录，分别为通用插件(`common.lua`)，主题(`colorscheme.lua`)，版本控制相关(`git.lua`)以及编程相关(`prog.lua`)
-- `complete` 补全引擎相关配置，补全引擎默认使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)，[`coq_nvim`](https://github.com/ms-jpq/coq_nvim)作为可选项，可以通过`setup.lua`进行切换。代码片段使用了 [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) 、LSP关键字图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
+- `plugins` 插件管理，`plugins/list` 是插件列表和简单配置，分别为通用插件(`common.lua`)，主题(`colorscheme.lua`)，版本控制相关(`git.lua`)以及编程相关(`prog.lua`)。`plugins/configs` 是某些复杂插件的单独配置
+- `complete` 补全引擎相关配置，补全引擎默认使用了 [`nvim-cmp`](https://github.com/hrsh7th/nvim-cmp)。代码片段使用了 [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip)，LSP关键字图标采用了 [`lspkind`](https://github.com/onsails/lspkind.nvim)
 - `dap` Debug Adapter Protocol 相关配置，主要使用 [`nvim-dap`](https://github.com/mfussenegger/nvim-dap)
-- `format` 代码格式化相关配置，默认使用 [`none-ls.nvim`](https://github.com/nvimtools/none-ls.nvim)，[`conform.nvim`](https://github.com/stevearc/conform.nvim)，[`formatter.nvim`](https://github.com/mhartington/formatter.nvim) 和 [`efm`](https://github.com/mattn/efm-langserver) 作为备选项，可以通过`setup.lua`进行调整
-- `lint` 代码检查相关配置，默认使用 [`nvim-lint`](https://github.com/mfussenegger/nvim-lint) ， [`efm`](https://github.com/mattn/efm-langserver)作为备选项，可以通过`setup.lua`进行调整
+- `fmt-lint` 代码格式化和lint相关配置，[`nvim-lint`](https://github.com/mfussenegger/nvim-lint)用于lint [`conform.nvim`](https://github.com/stevearc/conform.nvim)用于格式化
 - `lsp` Language Server Protolcol 相关配置，主要使用 [`mason`](https://github.com/williamboman/mason.nvim) 进行 LSP、DAP、Linter、Formmater 等包的管理、[`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) 和 [`mason-lspconfig`](https://github.com/williamboman/mason-lspconfig.nvim) 进行 LSP 的配置
 - `utils` 常用的工具库，如全局函数，通用配置等
+- `playground` 和 `self` 测试用目录，可删除
 
 ## 使用
 
@@ -107,7 +106,6 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 - [`bufferline.nvim`](https://github.com/akinsho/bufferline.nvim) 类似其他编辑器的标签页的插件
 - [`Comment.nvim`](`https://github.com/numToStr/Comment.nvim`) 行注释和块注释插件
 - [`dashboard-nvim`](https://github.com/glepnir/dashboard-nvim) 更美观的 neovim 的欢迎屏幕，配合 [`project.nvim`](https://github.com/ahmedkhalf/project.nvim) 来快速打开最近项目或文件
-- [`leap.nvim`](https://github.com/ggandor/leap.nvim) 文本快速跳转插件，快捷键为 `-` 和 `_`
 - [`lualine.nvim`](https://github.com/nvim-lualine/lualine.nvim) 状态栏插件
 - [`neo-tree.nvim`](https://github.com/nvim-neo-tree/neo-tree.nvim) 文件管理器
 - [`noice.nvim`](https://github.com/folke/noice.nvim) 通知、命令行、弹出菜单等功能的改进插件
@@ -128,3 +126,4 @@ neovim 如果使用纯 lua 配置，那么配置文件都会集中在 `./lua` �
 ## 贡献
 
 欢迎为我的 neovim 配置文件做出贡献！如果你想要添加新的插件或修改现有配置吗，请进行 pull request
+
