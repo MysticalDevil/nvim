@@ -18,13 +18,11 @@ return {
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
-    opts = function()
-      return require("devil.plugins.configs.dressing")
-    end,
+    opts = require("devil.plugins.configs.dressing"),
   },
   -- sqlite.lua
   -- SQLite LuaJIT binding with a very simple api.
-  { "kkharji/sqlite.lua", lazy = true, enabled = not jit.os:find("Windows") },
+  { "kkharji/sqlite.lua", lazy = true, enabled = not jit.os:find("Windows") }, ---@diagnostic disable-line
   -- nvim-web-devicons
   -- lua `fork` of vim-web-devicons for neovim
   { "nvim-tree/nvim-web-devicons", lazy = true },
@@ -36,9 +34,7 @@ return {
     "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
-    opts = function()
-      return require("devil.plugins.configs.onedark")
-    end,
+    opts = require("devil.plugins.configs.onedark"),
   },
   { "EdenEast/nightfox.nvim", opts = {} },
   { "folke/tokyonight.nvim", opts = {} },
@@ -49,9 +45,7 @@ return {
   -- Neovim plugin to flash cursor when jumps or moves between windows
   {
     "rainbowhxch/beacon.nvim",
-    opts = function()
-      return others_configs.beacon
-    end,
+    opts = others_configs.beacon,
   },
   -- bufdelete.nvim
   -- Delete Neovim buffers without losing window layout
@@ -96,9 +90,7 @@ return {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = function()
-      return require("devil.plugins.configs.dashboard")
-    end,
+    opts = require("devil.plugins.configs.dashboard"),
     config = function(_, opts)
       -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then
@@ -110,7 +102,7 @@ return {
           end,
         })
       end
-      require("dashboard").setup(opts)
+      require("dashboard").setup(opts) ---@diagnostic disable-line
     end,
   },
   -- dial.nvim
@@ -161,9 +153,7 @@ return {
         desc = "Toggle Flash Search",
       },
     },
-    opts = function()
-      return require("devil.plugins.configs.nvim-flash")
-    end,
+    opts = require("devil.plugins.configs.flash"), ---@diagnostic disable-line
   },
   -- glow.nvim
   -- A markdown preview directly in your neovim.
@@ -199,11 +189,9 @@ return {
   -- LSP, Tree-sitter, or regex matching.
   {
     "RRethy/vim-illuminate",
-    opts = function()
-      return require("devil.plugins.configs.illuminate")
-    end,
+    opts = require("devil.plugins.configs.illuminate"),
     config = function(_, opts)
-      require("illuminate").configure(opts)
+      require("illuminate").configure(opts) ---@diagnostic disable-line
     end,
   },
 
@@ -219,7 +207,7 @@ return {
     config = function(_, opts)
       local hooks = require("ibl.hooks")
 
-      require("ibl").setup(opts)
+      require("ibl").setup(opts) ---@diagnostic disable-line
 
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
@@ -268,17 +256,13 @@ return {
         desc = "Use neogeo to generate",
       },
     },
-    opts = function()
-      return others_configs.neogen
-    end,
+    opts = others_configs.neogen,
   },
   -- neoscroll.nvim
   -- Smooth scrolling neovim plugin written in lua
   {
     "karb94/neoscroll.nvim",
-    opts = function()
-      return others_configs.neoscroll
-    end,
+    opts = others_configs.neoscroll,
   },
   -- neo-tree.nvim
   -- Neovim plugin to manage the file system and other tree like structures
@@ -295,9 +279,7 @@ return {
       { "<A-m>", "<cmd>Neotree toggle<CR>", desc = "Toggle neo-tree" },
       { "\\", "<cmd>Neotree reveal<CR>", desc = "Reveal neo-tree" },
     },
-    opts = function()
-      return require("devil.plugins.configs.neo-tree")
-    end,
+    opts = require("devil.plugins.configs.neo-tree"),
     config = function(_, opts)
       vim.diagnostic.config({
         signs = {
@@ -317,7 +299,7 @@ return {
       })
 
       -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-      require("neo-tree").setup(opts)
+      require("neo-tree").setup(opts) ---@diagnostic disable-line
     end,
   },
   -- node-type.nvim
@@ -356,9 +338,7 @@ return {
       "ColorizerReloadAllBuffers",
       "ColorizerToggle",
     },
-    opts = function()
-      return require("devil.plugins.configs.colorizer")
-    end,
+    opts = require("devil.plugins.configs.colorizer"),
   },
   -- nvim-hlslens
   -- Hlsearch Lens for Neovim
@@ -406,9 +386,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "MunifTanjim/nui.nvim",
     },
-    opts = function()
-      return require("devil.plugins.configs.regexplainer")
-    end,
+    opts = require("devil.plugins.configs.regexplainer"),
   },
   -- nvim-scrollbar
   -- Extensible Neovim Scrollbar
@@ -439,9 +417,7 @@ return {
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
-    opts = function()
-      return require("devil.plugins.configs.surround")
-    end,
+    opts = require("devil.plugins.configs.surround"),
   },
   -- nvim-treesitter
   -- Nvim Treesitter configurations and abstraction layer
@@ -457,9 +433,7 @@ return {
       "RRethy/nvim-treesitter-endwise",
       "ziontee113/syntax-tree-surfer",
     },
-    opts = function()
-      return require("devil.plugins.configs.treesitter")
-    end,
+    opts = require("devil.plugins.configs.treesitter"),
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
@@ -474,9 +448,7 @@ return {
   -- Show code context
   {
     "nvim-treesitter/nvim-treesitter-context",
-    opts = function()
-      return require("devil.plugins.configs.treesitter-context")
-    end,
+    opts = require("devil.plugins.configs.treesitter-context"),
   },
   -- nvim-ts-context-commentstring
   -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
@@ -494,18 +466,14 @@ return {
     init = function()
       utils.load_mappings("ufo")
     end,
-    opts = function()
-      return require("devil.plugins.configs.ufo")
-    end,
+    opts = require("devil.plugins.configs.ufo"),
   },
   -- nvim-window-picker
   -- This plugins prompts the user to pick a window and returns the window id of the picked window
   {
     "s1n7ax/nvim-window-picker",
     version = "v2.*",
-    opts = function()
-      return require("devil.plugins.configs.window-picker")
-    end,
+    opts = require("devil.plugins.configs.window-picker"),
   },
   -- overseer.nvim
   -- A task runner and job management plugin for Neovim
@@ -566,9 +534,7 @@ return {
         desc = "Stop session",
       },
     },
-    opts = function()
-      return require("devil.plugins.configs.persisted")
-    end,
+    opts = require("devil.plugins.configs.persisted"), ---@diagnostic disable-line
   },
   -- rainbow-delimiters.nvim
   -- Rainbow delimiters for Neovim with Tree-sitter
@@ -635,9 +601,7 @@ return {
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
     "m4xshen/smartcolumn.nvim",
-    opts = function()
-      return others_configs.smartcolumn
-    end,
+    opts = others_configs.smartcolumn,
   },
   -- smart-open.nvim
   -- Neovim plugin for fast file-finding
@@ -661,9 +625,7 @@ return {
     "mrjones2014/smart-splits.nvim",
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
-    opts = function()
-      return require("devil.plugins.configs.smart-splits")
-    end,
+    opts = require("devil.plugins.configs.smart-splits"),
   },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code
@@ -671,9 +633,7 @@ return {
     "michaelb/sniprun",
     build = "bash ./install.sh",
     cmd = { "SnipRun" },
-    opts = function()
-      return require("devil.plugins.configs.sniprun")
-    end,
+    opts = require("devil.plugins.configs.sniprun"),
   },
   -- ssr.nvim
   -- Treesitter based structural search and replace plugin for Neovim
@@ -690,9 +650,7 @@ return {
       },
     },
     -- Calling setup is optional.
-    opts = function()
-      return others_configs.ssr
-    end,
+    opts = others_configs.ssr,
   },
 
   -- surround-ui.nvim
@@ -714,9 +672,7 @@ return {
   {
     "abecodes/tabout.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = function()
-      return require("devil.plugins.configs.tabout")
-    end,
+    opts = require("devil.plugins.configs.tabout"),
   },
   -- telescope.nvim
   -- Find, Filter, Preview, Pick. All lua, all the time.
@@ -739,7 +695,7 @@ return {
       utils.load_mappings("telescope")
     end,
     opts = function()
-      require("devil.plugins.configs.telescope")
+      return require("devil.plugins.configs.telescope")
     end,
   },
   -- text-case.nvim
@@ -750,9 +706,7 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-    opts = function()
-      return others_configs.todo_comments
-    end,
+    opts = others_configs.todo_comments,
   },
   -- ts-comments.nvim
   -- Tiny plugin to enhance Neovim's native comments
@@ -770,9 +724,7 @@ return {
       { "<C-\\>", "<cmd>ToggleTerm<cr>", desc = "Open ToggleTerm" },
     },
     cmd = "ToggleTerm",
-    opts = function()
-      return require("devil.plugins.configs.toggleterm")
-    end,
+    opts = require("devil.plugins.configs.toggleterm"),
   },
   -- treesj
   -- Neovim plugin for splitting/joining blocks of code
@@ -783,9 +735,7 @@ return {
       { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = function()
-      return others_configs.treesj
-    end,
+    opts = others_configs.treesj,
   },
   -- trouble.nvim
   -- A pretty diagnostics, references, telescope results,
@@ -811,9 +761,7 @@ return {
     "altermo/ultimate-autopair.nvim",
     event = { "InsertEnter", "CmdlineEnter" },
     branch = "v0.6", --recomended as each new version will have breaking changes
-    opts = function()
-      return require("devil.plugins.configs.ultimate-autopair")
-    end,
+    opts = require("devil.plugins.configs.ultimate-autopair"),
   },
   -- urlview.nvim
   -- Neovim plugin for viewing all the URLs in a buffer
@@ -842,9 +790,7 @@ return {
     init = function()
       utils.load_mappings("whichkey")
     end,
-    opts = function()
-      return require("devil.plugins.configs.which-key")
-    end,
+    opts = require("devil.plugins.configs.which-key"),
   },
   -- workspaces.nvim
   -- a simple plugin to manage workspace directories in neovim
@@ -874,9 +820,7 @@ return {
     init = function()
       utils.load_mappings("yanky")
     end,
-    opts = function()
-      return require("devil.plugins.configs.yanky")
-    end,
+    opts = require("devil.plugins.configs.yanky"),
   },
   -- zen-mode.nvim
   -- Distraction-free coding for Neovim
@@ -886,8 +830,6 @@ return {
       { "<leader>z", "<cmd>ZenMode<CR>", desc = "Enter zen mode" },
     },
     cmd = "Zen",
-    opts = function()
-      return require("devil.plugins.configs.zen-mode")
-    end,
+    opts = require("devil.plugins.configs.zen-mode"),
   },
 }

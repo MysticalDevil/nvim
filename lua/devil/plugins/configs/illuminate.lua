@@ -51,7 +51,7 @@ return {
   -- should_enable: a callback that overrides all other settings to
   -- enable/disable illumination. This will be called a lot so don't do
   -- anything expensive in it.
-  should_enable = function(bufnr)
+  should_enable = function(_)
     return true
   end,
   -- case_insensitive_regex: sets regex case sensitivity

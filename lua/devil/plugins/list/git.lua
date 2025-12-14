@@ -20,9 +20,7 @@ return {
     init = function()
       utils.load_mappings("gitsigns")
     end,
-    opts = function()
-      return require("devil.plugins.configs.gitsigns")
-    end,
+    opts = require("devil.plugins.configs.gitsigns"),
   },
   -- neogit
   -- magit for neovim
@@ -34,9 +32,6 @@ return {
       "nvim-telescope/telescope.nvim",
       "sindrets/diffview.nvim",
     },
-    opts = function()
-      require("devil.plugins.configs.neogit")
-    end,
   },
   -- git-conflict.nvim
   -- A plugin to visualise and resolve merge conflicts in neovim

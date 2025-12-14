@@ -31,9 +31,7 @@ return {
   {
     "folke/neodev.nvim",
     ft = { "lua" },
-    opts = function()
-      return require("devil.plugins.configs.neodev")
-    end,
+    opts = require("devil.plugins.configs.neodev"), ---@diagnostic disable-line
   },
   -- nlsp-settings.nvim
   -- A plugin for setting Neovim LSP with JSON or YAML files
@@ -159,9 +157,7 @@ return {
     ft = { "python" },
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     branch = "main",
-    opts = function()
-      return require("devil.plugins.configs.venv-selector")
-    end,
+    opts = require("devil.plugins.configs.venv-selector"),
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
 
@@ -180,9 +176,7 @@ return {
     build = function()
       require("go.install").update_all_sync()
     end, -- if you need to install/update all binaries
-    opts = function()
-      return require("devil.plugins.configs.go")
-    end,
+    opts = require("devil.plugins.configs.go"),
     config = function(_, opts)
       require("go").setup(opts)
       -- Run gofmt + goimport on save
@@ -204,9 +198,7 @@ return {
     "Civitasv/cmake-tools.nvim",
     event = "BufRead CMakeLists.txt",
     ft = { "cmake" },
-    opts = function()
-      return require("devil.plugins.configs.cmake-tools")
-    end,
+    opts = require("devil.plugins.configs.cmake-tools"),
   },
 
   ------------------- Flutter -------------------
@@ -219,9 +211,7 @@ return {
       "nvim-lua/plenary.nvim",
       "stevearc/dressing.nvim",
     },
-    opts = function()
-      return require("devil.plugins.configs.flutter-tools")
-    end,
+    opts = require("devil.plugins.configs.flutter-tools"),
   },
 
   ----------------- TypeScript ------------------
@@ -348,9 +338,7 @@ return {
     keys = {
       { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle symbols outline tree" },
     },
-    opts = function()
-      return require("devil.plugins.configs.outline")
-    end,
+    opts = require("devil.plugins.configs.outline"),
   },
 
   -- dropbar.nvim
@@ -420,9 +408,7 @@ return {
   {
     "dgagn/diagflow.nvim",
     event = "LspAttach", -- This is what I use personnally and it works great
-    opts = function()
-      return require("devil.plugins.configs.diagflow")
-    end,
+    opts = require("devil.plugins.configs.diagflow"),
   },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
@@ -460,9 +446,6 @@ return {
         border = "rounded",
       },
     },
-    config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
   },
 
   -- symbol-useage.nvim
