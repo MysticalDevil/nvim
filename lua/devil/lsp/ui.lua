@@ -1,13 +1,18 @@
 -- Customize icon
---[[ vim.diagnostic.config({
-  virtual_text = true,
-  underline = true,
+vim.diagnostic.config({
+  virtual_text = false,
+  virtual_lines = {
+    current_line = true,
+  },
+  underline = {
+    serverity = { max = vim.diagnostic.severity.WARN },
+  },
   signs = true,
   update_in_insert = false,
   show_header = false,
   severity_sort = false,
   float = {
-    source = "always",
+    source = "if_many",
     border = "rounded",
     style = "minimal",
     header = "",
@@ -16,7 +21,7 @@
     -- width = 60,
     -- height = 20,
   },
-}) ]]
+})
 
 local signs = { Error = "󰅚 ", Warn = " ", Hint = "󰌶 ", Info = " " }
 for type, icon in pairs(signs) do

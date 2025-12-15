@@ -403,13 +403,6 @@ return {
       return require("devil.plugins.configs.fidget")
     end,
   },
-  -- diagflow.nvim
-  -- LSP diagnostics in virtual text at the top right of your screen
-  {
-    "dgagn/diagflow.nvim",
-    event = "LspAttach", -- This is what I use personnally and it works great
-    opts = require("devil.plugins.configs.diagflow"),
-  },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
   {
