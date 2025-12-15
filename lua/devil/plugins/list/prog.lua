@@ -221,9 +221,9 @@ return {
     "vuki656/package-info.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
     opts = {
-      colors = {
-        up_to_date = "#3C4048", -- Text color for up to date dependency virtual text
-        outdated = "#d19a66", -- Text color for outdated dependency virtual text
+      highlights = {
+        up_to_date = { fg = "#3c4048" }, -- Text color for up to date dependency virtual text
+        outdated = { fg = "#d19a66" }, -- Text color for outdated dependency virtual text
       },
       icons = {
         enable = true, -- Whether to display icons
