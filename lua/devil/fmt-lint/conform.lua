@@ -1,6 +1,6 @@
 local status, conform = pcall(require, "conform")
 if not status then
-  vim.notify("conform.nvim not found", "error")
+  vim.notify("conform.nvim not found", vim.log.levels.ERROR)
   return
 end
 
@@ -9,24 +9,16 @@ local opts = {
   formatters_by_ft = {
     bash = { "beautysh" },
     c = { "clang_format" },
-    clojure = { "zprint" },
     cmake = { "cmake_format" },
     cpp = { "clang_format" },
-    cs = { "charpier" },
     dart = { "dart_format" },
-    elixir = { "mix" },
     fish = { "fish_indent" },
     go = { "gofumpt", "goimports-reviser", "golines" },
-    java = { "google-java-format" },
     json = { "jq" },
-    kotlin = { "ktlint" },
     lua = { "stylua" },
-    perl = { "perlimports", "perltidy" },
-    php = { "php_cs_fixer" },
     python = { "isort", "black" },
     ruby = { "standardrb" },
     rust = { "rustfmt" },
-    scala = { "scalafmt" },
     sh = { "beautysh" },
     toml = { "taplo" },
     xml = { "xmlformat" },
