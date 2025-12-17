@@ -12,11 +12,50 @@ return {
   comment_placeholder = "", -- comment_placeholder your cool placeholder e.g. 󰟓       
   icons = { breakpoint = "🧘", currentpos = "🏃" }, -- setup to `false` to disable icons setup
   verbose = false, -- output loginf in messages
-  lsp_cfg = false, -- true: use non-default gopls setup specified in go/lsp.lua
+  lsp_cfg = {
+    settings = {
+      gopls = {
+        experimentalPostfixCompletions = true,
+        analyses = {
+          shadow = true,
+          fieldalignment = true,
+          nilness = true,
+          unusedparams = true,
+          unusedwrite = true,
+          useany = true,
+        },
+        gofumpt = true,
+        hints = {
+          rangeVariableTypes = true,
+          parameterNames = true,
+          constantValues = true,
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          functionTypeParameters = true,
+        },
+        codelenses = {
+          gc_details = false,
+          generate = true,
+          regenerate_cgo = true,
+          run_govulncheck = true,
+          test = true,
+          tidy = true,
+          upgrade_dependency = true,
+          vendor = true,
+        },
+        usePlaceholders = true,
+        completeUnimported = true,
+        staticcheck = true,
+        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+        semanticTokens = true,
+      },
+    },
+  }, -- true: use non-default gopls setup specified in go/lsp.lua
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-  lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = nil, -- nil: use on_attach function defined in go/lsp.lua,
   --      when lsp_cfg is true
   -- if lsp_on_attach is a function: use this function as on_attach function for gopls
@@ -38,7 +77,7 @@ return {
   -- set to true: use gopls to format
   -- false if you want to use other formatter tool(e.g. efm, nulls)
   lsp_inlay_hints = {
-    enable = false,
+    enable = true,
     -- Only show inlay hints for the current line
     only_current_line = false,
     -- Event which triggers a refersh of the inlay hints.
