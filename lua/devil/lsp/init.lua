@@ -7,7 +7,6 @@ local util = require("devil.lsp.util")
 
 -- :h mason-default-settings
 mason.setup({
-
   ui = {
     -- Whether to automatically check for new versions when opening the :Mason window.
     check_outdated_packages_on_open = true,
@@ -38,6 +37,11 @@ mason.setup({
 mason_lspconfig.setup({
   ensure_installed = {},
   automatic_installation = false,
+  automatic_enable = {
+    exclude = {
+      "rust_analyzer",
+    },
+  },
   handlers = {
     jdtls = function() end,
   },
