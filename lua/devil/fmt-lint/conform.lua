@@ -1,13 +1,9 @@
-local status, conform = pcall(require, "conform")
-if not status then
-  vim.notify("conform.nvim not found", vim.log.levels.ERROR)
-  return
-end
+local conform = require("conform")
 
 local function js_ts_fmt(bufnr)
-  if conform.getformatter_info("biome", bufnr).available then
+  if conform.get_formatter_info("biome", bufnr).available then
     return { "biome-check" }
-  elseif conform.getformatter_info("eslint_d", bufnr).available then
+  elseif conform.get_formatter_info("eslint_d", bufnr).available then
     return { "eslint_d" }
   end
 end
@@ -27,7 +23,7 @@ local opts = {
     lua = { "stylua" },
     php = { "mago_format", "mago_lint" },
     python = function(bufnr)
-      if conform.getformatter_info("ruff_format", bufnr).available then
+      if conform.get_formatter_info("ruff_format", bufnr).available then
         return { "ruff_format" }
       else
         return { "isort", "black" }
