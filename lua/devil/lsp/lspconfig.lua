@@ -12,6 +12,7 @@ local noconfig_servers = {
   "lemminx", -- XML
   "neocmake",
   "nil_ls", -- Nix
+  "phpactor",
   "ruff",
   "sourcekit",
   "tailwindcss",
