@@ -1,17 +1,17 @@
 local util = require("devil.lsp.util")
-local opts = util.default_configs()
 
-opts.settings = {
-  ty = {
-    inlayHints = {
-      variableTypes = true,
-      callArgumentNames = true,
+---@type vim.lsp.Config
+return vim.tbl_deep_config("keep", util.default_configs(), {
+  settings = {
+    ty = {
+      inlayHints = {
+        variableTypes = true,
+        callArgumentNames = true,
+      },
+      completions = {
+        autoImport = true,
+      },
+      diagnosticMode = "workspace",
     },
-    completions = {
-      autoImport = true,
-    },
-    diagnosticMode = "workspace",
   },
-}
-
-return opts
+})

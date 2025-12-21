@@ -1,12 +1,11 @@
 local util = require("devil.lsp.util")
-local opts = util.default_configs()
 
-opts.settings = {
-  bashIde = {
-    globPattern = "*@(.sh|.inc|.bash|.command)",
+return vim.tbl_deep_extend("keep", util.default_configs(), {
+  settings = {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)",
+    },
   },
-}
 
-opts.filetypes = { "sh", "zsh", "bash" }
-
-return opts
+  filetypes = { "sh", "zsh", "bash" },
+})

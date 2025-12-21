@@ -1,26 +1,25 @@
 local util = require("devil.lsp.util")
-local opts = util.default_configs()
 
-opts.filetypes = { "vim" }
-opts.init_options = {
-  diagnostic = {
-    enable = true,
+---@type vim.lsp.Config
+return vim.tbl_deep_extend("keep", util.default_configs(), {
+  init_options = {
+    diagnostic = {
+      enable = true,
+    },
+    indexes = {
+      count = 3,
+      gap = 100,
+      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+      runtimepath = true,
+    },
+    isNeovim = true,
+    iskeyword = "@,48-57,_,192-255,-#",
+    runtimepath = "",
+    suggest = {
+      fromRuntimepath = true,
+      fromVimruntime = true,
+    },
+    vimruntime = "",
   },
-  indexes = {
-    count = 3,
-    gap = 100,
-    projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
-    runtimepath = true,
-  },
-  isNeovim = true,
-  iskeyword = "@,48-57,_,192-255,-#",
-  runtimepath = "",
-  suggest = {
-    fromRuntimepath = true,
-    fromVimruntime = true,
-  },
-  vimruntime = "",
-}
-opts.single_file_support = true
-
-return opts
+  single_file_support = true,
+})
