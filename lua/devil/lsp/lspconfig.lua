@@ -53,3 +53,13 @@ for _, server in ipairs(lsp_servers) do
   lspconfig(server, user_opts)
   vim.lsp.enable(server)
 end
+
+local rust_analyzer = require("devil.lsp.config.rust_analyzer")
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = rust_analyzer.on_attach,
+    flags = rust_analyzer.flags,
+    capabilities = rust_analyzer.capabilities,
+    default_settings = rust_analyzer.settings,
+  },
+}

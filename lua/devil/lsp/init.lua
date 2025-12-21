@@ -44,7 +44,7 @@ mason_lspconfig.setup({
 })
 
 require("devil.lsp.ui")
-require("devil.lsp.attach")
+-- require("devil.lsp.attach")
 
 require("devil.lsp.lspconfig")
 

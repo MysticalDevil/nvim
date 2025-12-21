@@ -13,22 +13,22 @@ require("devil.core")
 require("devil.core.bootstrap")
 
 -- Lazy plugins manage
-require("devil.plugins.setup")
+require("devil.plugins")
 
 -- Keymappings
 require("devil.utils").load_mappings()
 
 -- Language server protocol
-require("devil.lsp.setup")
+require("devil.lsp")
 -- Complete engine
-require("devil.complete.setup")
+require("devil.complete")
 -- Formater and Linter
-require("devil.fmt-lint.setup")
+require("devil.fmt-lint")
 -- Debug Adapter Protocol
-require("devil.dap.setup")
+require("devil.dap")
 
 -- Customize commands
-require("devil.commands.setup")
+require("devil.commands")
 
 require("devil.core.colorscheme")
 
