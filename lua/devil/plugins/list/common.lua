@@ -298,8 +298,19 @@ return {
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-      "nvim-treesitter/nvim-treesitter",
+      {
+        "rcarriga/nvim-notify",
+        lazy = false,
+        opts = {
+          stages = "slide",
+          timeout = 5000,
+          render = "default",
+        },
+        config = function(_, opts)
+          require("notify").setup(opts)
+          vim.notify = require("notify")
+        end,
+      },
     },
     opts = {
       presets = {
