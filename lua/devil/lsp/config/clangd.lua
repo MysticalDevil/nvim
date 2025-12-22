@@ -70,13 +70,6 @@ return vim.tbl_deep_extend("force", util.default_configs(), {
     util.disable_format(client)
     util.key_attach(bufnr)
 
-    require("lsp_signature").on_attach({
-      bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
-    }, bufnr)
-
     vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
     vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
     vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })

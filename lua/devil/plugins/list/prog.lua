@@ -407,14 +407,6 @@ return {
   },
 
   ----------------- LSP Improve -----------------
-  -- fidget.nvim
-  -- Standalone UI for nvim-lsp progress
-  {
-    "j-hui/fidget.nvim",
-    opts = function()
-      return require("devil.plugins.configs.fidget")
-    end,
-  },
   -- action-preview.nvim
   -- Fully customizable previewer for LSP code actions.
   {
@@ -426,31 +418,6 @@ return {
     opts = function()
       return require("devil.plugins.configs.actions-preview")
     end,
-  },
-  -- nvim-docs-view
-  -- A neovim plugin to display lsp hover documentation in a side panel.
-  {
-    "amrbashir/nvim-docs-view",
-    cmd = { "DocsViewToggle" },
-    config = function()
-      require("docs-view").setup({
-        position = "bottom",
-        width = 60,
-      })
-    end,
-  },
-
-  -- lsp_signature.nvim
-  -- LSP signature hint as you type
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {
-      bind = true,
-      handler_opts = {
-        border = "rounded",
-      },
-    },
   },
 
   -- symbol-useage.nvim

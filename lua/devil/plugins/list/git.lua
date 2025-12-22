@@ -20,7 +20,7 @@ return {
     init = function()
       utils.load_mappings("gitsigns")
     end,
-    opts = require("devil.plugins.configs.gitsigns"),
+    opts = require("devil.plugins.configs.gitsigns"), ---@diagnostic disable-line
   },
   -- neogit
   -- magit for neovim

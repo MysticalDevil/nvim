@@ -64,18 +64,6 @@ return {
       return require("devil.plugins.configs.bufferline")
     end,
   },
-  -- cellular-automaton.nvim
-  -- A useless plugin that might help you cope with stubbornly broken tests or overall lack of sense in life.
-  -- It lets you execute aesthetically pleasing, cellular automaton animations based on the content of neovim buffer.
-  {
-    "eandrju/cellular-automaton.nvim",
-    cmd = "CellularAutomaton",
-    keys = {
-      n = {
-        ["<leader>fml"] = { "<cmd> CellularAutomaton make_it_rain <CR>", "Let code be rain" },
-      },
-    },
-  },
   -- Comment.nvim
   -- Smart and powerful comment plugin for neovim
   {
@@ -302,9 +290,6 @@ return {
       require("neo-tree").setup(opts) ---@diagnostic disable-line
     end,
   },
-  -- node-type.nvim
-  -- A Neovim plugin to show the currently selected node type from lsp and treesitter information
-  { "roobert/node-type.nvim", lazy = true },
   -- noice.nvim
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
   {
@@ -316,9 +301,22 @@ return {
       "rcarriga/nvim-notify",
       "nvim-treesitter/nvim-treesitter",
     },
-    opts = function()
-      return require("devil.plugins.configs.noice")
-    end,
+    opts = {
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = true, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
+    },
+  },
+  -- nvim-autopairs
+  -- A super powerful autopair plugin for Neovim that supports multiple characters.
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
   -- nvim-bqf
   -- Better quickfix window in Neovim, polish old quickfix window.
@@ -360,22 +358,6 @@ return {
     dependencies = {
       { "kkharji/sqlite.lua", module = "sqlite" },
     },
-  },
-  -- nvim-notify
-  -- A fancy, configurable, notification manager for NeoVim
-  {
-    "rcarriga/nvim-notify",
-    lazy = true,
-    config = function()
-      local notify = require("notify")
-      ---@diagnostic disable-next-line: missing-fields
-      notify.setup({
-        stages = "slide",
-        timeout = 5000,
-        render = "default",
-      })
-      vim.notyfy = notify
-    end,
   },
   -- nvim-regexplainer
   -- Describe the regexp under the cursor
@@ -499,13 +481,6 @@ return {
       "OverseerClearCache",
     },
   },
-  -- painefer-rust
-  -- A Rust port of parinfer.
-  {
-    "eraserhd/parinfer-rust",
-    cmd = "ParinferOn",
-    build = "cargo build --release",
-  },
   -- persisted.nvim
   -- Simple session management for Neovim, autoloading and Telescope support(forked folke/persistence.nvim)
   {
@@ -573,30 +548,6 @@ return {
       }
     end,
   },
-  -- registers.nvim
-  -- Neovim plugin to preview the contents of the registers
-  {
-    "tversteeg/registers.nvim",
-    border = "rounded",
-    min_width = 50,
-    min_height = 5,
-    max_width = 120,
-    max_height = 25,
-    adjust_window = true,
-    keymaps = {
-      close = "q",
-      next_match = "n",
-      prev_match = "N",
-      replace_confirm = "<cr>",
-      replace_all = "<leader><cr>",
-    },
-    name = "registers",
-    keys = {
-      { '"', mode = { "n", "v" } },
-      { "<C-R>", mode = "i" },
-    },
-    cmd = "Registers",
-  },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
@@ -635,45 +586,6 @@ return {
     cmd = { "SnipRun" },
     opts = require("devil.plugins.configs.sniprun"),
   },
-  -- ssr.nvim
-  -- Treesitter based structural search and replace plugin for Neovim
-  {
-    "cshuaimin/ssr.nvim",
-    module = "ssr",
-    keys = {
-      {
-        "<leader>sr",
-        function()
-          require("ssr").open()
-        end,
-        mode = { "n", "x" },
-      },
-    },
-    -- Calling setup is optional.
-    opts = others_configs.ssr,
-  },
-
-  -- surround-ui.nvim
-  -- A Neovim plugin which acts as a helper or training aid for kylechui/nvim-surround
-  {
-    "roobert/surround-ui.nvim",
-    dependencies = {
-      "kylechui/nvim-surround",
-      "folke/which-key.nvim",
-    },
-    config = function()
-      require("surround-ui").setup({
-        root_key = "S",
-      })
-    end,
-  },
-  -- tabout.nvim
-  -- Supercharge your workflow and start tabbing out from parentheses, quotes, and similar contexts today.
-  {
-    "abecodes/tabout.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    opts = require("devil.plugins.configs.tabout"),
-  },
   -- telescope.nvim
   -- Find, Filter, Preview, Pick. All lua, all the time.
   {
@@ -690,7 +602,7 @@ return {
 
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
-    version = "0.1.x",
+    version = "^0.2",
     init = function()
       utils.load_mappings("telescope")
     end,
@@ -754,14 +666,6 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-  },
-  -- ultimate-autopair.nvim
-  -- A neovim autopair plugin designed to have all the features that an autopair plugin needs.
-  {
-    "altermo/ultimate-autopair.nvim",
-    event = { "InsertEnter", "CmdlineEnter" },
-    branch = "v0.6", --recomended as each new version will have breaking changes
-    opts = require("devil.plugins.configs.ultimate-autopair"),
   },
   -- urlview.nvim
   -- Neovim plugin for viewing all the URLs in a buffer

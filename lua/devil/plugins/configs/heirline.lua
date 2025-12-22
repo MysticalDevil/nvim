@@ -412,18 +412,6 @@ local Git = {
   },
 }
 
-local SignatureHelp = {
-  condition = conditions.lsp_attached,
-  provider = function()
-    if not pcall(require, "lsp_signature") then
-      return
-    end
-    local sig = require("lsp_signature").status_line()
-    return sig.label .. "🐼" .. sig.hint
-  end,
-  hl = { fg = "lightyellow", italic = true },
-}
-
 --[[
 local WorkDir = {
   init = function(self)
@@ -525,7 +513,6 @@ local DefaultStatusline = {
   Space,
   Diagnostics,
   Space,
-  SignatureHelp,
   Align,
   Align,
   LSPActive,

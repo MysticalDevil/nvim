@@ -87,18 +87,7 @@ local opts = {
         padding = { left = 0, right = 0 },
       },
     },
-    lualine_x = {
-      {
-        function()
-          if not pcall(require, "lsp_signature") then
-            return
-          end
-          local sign = require("lsp_signature").status_line()
-          return sign.label .. "🐼" .. sign.hint
-        end,
-        color = { fg = colors.yellow, gui = "italic" },
-      },
-    },
+    lualine_x = {},
   },
 }
 
