@@ -6,7 +6,6 @@ local extensions_list = {
   "file_browser",
   "fzf",
   "neoclip",
-  "noice",
   "persisted",
   "project",
   "smart_open",
