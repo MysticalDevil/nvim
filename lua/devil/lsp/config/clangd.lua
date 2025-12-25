@@ -1,20 +1,51 @@
 local util = require("devil.lsp.util")
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
----@diagnostic disable-next-line
-capabilities.offsetEncoding = { "utf-16" }
+local function clangd_help()
+  local result = vim.system({ "clangd", "--help" }, { text = true }):wait()
+  if result.code ~= 0 then
+    return ""
+  end
+
+  return ("%s\n%s"):format(result.stdout or "", result.stderr or "")
+end
+
+local function clangd_has_flag(help, flag)
+  return help:find(flag, 1, true) ~= nil
+end
+
+local function build_clangd_cmd()
+  local help = clangd_help()
+  local cmd = {
+    "clangd",
+    "--pch-storage=memory",
+    "--background-index",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+    "--completion-style=detailed",
+    "--fallback-style=llvm",
+  }
+
+  if clangd_has_flag(help, "--experimental-modules-support") then
+    table.insert(cmd, "--experimental-modules-support")
+  end
+
+  --if clangd_has_flag(help, "--function-arg-placeholders") then
+  --table.insert(cmd, "--function-arg-placeholders=1")
+  --end
+end
 
 ---@type vim.lsp.Config
 return vim.tbl_deep_extend("force", util.default_configs(), {
-  capabilities = capabilities,
   filetypes = {
     "c",
+    "cc",
     "cpp",
-    "h",
-    "hpp",
     "cuda",
+    "objc",
     "objcpp",
     "cppm",
+    "ixx",
+    "mpp",
   },
   settings = {
     clangd = {
@@ -32,49 +63,12 @@ return vim.tbl_deep_extend("force", util.default_configs(), {
       },
     },
   },
-  cmd = {
-    "clangd",
-    "--pch-storage=memory",
-    "--background-index",
-    "--clang-tidy",
-    "--header-insertion=iwyu",
-    "--completion-style=detailed",
-    "--function-arg-placeholders",
-    "--fallback-style=llvm",
-  },
+  cmd = build_clangd_cmd(),
   init_options = {
     clangdFileStatus = true,
     usePlaceholders = true,
     completeUnimported = true,
     semanticHighlighting = true,
   },
-  root_dir = function(fname)
-    return require("lspconfig.util").root_pattern(
-      "configure.ac",
-      "Makefile",
-      "configure.in",
-      "config.h.in",
-      "meson.build",
-      "meson_options.txt",
-      "build.ninja"
-    )(fname) or require("lspconfig.util").root_pattern(
-      ".clangd",
-      ".clang-tidy",
-      ".clang-format",
-      "compile_commands.json",
-      "compile_flags.txt"
-    )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-  end,
-
-  on_attach = function(client, bufnr)
-    util.disable_format(client)
-    util.key_attach(bufnr)
-
-    vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
-    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-    vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
-
-    util.set_inlay_hints(client, bufnr)
-  end,
   single_file_support = true,
 })

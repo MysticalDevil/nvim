@@ -2,7 +2,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 local commonAutoGroup = augroup("commonAutoGroup", { clear = true })
-local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
+-- local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 

@@ -48,7 +48,7 @@ local lsp_servers = {
 }
 
 for _, server in ipairs(lsp_servers) do
-  local user_opts_ok, user_opts = pcall(require, ("devil.lsp.config."):format(server))
+  local user_opts_ok, user_opts = pcall(require, ("devil.lsp.config.%s"):format(server))
   user_opts = user_opts_ok and user_opts or {}
   lspconfig(server, user_opts)
   vim.lsp.enable(server)

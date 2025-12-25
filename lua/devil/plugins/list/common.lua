@@ -435,6 +435,8 @@ return {
       -- enable Folding module
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.treesitter.language.register("cpp", "mpp")
+      vim.treesitter.language.register("cpp", "ixx")
     end,
   },
   -- nvim-treesitter-context
