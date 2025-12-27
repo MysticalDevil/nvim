@@ -420,16 +420,6 @@ return {
     end,
   },
 
-  -- symbol-useage.nvim
-  -- Display references, definitions and implementations of document symbols
-  {
-    "Wansmer/symbol-usage.nvim",
-    event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-    opts = function()
-      return require("devil.plugins.configs.symbol-usage")
-    end,
-  },
-
   -- inc-rename.nvim
   -- Incremental LSP renaming based on Neovim's command-preview feature
   {

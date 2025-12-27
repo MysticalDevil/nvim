@@ -268,27 +268,6 @@ return {
       { "\\", "<cmd>Neotree reveal<CR>", desc = "Reveal neo-tree" },
     },
     opts = require("devil.plugins.configs.neo-tree"),
-    config = function(_, opts)
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.WARN] = "",
-            [vim.diagnostic.severity.INFO] = "",
-            [vim.diagnostic.severity.HINT] = "󰌵",
-          },
-          numhl = {
-            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-          },
-        },
-      })
-
-      -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-      require("neo-tree").setup(opts) ---@diagnostic disable-line
-    end,
   },
   -- noice.nvim
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
@@ -461,7 +440,7 @@ return {
     init = function()
       utils.load_mappings("ufo")
     end,
-    opts = require("devil.plugins.configs.ufo"),
+    opts = require("devil.plugins.configs.ufo"), ---@diagnostic disable-line
   },
   -- nvim-window-picker
   -- This plugins prompts the user to pick a window and returns the window id of the picked window
@@ -672,7 +651,7 @@ return {
     init = function()
       utils.load_mappings("trouble")
     end,
-    opts = {},
+    opts = { use_diagnostic_signs = true },
   },
   -- twilight.nvim
   -- Dims inactive portions of the code you're editing using TreeSitter.

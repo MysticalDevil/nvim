@@ -1,4 +1,21 @@
-local trouble = require("trouble.providers.telescope")
+local telescope = require("telescope")
+
+local mappings = {
+  i = {
+    -- move up and down
+    ["C-j"] = "move_selection_next",
+    ["C-k"] = "move_selection_previous",
+    -- history records
+    ["<Down>"] = "cycle_history_next",
+    ["<Up>"] = "cycle_history_prev",
+    -- close window
+    ["<C-c>"] = "close",
+    -- scroll the preview window up and down
+    ["<C-u>"] = "preview_scrolling_up",
+    ["<C-d>"] = "preview_scrolling_down",
+  },
+  n = {},
+}
 
 local extensions_list = {
   "agrolens",
@@ -16,7 +33,13 @@ local extensions_list = {
 }
 
 for _, value in pairs(extensions_list) do
-  require("telescope").load_extension(value)
+  telescope.load_extension(value)
+end
+
+local has_trouble, trouble_telescope = pcall(require, "trouble.sources.telescope")
+if has_trouble then
+  mappings.i["<C-t>"] = trouble_telescope.open
+  mappings.n["<C-t>"] = trouble_telescope.open
 end
 
 return {
@@ -25,26 +48,7 @@ return {
     -- vertival, center, cursor
     layout_strategy = "horizontal",
     -- shortcut keys in the window
-    mappings = {
-      i = {
-        -- move up and down
-        ["C-j"] = "move_selection_next",
-        ["C-k"] = "move_selection_previous",
-        -- history records
-        ["<Down>"] = "cycle_history_next",
-        ["<Up>"] = "cycle_history_prev",
-        -- close window
-        ["<C-c>"] = "close",
-        -- scroll the preview window up and down
-        ["<C-u>"] = "preview_scrolling_up",
-        ["<C-d>"] = "preview_scrolling_down",
-        -- trouble.nvim support
-        -- ["<C-T>"] = trouble.open_with_trouble,
-      },
-      n = {
-        -- ["<C-t>"] = trouble.open_with_trouble,
-      },
-    },
+    mappings = mappings,
     vimgrep_arguments = {
       "rg",
       "-L",

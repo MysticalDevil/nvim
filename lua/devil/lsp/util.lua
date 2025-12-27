@@ -2,8 +2,6 @@ local M = {}
 
 local utils = require("devil.utils")
 
-local inlay_hint = vim.lsp.inlay_hint
-
 function M.key_attach(bufnr)
   utils.load_mappings("lspconfig", { buffer = bufnr })
 end
