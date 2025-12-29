@@ -389,7 +389,10 @@ return {
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
-    opts = require("devil.plugins.configs.surround"),
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
   },
   -- nvim-treesitter
   -- Nvim Treesitter configurations and abstraction layer
