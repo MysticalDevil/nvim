@@ -44,6 +44,7 @@ local opts = {
     { name = "treesitter" },
     { name = "crates" },
     { name = "npm", keyword_length = 4 },
+    { name = "lazydev", group_index = 0 },
   }),
   sorting = {
     comparators = {

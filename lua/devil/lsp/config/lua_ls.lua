@@ -1,5 +1,3 @@
-require("neodev").setup()
-
 local util = require("devil.lsp.util")
 
 ---@type vim.lsp.Config

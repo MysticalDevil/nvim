@@ -24,15 +24,6 @@ return {
       "williamboman/mason.nvim",
     },
   },
-
-  -- neodev.nvim
-  -- Neovim setup for init.lua and plugin development with full signature help,
-  -- docs and completion for the nvim lua API
-  {
-    "folke/neodev.nvim",
-    ft = { "lua" },
-    opts = require("devil.plugins.configs.neodev"), ---@diagnostic disable-line
-  },
   -- nlsp-settings.nvim
   -- A plugin for setting Neovim LSP with JSON or YAML files
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
@@ -109,6 +100,22 @@ return {
   --
   ---------------------------------------- Language Improve ---------------------------------------
   --
+
+  -------------------- Lua ----------------------
+  -- lazydev.nvim
+  -- Faster LuaLS setup for Neovim
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        "lazy.nvim",
+      },
+    },
+  },
 
   -------------------- JSON ---------------------
   -- schemastore.nvim
