@@ -397,13 +397,16 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-refactor",
-      "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        init = function()
+          vim.g.no_plugin_map = true
+        end,
+      },
       "nvim-treesitter/nvim-tree-docs",
-      "nvim-treesitter/playground",
       "windwp/nvim-ts-autotag",
       "RRethy/nvim-treesitter-endwise",
-      "ziontee113/syntax-tree-surfer",
     },
     opts = require("devil.plugins.configs.treesitter"),
     config = function(_, opts)
