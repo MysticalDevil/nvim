@@ -113,6 +113,10 @@ return {
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         "lazy.nvim",
+        {
+          path = vim.fn.stdpath("data") .. "/lazy/xmake.nvim/addons/en/library",
+          files = { "xmake.lua" },
+        },
       },
     },
   },
@@ -217,7 +221,18 @@ return {
     "Civitasv/cmake-tools.nvim",
     event = "BufRead CMakeLists.txt",
     ft = { "cmake" },
-    opts = require("devil.plugins.configs.cmake-tools"),
+    opt = {},
+  },
+  -- xmake.nvim
+  -- The xmake plugin for neovim provides a ui
+  -- interface that allows you to configure xmake more efficiently.
+  {
+    "Mythos-404/xmake.nvim",
+    version = "^3",
+    lazy = true,
+    event = "BufReadPost",
+    dependencies = { "folke/lazydev.nvim" },
+    config = true,
   },
 
   ------------------- Flutter -------------------
