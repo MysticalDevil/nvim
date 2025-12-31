@@ -32,6 +32,7 @@ local function build_clangd_cmd()
   --if clangd_has_flag(help, "--function-arg-placeholders") then
   --table.insert(cmd, "--function-arg-placeholders=1")
   --end
+  return cmd
 end
 
 ---@type vim.lsp.Config

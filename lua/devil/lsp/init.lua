@@ -49,5 +49,6 @@ mason_lspconfig.setup({
 
 require("devil.lsp.config")
 require("devil.lsp.diag")
+require("devil.lsp.clangd_native").setup()
 
 util.enable_inlay_hints_autocmd()

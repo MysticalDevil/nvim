@@ -34,7 +34,7 @@ end
 local lsp_servers = {
   -- "basedpyright",
   "bashls",
-  "clangd",
+  -- "clangd",
   "cssls",
   -- "gopls",
   "jsonls",
