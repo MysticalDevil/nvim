@@ -334,7 +334,6 @@ return {
       "ColorizerReloadAllBuffers",
       "ColorizerToggle",
     },
-    opts = require("devil.plugins.configs.colorizer"),
   },
   -- nvim-hlslens
   -- Hlsearch Lens for Neovim
@@ -734,7 +733,6 @@ return {
     init = function()
       utils.load_mappings("yanky")
     end,
-    opts = require("devil.plugins.configs.yanky"),
   },
   -- zen-mode.nvim
   -- Distraction-free coding for Neovim
