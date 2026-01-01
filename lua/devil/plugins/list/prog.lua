@@ -4,7 +4,12 @@ return {
 
   -- nvim-lspconfig
   -- Quickstart configs for Nvim LSP
-  { "neovim/nvim-lspconfig", proiority = 1000 },
+  {
+    "neovim/nvim-lspconfig",
+    priority = 1000,
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspStart" },
+  },
 
   -- mason.nvim
   -- Portable package manager for Neovim
@@ -12,36 +17,23 @@ return {
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
-      "mfussenegger/nvim-dap",
-      "mfussenegger/nvim-lint",
-      "stevearc/conform.nvim",
+      "zapling/mason-conform.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
       "jay-babu/mason-nvim-dap.nvim",
     },
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "williamboman/mason.nvim",
-    },
-  },
-  -- nlsp-settings.nvim
-  -- A plugin for setting Neovim LSP with JSON or YAML files
-  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-
   --
   ------------------------------------- Formatter and Linter --------------------------------------
   --
 
   -- conform.nvim
   -- Lightweight yet powerful formatter plugin for Neovim
-  { "stevearc/conform.nvim" },
-  { "zapling/mason-conform.nvim" },
+  { "stevearc/conform.nvim", event = { "BufReadPost", "BufNewFile" }, cmd = { "ConformInfo" } },
 
   -- nvim-lint
   -- An asynchronous linter plugin for Neovim complementary to
   -- the built-in Language Server Protocol support.
-  { "mfussenegger/nvim-lint" },
+  { "mfussenegger/nvim-lint", event = { "BufReadPost", "BufNewFile" } },
 
   --
   ---------------------------------------- Complete Engine ----------------------------------------
@@ -97,6 +89,44 @@ return {
       },
     },
   },
+  ----------------------------------- Debug Adapter Protocol ------------------------------------
+  -- nvim-dap
+  -- Debug Adapter Protocol client implementation for Neovim
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    init = function()
+      require("devil.utils").load_mappings("dap")
+    end,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "LiadOz/nvim-dap-repl-highlights",
+    },
+    config = function()
+      require("mason-nvim-dap").setup({
+        ensure_installed = { "codelldb", "delve", "js-debug-adapter" },
+        automatic_installation = true,
+      })
+
+      require("devil.dap").setup()
+    end,
+  },
+
+  -- nvim-dap-python
+  -- An extension for nvim-dap, providing default configurations for python
+  -- and methods to debug individual test methods or classes.
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = { "python" },
+    dependencies = { "mfussenegger/nvim-dap" },
+  },
+
+  -- jbyuki/one-small-step-for-vimkind
+  -- Debug adapter for Neovim plugins
+  {
+    "jbyuki/one-small-step-for-vimkind",
+  },
 
   --
   ---------------------------------------- Language Improve ---------------------------------------
@@ -140,13 +170,16 @@ return {
     ft = { "rust" },
     lazy = false,
     init_option = function()
-      local rust_analyzer = require("devil.lsp.config.rust_analyzer")
+      local util = require("devil.lsp.util")
+      local common_on_attach = util.default_on_attach
+      local common_caps = util.common_capabilities()
       vim.g.rustaceanvim = {
         server = {
-          on_attach = rust_analyzer.on_attach,
-          flags = rust_analyzer.flags,
-          capabilities = rust_analyzer.capabilities,
-          default_settings = rust_analyzer.settings,
+          on_attach = function(client, bufnr)
+            common_on_attach(client, bufnr)
+          end,
+          capabilities = common_caps,
+          default_settings = require("devil.lsp.config.rust_analyzer"),
         },
       }
     end,
@@ -232,6 +265,7 @@ return {
     version = "^3",
     lazy = true,
     event = "BufReadPost",
+    cmd = "Xmake",
     dependencies = { "folke/lazydev.nvim" },
     config = true,
   },
@@ -290,47 +324,6 @@ return {
       "nvim-telescope/telescope.nvim", -- optional
     },
   },
-
-  ----------------------------------- Debug Adapter Protocol ------------------------------------
-  -- nvim-dap
-  -- Debug Adapter Protocol client implementation for Neovim
-  {
-    "mfussenegger/nvim-dap",
-    lazy = true,
-    init = function()
-      require("devil.utils").load_mappings("dap")
-    end,
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-      "LiadOz/nvim-dap-repl-highlights",
-      "jay-babu/mason-nvim-dap.nvim",
-    },
-    config = function()
-      require("mason-nvim-dap").setup({
-        ensure_installed = { "codelldb", "delve", "js-debug-adapter" },
-        automatic_installation = true,
-      })
-
-      require("devil.dap").setup()
-    end,
-  },
-
-  -- nvim-dap-python
-  -- An extension for nvim-dap, providing default configurations for python
-  -- and methods to debug individual test methods or classes.
-  {
-    "mfussenegger/nvim-dap-python",
-    ft = { "python" },
-    dependencies = { "mfussenegger/nvim-dap" },
-  },
-
-  -- jbyuki/one-small-step-for-vimkind
-  -- Debug adapter for Neovim plugins
-  {
-    "jbyuki/one-small-step-for-vimkind",
-  },
-
   --
   -------------------------------------------- Helpers --------------------------------------------
   --

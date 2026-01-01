@@ -23,9 +23,19 @@ return {
   -- sqlite.lua
   -- SQLite LuaJIT binding with a very simple api.
   { "kkharji/sqlite.lua", lazy = true, enabled = not jit.os:find("Windows") }, ---@diagnostic disable-line
-  -- nvim-web-devicons
-  -- lua `fork` of vim-web-devicons for neovim
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  -- mini.icons
+  -- Icon provider. Part of 'mini.nvim' library.
+  {
+    "nvim-mini/mini.icons",
+    lazy = true,
+    opts = {},
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
   -- nvim-qt
   -- Neovim client library and GUI
   { "equalsraf/neovim-gui-shim", lazy = true },
@@ -64,20 +74,18 @@ return {
       return require("devil.plugins.configs.bufferline")
     end,
   },
-  -- Comment.nvim
-  -- Smart and powerful comment plugin for neovim
   {
-    "numToStr/Comment.nvim",
-    opts = function()
-      return require("devil.plugins.configs.comment")
-    end,
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+    enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
   -- dashboard-nvim
   -- Fancy and Blazing Fast start screen plugin of neovim
   {
     "glepnir/dashboard-nvim",
     event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-mini/mini.icons" },
     opts = require("devil.plugins.configs.dashboard"),
     config = function(_, opts)
       -- close Lazy and re-open when the dashboard is ready
@@ -224,7 +232,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-mini/mini.icons" },
     opts = function()
       return require("devil.plugins.configs.lualine")
     end,
@@ -260,7 +268,7 @@ return {
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
+      "nvim-mini/mini.icons",
       "MunifTanjim/nui.nvim",
     },
     keys = {
@@ -656,7 +664,7 @@ return {
   {
     "folke/trouble.nvim",
     cmd = "Trouble",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    dependencies = "nvim-mini/mini.icons",
     init = function()
       utils.load_mappings("trouble")
     end,
@@ -690,8 +698,7 @@ return {
   -- Create key bindings that stick
   {
     "folke/which-key.nvim",
-    cmd = "WhichKey",
-    keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+    event = "VeryLazy",
     init = function()
       utils.load_mappings("whichkey")
     end,
