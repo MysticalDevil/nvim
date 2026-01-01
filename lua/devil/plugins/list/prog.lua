@@ -402,8 +402,8 @@ return {
       "sidlatau/neotest-dart",
     },
 
-    config = function()
-      require("neotest").setup({
+    opts = function()
+      return {
         adapters = {
           require("neotest-python"),
           require("neotest-plenary"),
@@ -416,7 +416,7 @@ return {
             ignore_file_types = { "python", "vim", "lua" },
           }),
         },
-      })
+      }
     end,
   },
 
