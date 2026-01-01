@@ -1,20 +1,24 @@
 local utils = require("devil.utils")
 
 local get_highlight = require("lualine.utils.utils").extract_highlight_colors
+local function hl(name, scope, fallback)
+  local v = get_highlight(name, scope)
+  return v or fallback
+end
 
 -- Color table for highlights
 local colors = {
-  bg = get_highlight("Folded", "bg"),
-  fg = get_highlight("Folded", "fg"),
-  yellow = get_highlight("DiagnosticWarn", "fg"),
-  green = get_highlight("String", "fg"),
-  blue = get_highlight("Function", "fg"),
-  red = get_highlight("DiagnosticError", "fg"),
-  orange = get_highlight("Number", "fg"),
-  cyan = get_highlight("Constant", "fg"),
-  darkblue = get_highlight("DiffFile", "fg"),
-  violet = "#e5d0ff",
-  magenta = "#ff00ff",
+  bg = hl("Folded", "bg"),
+  fg = hl("Folded", "fg"),
+  yellow = hl("DiagnosticWarn", "fg"),
+  green = hl("String", "fg"),
+  blue = hl("Function", "fg"),
+  red = hl("DiagnosticError", "fg"),
+  orange = hl("Number", "fg"),
+  cyan = hl("Constant", "fg"),
+  darkblue = hl("DiffFile", "fg"),
+  violet = hl("Type", "fg", "#a9a1e1"),
+  magenta = hl("Keyword", "fg", "#c678dd"),
 }
 
 local conditions = {
@@ -25,18 +29,48 @@ local conditions = {
     return vim.fn.winwidth(0) > 80
   end,
   check_git_workspace = function()
+    if vim.b.gitsigns_status_dict then
+      return true
+    end
+
     local filepath = vim.fn.expand("%:p:h")
     local gitdir = vim.fn.finddir(".git", filepath .. ";")
-    return gitdir and #gitdir > 0 and #gitdir < #filepath
+
+    return gitdir and #gitdir > 0
   end,
 }
 
+local function mk_section()
+  return { fg = colors.fg, bg = colors.bg }
+end
+
+local function mk_theme()
+  local t = {}
+  -- lualine 常见 mode：normal/insert/visual/replace/command/terminal/inactive
+  for _, m in ipairs({ "normal", "insert", "visual", "replace", "command", "terminal" }) do
+    t[m] = {
+      a = mk_section(),
+      b = mk_section(),
+      c = mk_section(),
+      x = mk_section(),
+      y = mk_section(),
+      z = mk_section(),
+    }
+  end
+  t.inactive = {
+    a = mk_section(),
+    b = mk_section(),
+    c = mk_section(),
+    x = mk_section(),
+    y = mk_section(),
+    z = mk_section(),
+  }
+  return t
+end
+
 local opts = {
   options = {
-    theme = {
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
-    },
+    theme = mk_theme(),
     component_separators = "",
     section_separators = "",
     ignore_focus = { "neo-tree", "dropbar_menu" },
@@ -83,7 +117,6 @@ local opts = {
       {
         "%{%v:lua.dropbar()%}",
         separator = { left = "", right = "" },
-        color = "nil",
         padding = { left = 0, right = 0 },
       },
     },
@@ -132,7 +165,9 @@ local mode = {
   function()
     return " " .. tostring(vim.fn.mode()):upper()
   end,
-  color = { fg = mode_color[vim.fn.mode()] },
+  color = function()
+    return { fg = mode_color[vim.fn.mode()] or colors.red }
+  end,
   padding = { right = 1 },
 }
 
@@ -171,7 +206,7 @@ local filename = {
   "filename",
   file_status = true, -- Displays file status (readonly status, modified status)
   newfile_status = true, -- Display new file status (new file means no write after created)
-  path = 1, -- 0: Just the filename
+  path = 4, -- 0: Just the filename
   -- 1: Relative path
   -- 2: Absolute path
   -- 3: Absolute path, with tilde as the home directory
@@ -186,7 +221,7 @@ local filename = {
     newfile = "[New]", -- Text to show for new created file before first writting
   },
   cond = conditions.buffer_not_empty,
-  color = { fg = colors.magentam, gui = "bold" },
+  color = { fg = colors.magenta, gui = "bold" },
 }
 
 local lsp_info = {
@@ -234,7 +269,7 @@ ins_section(fileformat, "lualine_x")
 ins_section(encoding, "lualine_x")
 ins_section("filetype", "lualine_x")
 
-ins_section("process", "lualine_y")
+ins_section("progress", "lualine_y")
 
 ins_section("location", "lualine_z")
 
