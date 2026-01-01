@@ -1,5 +1,17 @@
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
+local excluded_filetypes = {
+  ["qf"] = true,
+  ["checkhealth"] = true,
+  ["gitcommit"] = true,
+  ["gitrebase"] = true,
+  ["help"] = true,
+  ["alpha"] = true,
+  ["dashboard"] = true,
+  ["neo-tree"] = true,
+  ["lazy"] = true,
+  ["mason"] = true,
+}
 
 return {
   options = {
@@ -15,7 +27,9 @@ return {
       require("bufdelete").bufdelete(bufnum, true)
     end,
     left_mouse_command = "buffer %d",
-    middle_mouse_command = nil,
+    middle_mouse_command = function(bufnm)
+      require("bufdelete").bufdelete(bufnm, true)
+    end,
     indicator = {
       icon = "▎",
       style = "icon",
@@ -32,20 +46,27 @@ return {
     tab_size = 18,
     diagnostics = "nvim_lsp",
     diagnostics_indicator = function(_, _, diagnostics_dict, _)
-      local s = ""
-      for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and " " or (e == "warning" and " " or " ")
-        s = ("%s%s%s"):format(s, n, sym)
+      local icons = {
+        error = " ",
+        warning = " ",
+        info = " ",
+        hint = " ",
+      }
+      local result = {}
+      for name, count in pairs(diagnostics_dict) do
+        if icons[name] and count > 0 then
+          table.insert(result, icons[name] .. count)
+        end
       end
-      return s
+      return table.concat(result, " ")
     end,
 
     custom_filter = function(buf_number)
-      local ft = vim.bo[buf_number].filetype
-      if ft == "qf" or ft == "checkhealth" then
+      if vim.fn.bufname(buf_number) == "" then
         return false
       end
-      if vim.fn.bufname(buf_number) == "" then
+      local ft = vim.bo[buf_number].filetype
+      if excluded_filetypes[ft] then
         return false
       end
       return true
@@ -93,11 +114,73 @@ return {
           auto_close = false,
           matcher = function(buf)
             local name = vim.api.nvim_buf_get_name(buf.id)
+            local filename = vim.fn.fnamemodify(name, ":t")
+
+            local excluded_files = {
+              ["CMakeLists.txt"] = true,
+              ["requirements.txt"] = true,
+              ["robots.txt"] = true,
+              ["license.txt"] = true,
+              ["LICENSE.txt"] = true,
+            }
+
+            if excluded_files[filename] then
+              return false
+            end
+
             return name:match("%.md") or name:match("%.txt")
           end,
           separator = {
             style = require("bufferline.groups").separator.tab,
           },
+        },
+        {
+          name = "Headers",
+          highlight = { sp = "orange", underline = true },
+          matcher = function(buf)
+            return vim.api.nvim_buf_get_name(buf.id):match("%.h$") or vim.api.nvim_buf_get_name(buf.id):match("%.hpp$")
+          end,
+        },
+        {
+          name = "Configs",
+          highlight = { link = "Special", italic = true },
+          matcher = function(buf)
+            local name = vim.api.nvim_buf_get_name(buf.id)
+            local filename = vim.fn.fnamemodify(name, ":t")
+
+            local config_exts = {
+              ["json"] = true,
+              ["yaml"] = true,
+              ["yml"] = true,
+              ["toml"] = true,
+              ["ini"] = true,
+              ["conf"] = true,
+            }
+            local ext = vim.fn.fnamemodify(name, ":e")
+            if config_exts[ext] then
+              return true
+            end
+
+            local special_configs = {
+              ["MakeFile"] = true,
+              [".editorconfig"] = true,
+              [".gitignore"] = true,
+            }
+            if special_configs[filename] then
+              return true
+            end
+
+            if ext == "lua" then
+              if name:match("/config/") or name:match("/settings/") then
+                return true
+              end
+              if filename:match("config") or filename:match("rc%.lua") then
+                return true
+              end
+            end
+
+            return false
+          end,
         },
       },
     },
