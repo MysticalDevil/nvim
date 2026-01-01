@@ -22,7 +22,7 @@ local M = {}
 
 M.general = {
   i = {
-    ["<C-b>"] = { "<ESC>^i", "Begging of line" },
+    ["<C-b>"] = { "<ESC>^i", "Begining of line" },
     ["<C-e>"] = { "<End>", "End of line" },
 
     ["<C-h>"] = { "<Left>", "Move left" },
@@ -33,8 +33,6 @@ M.general = {
 
   n = {
     ["<Esc>"] = { "<cmd> noh <CR>", "Clear highlight" },
-    ["<C-j>"] = { "5j", "Five lines down" },
-    ["<C-k>"] = { "5k", "Five lines up" },
     ["<C-d>"] = { "10j", "Five lines down" },
     ["<C-u>"] = { "10k", "Five lines up" },
 
@@ -48,17 +46,17 @@ M.general = {
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
 
     -- new buffer
-    ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
+    ["<leader>bn"] = { "<cmd> enew <CR>", "New buffer" },
     ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
 
-    ["<leader>f"] = {
+    ["<leader>fm"] = {
       function()
         vim.lsp.buf.format({ async = true })
       end,
       "LSP formatting",
     },
 
-    ["<Space>t"] = {
+    ["<Space>th"] = {
       function()
         if opts.space_visible then
           vim.opt.listchars:remove("space:·")
@@ -71,27 +69,24 @@ M.general = {
       "Toggle space visible status",
     },
 
-    ["<leader>q"] = { ":q<CR>", "Quit editor" },
-    ["<leader>w"] = { ":w<CR>", "Save file" },
-
     -- s_windows
-    ["sv"] = { ":vsp<CR>", "Split window vertically" },
-    ["sh"] = { ":sp<CR>", "Split window horizontally" },
-    ["sc"] = { "<C-w>c", "Close picked split window" },
-    ["so"] = { "<C-w>o", "Close other split window" },
-    ["s,"] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
-    ["s."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
-    ["sj"] = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
-    ["sk"] = { ":horizontal resize +5<CR>", "Increase vertical window size" },
-    ["s="] = { "<C-w>=", "Make split windows equal in size" },
+    ["<leader>wv"] = { ":vsp<CR>", "Split window vertically" },
+    ["<leader>wh"] = { ":sp<CR>", "Split window horizontally" },
+    ["<leader>wc"] = { "<C-w>c", "Close picked split window" },
+    ["<leader>wo"] = { "<C-w>o", "Close other split window" },
+    ["<leader>w,"] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
+    ["<leader>w."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
+    ["<leader>wj"] = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
+    ["<leader>wk"] = { ":horizontal resize +5<CR>", "Increase vertical window size" },
+    ["<leader>w="] = { "<C-w>=", "Make split windows equal in size" },
 
     -- tabs
-    ["ts"] = { "<cmd>tab split<CR>", "Split window use tab" },
-    ["th"] = { "<cmd>tabprev<CR>", "Switch to previous tab" },
-    ["tj"] = { "<cmd>tabnext<CR>", "Switch to next tab" },
-    ["tf"] = { "<cmd>tabfirst<CR>", "Switch to first tab" },
-    ["tl"] = { "<cmd>tablast<CR>", "Switch to last tab" },
-    ["tc"] = { "<cmd>tabclose<CR>", "Close tab" },
+    ["<leader><Tab>s"] = { "<cmd>tab split<CR>", "Split window use tab" },
+    ["<leader><Tab>h"] = { "<cmd>tabprev<CR>", "Switch to previous tab" },
+    ["<leader><Tab>j"] = { "<cmd>tabnext<CR>", "Switch to next tab" },
+    ["<leader><Tab>f"] = { "<cmd>tabfirst<CR>", "Switch to first tab" },
+    ["<leader><Tab>l"] = { "<cmd>tablast<CR>", "Switch to last tab" },
+    ["<leader><Tab>c"] = { "<cmd>tabclose<CR>", "Close tab" },
 
     ["zo"] = { "<CMD>foldopen<CR>", "Open fold" },
     ["zc"] = { "<CMD>foldclose<CR>", "Close fold" },
@@ -164,11 +159,7 @@ M.lspconfig = {
 
     ["gd"] = {
       function()
-        if vim.bo.filetype == "cs" then
-          require("omnisharp_extended").telescope_lsp_definitions()
-        else
-          require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
-        end
+        require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
       end,
       "LSP definition",
     },
@@ -225,14 +216,14 @@ M.lspconfig = {
 
     ["[d"] = {
       function()
-        vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+        vim.diagnostic.jump({ count = -1, float = { border = "rounded" } })
       end,
       "Goto prev",
     },
 
     ["]d"] = {
       function()
-        vim.diagnostic.goto_next({ float = { border = "rounded" } })
+        vim.diagnostic.jump({ count = 1, float = { border = "rounded" } })
       end,
       "Goto next",
     },
@@ -470,6 +461,90 @@ M.hlslens = {
       "g#<cmd>lua require('hlslens').start()<CR>",
       "",
       opts = { noremap = true, silent = true },
+    },
+  },
+}
+
+M.smart_spilts = {
+  plugin = true,
+
+  n = {
+    -- Resize (Alt + h/j/k/l)
+    ["<A-h>"] = {
+      function()
+        require("smart-splits").resize_left()
+      end,
+      "Resize window left",
+    },
+    ["<A-j>"] = {
+      function()
+        require("smart-splits").resize_down()
+      end,
+      "Resize window down",
+    },
+    ["<A-k>"] = {
+      function()
+        require("smart-splits").resize_up()
+      end,
+      "Resize window up",
+    },
+    ["<A-l>"] = {
+      function()
+        require("smart-splits").resize_right()
+      end,
+      "Resize window right",
+    },
+
+    -- Navigation (Ctrl + h/j/k/l)
+    ["<C-h>"] = {
+      function()
+        require("smart-splits").move_cursor_left()
+      end,
+      "Move window left",
+    },
+    ["<C-j>"] = {
+      function()
+        require("smart-splits").move_cursor_down()
+      end,
+      "Move window down",
+    },
+    ["<C-k>"] = {
+      function()
+        require("smart-splits").move_cursor_up()
+      end,
+      "Move window up",
+    },
+    ["<C-l>"] = {
+      function()
+        require("smart-splits").move_cursor_right()
+      end,
+      "Move window right",
+    },
+
+    -- Swapping Buffers (Leader + Leader + h/j/k/l)
+    ["<leader><leader>h"] = {
+      function()
+        require("smart-splits").swap_buf_left()
+      end,
+      "Swap buffer left",
+    },
+    ["<leader><leader>j"] = {
+      function()
+        require("smart-splits").swap_buf_down()
+      end,
+      "Swap buffer down",
+    },
+    ["<leader><leader>k"] = {
+      function()
+        require("smart-splits").swap_buf_up()
+      end,
+      "Swap buffer up",
+    },
+    ["<leader><leader>l"] = {
+      function()
+        require("smart-splits").swap_buf_right()
+      end,
+      "Swap buffer right",
     },
   },
 }
@@ -722,8 +797,6 @@ M.ufo = {
       function()
         local winid = require("ufo").peekFoldedLinesUnderCursor()
         if not winid then
-          -- choose one of coc.nvim and nvim lsp
-          vim.fn.CocActionAsync("definitionHover") -- coc.nvim
           vim.lsp.buf.hover()
         end
       end,

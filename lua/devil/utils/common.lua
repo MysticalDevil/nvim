@@ -167,6 +167,11 @@ function M.load_mappings(section, mapping_opt)
     local mappings = require("devil.core.mappings")
 
     if type(section) == "string" then
+      if not mappings[section] then
+        vim.notify(("Keymap Error: '%s' not found in mappings.lua"):format(section), vim.log.levels.WARN)
+        return
+      end
+
       mappings[section]["plugin"] = nil
       mappings = { mappings[section] }
     end

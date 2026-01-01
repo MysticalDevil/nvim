@@ -574,6 +574,9 @@ return {
     "mrjones2014/smart-splits.nvim",
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
+    init = function()
+      utils.load_mappings("smart_spilts")
+    end,
     opts = require("devil.plugins.configs.smart-splits"),
   },
   -- sniprun
@@ -692,7 +695,9 @@ return {
     init = function()
       utils.load_mappings("whichkey")
     end,
-    opts = require("devil.plugins.configs.which-key"),
+    config = function()
+      require("devil.plugins.configs.which-key")
+    end,
   },
   -- workspaces.nvim
   -- a simple plugin to manage workspace directories in neovim
