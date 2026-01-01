@@ -1,31 +1,21 @@
 local M = {}
 
--- Function to formatting code asynchronously
----@param bufnr number
-function M.async_formatting(bufnr)
+---@param bufnr number?
+---@param should_save boolean?
+function M.format(bufnr, should_save)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
 
-  vim.lsp.buf_request(bufnr, "textDocument/formatting", vim.lsp.util.make_formatting_params({}), function(err, res, ctx)
-    if err then
-      local err_msg = type(err) == "string" and err or err.message
-      -- you can modify the log message / level (or ignore it completely)
-      vim.notify(("formatting: %s"):format(err_msg), vim.log.levels.WARN)
-      return
-    end
+  vim.lsp.buf.format({
+    bufnr = bufnr,
+    async = true,
+    filter = function(_)
+      return true
+    end,
+  })
 
-    -- don't apply results if buffer is unloaded or has been modified
-    if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_get_option_value("modified", { buf = bufnr }) then
-      return
-    end
-
-    if res then
-      local client = vim.lsp.get_client_by_id(ctx.client_id)
-      vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent noautocmd update")
-      end)
-    end
-  end)
+  if should_save then
+    vim.cmd("update")
+  end
 end
 
 local proxy_lsps = {

@@ -131,16 +131,6 @@ M.exclude_filetypes = {
   "TelescopeResults",
 }
 
-function M.arr_has_value(arr, val)
-  for _, value in ipairs(arr) do
-    if value == val then
-      return true
-    end
-  end
-
-  return false
-end
-
 function M.load_mappings(section, mapping_opt)
   vim.schedule(function()
     local function set_section_map(section_values)
