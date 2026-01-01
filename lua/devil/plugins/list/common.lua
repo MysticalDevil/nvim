@@ -733,6 +733,7 @@ return {
     init = function()
       utils.load_mappings("yanky")
     end,
+    opts = {},
   },
   -- zen-mode.nvim
   -- Distraction-free coding for Neovim

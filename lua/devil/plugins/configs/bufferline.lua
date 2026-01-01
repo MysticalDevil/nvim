@@ -1,16 +1,6 @@
 -- bufferline configure
 -- https://github.com/akinsho/bufferline.nvim#configuration
 
--- Helper function to get highlight color from theme
-local function get_hl_color(group, attr)
-  local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-  if not hl then
-    return nil
-  end
-  local color = hl[attr]
-  return color and string.format("#%06x", color) or nil
-end
-
 return {
   options = {
     mode = "buffers",
@@ -51,7 +41,8 @@ return {
     end,
 
     custom_filter = function(buf_number)
-      if vim.bo[buf_number].filetype == "qf" then
+      local ft = vim.bo[buf_number].filetype
+      if ft == "qf" or ft == "checkhealth" then
         return false
       end
       if vim.fn.bufname(buf_number) == "" then
@@ -80,45 +71,34 @@ return {
       delay = 200,
       reveal = { "close" },
     },
-
-    custom_areas = {
-      right = function()
-        local result = {}
-        local seve = vim.diagnostic.severity
-        local error = #vim.diagnostic.get(0, { severity = seve.ERROR })
-        local warning = #vim.diagnostic.get(0, { severity = seve.WARN })
-        local info = #vim.diagnostic.get(0, { severity = seve.INFO })
-        local hint = #vim.diagnostic.get(0, { severity = seve.HINT })
-
-        local error_fg = get_hl_color("DiagnosticError", "fg") or "#EC5241"
-        local warn_fg = get_hl_color("DiagnosticWarn", "fg") or "#EFB839"
-        local hint_fg = get_hl_color("DiagnosticHint", "fg") or "#A3BA5E"
-        local info_fg = get_hl_color("DiagnosticInfo", "fg") or "#7EA9A7"
-
-        if error ~= 0 then
-          table.insert(result, { text = (" 󰅚 %s"):format(error), fg = error_fg })
-        end
-
-        if warning ~= 0 then
-          table.insert(result, { text = ("  %s"):format(warning), fg = warn_fg })
-        end
-
-        if hint ~= 0 then
-          table.insert(result, { text = ("  %s"):format(hint), fg = hint_fg })
-        end
-
-        if info ~= 0 then
-          table.insert(result, { text = ("  %s"):format(info), fg = info_fg })
-        end
-        return result
-      end,
-    },
     groups = {
       options = {
         toggle_hidden_on_enter = true,
       },
       items = {
         require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+        {
+          name = "Tests",
+          highlight = { underline = true, sp = "blue" },
+          priority = 2,
+          icon = " ",
+          matcher = function(buf)
+            local name = vim.api.nvim_buf_get_name(buf.id)
+            return name:match("%_test") or name:match("%_spec")
+          end,
+        },
+        {
+          name = "Docs",
+          highlight = { undercurl = true, sp = "green" },
+          auto_close = false,
+          matcher = function(buf)
+            local name = vim.api.nvim_buf_get_name(buf.id)
+            return name:match("%.md") or name:match("%.txt")
+          end,
+          separator = {
+            style = require("bufferline.groups").separator.tab,
+          },
+        },
       },
     },
   },
