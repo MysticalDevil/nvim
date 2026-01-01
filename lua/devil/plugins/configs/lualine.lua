@@ -1,9 +1,12 @@
-local utils = require("devil.utils")
-
 local get_highlight = require("lualine.utils.utils").extract_highlight_colors
 local function hl(name, scope, fallback)
   local v = get_highlight(name, scope)
   return v or fallback
+end
+
+local function wide(min)
+  min = min or 90
+  return vim.api.nvim_win_get_width(0) >= min
 end
 
 -- Color table for highlights
@@ -73,6 +76,11 @@ local opts = {
     theme = mk_theme(),
     component_separators = "",
     section_separators = "",
+    refresh = {
+      statusline = 200,
+      tabline = 200,
+      winbar = 200,
+    },
     ignore_focus = { "neo-tree", "dropbar_menu" },
     globalstatus = true,
     disabled_filetypes = {
@@ -225,12 +233,86 @@ local filename = {
 }
 
 local lsp_info = {
-  utils.get_lsp_info,
-  icon = "󰒋 LSP:",
-  color = {
-    fg = colors.green,
-    gui = "bold",
-  },
+  function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr }) or {}
+
+    if #clients == 0 then
+      return "No LSP"
+    end
+
+    local ignore = {
+      copilot = true,
+      ["null-ls"] = true,
+      cspell_ls = true,
+      typos_lsp = true,
+      harper_ls = true,
+    }
+
+    local alias = {
+      lua_ls = "LuaLS",
+      stylua = "StyLua",
+      rust_analyzer = "RA",
+      tsserver = "TS",
+      gopls = "Go",
+      pyright = "Py",
+    }
+
+    local shown = {}
+    for _, c in ipairs(clients) do
+      if not ignore[c.name] then
+        shown[#shown + 1] = c.name
+      end
+    end
+    if #shown == 0 then
+      return "No LSP"
+    end
+
+    local busy = {}
+    local any_busy = false
+    if vim.lsp.util and vim.lsp.util.get_progress_messages then
+      local msgs = vim.lsp.util.get_progress_messages() or {}
+      for _, m in ipairs(msgs) do
+        local name = m.name
+        if m.client_id and vim.lsp.get_client_by_id then
+          local cc = vim.lsp.get_client_by_id(m.client_id)
+          if cc then
+            name = cc.name
+          end
+        end
+        if name and not m.done then
+          busy[name] = true
+          any_busy = true
+        end
+      end
+    end
+
+    local frames = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+    local uv = vim.uv or vim.loop
+    local ms = uv.hrtime() / 1e6
+    local idx = (math.floor(ms / 120) % #frames) + 1
+    local spin = frames[idx]
+
+    local parts = {}
+    for _, name in ipairs(shown) do
+      local display = alias[name] or name
+      if busy[name] then
+        parts[#parts + 1] = ("[%s]%s"):format(spin, display)
+      else
+        parts[#parts + 1] = display
+      end
+    end
+
+    -- 方案二：如果“有任何进度”，再给一个全局 spinner（但不重复噪音）
+    -- 你可以把全局 spinner 放 icon 后面，视觉更像“状态灯”
+    local prefix = "󰒋 "
+    if any_busy then
+      prefix = ("󰒋  %s "):format(spin) -- 全局 spinner + 空格
+    end
+
+    return prefix .. table.concat(parts, ", ")
+  end,
+  color = { fg = colors.green, gui = "bold" },
 }
 
 local filesize = {
@@ -254,6 +336,21 @@ local encoding = {
   color = { fg = colors.blue, gui = "bold" },
 }
 
+local blame = {
+  function()
+    local ok, _ = pcall(require, "gitsigns")
+    if not ok then
+      return ""
+    end
+    local b = vim.b.gitsigns_blame_line or ""
+    return b ~= "" and ("󰊢 " .. b) or ""
+  end,
+  cond = function()
+    return wide(120) and vim.b.gitsigns_head ~= nil
+  end,
+  color = { fg = colors.darkblue },
+}
+
 ins_section(head, "lualine_a")
 ins_section(mode, "lualine_a")
 
@@ -263,6 +360,7 @@ ins_section(diff, "lualine_b")
 ins_section(diagnostics, "lualine_c")
 ins_section(filename, "lualine_c")
 
+ins_section(blame, "lualine_x")
 ins_section(lsp_info, "lualine_x")
 ins_section(filesize, "lualine_x")
 ins_section(fileformat, "lualine_x")
