@@ -602,7 +602,6 @@ return {
       "nvim-lua/plenary.nvim",
       "LinArcX/telescope-env.nvim",
       "debugloop/telescope-undo.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",

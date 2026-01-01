@@ -19,7 +19,7 @@ local function border(hl_name)
   }
 end
 
-local opts = {
+cmp.setup({
   formatting = util.formatting,
   snippet = {
     expand = function(args)
@@ -27,7 +27,10 @@ local opts = {
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
+    completion = {
+      border = border("CmpBorder"),
+      winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+    },
     documentation = {
       border = border("CmpDocBorder"),
       winhighlight = "Normal:CmpDoc",
@@ -58,9 +61,7 @@ local opts = {
       cmp.config.compare.order,
     },
   },
-}
-
-cmp.setup(opts)
+})
 
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),

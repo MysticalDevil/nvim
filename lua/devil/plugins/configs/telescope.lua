@@ -26,7 +26,6 @@ local extensions_list = {
   "persisted",
   "project",
   "smart_open",
-  "ui-select",
   "undo",
   "live_grep_args",
   "workspaces",
@@ -128,12 +127,6 @@ return {
       ignore_patterns = { "*.git/*", "*/tmp/*" },
       match_algorithm = "fzy",
       disable_devicons = false,
-    },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown({
-        -- even more opts
-        initial_mode = "normal",
-      }),
     },
     undo = {
       use_delta = true,
