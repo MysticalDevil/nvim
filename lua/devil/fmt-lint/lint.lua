@@ -6,7 +6,7 @@ end
 
 lint.linters_by_ft = {
   c = { "clangtidy" },
-  cmake = { "cmake-lint" },
+  cmake = { "cmakelint" },
   css = { "stylelint" },
   cpp = { "clangtidy" },
   go = { "golangcilint" },
