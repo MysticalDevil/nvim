@@ -15,6 +15,7 @@ return {
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-lint",
       "stevearc/conform.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
     },
   },
   {
@@ -303,7 +304,16 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "LiadOz/nvim-dap-repl-highlights",
+      "jay-babu/mason-nvim-dap.nvim",
     },
+    config = function()
+      require("mason-nvim-dap").setup({
+        ensure_installed = { "codelldb", "delve", "js-debug-adapter" },
+        automatic_installation = true,
+      })
+
+      require("devil.dap").setup()
+    end,
   },
 
   -- nvim-dap-python
@@ -313,17 +323,6 @@ return {
     "mfussenegger/nvim-dap-python",
     ft = { "python" },
     dependencies = { "mfussenegger/nvim-dap" },
-  },
-
-  -- nvim-dap-vscode-js
-  -- nvim-dap adapter for vscode-js-debug
-  {
-    "mxsdev/nvim-dap-vscode-js",
-    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-    dependencies = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("devil.dap.config.vscode-js")
-    end,
   },
 
   -- jbyuki/one-small-step-for-vimkind
