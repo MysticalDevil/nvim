@@ -1,5 +1,7 @@
 local M = {}
 
+local util = require("devil.lsp.util")
+
 local function find_best_build_dir(root_dir)
   local luv = vim.uv or vim.loop
 
@@ -57,6 +59,11 @@ function M.setup()
       local config = vim.deepcopy(clangd_conf)
       config.root_dir = root_dir
       config.name = "clangd"
+
+      config.capabilities = vim.tbl_deep_extend("keep", config.capabilities or {}, util.common_capabilities())
+      config.on_attach = function(client, bufnr)
+        util.default_on_attach(client, bufnr)
+      end
 
       if build_dir then
         if type(config.cmd) == "table" then

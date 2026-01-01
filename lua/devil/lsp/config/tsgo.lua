@@ -1,7 +1,5 @@
-local util = require("devil.lsp.util")
-
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("keep", util.default_configs(), {
+return {
   settings = {
     typescript = {
       inlayHints = {
@@ -14,4 +12,4 @@ return vim.tbl_deep_extend("keep", util.default_configs(), {
       },
     },
   },
-})
+}

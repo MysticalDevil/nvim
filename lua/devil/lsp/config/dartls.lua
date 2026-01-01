@@ -1,7 +1,5 @@
-local util = require("devil.lsp.util")
-
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("keep", util.default_configs(), {
+return {
   settings = {
     dart = {
       showTodos = true,
@@ -20,4 +18,4 @@ return vim.tbl_deep_extend("keep", util.default_configs(), {
     outline = true,
     suggestFromUnimportedLibraries = true,
   },
-})
+}

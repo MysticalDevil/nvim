@@ -19,7 +19,13 @@ function M.common_capabilities()
     return cmp_nvim_lsp.default_capabilities()
   end
 
-  return vim.lsp.protocol.make_client_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  return capabilities
 end
 
 ---@return table
@@ -32,19 +38,10 @@ end
 function M.default_on_attach(client, bufnr)
   M.disable_format(client)
   M.key_attach(bufnr)
-  M.set_inlay_hints(client, bufnr)
 
   vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
   vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
-end
-
-function M.default_configs()
-  return {
-    capabilities = M.common_capabilities(),
-    flags = M.flags(),
-    on_attach = M.default_on_attach,
-  }
 end
 
 function M.set_inlay_hints(client, bufnr)
@@ -54,27 +51,22 @@ function M.set_inlay_hints(client, bufnr)
   end
 
   -- Filtering unstable LSPs
-  local unstableLSP = {
-    phpactor = true,
-    tsserver = false,
+  local blocker_lsps = {
+    ["null-ls"] = true,
+    ["phpactor"] = true,
+    ["zls"] = false,
   }
-  if unstableLSP[client.name] then
+  if blocker_lsps[client.name] then
     vim.notify("Skip inlay hints for LSP: " .. client.name, vim.log.levels.WARN)
     return
   end
 
   -- Enabled only it supported
   local ok = client:supports_method("textDocument/inlayHint")
-    or (client.server_Capabilities and client.server_capabilities.inlayHintProvider)
+    or (client.server_capabilities and client.server_capabilities.inlayHintProvider)
   if not ok then
     return
   end
-
-  -- Defense: Some LSPs are triggered twice
-  if vim.b[bufnr].inlay_hint_enabled then
-    return
-  end
-  vim.b[bufnr].inlay_hint_enabled = true
 
   -- Enable inlay hint
   pcall(function()
@@ -83,11 +75,18 @@ function M.set_inlay_hints(client, bufnr)
 end
 
 function M.enable_inlay_hints_autocmd()
-  vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
-  vim.cmd.highlight("default link LspInlayHint Comment")
+  local ih_group = vim.api.nvim_create_augroup("LspSetup_Inlayhints", { clear = true })
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    group = ih_group,
+    pattern = "*",
+    callback = function()
+      vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
+    end,
+  })
+  vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
 
   vim.api.nvim_create_autocmd("LspAttach", {
-    group = "LspSetup_Inlayhints",
+    group = ih_group,
     callback = function(args)
       if not (args.data and args.data.client_id) then
         return
@@ -108,7 +107,9 @@ function M.on_attach(on_attach)
     callback = function(args)
       local buffer = args.buf ---@type number
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
+      if client then
+        on_attach(client, buffer)
+      end
     end,
   })
 end

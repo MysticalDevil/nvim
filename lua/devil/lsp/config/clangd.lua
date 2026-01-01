@@ -1,5 +1,3 @@
-local util = require("devil.lsp.util")
-
 local function clangd_help()
   local result = vim.system({ "clangd", "--help" }, { text = true }):wait()
   if result.code ~= 0 then
@@ -36,7 +34,7 @@ local function build_clangd_cmd()
 end
 
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("force", util.default_configs(), {
+return {
   filetypes = {
     "c",
     "cc",
@@ -72,4 +70,4 @@ return vim.tbl_deep_extend("force", util.default_configs(), {
     semanticHighlighting = true,
   },
   single_file_support = true,
-})
+}

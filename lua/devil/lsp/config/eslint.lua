@@ -1,7 +1,7 @@
 local util = require("devil.lsp.util")
 
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("force", util.defailt_configs(), {
+return {
   settings = {
     codeAction = {
       disableRuleComment = {
@@ -45,4 +45,4 @@ return vim.tbl_deep_extend("force", util.defailt_configs(), {
     })
   end,
   single_file_support = false,
-})
+}

@@ -1,9 +1,7 @@
-local util = require("devil.lsp.util")
-
 local url = "https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json"
 
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("keep", util.default_configs(), {
+return {
   settings = {
     yaml = {
       keyOrdering = false,
@@ -23,4 +21,4 @@ return vim.tbl_deep_extend("keep", util.default_configs(), {
     },
   },
   single_file_support = true,
-})
+}

@@ -1,7 +1,5 @@
-local util = require("devil.lsp.util")
-
 ---@type vim.lsp.Config
-return vim.tbl_deep_extend("keep", util.default_config(), {
+return {
   settings = {
     json = {
       schemas = require("schemastore").json.schemas(),
@@ -13,4 +11,4 @@ return vim.tbl_deep_extend("keep", util.default_config(), {
     provideFormatter = true,
   },
   single_file_support = true,
-})
+}
