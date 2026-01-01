@@ -1,23 +1,26 @@
 local create_user_command = vim.api.nvim_create_user_command
 
-local inlay_hint = vim.lsp.inlay_hint
+local ih = vim.lsp.inlay_hint
+
+local function get_filter()
+  return { bufnr = 0 }
+end
 
 local function toggle_inlay_hints()
-  inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+  local filter = get_filter()
+  local is_enabled = ih.is_enabled(filter)
+  ih.enable(not is_enabled, filter)
+  vim.notify("Inlay Hints: " .. (not is_enabled and "Enabled" or "Disabled"), vim.log.levels.INFO)
 end
 
 local function enable_inlay_hints()
-  if not inlay_hint.is_enabled() then
-    inlay_hint.enable(true, nil)
-  end
+  ih.enable(true, get_filter())
 end
 
 local function disable_inlay_hints()
-  if inlay_hint.is_enabled() then
-    inlay_hint.enable(false, nil)
-  end
+  ih.enable(false, get_filter())
 end
 
-create_user_command("InlayHintsToggle", toggle_inlay_hints, { desc = "Enable/Disable inlay hints on current buffer" })
-create_user_command("InlayHintsEnable", enable_inlay_hints, { desc = "Enable/Disable inlay hints on current buffer" })
-create_user_command("InlayHintsDisable", disable_inlay_hints, { desc = "Enable/Disable inlay hints on current buffer" })
+create_user_command("InlayHintsToggle", toggle_inlay_hints, { desc = "Toggle inlay hints (buffer)" })
+create_user_command("InlayHintsEnable", enable_inlay_hints, { desc = "Enable inlay hints (buffer)" })
+create_user_command("InlayHintsDisable", disable_inlay_hints, { desc = "Disable inlay hints (buffer)" })
