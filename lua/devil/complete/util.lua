@@ -2,11 +2,9 @@ local cmp = require("cmp")
 
 local status, lspkind = pcall(require, "lspkind")
 if not status then
-  vim.notify("lspkind.nvim not found", "error")
+  vim.notify("lspkind.nvim not found", vim.log.levels.ERROR)
   return
 end
-
-local kind_icons = require("devil.utils").kind_icons
 
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -34,28 +32,34 @@ M.formatting = {
     -- so that you can provide more controls on popup customization.
     -- (See [#30](https://github.com/onsails/lspkind.nvim/pull/30))
     before = function(entry, vim_item)
-      local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
-      if shorten_abbr ~= vim_item.abbr then
-        vim_item.abbr = ("%s..."):format(shorten_abbr)
-      end
-      -- Kind icons
-      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
       -- Source
       vim_item.menu = ({
         buffer = "[Buf]",
         nvim_lsp = "[LSP]",
+        lazydev = "[Lua]",
         snippets = "[Snip]",
         nvim_lua = "[API]",
         latex_symbols = "[LaTeX]",
+        async_path = "[Path]",
         path = "[Path]",
         emoji = "[Emoji]",
-        treesitter = "[TreeSitter]",
+        treesitter = "[TS]",
         crates = "[Crates]",
         npm = "[NPM]",
         cmdline = "[CMD]",
         git = "[Git]",
         calc = "[Calc]",
       })[entry.source.name]
+
+      if vim_item.menu == nil then
+        vim_item.menu = ("[%s]"):format(entry.source.name)
+      end
+
+      local shorten_abbr = string.sub(vim_item.abbr, 1, 30)
+      if shorten_abbr ~= vim_item.abbr then
+        vim_item.abbr = ("%s..."):format(shorten_abbr)
+      end
+
       return vim_item
     end,
   }),

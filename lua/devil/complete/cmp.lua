@@ -35,6 +35,7 @@ local opts = {
   },
   mapping = util.mapping,
   sources = cmp.config.sources({
+    { name = "lazydev", group_index = 0 },
     { name = "snippets", max_item_count = 10 },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
@@ -44,7 +45,6 @@ local opts = {
     { name = "treesitter" },
     { name = "crates" },
     { name = "npm", keyword_length = 4 },
-    { name = "lazydev", group_index = 0 },
   }),
   sorting = {
     comparators = {
@@ -64,12 +64,6 @@ cmp.setup(opts)
 
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
-
-cmp.setup.cmdline("/", {
   sources = cmp.config.sources({
     { name = "nvim_lsp_document_symbol" },
   }, {
