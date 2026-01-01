@@ -1,14 +1,21 @@
 local conform = require("conform")
 
-local function js_ts_fmt(bufnr)
-  if conform.get_formatter_info("biome", bufnr).available then
+local function web_fmt(bufnr)
+  if conform.get_formatter_info("biome-check", bufnr).available then
     return { "biome-check" }
-  elseif conform.get_formatter_info("eslint_d", bufnr).available then
-    return { "eslint_d" }
+  end
+  return { "prettierd", "prettier", stop_after_first = true }
+end
+
+local function python_fmt(bufnr)
+  if conform.get_formatter_info("ruff_format", bufnr).available then
+    return { "ruff_format" }
+  else
+    return { "isort", "black" }
   end
 end
 
-local opts = {
+conform.setup({
   -- Map of filetype to formatters
   formatters_by_ft = {
     bash = { "beautysh" },
@@ -18,22 +25,18 @@ local opts = {
     dart = { "dart_format" },
     fish = { "fish_indent" },
     go = { "gofumpt", "goimports-reviser", "golines" },
-    javascript = js_ts_fmt,
+    javascript = web_fmt,
+    typescript = web_fmt,
+    javascriptreact = web_fmt,
+    typescriptreadt = web_fmt,
     json = { "jq" },
     lua = { "stylua" },
-    php = { "mago_format", "mago_lint" },
-    python = function(bufnr)
-      if conform.get_formatter_info("ruff_format", bufnr).available then
-        return { "ruff_format" }
-      else
-        return { "isort", "black" }
-      end
-    end,
+    php = { "mago_format" },
+    python = python_fmt,
     ruby = { "standardrb" },
     rust = { "rustfmt" },
     sh = { "beautysh" },
     toml = { "taplo" },
-    typescript = js_ts_fmt,
     xml = { "xmlformat" },
     yaml = { "yamlfmt" },
     zig = { "zigfmt" },
@@ -54,13 +57,7 @@ local opts = {
   format_on_save = {
     -- I recommend these options. See :help conform.format for details.
     lsp_fallback = true,
-    timeout_ms = 500,
-  },
-  -- If this is set, Conform will run the formatter asynchronously after save.
-  -- It will pass the table to conform.format().
-  -- This can also be a function that returns the table.
-  format_after_save = {
-    lsp_format = "fallback",
+    timeout_ms = 1000,
   },
   -- Set the log level. Use `:ConformInfo` to see the location of the log file.
   log_level = vim.log.levels.ERROR,
@@ -70,6 +67,4 @@ local opts = {
   notify_no_formatters = true,
   -- Define custom formatters here
   formatters = {},
-}
-
-conform.setup(opts)
+})
