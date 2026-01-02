@@ -3,6 +3,15 @@ local mason_lspconfig = require("mason-lspconfig")
 
 local util = require("devil.lsp.util")
 
+local function is_nixos()
+  local f = io.open("/etc/NIXOS", "r")
+  if f then
+    io.close(f)
+    return true
+  end
+  return false
+end
+
 --------------------------------------- Configures ------------------------------------------------
 
 -- :h mason-default-settings
@@ -35,7 +44,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-  ensure_installed = {},
+  ensure_installed = is_nixos() or {},
   automatic_installation = false,
   automatic_enable = {
     exclude = {
