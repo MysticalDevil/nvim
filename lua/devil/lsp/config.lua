@@ -1,71 +1,84 @@
 local util = require("devil.lsp.util")
 
-local noconfig_servers = {
-  "bashls",
-  "biome",
-  "cssls",
-  "denols",
-  "dockerls",
-  "emmet_language_server",
-  "elixirls",
-  -- "expert", -- Elixir WIP
-  "html",
-  "jsonls",
-  "lemminx", -- XML
-  "neocmake",
-  "nil_ls", -- Nix
-  "phpactor",
-  "ruff",
-  "tailwindcss",
-  "taplo",
-  "vimls",
-  "vue_ls",
+local servers = {
+  -- no-config servers
+  bashls = false,
+  biome = false,
+  cssls = false,
+  denols = false,
+  dockerls = false,
+  emmet_language_server = false,
+  elixirls = false,
+  html = false,
+  jsonls = false,
+  lemminx = false,
+  neocmake = false,
+  nil_ls = false,
+  phpactor = false,
+  ruff = false,
+  tailwindcss = false,
+  taplo = false,
+  vimls = false,
+  vue_ls = false,
+
+  clangd = true,
+  jdtls = true,
+  lua_ls = true,
+  sourcekit = true,
+  svelte = true,
+  tsgo = true,
+  ty = true,
+  yamlls = true,
+  zls = true,
 }
 
--- Configure the language server. The on_setup function must be implemented in the configuration file.
-for _, name in ipairs(noconfig_servers) do
-  vim.lsp.config(name, {
+local function load_server_opts(server, selector)
+  if not selector then
+    return {}
+  end
+
+  local module_name = (selector == true) and server or selector
+  local config_path = ("devil.lsp.config.%s"):format(module_name)
+
+  local ok, opts = pcall(require, config_path)
+  if not ok then
+    if tostring(opts):match("module '.*' not found") then
+      vim.notify(
+        ("LSP config not found for %s (%s), fallback to default"):format(server, config_path),
+        vim.log.levels.WARN
+      )
+    else
+      vim.notify(
+        ("Error loading LSP config for %s (%s):\n%s"):format(server, config_path, tostring(opts)),
+        vim.log.levels.ERROR
+      )
+    end
+    return {}
+  end
+
+  return opts or {}
+end
+
+for server, selector in pairs(servers) do
+  local base = {
     capabilities = util.common_capabilities(),
     flags = util.flags(),
     on_attach = util.default_on_attach,
-  })
-  vim.lsp.enable(name)
-end
+  }
 
-local configured_servers = {
-  ["jdtls"] = "jdtls",
-  ["jsonls"] = "jsonls",
-  ["lua_ls"] = "lua_ls",
-  ["sourcekit"] = "sourcekit",
-  ["svelte"] = "svelte",
-  ["tsgo"] = "tsgo",
-  ["ty"] = "ty",
-  ["yamlls"] = "yamlls",
-  ["zls"] = "zls",
-}
+  local extra = load_server_opts(server, selector)
 
-for server, config_name in pairs(configured_servers) do
-  local config_path = ("devil.lsp.config.%s"):format(config_name)
-  local success, opts = pcall(require, config_path)
+  local opts = vim.tbl_deep_extend("force", base, extra)
 
-  if not success then
-    if opts:match("module '.*' not found") then
-      vim.notify(("LSP Config not found for: %s, use default"):format(server), vim.log.levels.WARN)
-      opts = {}
-    else
-      vim.notify(("Error loadding LSP config for %s:\n"):format(server), vim.log.levels.ERROR)
-      opts = {}
-    end
-  end
-
-  opts.capabilities = vim.tbl_deep_extend("keep", opts.capabilities or {}, util.common_capabilities())
-  local old_on_attach = opts.on_attach
+  local old_on_attach = extra.on_attach
   opts.on_attach = function(client, bufnr)
     util.default_on_attach(client, bufnr)
     if old_on_attach then
       old_on_attach(client, bufnr)
     end
   end
+
+  opts.capabilities = vim.tbl_deep_extend("keep", opts.capabilities or {}, util.common_capabilities())
 
   vim.lsp.config(server, opts)
   vim.lsp.enable(server)
