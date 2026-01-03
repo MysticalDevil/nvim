@@ -270,6 +270,15 @@ return {
     config = true,
   },
 
+  -------------------- Java ---------------------
+  -- nvim-java
+  -- Painless Java in Neovim
+  {
+    "nvim-java/nvim-java",
+    ft = { "java" },
+    opts = { jdk = { auto_install = false, version = "25" } },
+  },
+
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp

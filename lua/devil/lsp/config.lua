@@ -7,6 +7,8 @@ local noconfig_servers = {
   "denols",
   "dockerls",
   "emmet_language_server",
+  "elixirls",
+  -- "expert", -- Elixir WIP
   "html",
   "jsonls",
   "lemminx", -- XML
@@ -14,7 +16,6 @@ local noconfig_servers = {
   "nil_ls", -- Nix
   "phpactor",
   "ruff",
-  "sourcekit",
   "tailwindcss",
   "taplo",
   "vimls",
@@ -32,8 +33,10 @@ for _, name in ipairs(noconfig_servers) do
 end
 
 local configured_servers = {
+  ["jdtls"] = "jdtls",
   ["jsonls"] = "jsonls",
   ["lua_ls"] = "lua_ls",
+  ["sourcekit"] = "sourcekit",
   ["svelte"] = "svelte",
   ["tsgo"] = "tsgo",
   ["ty"] = "ty",
