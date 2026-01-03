@@ -276,7 +276,11 @@ return {
   {
     "nvim-java/nvim-java",
     ft = { "java" },
-    opts = { jdk = { auto_install = false, version = "25" } },
+    config = function()
+      require("java").setup({
+        jdtls = { version = "1.54.0" },
+      })
+    end,
   },
 
   ------------------- Flutter -------------------

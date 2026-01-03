@@ -3,7 +3,7 @@ if vim.fn.has("nvim-0.10") ~= 1 then
   return
 end
 
-if vim.loop.os_uname().release:match("gentoo") then
+if vim.uv.os_uname().release:match("gentoo") then
   vim.opt.rtp:append("/usr/share/vim/vimfiles")
 end
 
