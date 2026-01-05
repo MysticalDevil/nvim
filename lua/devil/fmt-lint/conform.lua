@@ -15,6 +15,21 @@ local function python_fmt(bufnr)
   end
 end
 
+local function yaml_fmt(bufnr)
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  local filename = vim.fn.fnamemodify(bufname, ":t")
+
+  if filename == "docker-compose.yml" then
+    return { "yamlfmt" }
+  end
+
+  if filename == "pubspec.yaml" then
+    return {}
+  end
+
+  return { "yamlfmt" }
+end
+
 conform.setup({
   -- Map of filetype to formatters
   formatters_by_ft = {
@@ -38,7 +53,7 @@ conform.setup({
     sh = { "beautysh" },
     toml = { "taplo" },
     xml = { "xmlformat" },
-    yaml = { "yamlfmt" },
+    yaml = yaml_fmt,
     zig = { "zigfmt" },
     -- Use the "*" filetype to run formatters on all filetypes.
     ["*"] = { "codespell" },

@@ -5,16 +5,13 @@ if not status then
 end
 
 lint.linters_by_ft = {
-  c = { "clangtidy" },
   cmake = { "cmakelint" },
   css = { "stylelint" },
-  cpp = { "clangtidy" },
   go = { "golangcilint" },
   json = { "jsonlint" },
   lua = { "selene" },
   markdown = { "markdownlint" },
   php = { "mago_lint" },
-  python = { "ruff" },
   ruby = { "standardrb" },
   sh = { "shellcheck" },
   vim = { "vint" },
