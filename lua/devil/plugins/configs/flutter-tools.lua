@@ -28,14 +28,14 @@ return {
     -- if empty dap will not stop on any exceptions, otherwise it will stop on those specified
     -- see |:help dap.set_exception_breakpoints()| for more info
     exception_breakpoints = {},
-    register_configurations = function(paths) ---@diagnostic disable-line
+    register_configurations = function(_) ---@diagnostic disable-line
       require("dap").configurations.dart = {
         -- <put here config that you would find in .vscode/launch.json>
       }
     end,
   },
-  flutter_path = vim.fn.exepath("flutter") or "/usr/bin/flutter", -- <-- this takes priority over the lookup
-  flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
+  flutter_path = nil, -- <-- this takes priority over the lookup
+  flutter_lookup_cmd = "mise where flutter", -- example "dirname $(which flutter)" or "asdf where flutter"
   root_patterns = { ".git", "pubspec.yaml" }, -- patterns to find the root of your flutter project
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   widget_guides = {
