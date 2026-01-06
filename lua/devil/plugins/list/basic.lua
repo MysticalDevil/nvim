@@ -22,7 +22,7 @@ return {
   },
   -- sqlite.lua
   -- SQLite LuaJIT binding with a very simple api.
-  { "kkharji/sqlite.lua", lazy = true, enabled = not jit.os:find("Windows") }, ---@diagnostic disable-line
+  { "kkharji/sqlite.lua", lazy = true, enabled = vim.uv.os_uname().sysname ~= "Windows_NT" },
   -- mini.icons
   -- Icon provider. Part of 'mini.nvim' library.
   {
