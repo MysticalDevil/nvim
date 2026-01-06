@@ -785,22 +785,4 @@ return {
       "sindrets/diffview.nvim",
     },
   },
-  -- lazygit.nvim
-  -- Plugin for calling lazygit from within neovim.
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
 }
