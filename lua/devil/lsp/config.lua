@@ -15,6 +15,7 @@ local servers = {
   neocmake = false,
   nil_ls = false,
   phpactor = false,
+  roslyn = false,
   ruff = false,
   tailwindcss = false,
   taplo = false,

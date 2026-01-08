@@ -283,6 +283,12 @@ return {
     end,
   },
 
+  ------------------- CSharp --------------------
+  {
+    "seblyng/roslyn.nvim",
+    opts = {},
+  },
+
   ------------------- Flutter -------------------
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
