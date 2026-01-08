@@ -100,6 +100,26 @@ function M.enable_inlay_hints_autocmd()
       end
     end,
   })
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = ih_group,
+    callback = function(args)
+      local client = vim.lsp.get_clients({ bufnr = args.buf })[1]
+      if client and client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    group = ih_group,
+    callback = function(args)
+      local client = vim.lsp.get_clients({ bufnr = args.buf })[1]
+      if client and client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+      end
+    end,
+  })
 end
 
 function M.on_attach(on_attach)
