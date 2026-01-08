@@ -37,6 +37,7 @@ conform.setup({
     c = { "clang_format" },
     cmake = { "gersemi" },
     cpp = { "clang_format" },
+    cs = { "csharpier" },
     dart = { "dart_format" },
     fish = { "fish_indent" },
     go = { "gofumpt", "goimports-reviser", "golines" },
