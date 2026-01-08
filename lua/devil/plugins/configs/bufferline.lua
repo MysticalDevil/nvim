@@ -136,51 +136,13 @@ return {
         },
         {
           name = "Headers",
-          highlight = { sp = "orange", underline = true },
+          highlight = { sp = "seagreen", underline = false },
           matcher = function(buf)
             return vim.api.nvim_buf_get_name(buf.id):match("%.h$") or vim.api.nvim_buf_get_name(buf.id):match("%.hpp$")
           end,
-        },
-        {
-          name = "Configs",
-          highlight = { link = "Special", italic = true },
-          matcher = function(buf)
-            local name = vim.api.nvim_buf_get_name(buf.id)
-            local filename = vim.fn.fnamemodify(name, ":t")
-
-            local config_exts = {
-              ["json"] = true,
-              ["yaml"] = true,
-              ["yml"] = true,
-              ["toml"] = true,
-              ["ini"] = true,
-              ["conf"] = true,
-            }
-            local ext = vim.fn.fnamemodify(name, ":e")
-            if config_exts[ext] then
-              return true
-            end
-
-            local special_configs = {
-              ["MakeFile"] = true,
-              [".editorconfig"] = true,
-              [".gitignore"] = true,
-            }
-            if special_configs[filename] then
-              return true
-            end
-
-            if ext == "lua" then
-              if name:match("/config/") or name:match("/settings/") then
-                return true
-              end
-              if filename:match("config") or filename:match("rc%.lua") then
-                return true
-              end
-            end
-
-            return false
-          end,
+          separator = {
+            style = require("bufferline.groups").separator.tab,
+          },
         },
       },
     },

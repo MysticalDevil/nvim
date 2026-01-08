@@ -17,6 +17,7 @@ return {
         parameterNames = {
           enabled = "all", -- literals, all, none
         },
+        signatureHelp = { enabled = true },
       },
 
       compile = {

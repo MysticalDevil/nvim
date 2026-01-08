@@ -104,9 +104,9 @@ function M.enable_inlay_hints_autocmd()
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = ih_group,
     callback = function(args)
-      local client = vim.lsp.get_clients({ bufnr = args.buf })[1]
-      if client and client.server_capabilities.inlayHintProvider then
+      if vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }) then
         vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+        vim.api.nvim_buf_set_var(args.buf, "inlayhint_saved_state", true)
       end
     end,
   })
@@ -114,9 +114,10 @@ function M.enable_inlay_hints_autocmd()
   vim.api.nvim_create_autocmd("BufWritePost", {
     group = ih_group,
     callback = function(args)
-      local client = vim.lsp.get_clients({ bufnr = args.buf })[1]
-      if client and client.server_capabilities.inlayHintProvider then
+      local ok, state = pcall(vim.api.nvim_buf_get_var, args.buf, "inlayhint_saved_state")
+      if ok and state then
         vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+        vim.api.nvim_buf_del_var(args.buf, "inlayhint_saved_state")
       end
     end,
   })
