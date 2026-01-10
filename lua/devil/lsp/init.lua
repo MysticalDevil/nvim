@@ -2,6 +2,7 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
 local util = require("devil.lsp.util")
+local lsp_config = require("devil.lsp.lsp_config")
 
 local function is_nixos()
   local f = io.open("/etc/NIXOS", "r")
@@ -47,6 +48,11 @@ mason.setup({
   },
 })
 
+local disabled_handlers = {}
+for server, _ in pairs(lsp_config.servers) do
+  disabled_handlers[server] = function() end
+end
+
 mason_lspconfig.setup({
   ensure_installed = is_nixos() or {},
   automatic_installation = false,
@@ -55,12 +61,10 @@ mason_lspconfig.setup({
       "rust_analyzer",
     },
   },
-  handlers = {
-    jdtls = function() end,
-  },
+  handlers = disabled_handlers,
 })
 
-require("devil.lsp.config")
+lsp_config.setup()
 require("devil.lsp.ui")
 
 util.enable_inlay_hints_autocmd()

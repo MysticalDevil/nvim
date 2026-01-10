@@ -49,7 +49,7 @@ conform.setup({
     lua = { "stylua" },
     php = { "mago_format" },
     python = python_fmt,
-    ruby = { "standardrb" },
+    ruby = { "rubocop" },
     rust = { "rustfmt" },
     sh = { "beautysh" },
     toml = { "taplo" },
@@ -70,11 +70,16 @@ conform.setup({
   -- If this is set, Conform will run the formatter on save.
   -- It will pass the table to conform.format().
   -- This can also be a function that returns the table.
-  format_on_save = {
-    -- I recommend these options. See :help conform.format for details.
-    lsp_fallback = true,
-    timeout_ms = 1000,
-  },
+  format_on_save = function(bufnr)
+    local slow_format_filetypes = { "ruby" }
+    local buf_ft = vim.bo[bufnr].filetype
+
+    if vim.tbl_contains(slow_format_filetypes, buf_ft) then
+      return { timeout_ms = 5000, lsp_fallback = true }
+    end
+
+    return { timeout_ms = 1000, lsp_fallback = true }
+  end,
   -- Set the log level. Use `:ConformInfo` to see the location of the log file.
   log_level = vim.log.levels.ERROR,
   -- Conform will notify you when a formatter errors
