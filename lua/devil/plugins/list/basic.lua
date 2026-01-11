@@ -405,6 +405,7 @@ return {
   -- Nvim Treesitter configurations and abstraction layer
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
       {
@@ -414,13 +415,12 @@ return {
           vim.g.no_plugin_map = true
         end,
       },
-      "nvim-treesitter/nvim-tree-docs",
       "windwp/nvim-ts-autotag",
       "RRethy/nvim-treesitter-endwise",
     },
     opts = require("devil.plugins.configs.treesitter"),
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
       require("nvim-dap-repl-highlights").setup()
 

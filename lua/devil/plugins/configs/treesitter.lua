@@ -43,8 +43,6 @@ return {
   },
   -- enable code indent module
   indent = { enable = true },
-  -- nvim-treesitter/nvim-tree-docs
-  tree_docs = { enable = true },
   -- https://github.com/RRethy/nvim-treesitter-endwise
   endwise = { enable = true },
   -- http://github.com/windwp/nvim-ts-autotag
