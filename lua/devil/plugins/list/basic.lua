@@ -40,14 +40,9 @@ return {
   -- Neovim client library and GUI
   { "equalsraf/neovim-gui-shim", lazy = true },
 
-  {
-    "navarasu/onedark.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = require("devil.plugins.configs.onedark"),
-  },
-  { "EdenEast/nightfox.nvim", opts = {} },
-  { "folke/tokyonight.nvim", opts = {} },
+  { "olimorris/onedarkpro.nvim" },
+  { "EdenEast/nightfox.nvim" },
+  { "folke/tokyonight.nvim" },
 
   --
   --------------------------------------- Common plugins ----------------------------------------
