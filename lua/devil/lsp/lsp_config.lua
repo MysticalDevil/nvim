@@ -5,7 +5,6 @@ M.servers = {
   -- no-config servers
   bashls = false,
   biome = false,
-  cssls = false,
   denols = false,
   dockerls = false,
   emmet_language_server = false,
@@ -19,7 +18,6 @@ M.servers = {
   roslyn = false,
   ruby_lsp = false,
   ruff = false,
-  tailwindcss = false,
   taplo = false,
   vimls = false,
   vue_ls = false,

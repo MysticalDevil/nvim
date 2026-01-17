@@ -6,7 +6,6 @@ end
 
 lint.linters_by_ft = {
   cmake = { "cmakelint" },
-  css = { "stylelint" },
   go = { "golangcilint" },
   json = { "jsonlint" },
   lua = { "selene" },
