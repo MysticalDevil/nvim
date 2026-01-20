@@ -19,7 +19,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "zapling/mason-conform.nvim",
       "jay-babu/mason-nvim-dap.nvim",
-      "jay-babu/mason-nvim-dap.nvim",
     },
   },
   --

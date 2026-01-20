@@ -64,6 +64,7 @@ M.smartcolumn = {
     "dapui_breakpoints",
     "dapui_console",
     "dap-repl",
+    "mason",
   },
   custom_colorcolumn = {},
   scope = "file",

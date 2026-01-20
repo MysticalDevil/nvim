@@ -28,7 +28,7 @@ which_key.setup({
   show_keys = true,
   disable = {
     buftypes = {},
-    filetypes = { "TelescopePrompt" },
+    filetypes = { "TelescopePrompt", "mason" },
   },
 })
 

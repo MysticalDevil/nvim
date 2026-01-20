@@ -191,13 +191,6 @@ return {
       },
     },
   },
-  -- nvim-autopairs
-  -- A super powerful autopair plugin for Neovim that supports multiple characters.
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {},
-  },
   -- nvim-bqf
   -- Better quickfix window in Neovim, polish old quickfix window.
   {
@@ -434,20 +427,6 @@ return {
     lazy = false,
     keys = utils.get_lazy_keys("snacks"),
     opts = require("devil.plugins.configs.snacks"),
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          vim.print = _G.dd
-        end,
-      })
-    end,
   },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
@@ -496,6 +475,7 @@ return {
       "nvim-lua/plenary.nvim",
       "LinArcX/telescope-env.nvim",
       "debugloop/telescope-undo.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",

@@ -29,6 +29,7 @@ local extensions_list = {
   "undo",
   "live_grep_args",
   "workspaces",
+  "ui-select",
 }
 
 for _, value in pairs(extensions_list) do
@@ -127,6 +128,9 @@ return {
       ignore_patterns = { "*.git/*", "*/tmp/*" },
       match_algorithm = "fzy",
       disable_devicons = false,
+    },
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown({}),
     },
     undo = {
       use_delta = true,
