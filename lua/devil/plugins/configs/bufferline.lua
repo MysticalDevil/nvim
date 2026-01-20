@@ -21,14 +21,14 @@ return {
       return string.format("%s", opts.raise(opts.ordinal))
     end,
     close_command = function(bufnum)
-      require("bufdelete").bufdelete(bufnum, true)
+      require("snacks").bufdelete(bufnum)
     end,
     right_mouse_command = function(bufnum)
-      require("bufdelete").bufdelete(bufnum, true)
+      require("snacks").bufdelete(bufnum)
     end,
     left_mouse_command = "buffer %d",
     middle_mouse_command = function(bufnm)
-      require("bufdelete").bufdelete(bufnm, true)
+      require("snacks").bufdelete(bufnm)
     end,
     indicator = {
       icon = "▎",

@@ -38,12 +38,14 @@ which_key.add({
   { "<leader>f", group = "Find" },
   { "<leader>g", group = "Git" },
   { "<leader>l", group = "LSP" },
+  { "<leader>n", group = "Notify" },
+  { "<leader>p", group = "Profiler" },
   { "<leader>q", group = "Quit/Session" },
   { "<leader>t", group = "Toggle" },
   { "<leader>w", group = "Window/Save" },
   { "<leader>x", group = "Trouble/Diagnos" },
   { "<leader>y", group = "Yank" },
-  -- 定义非 Leader 键的前缀组名
+
   { "s", group = "Split Window" },
   { "t", group = "Tabs" },
 })

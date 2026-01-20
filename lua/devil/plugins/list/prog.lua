@@ -144,6 +144,7 @@ return {
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         "lazy.nvim",
+        { path = "snacks.nvim", words = { "Snacks" } },
         {
           path = vim.fn.stdpath("data") .. "/lazy/xmake.nvim/addons/en/library",
           files = { "xmake.lua" },
@@ -451,30 +452,5 @@ return {
     opts = function()
       return require("devil.plugins.configs.actions-preview")
     end,
-  },
-
-  -- inc-rename.nvim
-  -- Incremental LSP renaming based on Neovim's command-preview feature
-  {
-    "smjonas/inc-rename.nvim",
-    event = "LspAttach",
-    keys = {
-      {
-        "<leader>rn",
-        ":IncRename ",
-        desc = "Rename symbols",
-      },
-    },
-    opts = {
-      cmd_name = "IncRename", -- the name of the command
-      -- the highlight group used for highlighting the identifier's new name
-      hl_group = "Substitute",
-      -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
-      preview_empty_name = false,
-      show_message = true, -- whether to display a `Renamed m instances in n files` message after a rename operation
-      -- the type of the external input buffer to use (the only supported value is currently "dressing")
-      input_buffer_type = nil,
-      post_hook = nil, -- callback to run after renaming, receives the result table (from LSP handler) as an argument
-    },
   },
 }

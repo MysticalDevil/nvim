@@ -13,13 +13,6 @@ return {
   -- nui.nvim
   -- UI Component Library for Neovim
   { "MunifTanjim/nui.nvim", lazy = true },
-  -- dressing.nvim
-  -- Neovim plugin to improve the default vim.ui interfaces
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    opts = require("devil.plugins.configs.dressing"),
-  },
   -- sqlite.lua
   -- SQLite LuaJIT binding with a very simple api.
   { "kkharji/sqlite.lua", lazy = true, enabled = vim.uv.os_uname().sysname ~= "Windows_NT" },
@@ -53,6 +46,136 @@ return {
   -- { "EdenEast/nightfox.nvim" },
   -- { "folke/tokyonight.nvim" },
 
+  -- snacks.nvim
+  -- A collection of QoL plugins for Neovim
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = {
+        enabled = true,
+        preset = {
+          header = [[
+   __  __           _   _           _
+  |  \/  |_   _ ___| |_(_) ___ __ _| |
+  | |\/| | | | / __| __| |/ __/ _` | |
+  | |  | | |_| \__ \ |_| | (_| (_| | |
+  |_|  |_|\__, |___/\__|_|\___\__,_|_|
+          |___/
+      ]],
+        },
+      },
+      dim = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true, timeout = 3000 },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      terminal = { enabled = true },
+      zen = {
+        enabled = true,
+        toggles = {
+          dim = true,
+          git_signs = true,
+          mini_diff_signs = false,
+        },
+        show = {
+          statusline = false,
+          tabline = false,
+        },
+      },
+    },
+    keys = {
+      {
+        "<c-\\>",
+        function()
+          Snacks.terminal.toggle()
+        end,
+        desc = "Toggle Terminal",
+        mode = { "n", "t" },
+      },
+      {
+        "<leader>cR",
+        function()
+          Snacks.rename.rename_file()
+        end,
+        desc = "Rename File",
+      },
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = "Toggle Zoom",
+      },
+      {
+        "<leader>ps",
+        function()
+          Snacks.profiler.startup({})
+        end,
+        desc = "Startup Profiler",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Notification History",
+      },
+      {
+        "<leader>gb",
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = "Git Blame Line",
+      },
+      {
+        "<leader>N",
+        desc = "Neovim News",
+        function()
+          Snacks.win({
+            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = "yes",
+              statuscolumn = " ",
+              conceallevel = 3,
+            },
+          })
+        end,
+      },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd
+        end,
+      })
+    end,
+  },
+
   --
   --------------------------------------- Common plugins ----------------------------------------
   -- beacon.nvim
@@ -61,9 +184,6 @@ return {
     "rainbowhxch/beacon.nvim",
     opts = others_configs.beacon,
   },
-  -- bufdelete.nvim
-  -- Delete Neovim buffers without losing window layout
-  { "famiu/bufdelete.nvim", lazy = true, dependencies = "lewis6991/gitsigns.nvim" },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
@@ -83,27 +203,6 @@ return {
     opts = {},
     event = "VeryLazy",
     enabled = vim.fn.has("nvim-0.10.0") == 1,
-  },
-  -- dashboard-nvim
-  -- Fancy and Blazing Fast start screen plugin of neovim
-  {
-    "glepnir/dashboard-nvim",
-    event = "VimEnter",
-    dependencies = { "nvim-mini/mini.icons" },
-    opts = require("devil.plugins.configs.dashboard"),
-    config = function(_, opts)
-      -- close Lazy and re-open when the dashboard is ready
-      if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "DashboardLoaded",
-          callback = function()
-            require("lazy").show()
-          end,
-        })
-      end
-      require("dashboard").setup(opts) ---@diagnostic disable-line
-    end,
   },
   -- dial.nvim
   -- enhanced increment/decrement plugin for Neovim.
@@ -184,39 +283,6 @@ return {
       disable_legacy_commands = true,
     },
   },
-  -- illuminate.vim
-  -- (Neo)Vim plugin for automatically highlighting other uses of the word under the cursor using either
-  -- LSP, Tree-sitter, or regex matching.
-  {
-    "RRethy/vim-illuminate",
-    opts = require("devil.plugins.configs.illuminate"),
-    config = function(_, opts)
-      require("illuminate").configure(opts) ---@diagnostic disable-line
-    end,
-  },
-
-  -- indent-blankline.nvim
-  -- Indent guides for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    event = "UIEnter",
-    opts = function()
-      return require("devil.plugins.configs.ibl")
-    end,
-    config = function(_, opts)
-      local hooks = require("ibl.hooks")
-
-      require("ibl").setup(opts) ---@diagnostic disable-line
-
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-
-      -- hide first line indent
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-    end,
-  },
-
   -- legendary.nvim
   -- A legend for your keymaps, commands, and autocmds, with which-key.nvim integration
   --[[{
@@ -258,12 +324,6 @@ return {
     },
     opts = others_configs.neogen,
   },
-  -- neoscroll.nvim
-  -- Smooth scrolling neovim plugin written in lua
-  {
-    "karb94/neoscroll.nvim",
-    opts = others_configs.neoscroll,
-  },
   -- neo-tree.nvim
   -- Neovim plugin to manage the file system and other tree like structures
   {
@@ -286,23 +346,6 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      {
-        "rcarriga/nvim-notify",
-        lazy = false,
-        opts = {
-          stages = "slide",
-          timeout = 5000,
-          render = "default",
-        },
-        config = function(_, opts)
-          require("notify").setup(opts)
-          vim.notify = require("notify")
-        end,
-      },
-    },
     opts = {
       presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
@@ -470,10 +513,6 @@ return {
   -- A task runner and job management plugin for Neovim
   {
     "stevearc/overseer.nvim",
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "rcarriga/nvim-notify",
-    },
     cmd = {
       "OverseerOpen",
       "OverseerClose",
@@ -639,16 +678,6 @@ return {
     event = "VeryLazy",
     enabled = vim.fn.has("nvim-0.10.0") == 1,
   },
-  -- toggleterm.nvim
-  -- A neovim lua plugin to help easily manage multiple terminal windows
-  {
-    "akinsho/toggleterm.nvim",
-    keys = {
-      { "<C-\\>", "<cmd>ToggleTerm<cr>", desc = "Open ToggleTerm" },
-    },
-    cmd = "ToggleTerm",
-    opts = require("devil.plugins.configs.toggleterm"),
-  },
   -- treesj
   -- Neovim plugin for splitting/joining blocks of code
   {
@@ -672,12 +701,6 @@ return {
     end,
     opts = { use_diagnostic_signs = true },
   },
-  -- twilight.nvim
-  -- Dims inactive portions of the code you're editing using TreeSitter.
-  {
-    "folke/twilight.nvim",
-    cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-  },
   -- urlview.nvim
   -- Neovim plugin for viewing all the URLs in a buffer
   {
@@ -685,15 +708,6 @@ return {
     cmd = "UrlView",
     opts = function()
       return require("devil.plugins.configs.urlview")
-    end,
-  },
-  -- vim-startuptime
-  -- A plugin for profiling Vim and Neovim startup time.
-  {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-    init = function()
-      vim.g.startuptime_tries = 10
     end,
   },
   -- which-key.nvim
@@ -737,16 +751,6 @@ return {
       utils.load_mappings("yanky")
     end,
     opts = {},
-  },
-  -- zen-mode.nvim
-  -- Distraction-free coding for Neovim
-  {
-    "folke/zen-mode.nvim",
-    keys = {
-      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Enter zen mode" },
-    },
-    cmd = "Zen",
-    opts = require("devil.plugins.configs.zen-mode"),
   },
 
   --------------------------------------------- Git ---------------------------------------------
