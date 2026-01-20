@@ -816,12 +816,6 @@ M.snacks = {
       end,
       "Rename File",
     },
-    ["<leader>cr"] = {
-      function()
-        Snacks.rename.rename()
-      end,
-      "Rename Symbol",
-    },
     ["<leader>z"] = {
       function()
         Snacks.zen()
