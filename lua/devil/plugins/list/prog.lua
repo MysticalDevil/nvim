@@ -296,7 +296,6 @@ return {
     ft = { "dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
     },
     opts = require("devil.plugins.configs.flutter-tools"),
   },

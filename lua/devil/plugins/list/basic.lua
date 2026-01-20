@@ -57,6 +57,7 @@ return {
   {
     "akinsho/bufferline.nvim",
     branch = "main",
+    event = "VeryLazy",
     keys = utils.get_lazy_keys("bufferline"),
     opts = function()
       return require("devil.plugins.configs.bufferline")
@@ -120,20 +121,6 @@ return {
     keys = require("devil.utils").get_lazy_keys("inc_rename"), -- 使用我们刚重构的方法
     opts = {},
   },
-  -- legendary.nvim
-  -- A legend for your keymaps, commands, and autocmds, with which-key.nvim integration
-  --[[{
-    "mrjones2014/legendary.nvim",
-    priority = 10000,
-    lazy = false,
-    dependencies = {
-      "kkharji/sqlite.lua",
-      "mrjones2014/smart-splits.nvim",
-    },
-    opts = function()
-      return require("devil.plugins.configs.legendary")
-    end,
-  },]]
   -- lualine.nvim
   -- A blazing fast and easy to configure neovim statusline plugin written in pure lua
   {
