@@ -95,9 +95,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     lazy = true,
-    init = function()
-      require("devil.utils").load_mappings("dap")
-    end,
+    keys = require("devil.utils").get_lazy_keys("dap"),
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",

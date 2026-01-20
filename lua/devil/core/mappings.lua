@@ -1,8 +1,4 @@
 local utils = require("devil.utils")
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opts = { enable_magic_search = true, enable_space_visible = false }
 
 -- magic search
@@ -285,7 +281,7 @@ M.gitsigns = {
           return "]c"
         end
         vim.schedule(function()
-          require("gitsigns").next_hunk()
+          require("gitsigns").nav_hunk("next")
         end)
         return "<Ignore>"
       end,
@@ -299,7 +295,7 @@ M.gitsigns = {
           return "[c"
         end
         vim.schedule(function()
-          require("gitsigns").prev_hunk()
+          require("gitsigns").nav_hunk("prev")
         end)
         return "<Ignore>"
       end,
@@ -331,7 +327,7 @@ M.gitsigns = {
 
     ["<leader>td"] = {
       function()
-        require("gitsigns").toggle_deleted()
+        require("gitsigns").preview_hunk_inline()
       end,
       "Toggle deleted",
     },
@@ -801,6 +797,133 @@ M.ufo = {
         end
       end,
       "Peek folded lines under cursor",
+    },
+  },
+}
+
+M.snacks = {
+  plugin = true,
+  n = {
+    ["<c-\\>"] = {
+      function()
+        Snacks.terminal.toggle()
+      end,
+      "Toggle Terminal",
+    },
+    ["<leader>cR"] = {
+      function()
+        Snacks.rename.rename_file()
+      end,
+      "Rename File",
+    },
+    ["<leader>z"] = {
+      function()
+        Snacks.zen()
+      end,
+      "Toggle Zen Mode",
+    },
+    ["<leader>Z"] = {
+      function()
+        Snacks.zen.zoom()
+      end,
+      "Toggle Zoom",
+    },
+    ["<leader>ps"] = {
+      function()
+        Snacks.profiler.startup({})
+      end,
+      "Startup Profiler",
+    },
+    ["<leader>n"] = {
+      function()
+        Snacks.notifier.show_history()
+      end,
+      "Notification History",
+    },
+    ["<leader>gb"] = {
+      function()
+        Snacks.git.blame_line()
+      end,
+      "Git Blame Line",
+    },
+    ["<leader>N"] = {
+      function()
+        Snacks.win({
+          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+          width = 0.6,
+          height = 0.6,
+          wo = {
+            spell = false,
+            wrap = false,
+            signcolumn = "yes",
+            statuscolumn = " ",
+            conceallevel = 3,
+          },
+        })
+      end,
+      "Neovim News",
+    },
+  },
+  t = {
+    ["<c-\\>"] = {
+      function()
+        Snacks.terminal.toggle()
+      end,
+      "Toggle Terminal",
+    },
+  },
+}
+
+M.flash = {
+  plugin = true,
+  n = {
+    ["S"] = {
+      function()
+        require("flash").treesitter()
+      end,
+      "Flash Treesitter",
+    },
+  },
+  x = {
+    ["S"] = {
+      function()
+        require("flash").treesitter()
+      end,
+      "Flash Treesitter",
+    },
+    ["R"] = {
+      function()
+        require("flash").treesitter_search()
+      end,
+      "Treesitter Search",
+    },
+  },
+  o = {
+    ["S"] = {
+      function()
+        require("flash").treesitter()
+      end,
+      "Flash Treesitter",
+    },
+    ["r"] = {
+      function()
+        require("flash").remote()
+      end,
+      "Remote Flash",
+    },
+    ["R"] = {
+      function()
+        require("flash").treesitter_search()
+      end,
+      "Treesitter Search",
+    },
+  },
+  c = {
+    ["<c-s>"] = {
+      function()
+        require("flash").toggle()
+      end,
+      "Toggle Flash Search",
     },
   },
 }

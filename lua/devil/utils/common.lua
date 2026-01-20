@@ -39,6 +39,44 @@ function M.deep_print(tbl)
   return request_headers_all
 end
 
+---Convert configurations from mappings.lua to lazy.nvim keys format
+---@param name string Plugin name (key in mappings.lua)
+---@return table
+function M.get_lazy_keys(name)
+  local keys = {}
+  local mappings = require("devil.core.mappings")
+
+  if not mappings[name] then
+    return keys
+  end
+
+  local section = mappings[name]
+  section.plugin = true
+
+  for mode, mode_values in pairs(section) do
+    if mode ~= "plugin" then
+      for keybind, mapping_info in pairs(mode_values) do
+        local key_config = {
+          keybind,
+          mapping_info[1],
+          desc = mapping_info[2],
+          mode = mode,
+        }
+
+        if mapping_info.opts then
+          for k, v in pairs(mapping_info.opts) do
+            key_config[k] = v
+          end
+        end
+
+        table.insert(keys, key_config)
+      end
+    end
+  end
+
+  return keys
+end
+
 -- A full icon for lsp label kinds
 M.kind_icons = {
   Array = "󰅪 ",

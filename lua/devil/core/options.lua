@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local options = {
   backup = false, -- create a backup file
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard

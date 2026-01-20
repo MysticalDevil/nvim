@@ -43,138 +43,6 @@ return {
       require("onedark").load()
     end,
   },
-  -- { "EdenEast/nightfox.nvim" },
-  -- { "folke/tokyonight.nvim" },
-
-  -- snacks.nvim
-  -- A collection of QoL plugins for Neovim
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    opts = {
-      bigfile = { enabled = true },
-      dashboard = {
-        enabled = true,
-        preset = {
-          header = [[
-   __  __           _   _           _
-  |  \/  |_   _ ___| |_(_) ___ __ _| |
-  | |\/| | | | / __| __| |/ __/ _` | |
-  | |  | | |_| \__ \ |_| | (_| (_| | |
-  |_|  |_|\__, |___/\__|_|\___\__,_|_|
-          |___/
-      ]],
-        },
-      },
-      dim = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true, timeout = 3000 },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      terminal = { enabled = true },
-      zen = {
-        enabled = true,
-        toggles = {
-          dim = true,
-          git_signs = true,
-          mini_diff_signs = false,
-        },
-        show = {
-          statusline = false,
-          tabline = false,
-        },
-      },
-    },
-    keys = {
-      {
-        "<c-\\>",
-        function()
-          Snacks.terminal.toggle()
-        end,
-        desc = "Toggle Terminal",
-        mode = { "n", "t" },
-      },
-      {
-        "<leader>cR",
-        function()
-          Snacks.rename.rename_file()
-        end,
-        desc = "Rename File",
-      },
-      {
-        "<leader>z",
-        function()
-          Snacks.zen()
-        end,
-        desc = "Toggle Zen Mode",
-      },
-      {
-        "<leader>Z",
-        function()
-          Snacks.zen.zoom()
-        end,
-        desc = "Toggle Zoom",
-      },
-      {
-        "<leader>ps",
-        function()
-          Snacks.profiler.startup({})
-        end,
-        desc = "Startup Profiler",
-      },
-      {
-        "<leader>n",
-        function()
-          Snacks.notifier.show_history()
-        end,
-        desc = "Notification History",
-      },
-      {
-        "<leader>gb",
-        function()
-          Snacks.git.blame_line()
-        end,
-        desc = "Git Blame Line",
-      },
-      {
-        "<leader>N",
-        desc = "Neovim News",
-        function()
-          Snacks.win({
-            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-            width = 0.6,
-            height = 0.6,
-            wo = {
-              spell = false,
-              wrap = false,
-              signcolumn = "yes",
-              statuscolumn = " ",
-              conceallevel = 3,
-            },
-          })
-        end,
-      },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          vim.print = _G.dd
-        end,
-      })
-    end,
-  },
 
   --
   --------------------------------------- Common plugins ----------------------------------------
@@ -191,9 +59,7 @@ return {
     dependencies = { "famiu/bufdelete.nvim" },
     -- version = "v4.*",
     branch = "main",
-    init = function()
-      utils.load_mappings("bufferline")
-    end,
+    keys = utils.get_lazy_keys("bufferline"),
     opts = function()
       return require("devil.plugins.configs.bufferline")
     end,
@@ -218,40 +84,7 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    keys = {
-      {
-        "S",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-      {
-        "R",
-        mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end,
-        desc = "Treesitter Search",
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function()
-          require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search",
-      },
-    },
+    keys = utils.get_lazy_keys("flash"),
     opts = require("devil.plugins.configs.flash"), ---@diagnostic disable-line
   },
   -- glow.nvim
@@ -386,9 +219,6 @@ return {
   -- Hlsearch Lens for Neovim
   {
     "kevinhwang91/nvim-hlslens",
-    init = function()
-      -- utils.load_mappings("hlslens")
-    end,
     opts = {
       build_position_cb = function(plist, _, _, _)
         require("scrollbar.handlers.search").handler.show(plist.start_pos)
@@ -497,9 +327,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
-    init = function()
-      utils.load_mappings("ufo")
-    end,
+    keys = utils.get_lazy_keys("ufo"),
     opts = require("devil.plugins.configs.ufo"), ---@diagnostic disable-line
   },
   -- nvim-window-picker
@@ -596,6 +424,29 @@ return {
       }
     end,
   },
+  -- snacks.nvim
+  -- A collection of QoL plugins for Neovim
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    keys = utils.get_lazy_keys("snacks"),
+    opts = require("devil.plugins.configs.snacks"),
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd
+        end,
+      })
+    end,
+  },
   -- smarkcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
@@ -624,9 +475,7 @@ return {
     "mrjones2014/smart-splits.nvim",
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
-    init = function()
-      utils.load_mappings("smart_spilts")
-    end,
+    keys = utils.get_lazy_keys("smart_spilts"),
     opts = require("devil.plugins.configs.smart-splits"),
   },
   -- sniprun
@@ -653,9 +502,7 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     version = "^0.2",
-    init = function()
-      utils.load_mappings("telescope")
-    end,
+    keys = utils.get_lazy_keys("telescope"),
     opts = function()
       return require("devil.plugins.configs.telescope")
     end,
@@ -696,9 +543,7 @@ return {
     "folke/trouble.nvim",
     cmd = "Trouble",
     dependencies = "nvim-mini/mini.icons",
-    init = function()
-      utils.load_mappings("trouble")
-    end,
+    keys = utils.get_lazy_keys("trouble"),
     opts = { use_diagnostic_signs = true },
   },
   -- urlview.nvim
@@ -715,9 +560,7 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    init = function()
-      utils.load_mappings("whichkey")
-    end,
+    keys = utils.get_lazy_keys("whichkey"),
     config = function()
       require("devil.plugins.configs.which-key")
     end,
@@ -747,9 +590,7 @@ return {
   -- Improved Yank and Put functionalities for Neovim
   {
     "gbprod/yanky.nvim",
-    init = function()
-      utils.load_mappings("yanky")
-    end,
+    keys = utils.get_lazy_keys("yanky"),
     opts = {},
   },
 
@@ -777,9 +618,7 @@ return {
     "lewis6991/gitsigns.nvim",
     cmd = "Gitsigns",
     event = "BufReadPre",
-    init = function()
-      utils.load_mappings("gitsigns")
-    end,
+    keys = utils.get_lazy_keys("gitsigns"),
     opts = require("devil.plugins.configs.gitsigns"), ---@diagnostic disable-line
   },
   -- neogit
