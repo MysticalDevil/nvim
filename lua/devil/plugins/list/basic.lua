@@ -56,8 +56,6 @@ return {
   -- A snazzy bufferline for Neovim
   {
     "akinsho/bufferline.nvim",
-    dependencies = { "famiu/bufdelete.nvim" },
-    -- version = "v4.*",
     branch = "main",
     keys = utils.get_lazy_keys("bufferline"),
     opts = function()
@@ -116,6 +114,12 @@ return {
       disable_legacy_commands = true,
     },
   },
+  {
+    "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
+    keys = require("devil.utils").get_lazy_keys("inc_rename"), -- 使用我们刚重构的方法
+    opts = {},
+  },
   -- legendary.nvim
   -- A legend for your keymaps, commands, and autocmds, with which-key.nvim integration
   --[[{
@@ -172,7 +176,18 @@ return {
       { "<A-m>", "<cmd>Neotree toggle<CR>", desc = "Toggle neo-tree" },
       { "\\", "<cmd>Neotree reveal<CR>", desc = "Reveal neo-tree" },
     },
-    opts = require("devil.plugins.configs.neo-tree"),
+    opts = function(_, opts)
+      local function on_move(data)
+        Snacks.rename.on_rename_file(data.source, data.destination)
+      end
+      local events = require("neo-tree.events")
+      opts.event_handlers = opts.event_handlers or {}
+      vim.list_extend(opts.event_handlers, {
+        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      })
+      return require("devil.plugins.configs.neo-tree")
+    end,
   },
   -- noice.nvim
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu
@@ -475,7 +490,7 @@ return {
     "mrjones2014/smart-splits.nvim",
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
-    keys = utils.get_lazy_keys("smart_spilts"),
+    keys = utils.get_lazy_keys("smart_splits"),
     opts = require("devil.plugins.configs.smart-splits"),
   },
   -- sniprun

@@ -30,9 +30,5 @@ return {
       git_signs = true,
       mini_diff_signs = false,
     },
-    show = {
-      statusline = false,
-      tabline = false,
-    },
   },
 }

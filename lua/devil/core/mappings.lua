@@ -461,7 +461,7 @@ M.hlslens = {
   },
 }
 
-M.smart_spilts = {
+M.smart_splits = {
   plugin = true,
 
   n = {
@@ -816,6 +816,12 @@ M.snacks = {
       end,
       "Rename File",
     },
+    ["<leader>cr"] = {
+      function()
+        Snacks.rename.rename()
+      end,
+      "Rename Symbol",
+    },
     ["<leader>z"] = {
       function()
         Snacks.zen()
@@ -924,6 +930,20 @@ M.flash = {
         require("flash").toggle()
       end,
       "Toggle Flash Search",
+    },
+  },
+}
+
+M.inc_rename = {
+  plugin = true,
+
+  n = {
+    ["<leader>rn"] = {
+      function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end,
+      "Incremental Rename",
+      opts = { expr = true },
     },
   },
 }
