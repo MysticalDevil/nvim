@@ -1,19 +1,19 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-local commanAugroup = augroup("commonAugroup", { clear = true })
+local commonAugroup = augroup("commonAugroup", { clear = true })
 -- local writeAutoGroup = augroup("writeAutoGroup", { clear = true })
 
 local lispFiletypes = { "clj", "*.el", "*.fnl", "*.hy", "*.janet", "*.lisp", "*.rkt", "*.scm" }
 
 -- Terminal mode automatically enters insert mode
 autocmd("TermOpen", {
-  group = commanAugroup,
+  group = commonAugroup,
   command = "startinsert",
 })
 
 autocmd("BufEnter", {
-  group = commanAugroup,
+  group = commonAugroup,
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - "o" + "r"
   end,
@@ -22,7 +22,7 @@ autocmd("BufEnter", {
 
 -- Auto enable parinfer for lisp-like languages
 autocmd({ "BufEnter", "BufWinEnter" }, {
-  group = commanAugroup,
+  group = commonAugroup,
   pattern = lispFiletypes,
   desc = "Auto enable brackets matching for lisp files",
   command = "ParinferOn",
@@ -30,7 +30,7 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
 
 -- Auto disable side line number for some filetypes
 autocmd("FileType", {
-  group = commanAugroup,
+  group = commonAugroup,
   pattern = { "nvim-docs-view" },
   desc = "Auto disable side line number for some filetypes",
   callback = function()
@@ -39,7 +39,7 @@ autocmd("FileType", {
 })
 
 autocmd("TextYankPost", {
-  group = commanAugroup,
+  group = commonAugroup,
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -47,7 +47,7 @@ autocmd("TextYankPost", {
 })
 
 autocmd("BufReadPost", {
-  group = commanAugroup,
+  group = commonAugroup,
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)

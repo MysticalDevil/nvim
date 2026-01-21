@@ -2,7 +2,7 @@ vim.treesitter.language.register("bash", "ebuild")
 
 vim.bo.expandtab = true
 vim.bo.shiftwidth = 2
-vim.bo.tapstop = 2
+vim.bo.tabstop = 2
 
 vim.wo.wrap = false
 vim.wo.signcolumn = "yes"
