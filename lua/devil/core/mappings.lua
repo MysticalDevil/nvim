@@ -355,7 +355,12 @@ M.bufferline = {
   n = {
     ["<C-h>"] = { "<CMD>BufferLineCyclePrev<CR>", "Cycle previous buffer" },
     ["<C-l>"] = { "<CMD>BufferLineCycleNext<CR>", "Cycle next buffer" },
-    ["<C-w>"] = { "<CMD>Bdelete!<CR>", "Delete buffer" },
+    ["<C-w>"] = {
+      function()
+        Snacks.bufdelete.delete()
+      end,
+      "Delete buffer",
+    },
     ["<A-<>"] = { "<CMD>BufferLineMovePrev<CR>", "Move buffer to previous" },
     ["<A->>"] = { "<CMD>BufferLineMoveNext<CR>", "Move buffer to next" },
     ["<A-1>"] = { "<CMD>BufferLineGoToBuffer 1<CR>", "Go to 1 buffer" },
