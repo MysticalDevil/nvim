@@ -6,10 +6,13 @@ globals:
     any: true
   assert:
     args:
-      - type: bool
+      - type: any
       - type: string
         required: false
   after_each:
+    args:
+      - type: function
+  defore_each:
     args:
       - type: function
   describe:

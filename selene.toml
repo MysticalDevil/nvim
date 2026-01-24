@@ -1,7 +1,9 @@
 std = "neovim"
 
 [rules]
-global_usage = "allow"
+global_usage = "deny"
 multiple_statements = "warn"
 incorrect_standard_library_use = "warn"
 mixed_table = "allow"
+unused_variable = "warn"
+shadowing = "warn"
