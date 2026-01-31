@@ -7,7 +7,7 @@ local signs = {
 
 local opts = {
   virtual_text = true,
-  virtual_lines = { current_line = true },
+  virtual_lines = { current_line = true, source = "if_many" },
   underline = true,
   signs = {
     text = signs,
