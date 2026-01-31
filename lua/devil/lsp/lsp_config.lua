@@ -12,6 +12,7 @@ M.servers = {
   html = false,
   jsonls = false,
   lemminx = false,
+  mesonlsp = false,
   neocmake = false,
   nil_ls = false,
   phpactor = false,
@@ -19,6 +20,7 @@ M.servers = {
   ruby_lsp = false,
   ruff = false,
   taplo = false,
+  vala_ls = false,
   vimls = false,
   vue_ls = false,
 
