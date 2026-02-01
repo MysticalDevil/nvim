@@ -16,6 +16,7 @@ M.servers = {
   neocmake = false,
   nil_ls = false,
   phpactor = false,
+  qmlls = false,
   roslyn = false,
   ruby_lsp = false,
   ruff = false,
