@@ -46,7 +46,7 @@
   影响：逻辑自相矛盾，维护时易误判。  
   建议：统一策略（保留或移除其一），并按平台条件分支处理。
 
-- [ ] 修正 `cmake-tools.nvim` 的配置字段拼写  
+- [x] 修正 `cmake-tools.nvim` 的配置字段拼写  
   文件：`lua/devil/plugins/list/prog.lua:256`  
   问题：使用了 `opt = {}`，lazy.nvim 常规字段是 `opts`。  
   影响：该配置项当前基本无效。  

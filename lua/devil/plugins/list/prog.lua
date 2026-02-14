@@ -253,7 +253,7 @@ return {
     "Civitasv/cmake-tools.nvim",
     event = "BufRead CMakeLists.txt",
     ft = { "cmake" },
-    opt = {},
+    opts = {},
   },
   -- xmake.nvim
   -- The xmake plugin for neovim provides a ui
