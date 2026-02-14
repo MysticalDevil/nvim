@@ -76,6 +76,20 @@ If something is missing, check these first:
   - `lua/devil/core/mappings.lua`
 - LSP-specific mappings are loaded on attach.
 
+## Keyspace Baseline
+
+Current leader-key namespace baseline (to avoid future collisions):
+
+- `<leader>f*`: find/search (Telescope)
+- `<leader>w*`: window management
+- `<leader>b*`: buffer management
+- `<leader>g*`: git operations
+- `<leader>l*`: LSP/diagnostics related actions
+- `<leader>x*`: diagnostics/trouble list views
+- `<leader>t*`: toggles/tools
+- `<leader>p*`: profiler/performance helpers
+- `<leader>c*`: code actions/rename/config commands
+
 ## Main Components
 
 - Plugin manager: [`folke/lazy.nvim`](https://github.com/folke/lazy.nvim)
@@ -85,6 +99,31 @@ If something is missing, check these first:
 - Linting: `nvim-lint`
 - Debugging: `nvim-dap`
 - Finder/UI: Telescope, Neo-tree, Noice, Snacks, etc.
+
+## External Dependencies
+
+Base:
+
+- `git` (bootstrap/plugins)
+- `rg` (search/pickers)
+- `fd` (optional, fast file discovery)
+- `curl`, `unzip` (often needed by language tooling installers)
+
+Formatting/Linting (based on configured filetypes):
+
+- Lua: `stylua`, `selene`
+- Shell: `shellcheck`, `beautysh`
+- JSON/YAML: `jq`, `yamllint`, `yamlfmt`
+- C/C++: `clang-format`
+- Go: `gofumpt`, `goimports-reviser`, `golines`, `golangci-lint`
+- Python: `ruff` (or `black` + `isort`)
+- Rust: `rustfmt`
+- Ruby: `rubocop`
+
+Package/build tools used by some plugins:
+
+- `make` (e.g. telescope fzf native extension)
+- `go` toolchain (for Go plugin workflows)
 
 ## Troubleshooting
 

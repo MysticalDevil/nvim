@@ -76,6 +76,20 @@ nvim
   - `lua/devil/core/mappings.lua`
 - LSP 相关按键在 LSP attach 后加载。
 
+## 键位空间基线
+
+当前 leader 键空间约定（用于减少后续冲突）：
+
+- `<leader>f*`：查找/检索（Telescope）
+- `<leader>w*`：窗口管理
+- `<leader>b*`：Buffer 管理
+- `<leader>g*`：Git 相关
+- `<leader>l*`：LSP/诊断相关
+- `<leader>x*`：诊断列表/问题视图
+- `<leader>t*`：开关/工具
+- `<leader>p*`：性能分析相关
+- `<leader>c*`：代码操作/重命名/配置命令
+
 ## 主要组件
 
 - 插件管理：[`folke/lazy.nvim`](https://github.com/folke/lazy.nvim)
@@ -85,6 +99,31 @@ nvim
 - Lint：`nvim-lint`
 - 调试：`nvim-dap`
 - 检索/界面：Telescope、Neo-tree、Noice、Snacks 等
+
+## 外部命令依赖
+
+基础依赖：
+
+- `git`（插件获取与更新）
+- `rg`（检索/picker）
+- `fd`（可选，更快文件发现）
+- `curl`、`unzip`（部分语言工具安装常用）
+
+格式化/Lint（依据当前配置）：
+
+- Lua：`stylua`、`selene`
+- Shell：`shellcheck`、`beautysh`
+- JSON/YAML：`jq`、`yamllint`、`yamlfmt`
+- C/C++：`clang-format`
+- Go：`gofumpt`、`goimports-reviser`、`golines`、`golangci-lint`
+- Python：`ruff`（或 `black` + `isort`）
+- Rust：`rustfmt`
+- Ruby：`rubocop`
+
+部分插件额外依赖：
+
+- `make`（例如 telescope fzf native）
+- Go 工具链（Go 生态插件相关流程）
 
 ## 常见问题
 
