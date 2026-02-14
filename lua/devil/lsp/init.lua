@@ -1,6 +1,7 @@
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
+local settings = require("devil.core.settings")
 local util = require("devil.lsp.util")
 local lsp_config = require("devil.lsp.lsp_config")
 
@@ -17,6 +18,7 @@ end
 
 -- :h mason-default-settings
 mason.setup({
+  PATH = is_nixos() and "skip" or "prepend",
   registries = {
     "github:mason-org/mason-registry",
     "github:Crashdummyy/mason-registry",
@@ -67,4 +69,6 @@ mason_lspconfig.setup({
 lsp_config.setup()
 require("devil.lsp.ui")
 
-util.enable_inlay_hints_autocmd()
+if settings.lsp.inlay_hints.auto_enable then
+  util.enable_inlay_hints_autocmd()
+end

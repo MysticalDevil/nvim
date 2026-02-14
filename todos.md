@@ -14,7 +14,7 @@
   现状：存在多处拼写问题（如 `avaiable`、`Boostrating`、`Formater`），以及中英文注释风格混杂。  
   建议：统一术语和提示文案，降低后续维护成本。
 
-- [ ] 为关键行为补充“开关”配置层  
+- [x] 为关键行为补充“开关”配置层  
   现状：如 `lazy.checker.enabled = true`、自动 lint、自动 inlay hint 等为硬编码。  
   建议：集中放到 `lua/devil/core/options.lua` 或单独 `settings.lua`，便于按机器/场景切换。
 

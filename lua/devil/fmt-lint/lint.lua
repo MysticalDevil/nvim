@@ -4,6 +4,8 @@ if not status then
   return
 end
 
+local settings = require("devil.core.settings")
+
 lint.linters_by_ft = {
   cmake = { "cmakelint" },
   go = { "golangcilint" },
@@ -19,9 +21,11 @@ lint.linters_by_ft = {
 
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-  group = lint_augroup,
-  callback = function()
-    lint.try_lint()
-  end,
-})
+if settings.lint.auto_run then
+  vim.api.nvim_create_autocmd(settings.lint.events, {
+    group = lint_augroup,
+    callback = function()
+      lint.try_lint()
+    end,
+  })
+end
