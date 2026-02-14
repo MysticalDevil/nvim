@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("devil.utils")
+local notify = require("devil.utils.notify")
 
 function M.key_attach(bufnr)
   utils.load_mappings("lspconfig", { buffer = bufnr })
@@ -57,7 +58,7 @@ function M.set_inlay_hints(client, bufnr)
     ["zls"] = false,
   }
   if blocker_lsps[client.name] then
-    vim.notify("Skip inlay hints for LSP: " .. client.name, vim.log.levels.WARN)
+    notify.debug("Skip inlay hints for LSP: " .. client.name)
     return
   end
 

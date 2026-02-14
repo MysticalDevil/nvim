@@ -1,4 +1,5 @@
 local create_cmd = vim.api.nvim_create_user_command
+local notify = require("devil.utils.notify")
 
 create_cmd("BufOnly", function()
   local current_buf = vim.api.nvim_get_current_buf()
@@ -14,17 +15,17 @@ end, { desc = "Close all other buffers" })
 create_cmd("CopyRelPath", function()
   local path = vim.fn.expand("%")
   vim.fn.setreg("+", path)
-  vim.notify("Copied relative path: " .. path, vim.log.levels.INFO)
+  notify.info("Copied relative path: " .. path)
 end, { desc = "Copy relative file path to clipboard" })
 
 create_cmd("ToggleDiagnostics", function()
   local is_enabled = vim.diagnostic.is_enabled()
   vim.diagnostic.enable(not is_enabled)
-  vim.notify("Diagnostics: " .. (not is_enabled and "Enabled" or "Disabled"), vim.log.levels.INFO)
+  notify.info("Diagnostics: " .. (not is_enabled and "Enabled" or "Disabled"))
 end, { desc = "Toggle diagnostics globally" })
 
 create_cmd("FixIndent", function()
   vim.cmd("retab")
   vim.cmd("normal! gg=G")
-  vim.notify("Indentation fixed!", vim.log.levels.INFO)
+  notify.info("Indentation fixed!")
 end, { desc = "Fix indentation for whole file" })

@@ -1,4 +1,5 @@
 local create_user_command = vim.api.nvim_create_user_command
+local notify = require("devil.utils.notify")
 
 local ih = vim.lsp.inlay_hint
 
@@ -10,7 +11,7 @@ local function toggle_inlay_hints()
   local filter = get_filter()
   local is_enabled = ih.is_enabled(filter)
   ih.enable(not is_enabled, filter)
-  vim.notify("Inlay Hints: " .. (not is_enabled and "Enabled" or "Disabled"), vim.log.levels.INFO)
+  notify.info("Inlay Hints: " .. (not is_enabled and "Enabled" or "Disabled"))
 end
 
 local function enable_inlay_hints()

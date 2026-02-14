@@ -2,6 +2,7 @@
 ---@module devil.utils.command
 
 local M = {}
+local notify = require("devil.utils.notify")
 
 ---Start an nREPL job once for the current project.
 ---@param command string
@@ -28,11 +29,11 @@ function M.start_nrepl(command, flag_var)
       detach = 1,
     })
     if job_id > 0 then
-      vim.notify(("Started `%s` in the background, job id: %s"):format(command, job_id), vim.log.levels.INFO)
+      notify.info(("Started `%s` in the background, job id: %s"):format(command, job_id))
       vim.api.nvim_set_var("clj_background_pid", job_id)
       vim.g[flag_var] = true
     else
-      vim.notify(("Failed to start `%s`"):format(command), vim.log.levels.ERROR)
+      notify.error(("Failed to start `%s`"):format(command))
     end
   end
 end
@@ -46,7 +47,7 @@ function M.stop_nrepl(flag_var)
 
   if job_id and job_id > 0 then
     vim.fn.jobstop(job_id)
-    vim.notify("Killed nREPL background task: " .. job_id, vim.log.levels.INFO)
+    notify.info("Killed nREPL background task: " .. job_id)
   end
 end
 

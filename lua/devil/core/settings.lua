@@ -32,4 +32,10 @@ M.lint = {
   events = { "BufEnter", "BufWritePost", "InsertLeave" },
 }
 
+M.notify = {
+  -- Minimum level emitted through `devil.utils.notify`.
+  -- Set to `vim.log.levels.WARN` to reduce UI noise.
+  min_level = vim.log.levels.INFO,
+}
+
 return M

@@ -18,6 +18,8 @@ end
 
 -- :h mason-default-settings
 mason.setup({
+  -- On NixOS, prefer system-managed language tools instead of Mason PATH injection.
+  -- This avoids conflicting toolchains and keeps reproducibility aligned with Nix packages.
   PATH = is_nixos() and "skip" or "prepend",
   registries = {
     "github:mason-org/mason-registry",

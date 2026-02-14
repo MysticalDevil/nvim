@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  static-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install base tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl unzip lua5.1 ripgrep
+
+      - name: Setup StyLua
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          version: latest
+
+      - name: StyLua check
+        run: stylua --check .
+
+      - name: Lua syntax check
+        run: |
+          rg --files -g '*.lua' | xargs -r -n 1 luac5.1 -p
+
+      - name: Install Neovim (stable appimage)
+        run: |
+          curl -fsSL -o nvim.appimage \
+            https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage
+          chmod +x nvim.appimage
+          ./nvim.appimage --appimage-extract
+          echo "$PWD/squashfs-root/usr/bin" >> "$GITHUB_PATH"
+
+      - name: Headless smoke test
+        run: |
+          XDG_CACHE_HOME="$RUNNER_TEMP/nvim-cache" \
+          XDG_STATE_HOME="$RUNNER_TEMP/nvim-state" \
+          XDG_DATA_HOME="$RUNNER_TEMP/nvim-data" \
+          nvim --headless "+qa"

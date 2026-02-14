@@ -3,6 +3,8 @@ if vim.fn.has("nvim-0.10") ~= 1 then
   return
 end
 
+-- Gentoo commonly ships extra Vim runtime files in this path.
+-- Keep it in runtimepath for compatibility with system-wide Vim plugins/scripts.
 if vim.uv.os_uname().release:match("gentoo") then
   vim.opt.rtp:append("/usr/share/vim/vimfiles")
 end
