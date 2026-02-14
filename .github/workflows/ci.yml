@@ -20,9 +20,8 @@ jobs:
         uses: JohnnyMorganz/stylua-action@v4
         with:
           version: latest
-
-      - name: StyLua check
-        run: stylua --check .
+          token: ${{ github.token }}
+          args: --check .
 
       - name: Lua syntax check
         run: |
