@@ -7,7 +7,7 @@
   问题：`typescriptreadt` 拼写错误，导致 `typescriptreact`（TSX）不会走预期格式化器。  
   建议：改为 `typescriptreact = web_fmt`。
 
-- [ ] 修复 `persisted.nvim` 的文件类型忽略逻辑  
+- [x] 修复 `persisted.nvim` 的文件类型忽略逻辑  
   文件：`lua/devil/plugins/configs/persisted.lua:1`、`lua/devil/plugins/configs/persisted.lua:25`  
   问题：`ignore_filetype` 定义为数组，却按哈希表方式 `ignore_filetype[vim.bo.filetype]` 查询，条件恒为 `nil`。  
   影响：本应跳过的 filetype 仍可能被自动保存会话。  

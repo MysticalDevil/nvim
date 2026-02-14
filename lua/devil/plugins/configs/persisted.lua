@@ -22,7 +22,7 @@ return {
   autosave = true, -- automatically save session files when exiting Neovim
   should_autosave = function()
     -- do not autosave if the alpha dashboard is the current filetype
-    if ignore_filetype[vim.bo.filetype] then
+    if vim.tbl_contains(ignore_filetype, vim.bo.filetype) then
       return false
     end
     return true
