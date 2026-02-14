@@ -25,7 +25,11 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
   group = commonAugroup,
   pattern = lispFiletypes,
   desc = "Auto enable brackets matching for lisp files",
-  command = "ParinferOn",
+  callback = function()
+    if vim.fn.exists(":ParinferOn") == 2 then
+      vim.cmd("ParinferOn")
+    end
+  end,
 })
 
 -- Auto disable side line number for some filetypes

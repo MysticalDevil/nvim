@@ -13,7 +13,7 @@
   影响：本应跳过的 filetype 仍可能被自动保存会话。  
   建议：改为集合表（`{ alpha = true, ... }`）或 `vim.tbl_contains`。
 
-- [ ] 处理 `ParinferOn` 命令依赖缺失风险  
+- [x] 处理 `ParinferOn` 命令依赖缺失风险  
   文件：`lua/devil/core/autocmds.lua:28`  
   问题：当前配置里未发现 Parinfer 插件声明，但自动命令直接执行 `ParinferOn`。  
   影响：进入匹配文件时可能报 “Not an editor command: ParinferOn”。  
