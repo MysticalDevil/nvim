@@ -167,7 +167,7 @@ return {
     version = "^7", -- Recommended
     ft = { "rust" },
     lazy = false,
-    init_option = function()
+    init = function()
       local util = require("devil.lsp.util")
       local common_on_attach = util.default_on_attach
       local common_caps = util.common_capabilities()

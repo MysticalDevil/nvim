@@ -21,7 +21,7 @@
   1. 补充并启用对应插件；  
   2. 自动命令前先判断命令是否存在（`vim.fn.exists(":ParinferOn") == 2`）。
 
-- [ ] 修复 `rustaceanvim` 初始化字段名  
+- [x] 修复 `rustaceanvim` 初始化字段名  
   文件：`lua/devil/plugins/list/prog.lua:170`  
   问题：使用了 `init_option`，lazy.nvim 规范字段应为 `init`。  
   影响：`vim.g.rustaceanvim` 可能未按预期在插件加载前设置。  
