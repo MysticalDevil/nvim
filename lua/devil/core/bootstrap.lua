@@ -4,7 +4,7 @@
 ---@param branch string
 local function bootstrap(path, repository, branch)
   if not vim.uv.fs_stat(path) then
-    vim.notify(("Boostrating %s is being installed, please wait..."):format(repository), vim.log.levels.INFO)
+    vim.notify(("Bootstrapping %s, please wait..."):format(repository), vim.log.levels.INFO)
     vim.fn.system({
       "git",
       "clone",

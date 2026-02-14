@@ -1,6 +1,6 @@
 local status_ok, lazy = pcall(require, "lazy")
 if not status_ok then
-  vim.notify("lazy.nvim not install", vim.log.levels.ERROR)
+  vim.notify("lazy.nvim is not installed", vim.log.levels.ERROR)
   return
 end
 

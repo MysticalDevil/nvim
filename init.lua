@@ -1,5 +1,5 @@
 if vim.fn.has("nvim-0.10") ~= 1 then
-  vim.notify("This config only avaiable on >=nvim-0.10", vim.log.levels.ERROR)
+  vim.notify("This config is only available on Neovim >= 0.10", vim.log.levels.ERROR)
   return
 end
 
@@ -7,30 +7,46 @@ if vim.uv.os_uname().release:match("gentoo") then
   vim.opt.rtp:append("/usr/share/vim/vimfiles")
 end
 
--- Basic configure
-require("devil.core")
+---Load module safely and notify on failure.
+---@param module string
+---@param level? integer
+---@return any|nil
+local function safe_require(module, level)
+  local ok, loaded = pcall(require, module)
+  if not ok then
+    vim.notify(("Failed to load `%s`: %s"):format(module, loaded), level or vim.log.levels.WARN)
+    return nil
+  end
+  return loaded
+end
 
-require("devil.core.bootstrap")
+-- Core setup
+safe_require("devil.core", vim.log.levels.ERROR)
 
--- Lazy plugins manage
-require("devil.plugins")
+safe_require("devil.core.bootstrap", vim.log.levels.ERROR)
 
--- Keymappings
-require("devil.utils").load_mappings()
+-- Plugin manager setup
+safe_require("devil.plugins", vim.log.levels.ERROR)
 
--- Language server protocol
-require("devil.lsp")
--- Complete engine
-require("devil.complete")
--- Formater and Linter
-require("devil.fmt-lint")
+-- Key mappings
+local utils = safe_require("devil.utils")
+if utils and type(utils.load_mappings) == "function" then
+  utils.load_mappings()
+end
+
+-- Language Server Protocol
+safe_require("devil.lsp")
+-- Completion engine
+safe_require("devil.complete")
+-- Formatter and linter
+safe_require("devil.fmt-lint")
 -- Debug Adapter Protocol
-require("devil.dap")
+safe_require("devil.dap")
 
--- Customize commands
-require("devil.commands")
+-- Custom commands
+safe_require("devil.commands")
 
-require("devil.core.colorscheme")
+safe_require("devil.core.colorscheme")
 
 -- Playground code
 -- require("devil.playground.setup")

@@ -6,11 +6,11 @@
   Completed: `lua/devil/utils/common.lua`, `lua/devil/utils/command.lua`, `lua/devil/utils/lsp_tool.lua`, `lua/devil/utils/ebuild_cmds.lua`, `lua/devil/utils/init.lua`  
   Also updated non-English code comments in `lua/` to English.
 
-- [ ] 增加最小化启动保护（缺失插件时优雅降级）  
+- [x] 增加最小化启动保护（缺失插件时优雅降级）  
   现状：`init.lua` 会直接 `require("devil.lsp") / require("devil.complete")`。在依赖未安装场景会直接报错中断。  
   建议：对关键模块入口加 `pcall(require, ...)`，至少保证编辑器可启动并给出可读提示。
 
-- [ ] 清理和统一配置中的英文文案/拼写  
+- [x] 清理和统一配置中的英文文案/拼写  
   现状：存在多处拼写问题（如 `avaiable`、`Boostrating`、`Formater`），以及中英文注释风格混杂。  
   建议：统一术语和提示文案，降低后续维护成本。
 
