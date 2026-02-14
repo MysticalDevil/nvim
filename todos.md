@@ -40,7 +40,7 @@
   问题：`ensure_installed = is_nixos() or {}` 在 NixOS 上会变成布尔值 `true`，而该字段应是列表。  
   建议：改为明确列表或空列表（例如 `is_nixos() and {} or { ... }`）。
 
-- [ ] 解决 Gentoo 运行时路径前后矛盾设置  
+- [x] 解决 Gentoo 运行时路径前后矛盾设置  
   文件：`init.lua:7`、`lua/devil/core/options.lua:70`  
   问题：前面在 Gentoo 下追加 `/usr/share/vim/vimfiles`，后面又无条件移除同一路径。  
   影响：逻辑自相矛盾，维护时易误判。  
