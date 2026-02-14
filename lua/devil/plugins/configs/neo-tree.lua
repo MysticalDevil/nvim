@@ -327,7 +327,7 @@ return {
       -- handler = function(file_path)
       handler = function(_)
         --auto close
-        require("neo-tree").close_all()
+        require("neo-tree.command").execute({ action = "close" })
       end,
     },
     {
