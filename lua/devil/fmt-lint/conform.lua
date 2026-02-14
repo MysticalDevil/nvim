@@ -44,7 +44,7 @@ conform.setup({
     javascript = web_fmt,
     typescript = web_fmt,
     javascriptreact = web_fmt,
-    typescriptreadt = web_fmt,
+    typescriptreact = web_fmt,
     json = { "jq" },
     lua = { "stylua" },
     php = { "mago_format" },
