@@ -54,19 +54,19 @@
 
 ## P2（可选优化，提升稳定性和可维护性）
 
-- [ ] 为 Telescope 扩展加载增加容错  
+- [x] 为 Telescope 扩展加载增加容错  
   文件：`lua/devil/plugins/configs/telescope.lua:29`  
   问题：`telescope.load_extension(value)` 未做 `pcall`。  
   影响：某扩展缺失/加载失败时可能中断整体配置。  
   建议：改为 `pcall(telescope.load_extension, value)` 并记录失败扩展。
 
-- [ ] 统一 inlay hint 调用参数写法  
+- [x] 统一 inlay hint 调用参数写法  
   文件：`lua/devil/core/mappings.lua:257`  
   问题：`is_enabled({ 0 })`、`enable(..., { 0 })` 使用了位置数组。  
   影响：不同版本 API 兼容性差，可读性弱。  
   建议：改为键值形式（如 `{ bufnr = 0 }`）。
 
-- [ ] 为 headless/只读场景加会话写入保护  
-  文件：`lua/devil/plugins/configs/persisted.lua:16`  
-  现象：在受限环境下退出时自动保存会话可能报写入错误。  
-  建议：在 `should_autosave` 中增加目录可写/非 headless 的判断。
+- [x] 为 headless/只读场景加会话写入保护（通过移除 `persisted.nvim` 实现）  
+  文件：`lua/devil/plugins/list/basic.lua`  
+  现象：会话自动保存相关报错来源于 `persisted.nvim`。  
+  处理：按需求移除插件与相关配置，问题源头消失。

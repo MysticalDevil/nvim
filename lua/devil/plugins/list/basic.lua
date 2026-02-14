@@ -352,36 +352,6 @@ return {
       "OverseerClearCache",
     },
   },
-  -- persisted.nvim
-  -- Simple session management for Neovim, autoloading and Telescope support(forked folke/persistence.nvim)
-  {
-    "olimorris/persisted.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    keys = {
-      {
-        "<leader>ps",
-        function()
-          require("persisted").load()
-        end,
-        desc = "Load session",
-      },
-      {
-        "<leader>pl",
-        function()
-          require("persisted").load({ last = true })
-        end,
-        desc = "Load last session",
-      },
-      {
-        "<leader>pd",
-        function()
-          require("persisted").stop()
-        end,
-        desc = "Stop session",
-      },
-    },
-    opts = require("devil.plugins.configs.persisted"), ---@diagnostic disable-line
-  },
   -- rainbow-delimiters.nvim
   -- Rainbow delimiters for Neovim with Tree-sitter
   {

@@ -254,7 +254,8 @@ M.lspconfig = {
 
     ["<leader>L"] = {
       function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+        local bufnr = 0
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
       end,
       "Toggle LSP inlay hints",
     },

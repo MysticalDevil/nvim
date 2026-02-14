@@ -23,7 +23,6 @@ local extensions_list = {
   "file_browser",
   "fzf",
   "neoclip",
-  "persisted",
   "project",
   "smart_open",
   "undo",
@@ -33,7 +32,10 @@ local extensions_list = {
 }
 
 for _, value in pairs(extensions_list) do
-  telescope.load_extension(value)
+  local ok, err = pcall(telescope.load_extension, value)
+  if not ok then
+    vim.notify(("Failed to load telescope extension `%s`: %s"):format(value, err), vim.log.levels.WARN)
+  end
 end
 
 local has_trouble, trouble_telescope = pcall(require, "trouble.sources.telescope")
@@ -117,9 +119,6 @@ return {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
-    },
-    persisted = {
-      layout_config = { width = 0.55, height = 0.55 },
     },
     smart_open = {
       cwd_only = true,
