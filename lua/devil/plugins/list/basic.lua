@@ -143,7 +143,7 @@ return {
         function()
           require("neogen").generate({ type = "any" })
         end,
-        desc = "Use neogeo to generate",
+        desc = "Use neogen to generate",
       },
     },
     opts = others_configs.neogen,
@@ -272,7 +272,7 @@ return {
       },
     },
   },
-  -- nvim-surrond
+  -- nvim-surround
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
@@ -406,7 +406,7 @@ return {
     keys = utils.get_lazy_keys("snacks"),
     opts = require("devil.plugins.configs.snacks"),
   },
-  -- smarkcolumn.nvim
+  -- smartcolumn.nvim
   -- A Neovim plugin hiding your colorcolumn when unneeded.
   {
     "m4xshen/smartcolumn.nvim",

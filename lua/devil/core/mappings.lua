@@ -18,7 +18,7 @@ local M = {}
 
 M.general = {
   i = {
-    ["<C-b>"] = { "<ESC>^i", "Begining of line" },
+    ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
     ["<C-e>"] = { "<End>", "End of line" },
 
     ["<C-h>"] = { "<Left>", "Move left" },
@@ -105,7 +105,7 @@ M.general = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
+    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Do not copy replaced text", opts = { silent = true } },
   },
 
   c = {
@@ -338,14 +338,14 @@ M.gitsigns = {
         require("gitsigns").toggle_numhl()
         require("gitsigns").toggle_linehl()
       end,
-      "Toggle line hightlight",
+      "Toggle line highlight",
     },
 
     ["<leader>tw"] = {
       function()
         require("gitsigns").toggle_word_diff()
       end,
-      "Toggle different word",
+      "Toggle word diff",
     },
   },
 }
@@ -592,7 +592,7 @@ M.whichkey = {
       end,
       "Which-key all keymaps",
     },
-    ["<leader>wk"] = {
+    ["<leader>w?"] = {
       function()
         local input = vim.fn.input("WhichKey: ")
         vim.cmd("WhichKey " .. input)
@@ -620,11 +620,11 @@ M.yanky = {
     },
     ["gp"] = {
       "<Plug>(YankyGPutAfter)",
-      "Put yankyed text after selection",
+      "Put yanked text after selection",
     },
     ["gP"] = {
       "<Plug>(YankyGPutBefore)",
-      "Put yankyed text before selection",
+      "Put yanked text before selection",
     },
     ["]y"] = {
       "<Plug>(YankyCycleForward)",
@@ -687,21 +687,13 @@ M.yanky = {
       "<Plug>(YankyYank)",
       "Yank text",
     },
-    ["p"] = {
-      "<Plug>(YankyPutAfter)",
-      "Put yanked text after cursor",
-    },
-    ["P"] = {
-      "<Plug>(YankyPutBefore)",
-      "Put yanked text before cursor",
-    },
     ["gp"] = {
       "<Plug>(YankyGPutAfter)",
-      "Put yankyed text after selection",
+      "Put yanked text after selection",
     },
     ["gP"] = {
       "<Plug>(YankyGPutBefore)",
-      "Put yankyed text before selection",
+      "Put yanked text before selection",
     },
   },
 }
@@ -846,7 +838,7 @@ M.snacks = {
       end,
       "Notification History",
     },
-    ["<leader>gb"] = {
+    ["<leader>gB"] = {
       function()
         Snacks.git.blame_line()
       end,

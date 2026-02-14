@@ -1,6 +1,7 @@
 local status_ok, lazy = pcall(require, "lazy")
+local notify = require("devil.utils.notify")
 if not status_ok then
-  vim.notify("lazy.nvim is not installed", vim.log.levels.ERROR)
+  notify.error("lazy.nvim is not installed")
   return
 end
 

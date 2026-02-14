@@ -1,4 +1,5 @@
 local M = {}
+local notify = require("devil.utils.notify")
 
 function M.setup()
   local status_ok, dap = pcall(require, "dap")
@@ -33,7 +34,7 @@ function M.setup()
   for _, name in ipairs(debug_configs) do
     local ok, config = pcall(require, "devil.dap.config." .. name)
     if not ok then
-      vim.notify("DAP: Failed to load config for " .. name, vim.log.levels.ERROR)
+      notify.error("DAP: Failed to load config for " .. name)
     else
       if config.adapters then
         for adapter_name, adapter_config in pairs(config.adapters) do

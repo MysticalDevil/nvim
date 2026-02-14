@@ -2,6 +2,7 @@
 ---@module devil.utils.ebuild_cmds
 
 local M = {}
+local notify = require("devil.utils.notify")
 
 ---Run a command and forward buffered output to quickfix.
 ---@param cmd string[]
@@ -38,13 +39,13 @@ local function run_to_qf(cmd, cwd, title)
       })
       vim.cmd("copen")
       if code ~= 0 then
-        vim.notify(string.format("%s failed (exit=%d)", title, code), vim.log.levels.WARN)
+        notify.warn(string.format("%s failed (exit=%d)", title, code))
       end
     end,
   })
 
   if job_id <= 0 then
-    vim.notify("failed to start job: " .. table.concat(cmd, " "), vim.log.levels.ERROR)
+    notify.error("failed to start job: " .. table.concat(cmd, " "))
   end
 end
 

@@ -1,50 +1,72 @@
 local M = {}
 local util = require("devil.lsp.util")
+local notify = require("devil.utils.notify")
 local settings = require("devil.core.settings")
 
-M.server_layers = {
-  stable = {
-    -- no-config servers
+M.server_groups = {
+  core = {
+    lua_ls = true,
+    jsonls = false,
+    yamlls = true,
+    taplo = false,
     bashls = false,
+    vimls = false,
+  },
+  web = {
     biome = false,
-    dockerls = false,
+    denols = false,
     emmet_language_server = false,
     html = false,
-    jsonls = false,
+    svelte = true,
+    tsgo = true,
+    vue_ls = false,
+  },
+  systems = {
+    clangd = true,
+    sourcekit = true,
+    zls = true,
+  },
+  mobile = {
+    ty = true,
+  },
+  enterprise = {
+    jdtls = true,
+    roslyn = false,
+    ruby_lsp = false,
+    phpactor = false,
+  },
+  experimental = {
+    elixirls = false,
     lemminx = false,
     mesonlsp = false,
     neocmake = false,
     nil_ls = false,
-    phpactor = false,
     qmlls = false,
-    roslyn = false,
     ruff = false,
-    taplo = false,
     vala_ls = false,
-    vimls = false,
-    vue_ls = false,
-
-    clangd = true,
-    jdtls = true,
-    lua_ls = true,
-    sourcekit = true,
-    svelte = true,
-    tsgo = true,
-    yamlls = true,
-    zls = true,
-  },
-  experimental = {
-    denols = false,
-    elixirls = false,
-    ruby_lsp = false,
-    ty = true,
+    dockerls = false,
   },
 }
 
+local function enabled_groups()
+  local groups = settings.lsp.groups or {}
+  return {
+    core = groups.core ~= false,
+    web = groups.web ~= false,
+    systems = groups.systems ~= false,
+    mobile = groups.mobile == true,
+    enterprise = groups.enterprise == true,
+    experimental = groups.experimental == true,
+  }
+end
+
 local function active_servers()
-  local servers = vim.tbl_deep_extend("force", {}, M.server_layers.stable)
-  if settings.lsp.servers.include_experimental then
-    servers = vim.tbl_deep_extend("force", servers, M.server_layers.experimental)
+  local servers = {}
+  local groups = enabled_groups()
+  for group_name, is_enabled in pairs(groups) do
+    if is_enabled and M.server_groups[group_name] then
+      servers = vim.tbl_deep_extend("force", servers, M.server_groups[group_name])
+    end
   end
   return servers
 end
@@ -67,7 +89,7 @@ local function load_server_opts(server, selector)
   local ok, opts = pcall(require, config_path)
   if not ok then
     if not tostring(opts):match("module '.*' not found") then
-      vim.notify(("Error loading LSP config for %s:\n%s"):format(server, opts), vim.log.levels.ERROR)
+      notify.error(("Error loading LSP config for %s:\n%s"):format(server, opts))
     end
     return {}
   end
@@ -85,7 +107,6 @@ function M.setup()
     }
 
     local extra = load_server_opts(server, selector)
-
     local opts = vim.tbl_deep_extend("force", base, extra)
 
     local old_on_attach = extra.on_attach

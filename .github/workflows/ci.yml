@@ -28,6 +28,9 @@ jobs:
         run: |
           rg --files -g '*.lua' | xargs -r -n 1 luac5.1 -p
 
+      - name: Keymap conflict check
+        run: lua5.1 scripts/check_keymap_conflicts.lua
+
       - name: Install Neovim (stable appimage)
         run: |
           curl -fsSL -o nvim.appimage \
@@ -41,4 +44,4 @@ jobs:
           XDG_CACHE_HOME="$RUNNER_TEMP/nvim-cache" \
           XDG_STATE_HOME="$RUNNER_TEMP/nvim-state" \
           XDG_DATA_HOME="$RUNNER_TEMP/nvim-data" \
-          nvim --headless "+qa"
+          nvim --headless "+lua assert(pcall(require, 'devil.core'))" "+qa"

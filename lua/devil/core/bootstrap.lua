@@ -1,10 +1,12 @@
+local notify = require("devil.utils.notify")
+
 -- Auto install lazy.nvim
 ---@param path string
 ---@param repository string
 ---@param branch string
 local function bootstrap(path, repository, branch)
   if not vim.uv.fs_stat(path) then
-    vim.notify(("Bootstrapping %s, please wait..."):format(repository), vim.log.levels.INFO)
+    notify.info(("Bootstrapping %s, please wait..."):format(repository))
     vim.fn.system({
       "git",
       "clone",

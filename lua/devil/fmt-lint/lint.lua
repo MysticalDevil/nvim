@@ -1,6 +1,7 @@
 local status, lint = pcall(require, "lint")
+local notify = require("devil.utils.notify")
 if not status then
-  vim.notify("nvim-lint not found", vim.log.levels.ERROR)
+  notify.error("nvim-lint not found")
   return
 end
 

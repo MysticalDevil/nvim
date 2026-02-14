@@ -1,6 +1,7 @@
 local status, cmp = pcall(require, "cmp")
+local notify = require("devil.utils.notify")
 if not status then
-  vim.notify("nvim-cmp not found", vim.log.levels.ERROR)
+  notify.error("nvim-cmp not found")
   return
 end
 

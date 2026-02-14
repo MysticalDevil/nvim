@@ -1,6 +1,7 @@
 local status_ok, which_key = pcall(require, "which-key")
+local notify = require("devil.utils.notify")
 if not status_ok then
-  vim.notify("which-key.nvim not found", vim.log.levels.ERROR)
+  notify.error("which-key.nvim not found")
   return
 end
 
@@ -12,8 +13,8 @@ which_key.setup({
     spelling = { enabled = true, suggestions = 20 },
     presets = {
       operators = false,
-      montions = false,
-      text_object = false,
+      motions = false,
+      text_objects = false,
       windows = true,
       nav = true,
       z = true,
@@ -43,7 +44,7 @@ which_key.add({
   { "<leader>q", group = "Quit/Session" },
   { "<leader>t", group = "Toggle" },
   { "<leader>w", group = "Window/Save" },
-  { "<leader>x", group = "Trouble/Diagnos" },
+  { "<leader>x", group = "Trouble/Diagnose" },
   { "<leader>y", group = "Yank" },
 
   { "s", group = "Split Window" },

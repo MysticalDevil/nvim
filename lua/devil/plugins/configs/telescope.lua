@@ -1,4 +1,5 @@
 local telescope = require("telescope")
+local notify = require("devil.utils.notify")
 
 local mappings = {
   i = {
@@ -34,7 +35,7 @@ local extensions_list = {
 for _, value in pairs(extensions_list) do
   local ok, err = pcall(telescope.load_extension, value)
   if not ok then
-    vim.notify(("Failed to load telescope extension `%s`: %s"):format(value, err), vim.log.levels.WARN)
+    notify.warn(("Failed to load telescope extension `%s`: %s"):format(value, err))
   end
 end
 
@@ -47,7 +48,7 @@ end
 return {
   defaults = {
     initial_mode = "insert",
-    -- vertival, center, cursor
+    -- vertical, center, cursor
     layout_strategy = "horizontal",
     -- shortcut keys in the window
     mappings = mappings,
@@ -95,7 +96,7 @@ return {
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
   },
   pickers = {
-    -- built-in pickers configurate
+    -- built-in picker configuration
     find_files = {
       -- theme = 'dropdown',
     },

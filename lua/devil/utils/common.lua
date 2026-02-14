@@ -3,6 +3,7 @@
 
 local M = {}
 local merge_tb = vim.tbl_deep_extend
+local notify = require("devil.utils.notify")
 
 ---Print a value via `vim.inspect` and return it unchanged.
 ---@param v any
@@ -204,7 +205,7 @@ function M.load_mappings(section, mapping_opt)
 
     if type(section) == "string" then
       if not mappings[section] then
-        vim.notify(("Keymap Error: '%s' not found in mappings.lua"):format(section), vim.log.levels.WARN)
+        notify.warn(("Keymap Error: '%s' not found in mappings.lua"):format(section))
         return
       end
 

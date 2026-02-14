@@ -1,5 +1,21 @@
+local notify = nil
+do
+  local ok, loaded = pcall(require, "devil.utils.notify")
+  if ok then
+    notify = loaded
+  end
+end
+
+local function emit(msg, level)
+  if notify then
+    notify.notify(msg, level)
+  else
+    vim.notify(msg, level)
+  end
+end
+
 if vim.fn.has("nvim-0.10") ~= 1 then
-  vim.notify("This config is only available on Neovim >= 0.10", vim.log.levels.ERROR)
+  emit("This config is only available on Neovim >= 0.10", vim.log.levels.ERROR)
   return
 end
 
@@ -16,7 +32,7 @@ end
 local function safe_require(module, level)
   local ok, loaded = pcall(require, module)
   if not ok then
-    vim.notify(("Failed to load `%s`: %s"):format(module, loaded), level or vim.log.levels.WARN)
+    emit(("Failed to load `%s`: %s"):format(module, loaded), level or vim.log.levels.WARN)
     return nil
   end
   return loaded

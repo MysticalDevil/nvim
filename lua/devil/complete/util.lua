@@ -1,8 +1,9 @@
 local cmp = require("cmp")
+local notify = require("devil.utils.notify")
 
 local status, lspkind = pcall(require, "lspkind")
 if not status then
-  vim.notify("lspkind.nvim not found", vim.log.levels.ERROR)
+  notify.error("lspkind.nvim not found")
   return
 end
 
@@ -75,8 +76,8 @@ M.mapping = {
   }),
 
   -- confirm
-  -- Accept surrently selected item. If none slected, `select` first item
-  -- Set `select` to `fasle` to only confirm explicitly slected items
+  -- Accept currently selected item. If none is selected, `select` the first item.
+  -- Set `select` to `false` to only confirm explicitly selected items.
   ["<CR>"] = cmp.mapping.confirm({
     select = true,
     behavior = cmp.ConfirmBehavior.Replace,
