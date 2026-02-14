@@ -54,7 +54,7 @@ for server, _ in pairs(lsp_config.servers) do
 end
 
 mason_lspconfig.setup({
-  ensure_installed = is_nixos() or {},
+  ensure_installed = {},
   automatic_installation = false,
   automatic_enable = {
     exclude = {

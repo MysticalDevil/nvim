@@ -35,7 +35,7 @@
   影响：触发行为不确定/后加载覆盖前加载。  
   建议：拆分成不同键位，避免冲突。
 
-- [ ] 修复 NixOS 下 `mason-lspconfig` 的 `ensure_installed` 赋值  
+- [x] 修复 NixOS 下 `mason-lspconfig` 的 `ensure_installed` 赋值  
   文件：`lua/devil/lsp/init.lua:57`  
   问题：`ensure_installed = is_nixos() or {}` 在 NixOS 上会变成布尔值 `true`，而该字段应是列表。  
   建议：改为明确列表或空列表（例如 `is_nixos() and {} or { ... }`）。
