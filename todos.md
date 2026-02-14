@@ -1,72 +1,54 @@
-# Neovim 配置检查待办（按必要程度）
+# Neovim 配置建议清单（新版）
 
-## P0（必须优先修复，可能导致功能失效/报错）
+## 高优先级（建议近期完成）
 
-- [x] 修复 TSX 格式化映射拼写错误  
-  文件：`lua/devil/fmt-lint/conform.lua:47`  
-  问题：`typescriptreadt` 拼写错误，导致 `typescriptreact`（TSX）不会走预期格式化器。  
-  建议：改为 `typescriptreact = web_fmt`。
+- [x] Add LDoc to custom `utils` modules and standardize code comments to English  
+  Completed: `lua/devil/utils/common.lua`, `lua/devil/utils/command.lua`, `lua/devil/utils/lsp_tool.lua`, `lua/devil/utils/ebuild_cmds.lua`, `lua/devil/utils/init.lua`  
+  Also updated non-English code comments in `lua/` to English.
 
-- [x] 修复 `persisted.nvim` 的文件类型忽略逻辑  
-  文件：`lua/devil/plugins/configs/persisted.lua:1`、`lua/devil/plugins/configs/persisted.lua:25`  
-  问题：`ignore_filetype` 定义为数组，却按哈希表方式 `ignore_filetype[vim.bo.filetype]` 查询，条件恒为 `nil`。  
-  影响：本应跳过的 filetype 仍可能被自动保存会话。  
-  建议：改为集合表（`{ alpha = true, ... }`）或 `vim.tbl_contains`。
+- [ ] 增加最小化启动保护（缺失插件时优雅降级）  
+  现状：`init.lua` 会直接 `require("devil.lsp") / require("devil.complete")`。在依赖未安装场景会直接报错中断。  
+  建议：对关键模块入口加 `pcall(require, ...)`，至少保证编辑器可启动并给出可读提示。
 
-- [x] 处理 `ParinferOn` 命令依赖缺失风险  
-  文件：`lua/devil/core/autocmds.lua:28`  
-  问题：当前配置里未发现 Parinfer 插件声明，但自动命令直接执行 `ParinferOn`。  
-  影响：进入匹配文件时可能报 “Not an editor command: ParinferOn”。  
-  建议：二选一  
-  1. 补充并启用对应插件；  
-  2. 自动命令前先判断命令是否存在（`vim.fn.exists(":ParinferOn") == 2`）。
+- [ ] 清理和统一配置中的英文文案/拼写  
+  现状：存在多处拼写问题（如 `avaiable`、`Boostrating`、`Formater`），以及中英文注释风格混杂。  
+  建议：统一术语和提示文案，降低后续维护成本。
 
-- [x] 修复 `rustaceanvim` 初始化字段名  
-  文件：`lua/devil/plugins/list/prog.lua:170`  
-  问题：使用了 `init_option`，lazy.nvim 规范字段应为 `init`。  
-  影响：`vim.g.rustaceanvim` 可能未按预期在插件加载前设置。  
-  建议：`init_option` 更正为 `init`。
+- [ ] 为关键行为补充“开关”配置层  
+  现状：如 `lazy.checker.enabled = true`、自动 lint、自动 inlay hint 等为硬编码。  
+  建议：集中放到 `lua/devil/core/options.lua` 或单独 `settings.lua`，便于按机器/场景切换。
 
-## P1（建议尽快修复，存在行为冲突或平台隐患）
+- [ ] 增加健康检查入口文档  
+  现状：仓库已有 `lua/devil/health.lua`，但使用路径不直观。  
+  建议：在 `README.md` 增加“首次安装后检查步骤”（`checkhealth`、Mason、Treesitter、DAP）和常见故障排查。
 
-- [x] 解决 `<leader>ps` 键位冲突  
-  文件：`lua/devil/plugins/list/basic.lua:362`、`lua/devil/core/mappings.lua:836`  
-  问题：`persisted` 与 `snacks` 都绑定了 `<leader>ps`，语义不同。  
-  影响：触发行为不确定/后加载覆盖前加载。  
-  建议：拆分成不同键位，避免冲突。
+## 中优先级（建议逐步优化）
 
-- [x] 修复 NixOS 下 `mason-lspconfig` 的 `ensure_installed` 赋值  
-  文件：`lua/devil/lsp/init.lua:57`  
-  问题：`ensure_installed = is_nixos() or {}` 在 NixOS 上会变成布尔值 `true`，而该字段应是列表。  
-  建议：改为明确列表或空列表（例如 `is_nixos() and {} or { ... }`）。
+- [ ] 进一步收敛启动时立即加载插件数量  
+  现状：部分插件使用 `lazy = false`，会提高冷启动负担。  
+  建议：按使用频率改成 `event` / `cmd` / `keys` 触发，并配合 `:Lazy profile` 定期回归。
 
-- [x] 解决 Gentoo 运行时路径前后矛盾设置  
-  文件：`init.lua:7`、`lua/devil/core/options.lua:70`  
-  问题：前面在 Gentoo 下追加 `/usr/share/vim/vimfiles`，后面又无条件移除同一路径。  
-  影响：逻辑自相矛盾，维护时易误判。  
-  建议：统一策略（保留或移除其一），并按平台条件分支处理。
+- [ ] LSP Server 列表按“已验证/实验”分层  
+  现状：`lua/devil/lsp/lsp_config.lua` 中 server 较多，未来升级时回归成本高。  
+  建议：拆成 `stable` 与 `experimental` 两层，默认仅启用稳定层。
 
-- [x] 修正 `cmake-tools.nvim` 的配置字段拼写  
-  文件：`lua/devil/plugins/list/prog.lua:256`  
-  问题：使用了 `opt = {}`，lazy.nvim 常规字段是 `opts`。  
-  影响：该配置项当前基本无效。  
-  建议：更正为 `opts = {}`（若确实需要配置）。
+- [ ] 规范键位空间并做冲突基线表  
+  现状：配置规模较大，后续继续扩展时容易出现 leader 键冲突。  
+  建议：在 `README.md` 或独立文档记录 keyspace（如 `<leader>p*`、`<leader>g*` 的保留用途）。
 
-## P2（可选优化，提升稳定性和可维护性）
+- [ ] 对外部命令依赖做显式声明  
+  现状：配置依赖较多 CLI（`rg`、`fd`、`jq`、`stylua`、`goimports` 等）。  
+  建议：文档中按语言分组列出必需/可选命令，减少新环境迁移摩擦。
 
-- [x] 为 Telescope 扩展加载增加容错  
-  文件：`lua/devil/plugins/configs/telescope.lua:29`  
-  问题：`telescope.load_extension(value)` 未做 `pcall`。  
-  影响：某扩展缺失/加载失败时可能中断整体配置。  
-  建议：改为 `pcall(telescope.load_extension, value)` 并记录失败扩展。
+## 低优先级（可选增强）
 
-- [x] 统一 inlay hint 调用参数写法  
-  文件：`lua/devil/core/mappings.lua:257`  
-  问题：`is_enabled({ 0 })`、`enable(..., { 0 })` 使用了位置数组。  
-  影响：不同版本 API 兼容性差，可读性弱。  
-  建议：改为键值形式（如 `{ bufnr = 0 }`）。
+- [ ] 增加 CI 基础校验（静态 + 最小启动）  
+  建议：在 CI 中跑 `stylua --check`、`luacheck/selene`（可选）和一次 `nvim --headless` 冒烟测试。
 
-- [x] 为 headless/只读场景加会话写入保护（通过移除 `persisted.nvim` 实现）  
-  文件：`lua/devil/plugins/list/basic.lua`  
-  现象：会话自动保存相关报错来源于 `persisted.nvim`。  
-  处理：按需求移除插件与相关配置，问题源头消失。
+- [ ] 为平台分支逻辑补充注释  
+  现状：已有 Gentoo/NixOS 分支逻辑。  
+  建议：在代码旁加“为何这么做”的一句注释，减少未来自己“读不懂当时意图”的成本。
+
+- [ ] 统一“通知噪声”等级策略  
+  现状：很多场景都 `vim.notify`，日常使用可能噪声偏高。  
+  建议：非关键提示改 `vim.log.levels.DEBUG/TRACE`（或受开关控制），关键错误保留 `ERROR/WARN`。

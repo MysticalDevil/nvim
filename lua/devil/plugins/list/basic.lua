@@ -118,7 +118,7 @@ return {
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
-    keys = require("devil.utils").get_lazy_keys("inc_rename"), -- 使用我们刚重构的方法
+    keys = require("devil.utils").get_lazy_keys("inc_rename"), -- Use the shared lazy-key helper
     opts = {},
   },
   -- lualine.nvim

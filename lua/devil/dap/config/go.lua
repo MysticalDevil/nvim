@@ -19,7 +19,7 @@ return {
       },
       {
         type = "go",
-        name = "Debug Test", -- 调试当前测试函数
+        name = "Debug Test", -- Debug the current test function
         request = "launch",
         mode = "test",
         program = "./${relativeFileDirname}",

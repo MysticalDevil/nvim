@@ -45,7 +45,7 @@ local opts = {
       disabled_plugins = {
         "gzip",
         "matchit",
-        -- "matchparen", -- 建议保留：这是括号匹配高亮 (%)
+        -- "matchparen", -- Recommended to keep: bracket match highlighting (%)
         "netrwPlugin",
         "tarPlugin",
         "tohtml",

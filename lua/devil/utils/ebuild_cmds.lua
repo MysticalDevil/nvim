@@ -1,5 +1,12 @@
+---Helpers for Gentoo ebuild related commands.
+---@module devil.utils.ebuild_cmds
+
 local M = {}
 
+---Run a command and forward buffered output to quickfix.
+---@param cmd string[]
+---@param cwd string
+---@param title string
 local function run_to_qf(cmd, cwd, title)
   local output = {}
   local function on_event(_, data, _)
@@ -41,6 +48,8 @@ local function run_to_qf(cmd, cwd, title)
   end
 end
 
+---Get current buffer directory or current working directory.
+---@return string
 local function buf_dir()
   local name = vim.api.nvim_buf_get_name(0)
   if name == "" then
@@ -49,6 +58,9 @@ local function buf_dir()
   return vim.fn.fnamemodify(name, ":p:h")
 end
 
+---Find executable in PATH.
+---@param bin string
+---@return string|nil
 local function exepath(bin)
   local p = vim.fn.exepath(bin)
   if p ~= nil and p ~= "" then
@@ -57,6 +69,9 @@ local function exepath(bin)
   return nil
 end
 
+---Find executable from mason bin directory.
+---@param bin string
+---@return string|nil
 local function mason_bin(bin)
   local p = vim.fn.stdpath("data") .. "/mason/bin/" .. bin
   if vim.uv.fs_stat(p) then
@@ -65,15 +80,22 @@ local function mason_bin(bin)
   return nil
 end
 
+---Resolve executable path with PATH -> mason -> raw binary fallback.
+---@param bin string
+---@return string
 local function find_bin(bin)
   return exepath(bin) or mason_bin(bin) or bin
 end
 
+---Run `pkgdev manifest` in current buffer directory.
+---@return nil
 function M.pkg_manifest()
   local cwd = buf_dir()
   run_to_qf({ find_bin("pkgdev"), "manifest" }, cwd, "pkgdev manifest")
 end
 
+---Run `pkgcheck scan` in current buffer directory.
+---@return nil
 function M.pkg_check()
   local cwd = buf_dir()
   run_to_qf({ find_bin("pkgcheck"), "scan" }, cwd, "pkgcheck scan")

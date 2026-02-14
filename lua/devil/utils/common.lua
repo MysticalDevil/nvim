@@ -1,7 +1,10 @@
+---Shared utility helpers.
+---@module devil.utils.common
+
 local M = {}
 local merge_tb = vim.tbl_deep_extend
 
--- A simple log function
+---Print a value via `vim.inspect` and return it unchanged.
 ---@param v any
 ---@return any
 function M.log(v)
@@ -9,7 +12,7 @@ function M.log(v)
   return v
 end
 
--- Wrapper function of vim.keymap.set
+---Wrapper around `vim.keymap.set` with sane defaults.
 ---@param mode string|table
 ---@param lhs string
 ---@param rhs string|function
@@ -23,7 +26,7 @@ function M.keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", default_opts, opts))
 end
 
--- Function to traverse nested tables
+---Serialize nested tables into a flat debug string.
 ---@param tbl table
 ---@return string
 function M.deep_print(tbl)
@@ -39,7 +42,7 @@ function M.deep_print(tbl)
   return request_headers_all
 end
 
----Convert configurations from mappings.lua to lazy.nvim keys format
+---Convert mappings.lua section into lazy.nvim key spec format.
 ---@param name string Plugin name (key in mappings.lua)
 ---@return table
 function M.get_lazy_keys(name)
@@ -77,7 +80,7 @@ function M.get_lazy_keys(name)
   return keys
 end
 
--- A full icon for lsp label kinds
+---Icon map for LSP and completion kinds.
 M.kind_icons = {
   Array = "󰅪 ",
   Boolean = " ",
@@ -147,6 +150,7 @@ M.kind_icons = {
   TypeParameter = "󰊄 ",
 }
 
+---Filetypes that should be excluded by some UI helpers.
 M.exclude_filetypes = {
   "lazy",
   "null-ls-info",
@@ -169,6 +173,10 @@ M.exclude_filetypes = {
   "TelescopeResults",
 }
 
+---Load key mappings from `devil.core.mappings`.
+---If `section` is provided, only that section is loaded.
+---@param section? string
+---@param mapping_opt? table
 function M.load_mappings(section, mapping_opt)
   vim.schedule(function()
     local function set_section_map(section_values)
@@ -181,7 +189,7 @@ function M.load_mappings(section, mapping_opt)
       for mode, mode_values in pairs(section_values) do
         local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
         for keybind, mapping_info in pairs(mode_values) do
-          -- merge default + user opts
+          -- Merge default and per-key options.
           local opts = merge_tb("force", default_opts, mapping_info.opts or {})
 
           mapping_info.opts, opts.mode = nil, nil
