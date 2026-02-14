@@ -833,7 +833,7 @@ M.snacks = {
       end,
       "Toggle Zoom",
     },
-    ["<leader>ps"] = {
+    ["<leader>pS"] = {
       function()
         Snacks.profiler.startup({})
       end,

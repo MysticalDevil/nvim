@@ -29,7 +29,7 @@
 
 ## P1（建议尽快修复，存在行为冲突或平台隐患）
 
-- [ ] 解决 `<leader>ps` 键位冲突  
+- [x] 解决 `<leader>ps` 键位冲突  
   文件：`lua/devil/plugins/list/basic.lua:362`、`lua/devil/core/mappings.lua:836`  
   问题：`persisted` 与 `snacks` 都绑定了 `<leader>ps`，语义不同。  
   影响：触发行为不确定/后加载覆盖前加载。  
