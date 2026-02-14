@@ -166,7 +166,6 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^7", -- Recommended
     ft = { "rust" },
-    lazy = false,
     init = function()
       local util = require("devil.lsp.util")
       local common_on_attach = util.default_on_attach

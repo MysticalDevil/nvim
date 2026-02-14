@@ -152,8 +152,8 @@ return {
   -- Neovim plugin to manage the file system and other tree like structures
   {
     "nvim-neo-tree/neo-tree.nvim",
-    lazy = false,
     branch = "v3.x",
+    cmd = { "Neotree" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-mini/mini.icons",
@@ -165,7 +165,15 @@ return {
     },
     opts = function(_, opts)
       local function on_move(data)
-        Snacks.rename.on_rename_file(data.source, data.destination)
+        if _G.Snacks and Snacks.rename and Snacks.rename.on_rename_file then
+          Snacks.rename.on_rename_file(data.source, data.destination)
+          return
+        end
+
+        local ok, snacks = pcall(require, "snacks")
+        if ok and snacks.rename and snacks.rename.on_rename_file then
+          snacks.rename.on_rename_file(data.source, data.destination)
+        end
       end
       local events = require("neo-tree.events")
       opts.event_handlers = opts.event_handlers or {}
@@ -277,7 +285,7 @@ return {
   -- Nvim Treesitter configurations and abstraction layer
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = false,
+    event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
     dependencies = {
       {
@@ -394,7 +402,7 @@ return {
   {
     "folke/snacks.nvim",
     priority = 1000,
-    lazy = false,
+    event = "VeryLazy",
     keys = utils.get_lazy_keys("snacks"),
     opts = require("devil.plugins.configs.snacks"),
   },

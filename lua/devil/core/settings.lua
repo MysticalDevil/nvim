@@ -22,6 +22,9 @@ M.lsp = {
   inlay_hints = {
     auto_enable = true,
   },
+  servers = {
+    include_experimental = false,
+  },
 }
 
 M.lint = {

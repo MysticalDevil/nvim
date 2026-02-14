@@ -1,40 +1,60 @@
 local M = {}
 local util = require("devil.lsp.util")
+local settings = require("devil.core.settings")
 
-M.servers = {
-  -- no-config servers
-  bashls = false,
-  biome = false,
-  denols = false,
-  dockerls = false,
-  emmet_language_server = false,
-  elixirls = false,
-  html = false,
-  jsonls = false,
-  lemminx = false,
-  mesonlsp = false,
-  neocmake = false,
-  nil_ls = false,
-  phpactor = false,
-  qmlls = false,
-  roslyn = false,
-  ruby_lsp = false,
-  ruff = false,
-  taplo = false,
-  vala_ls = false,
-  vimls = false,
-  vue_ls = false,
+M.server_layers = {
+  stable = {
+    -- no-config servers
+    bashls = false,
+    biome = false,
+    dockerls = false,
+    emmet_language_server = false,
+    html = false,
+    jsonls = false,
+    lemminx = false,
+    mesonlsp = false,
+    neocmake = false,
+    nil_ls = false,
+    phpactor = false,
+    qmlls = false,
+    roslyn = false,
+    ruff = false,
+    taplo = false,
+    vala_ls = false,
+    vimls = false,
+    vue_ls = false,
 
-  clangd = true,
-  jdtls = true,
-  lua_ls = true,
-  sourcekit = true,
-  svelte = true,
-  tsgo = true,
-  ty = true,
-  yamlls = true,
-  zls = true,
+    clangd = true,
+    jdtls = true,
+    lua_ls = true,
+    sourcekit = true,
+    svelte = true,
+    tsgo = true,
+    yamlls = true,
+    zls = true,
+  },
+  experimental = {
+    denols = false,
+    elixirls = false,
+    ruby_lsp = false,
+    ty = true,
+  },
 }
+
+local function active_servers()
+  local servers = vim.tbl_deep_extend("force", {}, M.server_layers.stable)
+  if settings.lsp.servers.include_experimental then
+    servers = vim.tbl_deep_extend("force", servers, M.server_layers.experimental)
+  end
+  return servers
+end
+
+M.servers = active_servers()
+
+local function refresh_servers()
+  M.servers = active_servers()
+  return M.servers
+end
 
 local function load_server_opts(server, selector)
   if not selector then
@@ -56,7 +76,8 @@ local function load_server_opts(server, selector)
 end
 
 function M.setup()
-  for server, selector in pairs(M.servers) do
+  local servers = refresh_servers()
+  for server, selector in pairs(servers) do
     local base = {
       capabilities = util.common_capabilities(),
       flags = util.flags(),
