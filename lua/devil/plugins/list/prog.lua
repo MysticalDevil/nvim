@@ -211,7 +211,13 @@ return {
     ft = { "python" },
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     branch = "main",
-    opts = require("devil.plugins.configs.venv-selector"),
+    opts = {
+      options = {
+        fd_binary_name = "fd",
+        notify_user_on_venv_activation = true,
+      },
+      search = {},
+    },
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
 
