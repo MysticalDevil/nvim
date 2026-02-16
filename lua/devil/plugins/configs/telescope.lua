@@ -4,8 +4,8 @@ local notify = require("devil.utils.notify")
 local mappings = {
   i = {
     -- move up and down
-    ["C-j"] = "move_selection_next",
-    ["C-k"] = "move_selection_previous",
+    ["<C-j>"] = "move_selection_next",
+    ["<C-k>"] = "move_selection_previous",
     -- history records
     ["<Down>"] = "cycle_history_next",
     ["<Up>"] = "cycle_history_prev",
