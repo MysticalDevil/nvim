@@ -1,6 +1,12 @@
 local function clangd_help()
-  local result = vim.system({ "clangd", "--help" }, { text = true }):wait()
-  if result.code ~= 0 then
+  if vim.fn.executable("clangd") ~= 1 then
+    return ""
+  end
+
+  local ok, result = pcall(function()
+    return vim.system({ "clangd", "--help" }, { text = true }):wait(800)
+  end)
+  if not ok or not result or result.code ~= 0 then
     return ""
   end
 
@@ -83,7 +89,7 @@ return {
         TypeNameLimit = 24,
       },
       CompileFlags = {
-        Add = { "-Wall", "" },
+        Add = { "-Wall" },
         Compiler = "clang++",
       },
     },
