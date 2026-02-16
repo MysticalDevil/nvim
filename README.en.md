@@ -110,16 +110,10 @@ Base:
 - `fd` (optional, fast file discovery)
 - `curl`, `unzip` (often needed by language tooling installers)
 
-Formatting/Linting (based on configured filetypes):
+Formatting/Linting (based on current config; selected by filetype and tool availability):
 
-- Lua: `stylua`, `selene`
-- Shell: `shellcheck`, `beautysh`
-- JSON/YAML: `jq`, `yamllint`, `yamlfmt`
-- C/C++: `clang-format`
-- Go: `gofumpt`, `goimports-reviser`, `golines`, `golangci-lint`
-- Python: `ruff` (or `black` + `isort`)
-- Rust: `rustfmt`
-- Ruby: `rubocop`
+- Formatters: `beautysh`, `clang-format`, `gersemi`, `csharpier`, `dart format`, `fish_indent`, `gofumpt`, `goimports-reviser`, `golines`, `biome-check`, `prettierd`, `prettier`, `jq`, `stylua`, `mago_format`, `ruff format`, `isort`, `black`, `rubocop`, `rustfmt`, `taplo`, `xmlformat`, `yamlfmt`, `zigfmt`, `codespell`
+- Linters: `cmakelint`, `golangci-lint`, `jsonlint`, `selene`, `markdownlint`, `mago_lint`, `rubocop`, `shellcheck`, `vint`, `yamllint`
 
 Package/build tools used by some plugins:
 

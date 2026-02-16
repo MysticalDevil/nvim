@@ -110,16 +110,10 @@ nvim
 - `fd`（可选，更快文件发现）
 - `curl`、`unzip`（部分语言工具安装常用）
 
-格式化/Lint（依据当前配置）：
+格式化/Lint（依据当前配置；按文件类型与工具可用性选择）：
 
-- Lua：`stylua`、`selene`
-- Shell：`shellcheck`、`beautysh`
-- JSON/YAML：`jq`、`yamllint`、`yamlfmt`
-- C/C++：`clang-format`
-- Go：`gofumpt`、`goimports-reviser`、`golines`、`golangci-lint`
-- Python：`ruff`（或 `black` + `isort`）
-- Rust：`rustfmt`
-- Ruby：`rubocop`
+- Formatters：`beautysh`、`clang-format`、`gersemi`、`csharpier`、`dart format`、`fish_indent`、`gofumpt`、`goimports-reviser`、`golines`、`biome-check`、`prettierd`、`prettier`、`jq`、`stylua`、`mago_format`、`ruff format`、`isort`、`black`、`rubocop`、`rustfmt`、`taplo`、`xmlformat`、`yamlfmt`、`zigfmt`、`codespell`
+- Linters：`cmakelint`、`golangci-lint`、`jsonlint`、`selene`、`markdownlint`、`mago_lint`、`rubocop`、`shellcheck`、`vint`、`yamllint`
 
 部分插件额外依赖：
 
