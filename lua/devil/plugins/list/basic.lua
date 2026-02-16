@@ -471,14 +471,6 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
     opts = others_configs.todo_comments,
   },
-  -- ts-comments.nvim
-  -- Tiny plugin to enhance Neovim's native comments
-  {
-    "folke/ts-comments.nvim",
-    opts = {},
-    event = "VeryLazy",
-    enabled = vim.fn.has("nvim-0.10.0") == 1,
-  },
   -- treesj
   -- Neovim plugin for splitting/joining blocks of code
   {
