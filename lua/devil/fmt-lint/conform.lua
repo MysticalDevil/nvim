@@ -34,9 +34,9 @@ conform.setup({
   -- Map of filetype to formatters
   formatters_by_ft = {
     bash = { "beautysh" },
-    c = { "clang_format" },
+    c = { "clang-format" },
     cmake = { "gersemi" },
-    cpp = { "clang_format" },
+    cpp = { "clang-format" },
     cs = { "csharpier" },
     dart = { "dart_format" },
     fish = { "fish_indent" },
@@ -53,7 +53,7 @@ conform.setup({
     rust = { "rustfmt" },
     sh = { "beautysh" },
     toml = { "taplo" },
-    xml = { "xmlformat" },
+    xml = { "xmlformatter" },
     yaml = yaml_fmt,
     zig = { "zigfmt" },
     -- Use the "*" filetype to run formatters on all filetypes.
