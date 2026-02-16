@@ -7,12 +7,6 @@ function M.key_attach(bufnr)
   utils.load_mappings("lspconfig", { buffer = bufnr })
 end
 
--- disable format, handle it to a dedicated plugin
-function M.disable_format(client)
-  client.server_capabilities.documentFormattingProvider = false
-  client.server_capabilities.documentRangeFormattingProvider = false
-end
-
 ---@return table
 function M.common_capabilities()
   local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -37,7 +31,6 @@ function M.flags()
 end
 
 function M.default_on_attach(client, bufnr)
-  M.disable_format(client)
   M.key_attach(bufnr)
 
   vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })

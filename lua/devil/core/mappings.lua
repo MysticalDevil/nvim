@@ -47,9 +47,14 @@ M.general = {
 
     ["<leader>fm"] = {
       function()
+        local ok, conform = pcall(require, "conform")
+        if ok then
+          conform.format({ async = true, lsp_fallback = true })
+          return
+        end
         vim.lsp.buf.format({ async = true })
       end,
-      "LSP formatting",
+      "Format buffer",
     },
 
     ["<Space>th"] = {
