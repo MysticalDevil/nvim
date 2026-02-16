@@ -282,7 +282,7 @@ return {
   -- Nvim Treesitter configurations and abstraction layer
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
       {
