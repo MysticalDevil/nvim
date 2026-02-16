@@ -38,7 +38,7 @@ autocmd("FileType", {
   pattern = { "nvim-docs-view" },
   desc = "Auto disable side line number for some filetypes",
   callback = function()
-    vim.opt.number = false
+    vim.opt_local.number = false
   end,
 })
 
