@@ -34,14 +34,10 @@ return {
   { "equalsraf/neovim-gui-shim", lazy = true },
 
   {
-    "navarasu/onedark.nvim",
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
-    config = function()
-      require("onedark").setup({
-        style = "darker",
-      })
-      require("onedark").load()
-    end,
+    opts = {},
   },
 
   --
