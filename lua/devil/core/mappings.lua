@@ -43,7 +43,7 @@ M.general = {
 
     -- new buffer
     ["<leader>bn"] = { "<cmd> enew <CR>", "New buffer" },
-    ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
+    ["<leader>ch"] = { "<cmd> WhichKey <CR>", "Mapping cheatsheet" },
 
     ["<leader>fm"] = {
       function()
