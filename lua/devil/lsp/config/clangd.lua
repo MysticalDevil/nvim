@@ -1,5 +1,10 @@
 local function clangd_help()
+  if vim.g.devil_clangd_help_cache ~= nil then
+    return vim.g.devil_clangd_help_cache
+  end
+
   if vim.fn.executable("clangd") ~= 1 then
+    vim.g.devil_clangd_help_cache = ""
     return ""
   end
 
@@ -7,10 +12,12 @@ local function clangd_help()
     return vim.system({ "clangd", "--help" }, { text = true }):wait(800)
   end)
   if not ok or not result or result.code ~= 0 then
+    vim.g.devil_clangd_help_cache = ""
     return ""
   end
 
-  return ("%s\n%s"):format(result.stdout or "", result.stderr or "")
+  vim.g.devil_clangd_help_cache = ("%s\n%s"):format(result.stdout or "", result.stderr or "")
+  return vim.g.devil_clangd_help_cache
 end
 
 local function clangd_has_flag(help, flag)
