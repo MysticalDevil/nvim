@@ -500,7 +500,35 @@ return {
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
     keys = utils.get_lazy_keys("smart_splits"),
-    opts = require("devil.plugins.configs.smart-splits"),
+    opts = {
+      ignored_filetypes = {
+        "nofile",
+        "quickfix",
+        "prompt",
+      },
+      ignored_buftypes = { "NvimTree" },
+      default_amount = 3,
+      at_edge = "wrap",
+      move_cursor_same_row = false,
+      cursor_follows_swapped_bufs = false,
+      resize_mode = {
+        quit_key = "<ESC>",
+        resize_keys = { "h", "j", "k", "l" },
+        silent = false,
+        hooks = {
+          on_enter = nil,
+          on_leave = nil,
+        },
+      },
+      ignored_events = {
+        "BufEnter",
+        "WinEnter",
+      },
+      multiplexer_integration = nil,
+      disable_multiplexer_nav_when_zoomed = true,
+      kitty_password = nil,
+      log_level = "info",
+    },
   },
   -- sniprun
   -- A neovim plugin to run lines/blocs of code
