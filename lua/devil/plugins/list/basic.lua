@@ -536,7 +536,42 @@ return {
     "michaelb/sniprun",
     build = "bash ./install.sh",
     cmd = { "SnipRun" },
-    opts = require("devil.plugins.configs.sniprun"),
+    opts = {
+      selected_interpreters = {},
+      repl_enable = {},
+      repl_disable = {},
+      interpreter_options = {
+        GFM_original = {
+          use_on_filetypes = { "markdown.pandoc" },
+        },
+        Python3_original = {
+          error_truncate = "auto",
+        },
+      },
+      display = {
+        "Classic",
+        "VirtualTextOk",
+        "NvimNotify",
+      },
+      live_display = { "VirtualTextOk" },
+      display_options = {
+        terminal_width = 45,
+        notification_timeout = 5,
+      },
+      show_no_output = {
+        "Classic",
+        "TempFloatingWindow",
+      },
+      snipruncolors = {
+        SniprunVirtualTextOk = { bg = "#66eeff", fg = "#000000", ctermbg = "Cyan", cterfg = "Black" },
+        SniprunFloatingWinOk = { fg = "#66eeff", ctermfg = "Cyan" },
+        SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", ctermbg = "DarkRed", cterfg = "Black" },
+        SniprunFloatingWinErr = { fg = "#881515", ctermfg = "DarkRed" },
+      },
+      live_mode_toggle = "off",
+      inline_messages = 0,
+      borders = "rounded",
+    },
   },
   -- telescope.nvim
   -- Find, Filter, Preview, Pick. All lua, all the time.
