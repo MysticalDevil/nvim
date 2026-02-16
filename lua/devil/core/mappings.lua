@@ -1,5 +1,5 @@
 local utils = require("devil.utils")
-local opts = { enable_magic_search = true, enable_space_visible = false }
+local opts = { enable_magic_search = true, space_visible = false }
 
 -- magic search
 if opts.enable_magic_search then
@@ -57,7 +57,7 @@ M.general = {
         if opts.space_visible then
           vim.opt.listchars:remove("space:·")
         else
-          vim.opt.listchars:append("space: ")
+          vim.opt.listchars:append("space:·")
         end
 
         opts.space_visible = not opts.space_visible
