@@ -6,7 +6,7 @@
 
 ## 环境要求
 
-- Neovim `>= 0.10`
+- Neovim `>= 0.11`
 - `git`
 - 推荐命令行工具：
   - `rg`（ripgrep）
@@ -98,6 +98,7 @@ nvim
 - 格式化：`conform.nvim`
 - Lint：`nvim-lint`
 - 调试：`nvim-dap`
+- 语法树：`nvim-treesitter`（通过 `nvim-treesitter.configs.setup` 配置）
 - 检索/界面：Telescope、Neo-tree、Noice、Snacks 等
 
 ## 外部命令依赖

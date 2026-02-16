@@ -6,7 +6,7 @@ A modular Neovim configuration built on Lua and `lazy.nvim`, focused on daily de
 
 ## Requirements
 
-- Neovim `>= 0.10`
+- Neovim `>= 0.11`
 - `git`
 - Recommended CLI tools:
   - `rg` (ripgrep)
@@ -98,6 +98,7 @@ Current leader-key namespace baseline (to avoid future collisions):
 - Formatting: `conform.nvim`
 - Linting: `nvim-lint`
 - Debugging: `nvim-dap`
+- Syntax tree: `nvim-treesitter` (configured via `nvim-treesitter.configs.setup`)
 - Finder/UI: Telescope, Neo-tree, Noice, Snacks, etc.
 
 ## External Dependencies
