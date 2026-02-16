@@ -312,7 +312,78 @@ return {
   -- Show code context
   {
     "nvim-treesitter/nvim-treesitter-context",
-    opts = require("devil.plugins.configs.treesitter-context"),
+    opts = {
+      enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+      max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+      trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+      min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+      patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        default = {
+          "class",
+          "function",
+          "method",
+          "for",
+          "while",
+          "if",
+          "switch",
+          "case",
+          "interface",
+          "struct",
+          "enum",
+        },
+        tex = {
+          "chapter",
+          "section",
+          "subsection",
+          "subsubsection",
+        },
+        haskell = {
+          "adt",
+        },
+        rust = {
+          "impl_item",
+        },
+        terraform = {
+          "block",
+          "object_elem",
+          "attribute",
+        },
+        scala = {
+          "object_definition",
+        },
+        vhdl = {
+          "process_statement",
+          "architecture_body",
+          "entity_declaration",
+        },
+        markdown = {
+          "section",
+        },
+        elixir = {
+          "anonymous_function",
+          "arguments",
+          "block",
+          "do_block",
+          "list",
+          "map",
+          "tuple",
+          "quoted_content",
+        },
+        json = {
+          "pair",
+        },
+        typescript = {
+          "export_statement",
+        },
+        yaml = {
+          "block_mapping_pair",
+        },
+      },
+      exact_patterns = {},
+      zindex = 20,
+      mode = "cursor",
+      separator = nil,
+    },
   },
   -- nvim-ts-context-commentstring
   -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
