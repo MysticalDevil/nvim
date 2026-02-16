@@ -75,10 +75,10 @@ conform.setup({
     local buf_ft = vim.bo[bufnr].filetype
 
     if vim.tbl_contains(slow_format_filetypes, buf_ft) then
-      return { timeout_ms = 5000, lsp_fallback = true }
+      return { timeout_ms = 5000, lsp_format = "fallback" }
     end
 
-    return { timeout_ms = 1000, lsp_fallback = true }
+    return { timeout_ms = 1000, lsp_format = "fallback" }
   end,
   -- Set the log level. Use `:ConformInfo` to see the location of the log file.
   log_level = vim.log.levels.ERROR,
