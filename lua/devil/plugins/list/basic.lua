@@ -148,6 +148,7 @@ return {
   -- Neovim plugin to manage the file system and other tree like structures
   {
     "nvim-neo-tree/neo-tree.nvim",
+    lazy = false,
     branch = "v3.x",
     cmd = { "Neotree" },
     dependencies = {
