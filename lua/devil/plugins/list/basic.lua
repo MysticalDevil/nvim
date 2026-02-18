@@ -298,80 +298,8 @@ return {
     },
     opts = require("devil.plugins.configs.treesitter"),
     config = function(_, opts)
-      local ts = require("nvim-treesitter")
-      ts.setup({})
-      ts.install(opts.ensure_installed)
+      require("nvim-treesitter.configs").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
-      require("nvim-ts-autotag").setup({
-        opts = vim.tbl_extend("force", {}, opts.autotag or {}, { enable = nil }),
-      })
-      require("nvim-treesitter-textobjects").setup({
-        select = opts.textobjects and opts.textobjects.select or {},
-        move = opts.textobjects and opts.textobjects.move or {},
-      })
-
-      local textobjects = opts.textobjects or {}
-      local select_keymaps = (textobjects.select and textobjects.select.keymaps) or {}
-      for key, query in pairs(select_keymaps) do
-        vim.keymap.set({ "x", "o" }, key, function()
-          require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
-        end)
-      end
-
-      local swap_next = (textobjects.swap and textobjects.swap.swap_next) or {}
-      for key, query in pairs(swap_next) do
-        vim.keymap.set("n", key, function()
-          require("nvim-treesitter-textobjects.swap").swap_next(query)
-        end)
-      end
-
-      local swap_previous = (textobjects.swap and textobjects.swap.swap_previous) or {}
-      for key, query in pairs(swap_previous) do
-        vim.keymap.set("n", key, function()
-          require("nvim-treesitter-textobjects.swap").swap_previous(query)
-        end)
-      end
-
-      local move = require("nvim-treesitter-textobjects.move")
-      local move_maps = {
-        goto_next_start = move.goto_next_start,
-        goto_next_end = move.goto_next_end,
-        goto_previous_start = move.goto_previous_start,
-        goto_previous_end = move.goto_previous_end,
-      }
-      for section, fn in pairs(move_maps) do
-        local keymaps = (textobjects.move and textobjects.move[section]) or {}
-        for key, query in pairs(keymaps) do
-          vim.keymap.set({ "n", "x", "o" }, key, function()
-            fn(query, "textobjects")
-          end)
-        end
-      end
-
-      if opts.highlight and opts.highlight.enable then
-        vim.api.nvim_create_autocmd("FileType", {
-          group = vim.api.nvim_create_augroup("devil_treesitter_highlight", { clear = true }),
-          callback = function(args)
-            local should_disable = false
-            if type(opts.highlight.disable) == "function" then
-              local ok, disabled = pcall(opts.highlight.disable, nil, args.buf)
-              should_disable = ok and disabled or false
-            end
-            if not should_disable then
-              pcall(vim.treesitter.start, args.buf)
-            end
-          end,
-        })
-      end
-
-      if opts.indent and opts.indent.enable then
-        vim.api.nvim_create_autocmd("FileType", {
-          group = vim.api.nvim_create_augroup("devil_treesitter_indent", { clear = true }),
-          callback = function(args)
-            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end,
-        })
-      end
 
       require("nvim-dap-repl-highlights").setup()
 
