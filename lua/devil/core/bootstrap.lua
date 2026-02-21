@@ -15,15 +15,8 @@ local function bootstrap(path, repository, branch)
       ("--branch=%s"):format(branch),
       path,
     })
-
-    if vim.v.shell_error ~= 0 or not vim.uv.fs_stat(path) then
-      notify.error(("Failed to bootstrap %s"):format(repository))
-      return false
-    end
   end
-
   vim.opt.rtp:prepend(path)
-  return true
 end
 
 local lazy_path = ("%s/lazy/lazy.nvim"):format(vim.fn.stdpath("data"))
