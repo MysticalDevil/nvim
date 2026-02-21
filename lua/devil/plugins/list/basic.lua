@@ -94,23 +94,6 @@ return {
       return require("devil.plugins.configs.headlines")
     end,
   },
-  -- icon-picker.nvim
-  -- This is a Neovim plugin that helps you pick Nerd Font Icons, Symbols & Emojis
-  {
-    "ziontee113/icon-picker.nvim",
-    cmd = {
-      "IconPickerYank",
-      "IconPickerInsert",
-      "IconPickerNormal",
-    },
-    keys = {
-      { "<Leader><Leader>i", "<cmd>IconPickerNormal<cr>", desc = "Pick icon in normal mode" },
-      { "<Leader><Leader>y", "<cmd>IconPickerYank<cr>", desc = "Pick icon in yank" },
-    },
-    opts = {
-      disable_legacy_commands = true,
-    },
-  },
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
