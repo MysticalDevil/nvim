@@ -401,6 +401,22 @@ return {
   },
 
   ------------------ Unit test ------------------
+  -- vim-test
+  -- Minimal fallback test runner for filetypes without dedicated neotest adapters.
+  {
+    "vim-test/vim-test",
+    cmd = {
+      "TestNearest",
+      "TestFile",
+      "TestSuite",
+      "TestLast",
+      "TestVisit",
+    },
+    init = function()
+      vim.g["test#strategy"] = "neovim"
+      vim.g["test#neovim#term_position"] = "vert botright"
+    end,
+  },
   -- neotest
   -- An extensible framework for interacting with tests within NeoVim.
   {
