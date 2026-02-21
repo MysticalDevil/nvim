@@ -332,19 +332,6 @@ return {
     event = "BufRead package.json",
   },
 
-  -------------------- Yaml ---------------------
-  -- yaml.nvim
-  -- YAML toolkit for Neovim users (moved from GitHub to tangled.org)
-  {
-    "https://tangled.org/cuducos.me/yaml.nvim",
-    name = "yaml.nvim",
-    ft = { "yaml" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
-  --
   -------------------------------------------- Helpers --------------------------------------------
   --
 

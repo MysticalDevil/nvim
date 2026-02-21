@@ -4,7 +4,7 @@
 This repository is a modular Neovim configuration.
 - Entry points: `init.lua`, `ginit.vim`.
 - Core runtime config: `lua/devil/core/` (`options.lua`, `autocmds.lua`, `mappings.lua`, bootstrap/settings).
-- Plugin definitions and plugin-specific setup: `lua/devil/plugins/list/` and `lua/devil/plugins/configs/`.
+- Plugin definitions and plugin-specific setup: `lua/devil/plugins/specs/` and `lua/devil/plugins/configs/`.
 - Language tooling: `lua/devil/lsp/`, `lua/devil/complete/`, `lua/devil/fmt-lint/`, `lua/devil/dap/`.
 - Custom commands/utilities: `lua/devil/commands/`, `lua/devil/utils/`, `lua/devil/health/`.
 - Filetype overrides: `after/ftplugin/`.
@@ -23,7 +23,7 @@ This repository is a modular Neovim configuration.
 - Formatting: StyLua (`stylua.toml`, 120-column width).
 - Linting: Selene (`selene.toml`, `std = "neovim"`).
 - Module naming: lowercase snake_case files (for example `fmt-lint/conform.lua`).
-- Keep plugin specs in `plugins/list/*.lua`; keep plugin behavior in `plugins/configs/*.lua`.
+- Keep plugin specs in `plugins/specs/*.lua` (for example `plugins/specs/core.lua`); keep plugin behavior in `plugins/configs/*.lua`.
 
 ## Testing Guidelines
 There is no dedicated unit-test suite in this repo; rely on static and smoke checks.

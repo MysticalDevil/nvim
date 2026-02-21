@@ -7,10 +7,7 @@ end
 
 local settings = require("devil.core.settings")
 
-local plugins_list = {
-  require("devil.plugins.list.basic"),
-  require("devil.plugins.list.prog"),
-}
+local plugins_list = require("devil.plugins.specs")
 
 local opts = {
   diff = {
