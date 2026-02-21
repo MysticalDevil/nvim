@@ -44,7 +44,7 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "buffer", keywords = 3 },
-    { name = "async_path" },
+    { name = "path" },
     { name = "calc" },
     { name = "treesitter" },
     { name = "crates" },
@@ -77,7 +77,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = "async_path" },
+    { name = "path" },
   }, {
     { name = "cmdline" },
   }),

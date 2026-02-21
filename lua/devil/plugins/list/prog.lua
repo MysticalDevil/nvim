@@ -80,7 +80,7 @@ return {
         "hrsh7th/cmp-nvim-lsp-document-symbol",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-emoji",
-        "FelipeLema/cmp-async-path",
+        "hrsh7th/cmp-path",
         "petertriho/cmp-git",
         "Dosx001/cmp-commit",
         "ray-x/cmp-treesitter",
