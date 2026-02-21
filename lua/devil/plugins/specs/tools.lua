@@ -209,5 +209,4 @@ return {
     keys = utils.get_lazy_keys("yanky"),
     opts = {},
   },
-
 }
