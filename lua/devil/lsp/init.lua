@@ -1,9 +1,34 @@
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
-
 local settings = require("devil.core.settings")
-local util = require("devil.lsp.util")
-local lsp_config = require("devil.lsp.lsp_config")
+
+local function warn(msg)
+  vim.schedule(function()
+    vim.notify(msg, vim.log.levels.WARN)
+  end)
+end
+
+local ok_mason, mason = pcall(require, "mason")
+if not ok_mason then
+  warn("LSP bootstrap skipped: mason.nvim is unavailable")
+  return
+end
+
+local ok_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not ok_mason_lspconfig then
+  warn("LSP bootstrap skipped: mason-lspconfig.nvim is unavailable")
+  return
+end
+
+local ok_util, util = pcall(require, "devil.lsp.util")
+if not ok_util then
+  warn("LSP bootstrap skipped: devil.lsp.util failed to load")
+  return
+end
+
+local ok_lsp_config, lsp_config = pcall(require, "devil.lsp.lsp_config")
+if not ok_lsp_config then
+  warn("LSP bootstrap skipped: devil.lsp.lsp_config failed to load")
+  return
+end
 
 local function is_nixos()
   local f = io.open("/etc/NIXOS", "r")
