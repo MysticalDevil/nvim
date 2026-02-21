@@ -180,19 +180,27 @@ M.exclude_filetypes = {
 function M.load_mappings(section, mapping_opt)
   vim.schedule(function()
     local function set_section_map(section_values)
+      if type(section_values) ~= "table" then
+        return
+      end
+
       if section_values.plugin then
         return
       end
 
       for mode, mode_values in pairs(section_values) do
-        local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
-        for keybind, mapping_info in pairs(mode_values) do
-          -- Merge default and per-key options.
-          local opts = merge_tb("force", default_opts, mapping_info.opts or {})
-          opts.mode = nil
-          opts.desc = mapping_info[2]
+        if type(mode_values) == "table" then
+          local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
+          for keybind, mapping_info in pairs(mode_values) do
+            if type(mapping_info) == "table" then
+              -- Merge default and per-key options.
+              local opts = merge_tb("force", default_opts, mapping_info.opts or {})
+              opts.mode = nil
+              opts.desc = mapping_info[2]
 
-          vim.keymap.set(mode, keybind, mapping_info[1], opts)
+              vim.keymap.set(mode, keybind, mapping_info[1], opts)
+            end
+          end
         end
       end
     end
