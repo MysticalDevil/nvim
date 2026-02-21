@@ -55,7 +55,6 @@ function M.get_lazy_keys(name)
   end
 
   local section = mappings[name]
-  section.plugin = true
 
   for mode, mode_values in pairs(section) do
     if mode ~= "plugin" then
@@ -185,15 +184,12 @@ function M.load_mappings(section, mapping_opt)
         return
       end
 
-      section_values.plugin = nil
-
       for mode, mode_values in pairs(section_values) do
         local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
         for keybind, mapping_info in pairs(mode_values) do
           -- Merge default and per-key options.
           local opts = merge_tb("force", default_opts, mapping_info.opts or {})
-
-          mapping_info.opts, opts.mode = nil, nil
+          opts.mode = nil
           opts.desc = mapping_info[2]
 
           vim.keymap.set(mode, keybind, mapping_info[1], opts)
@@ -209,7 +205,6 @@ function M.load_mappings(section, mapping_opt)
         return
       end
 
-      mappings[section]["plugin"] = nil
       mappings = { mappings[section] }
     end
 
