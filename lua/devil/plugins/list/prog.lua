@@ -334,18 +334,6 @@ return {
     event = "BufRead package.json",
   },
 
-  -------------------- Yaml ---------------------
-  -- yaml.nvim
-  -- YAML toolkit for Neovim users
-  {
-    "cuducos/yaml.nvim",
-    ft = { "yaml" }, -- optional
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-  },
-  --
   -------------------------------------------- Helpers --------------------------------------------
   --
 

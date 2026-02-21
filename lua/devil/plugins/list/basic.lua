@@ -82,9 +82,6 @@ return {
     keys = utils.get_lazy_keys("flash"),
     opts = require("devil.plugins.configs.flash"), ---@diagnostic disable-line
   },
-  -- glow.nvim
-  -- A markdown preview directly in your neovim.
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   -- headlines.nvim
   -- This plugin adds horizontal highlights for text filetypes, like markdown, orgmode, and neorg.
   {
