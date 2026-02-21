@@ -48,7 +48,6 @@ cmp.setup({
     { name = "calc" },
     { name = "treesitter" },
     { name = "crates" },
-    { name = "npm", keyword_length = 4 },
   }),
   sorting = {
     comparators = {
@@ -89,8 +88,6 @@ cmp.setup.filetype("gitcommit", {
     { name = "git" },
   }, {
     { name = "buffer" },
-  }, {
-    { name = "commit" },
   }, {
     { name = "emoji" },
   }),

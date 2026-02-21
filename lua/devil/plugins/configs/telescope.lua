@@ -20,7 +20,6 @@ local mappings = {
 
 local extensions_list = {
   "agrolens",
-  "env",
   "file_browser",
   "fzf",
   "neoclip",

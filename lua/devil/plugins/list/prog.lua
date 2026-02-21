@@ -82,9 +82,7 @@ return {
         "hrsh7th/cmp-emoji",
         "hrsh7th/cmp-path",
         "petertriho/cmp-git",
-        "Dosx001/cmp-commit",
         "ray-x/cmp-treesitter",
-        "David-Kunz/cmp-npm",
       },
     },
   },
@@ -334,6 +332,19 @@ return {
     event = "BufRead package.json",
   },
 
+  -------------------- Yaml ---------------------
+  -- yaml.nvim
+  -- YAML toolkit for Neovim users (moved from GitHub to tangled.org)
+  {
+    "https://tangled.org/cuducos.me/yaml.nvim",
+    name = "yaml.nvim",
+    ft = { "yaml" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  --
   -------------------------------------------- Helpers --------------------------------------------
   --
 
@@ -396,12 +407,10 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/nvim-nio",
 
       -- Languages impl
-      "nvim-neotest/neotest-vim-test",
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-go",
       "nvim-neotest/neotest-plenary",
@@ -421,9 +430,6 @@ return {
           require("neotest-rust"),
           require("neotest-zig"),
           require("neotest-dart"),
-          require("neotest-vim-test")({
-            ignore_file_types = { "python", "vim", "lua" },
-          }),
         },
       }
     end,

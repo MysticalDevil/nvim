@@ -42,12 +42,6 @@ return {
 
   --
   --------------------------------------- Common plugins ----------------------------------------
-  -- beacon.nvim
-  -- Neovim plugin to flash cursor when jumps or moves between windows
-  {
-    "rainbowhxch/beacon.nvim",
-    opts = others_configs.beacon,
-  },
   -- bufferline.nvim
   -- A snazzy bufferline for Neovim
   {
@@ -81,6 +75,17 @@ return {
     event = "VeryLazy",
     keys = utils.get_lazy_keys("flash"),
     opts = require("devil.plugins.configs.flash"), ---@diagnostic disable-line
+  },
+  -- render-markdown.nvim
+  -- Render markdown inside Neovim buffers.
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-mini/mini.icons",
+    },
+    opts = {},
   },
   -- headlines.nvim
   -- This plugin adds horizontal highlights for text filetypes, like markdown, orgmode, and neorg.
@@ -572,7 +577,6 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "LinArcX/telescope-env.nvim",
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
