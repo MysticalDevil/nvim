@@ -1,7 +1,7 @@
 local path = "lua/devil/core/mappings.lua"
 local f = io.open(path, "r")
 if not f then
-  io.stderr:write("Cannot read " .. path .. "\n")
+  io.write("Cannot read " .. path .. "\n")
   os.exit(2)
 end
 
@@ -20,12 +20,35 @@ local keys = {}
 local function brace_delta(line)
   local opens = 0
   local closes = 0
-  for _ in line:gmatch("{") do
-    opens = opens + 1
+  local in_single = false
+  local in_double = false
+  local escaped = false
+  local i = 1
+  while i <= #line do
+    local ch = line:sub(i, i)
+    local next_ch = line:sub(i + 1, i + 1)
+
+    if escaped then
+      escaped = false
+    elseif (in_single or in_double) and ch == "\\" then
+      escaped = true
+    elseif not in_single and not in_double and ch == "-" and next_ch == "-" then
+      break
+    elseif not in_double and ch == "'" then
+      in_single = not in_single
+    elseif not in_single and ch == '"' then
+      in_double = not in_double
+    elseif not in_single and not in_double then
+      if ch == "{" then
+        opens = opens + 1
+      elseif ch == "}" then
+        closes = closes + 1
+      end
+    end
+
+    i = i + 1
   end
-  for _ in line:gmatch("}") do
-    closes = closes + 1
-  end
+
   return opens - closes
 end
 
@@ -95,11 +118,11 @@ if #conflicts == 0 then
   os.exit(0)
 end
 
-io.stderr:write("Keymap conflict check failed:\n")
+io.write("Keymap conflict check failed:\n")
 for _, item in ipairs(conflicts) do
-  io.stderr:write("  " .. item.combo .. "\n")
+  io.write("  " .. item.combo .. "\n")
   for _, ref in ipairs(item.refs) do
-    io.stderr:write(("    - section=%s line=%d\n"):format(ref.section, ref.line))
+    io.write(("    - section=%s line=%d\n"):format(ref.section, ref.line))
   end
 end
 os.exit(1)
