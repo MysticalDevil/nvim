@@ -298,7 +298,18 @@ return {
     },
     opts = require("devil.plugins.configs.treesitter"),
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      local ok_ts, ts = pcall(require, "nvim-treesitter")
+      if ok_ts and type(ts.setup) == "function" then
+        ts.setup(opts)
+      else
+        local ok_configs, configs = pcall(require, "nvim-treesitter.configs")
+        if ok_configs and type(configs.setup) == "function" then
+          configs.setup(opts)
+        else
+          vim.notify("nvim-treesitter setup module not found", vim.log.levels.WARN)
+          return
+        end
+      end
       require("nvim-treesitter.install").prefer_git = true
 
       require("nvim-dap-repl-highlights").setup()
