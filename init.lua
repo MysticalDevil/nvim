@@ -46,6 +46,11 @@ safe_require("devil.core.bootstrap", vim.log.levels.ERROR)
 -- Plugin manager setup
 safe_require("devil.plugins", vim.log.levels.ERROR)
 
+local mappings = safe_require("devil.core.mappings")
+if mappings and type(mappings.setup_early_mappings) == "function" then
+  mappings.setup_early_mappings()
+end
+
 -- Key mappings
 local utils = safe_require("devil.utils")
 if utils and type(utils.load_mappings) == "function" then

@@ -1,20 +1,14 @@
-local utils = require("devil.utils")
 local opts = { enable_magic_search = true, space_visible = false }
 
--- magic search
-if opts.enable_magic_search then
-  utils.keymap({ "n", "v" }, "/", "/\\v", {
-    remap = false,
-    silent = false,
-  })
-else
-  utils.keymap({ "n", "v" }, "/", "/", {
+local M = {}
+
+function M.setup_early_mappings()
+  local rhs = opts.enable_magic_search and "/\\v" or "/"
+  vim.keymap.set({ "n", "v" }, "/", rhs, {
     remap = false,
     silent = false,
   })
 end
-
-local M = {}
 
 M.general = {
   i = {
