@@ -36,7 +36,7 @@ M.server_groups = {
     phpactor = false,
   },
   experimental = {
-    elixirls = false,
+    expert = false,
     lemminx = false,
     mesonlsp = false,
     neocmake = false,
