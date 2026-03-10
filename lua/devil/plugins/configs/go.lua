@@ -48,7 +48,8 @@ return {
         completeUnimported = true,
         staticcheck = true,
         directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-        semanticTokens = true,
+        semanticTokens = false,
+        noSemanticTokens = true,
       },
     },
   }, -- true: use non-default gopls setup specified in go/lsp.lua

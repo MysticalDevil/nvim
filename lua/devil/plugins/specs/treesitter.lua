@@ -36,6 +36,13 @@ return {
 
       require("nvim-dap-repl-highlights").setup()
 
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("devil_treesitter_start", { clear = true }),
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+
       -- enable Folding module
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"

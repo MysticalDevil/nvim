@@ -11,6 +11,7 @@ local languages = {
   "python",
   "ruby",
   "rust",
+  "sql",
   "typescript",
   "tsx",
   "vim",
