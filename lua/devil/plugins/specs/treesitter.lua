@@ -50,6 +50,22 @@ return {
       vim.treesitter.language.register("cpp", "ixx")
     end,
   },
+  -- ts-inject.nvim
+  -- Better TypeScript language injections for modern frontend files.
+  {
+    "MysticalDevil/ts-inject.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "VeryLazy",
+    opts = {
+      enable = {
+        bash = true,
+        go = true,
+        python = true,
+        rust = true,
+        zig = true,
+      },
+    },
+  },
   -- nvim-treesitter-context
   -- Show code context
   {
