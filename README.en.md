@@ -98,7 +98,8 @@ Current leader-key namespace baseline (to avoid future collisions):
 - Formatting: `conform.nvim`
 - Linting: `nvim-lint`
 - Debugging: `nvim-dap`
-- Syntax tree: `nvim-treesitter` (configured via `nvim-treesitter.configs.setup`)
+- Syntax tree: `nvim-treesitter`
+  parser/query installation is managed via `require('nvim-treesitter').setup()`
 - Finder/UI: Telescope, Neo-tree, Noice, Snacks, etc.
 
 ## External Dependencies

@@ -98,7 +98,8 @@ nvim
 - 格式化：`conform.nvim`
 - Lint：`nvim-lint`
 - 调试：`nvim-dap`
-- 语法树：`nvim-treesitter`（通过 `nvim-treesitter.configs.setup` 配置）
+- 语法树：`nvim-treesitter`
+  parser/query 安装通过 `require('nvim-treesitter').setup()` 管理
 - 检索/界面：Telescope、Neo-tree、Noice、Snacks 等
 
 ## 外部命令依赖
