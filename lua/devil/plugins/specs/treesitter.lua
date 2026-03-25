@@ -14,23 +14,133 @@ return {
         init = function()
           vim.g.no_plugin_maps = true
         end,
+        opts = {
+          select = {
+            lookahead = true,
+          },
+          move = {
+            set_jumps = true,
+          },
+        },
+        config = function(_, opts)
+          require("nvim-treesitter-textobjects").setup(opts)
+
+          local select = require("nvim-treesitter-textobjects.select")
+          local move = require("nvim-treesitter-textobjects.move")
+          local swap = require("nvim-treesitter-textobjects.swap")
+          local keymap = vim.keymap.set
+
+          local function map(modes, lhs, rhs, desc)
+            keymap(modes, lhs, rhs, { desc = desc, silent = true })
+          end
+
+          map({ "x", "o" }, "af", function()
+            select.select_textobject("@function.outer", "textobjects")
+          end, "Select function outer")
+          map({ "x", "o" }, "if", function()
+            select.select_textobject("@function.inner", "textobjects")
+          end, "Select function inner")
+          map({ "x", "o" }, "ac", function()
+            select.select_textobject("@class.outer", "textobjects")
+          end, "Select class outer")
+          map({ "x", "o" }, "ic", function()
+            select.select_textobject("@class.inner", "textobjects")
+          end, "Select class inner")
+          map({ "x", "o" }, "ai", function()
+            select.select_textobject("@conditional.outer", "textobjects")
+          end, "Select conditional outer")
+          map({ "x", "o" }, "ii", function()
+            select.select_textobject("@conditional.inner", "textobjects")
+          end, "Select conditional inner")
+          map({ "x", "o" }, "al", function()
+            select.select_textobject("@loop.outer", "textobjects")
+          end, "Select loop outer")
+          map({ "x", "o" }, "il", function()
+            select.select_textobject("@loop.inner", "textobjects")
+          end, "Select loop inner")
+          map({ "x", "o" }, "ab", function()
+            select.select_textobject("@block.outer", "textobjects")
+          end, "Select block outer")
+          map({ "x", "o" }, "ib", function()
+            select.select_textobject("@block.inner", "textobjects")
+          end, "Select block inner")
+
+          map("n", "<leader>a", function()
+            swap.swap_next("@parameter.inner", "textobjects")
+          end, "Swap next parameter")
+          map("n", "<leader>A", function()
+            swap.swap_previous("@parameter.inner", "textobjects")
+          end, "Swap previous parameter")
+
+          map({ "n", "x", "o" }, "]m", function()
+            move.goto_next_start("@function.outer", "textobjects")
+          end, "Next function start")
+          map({ "n", "x", "o" }, "]]", function()
+            move.goto_next_start("@class.outer", "textobjects")
+          end, "Next class start")
+          map({ "n", "x", "o" }, "]M", function()
+            move.goto_next_end("@function.outer", "textobjects")
+          end, "Next function end")
+          map({ "n", "x", "o" }, "][", function()
+            move.goto_next_end("@class.outer", "textobjects")
+          end, "Next class end")
+          map({ "n", "x", "o" }, "[m", function()
+            move.goto_previous_start("@function.outer", "textobjects")
+          end, "Previous function start")
+          map({ "n", "x", "o" }, "[[", function()
+            move.goto_previous_start("@class.outer", "textobjects")
+          end, "Previous class start")
+          map({ "n", "x", "o" }, "[M", function()
+            move.goto_previous_end("@function.outer", "textobjects")
+          end, "Previous function end")
+          map({ "n", "x", "o" }, "[]", function()
+            move.goto_previous_end("@class.outer", "textobjects")
+          end, "Previous class end")
+        end,
       },
-      "windwp/nvim-ts-autotag",
+      {
+        "windwp/nvim-ts-autotag",
+        opts = {
+          opts = {
+            enable_close = true,
+            enable_rename = true,
+            enable_close_on_slash = true,
+          },
+        },
+      },
       "RRethy/nvim-treesitter-endwise",
     },
-    opts = require("devil.plugins.configs.treesitter"),
+    opts = {
+      ensure_installed = {
+        "c",
+        "cpp",
+        "dart",
+        "go",
+        "haskell",
+        "java",
+        "javascript",
+        "kotlin",
+        "lua",
+        "python",
+        "ruby",
+        "rust",
+        "sql",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
+        "zig",
+      },
+      auto_install = true,
+      max_highlight_lines = 10000,
+    },
     config = function(_, opts)
-      local ok_ts, ts = pcall(require, "nvim-treesitter")
-      if ok_ts and type(ts.setup) == "function" then
-        ts.setup(opts)
-      else
-        local ok_configs, configs = pcall(require, "nvim-treesitter.configs")
-        if ok_configs and type(configs.setup) == "function" then
-          configs.setup(opts)
-        else
-          vim.notify("nvim-treesitter setup module not found", vim.log.levels.WARN)
-          return
-        end
+      local ts = require("nvim-treesitter")
+      local parsers = require("nvim-treesitter.parsers")
+
+      ts.setup()
+      if opts.ensure_installed and #opts.ensure_installed > 0 then
+        ts.install(opts.ensure_installed)
       end
       require("nvim-treesitter.install").prefer_git = true
 
@@ -39,7 +149,17 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("devil_treesitter_start", { clear = true }),
         callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
+          local filetype = vim.bo[args.buf].filetype
+          local lang = vim.treesitter.language.get_lang(filetype)
+
+          if opts.auto_install and lang and parsers[lang] and not vim.list_contains(ts.get_installed(), lang) then
+            ts.install(lang)
+          end
+
+          if vim.api.nvim_buf_line_count(args.buf) <= opts.max_highlight_lines then
+            pcall(vim.treesitter.start, args.buf)
+          end
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
       })
 
