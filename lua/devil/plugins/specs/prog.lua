@@ -14,9 +14,9 @@ return {
   -- mason.nvim
   -- Portable package manager for Neovim
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "zapling/mason-conform.nvim",
       "jay-babu/mason-nvim-dap.nvim",
     },
@@ -294,7 +294,7 @@ return {
   -- flutter-tools.nvim
   -- Tools to help create flutter apps in neovim using the native lsp
   {
-    "akinsho/flutter-tools.nvim",
+    "nvim-flutter/flutter-tools.nvim",
     ft = { "dart" },
     dependencies = {
       "nvim-lua/plenary.nvim",

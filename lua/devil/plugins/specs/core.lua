@@ -153,7 +153,7 @@ return {
   -- nvim-colorizer.lua
   -- The fastest Neovim colorizer
   {
-    "NvChad/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     cmd = {
       "ColorizerAttachToBuffer",
       "ColorizerDetachFromBuffer",
