@@ -88,7 +88,5 @@ cmp.setup.filetype("gitcommit", {
     { name = "git" },
   }, {
     { name = "buffer" },
-  }, {
-    { name = "emoji" },
   }),
 })

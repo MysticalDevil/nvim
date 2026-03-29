@@ -42,7 +42,6 @@ M.formatting = {
         nvim_lua = "[API]",
         latex_symbols = "[LaTeX]",
         path = "[Path]",
-        emoji = "[Emoji]",
         treesitter = "[TS]",
         crates = "[Crates]",
         cmdline = "[CMD]",
