@@ -176,15 +176,6 @@ return {
     keys = utils.get_lazy_keys("trouble"),
     opts = { use_diagnostic_signs = true },
   },
-  -- urlview.nvim
-  -- Neovim plugin for viewing all the URLs in a buffer
-  {
-    "axieax/urlview.nvim",
-    cmd = "UrlView",
-    opts = function()
-      return require("devil.plugins.configs.urlview")
-    end,
-  },
   -- which-key.nvim
   -- Create key bindings that stick
   {
