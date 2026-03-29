@@ -1,8 +1,4 @@
-local get_highlight = require("lualine.utils.utils").extract_highlight_colors
-local function hl(name, scope, fallback)
-  local v = get_highlight(name, scope)
-  return v or fallback
-end
+local hl = require("devil.utils.highlight")
 
 local function wide(min)
   min = min or 90
@@ -11,17 +7,17 @@ end
 
 -- Color table for highlights
 local colors = {
-  bg = hl("Folded", "bg"),
-  fg = hl("Folded", "fg"),
-  yellow = hl("DiagnosticWarn", "fg"),
-  green = hl("String", "fg"),
-  blue = hl("Function", "fg"),
-  red = hl("DiagnosticError", "fg"),
-  orange = hl("Number", "fg"),
-  cyan = hl("Constant", "fg"),
-  darkblue = hl("DiffFile", "fg"),
-  violet = hl("Type", "fg", "#a9a1e1"),
-  magenta = hl("Keyword", "fg", "#c678dd"),
+  bg = hl.first({ { "Folded", "bg" }, { "StatusLine", "bg" }, { "Normal", "bg" } }),
+  fg = hl.first({ { "Folded", "fg" }, { "StatusLine", "fg" }, { "Normal", "fg" } }),
+  yellow = hl.first({ { "DiagnosticWarn", "fg" }, { "WarningMsg", "fg" }, { "Number", "fg" } }),
+  green = hl.first({ { "String", "fg" }, { "DiffAdd", "fg" }, { "MoreMsg", "fg" } }),
+  blue = hl.first({ { "Function", "fg" }, { "Directory", "fg" }, { "Identifier", "fg" } }),
+  red = hl.first({ { "DiagnosticError", "fg" }, { "ErrorMsg", "fg" }, { "DiffDelete", "fg" } }),
+  orange = hl.first({ { "Number", "fg" }, { "DiagnosticWarn", "fg" }, { "Special", "fg" } }),
+  cyan = hl.first({ { "Constant", "fg" }, { "Special", "fg" }, { "Identifier", "fg" } }),
+  darkblue = hl.first({ { "DiffFile", "fg" }, { "Title", "fg" }, { "Directory", "fg" } }),
+  violet = hl.first({ { "Type", "fg" }, { "Include", "fg" }, { "Special", "fg" } }),
+  magenta = hl.first({ { "Keyword", "fg" }, { "Statement", "fg" }, { "Conditional", "fg" } }),
 }
 
 local conditions = {

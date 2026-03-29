@@ -1,3 +1,5 @@
+local hl = require("devil.utils.highlight")
+
 return {
   -- type of hints you want to get
   -- following types are supported
@@ -92,28 +94,28 @@ return {
   -- highlight
   highlights = {
     statusline = {
-      focused = {
-        fg = "#ededed",
-        bg = "#e35e4f",
-        bold = true,
-      },
-      unfocused = {
-        fg = "#ededed",
-        bg = "#44cc41",
-        bold = true,
-      },
+      focused = hl.style({
+        fg = { { "StatusLine", "fg" }, { "Normal", "fg" } },
+        bg = { { "StatusLine", "bg" }, { "WinBar", "bg" }, { "Folded", "bg" } },
+        extra = { bold = true },
+      }),
+      unfocused = hl.style({
+        fg = { { "StatusLineNC", "fg" }, { "Normal", "fg" } },
+        bg = { { "StatusLineNC", "bg" }, { "WinBarNC", "bg" }, { "Normal", "bg" } },
+        extra = { bold = true },
+      }),
     },
     winbar = {
-      focused = {
-        fg = "#ededed",
-        bg = "#e35e4f",
-        bold = true,
-      },
-      unfocused = {
-        fg = "#ededed",
-        bg = "#44cc41",
-        bold = true,
-      },
+      focused = hl.style({
+        fg = { { "WinBar", "fg" }, { "StatusLine", "fg" }, { "Normal", "fg" } },
+        bg = { { "WinBar", "bg" }, { "StatusLine", "bg" }, { "Folded", "bg" } },
+        extra = { bold = true },
+      }),
+      unfocused = hl.style({
+        fg = { { "WinBarNC", "fg" }, { "StatusLineNC", "fg" }, { "Normal", "fg" } },
+        bg = { { "WinBarNC", "bg" }, { "StatusLineNC", "bg" }, { "Normal", "bg" } },
+        extra = { bold = true },
+      }),
     },
   },
 }
