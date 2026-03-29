@@ -17,7 +17,6 @@ return {
     "mason-org/mason.nvim",
     dependencies = {
       "mason-org/mason-lspconfig.nvim",
-      "zapling/mason-conform.nvim",
       "jay-babu/mason-nvim-dap.nvim",
     },
   },
@@ -418,7 +417,6 @@ return {
       "nvim-neotest/neotest-go",
       "nvim-neotest/neotest-plenary",
       "marilari88/neotest-vitest",
-      "rouge8/neotest-rust",
       "lawrence-laz/neotest-zig",
       "sidlatau/neotest-dart",
     },
@@ -430,7 +428,6 @@ return {
           require("neotest-plenary"),
           require("neotest-vitest"),
           require("neotest-go"),
-          require("neotest-rust"),
           require("neotest-zig"),
           require("neotest-dart"),
         },
