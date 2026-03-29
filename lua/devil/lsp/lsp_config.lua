@@ -7,6 +7,7 @@ M.server_groups = {
   core = {
     lua_ls = true,
     jsonls = false,
+    rumdl = true,
     yamlls = true,
     taplo = false,
     bashls = false,

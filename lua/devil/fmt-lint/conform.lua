@@ -47,6 +47,7 @@ conform.setup({
     typescriptreact = web_fmt,
     json = { "jq" },
     lua = { "stylua" },
+    markdown = { "rumdl" },
     php = { "mago_format" },
     python = python_fmt,
     ruby = { "rubocop" },
