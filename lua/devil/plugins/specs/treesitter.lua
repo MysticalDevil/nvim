@@ -144,8 +144,6 @@ return {
       end
       require("nvim-treesitter.install").prefer_git = true
 
-      require("nvim-dap-repl-highlights").setup()
-
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("devil_treesitter_start", { clear = true }),
         callback = function(args)
