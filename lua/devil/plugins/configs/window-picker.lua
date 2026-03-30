@@ -1,4 +1,4 @@
-local hl = require("devil.utils.highlight")
+local hl = require("devil.shared.highlight")
 
 return {
   -- type of hints you want to get

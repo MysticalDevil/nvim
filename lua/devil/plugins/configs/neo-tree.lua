@@ -177,7 +177,7 @@ return {
         --"thumbs.db"
       },
       never_show_by_pattern = { -- uses glob style patterns
-        --".null-ls_*",
+        --".lint_*",
       },
     },
     follow_current_file = {

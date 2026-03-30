@@ -69,7 +69,6 @@ return {
   diagnostic = false,
   lsp_document_formatting = true,
   -- set to true: use gopls to format
-  -- false if you want to use other formatter tool(e.g. efm, nulls)
   lsp_inlay_hints = {
     enable = true,
     -- Only show inlay hints for the current line
@@ -126,6 +125,5 @@ return {
     height = 0.98, -- height of float window if not auto
   },
   trouble = false, -- true: use trouble to open quickfix
-  test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
   iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the beginning of if err statement
 }

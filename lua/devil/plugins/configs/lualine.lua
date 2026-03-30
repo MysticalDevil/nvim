@@ -1,4 +1,4 @@
-local hl = require("devil.utils.highlight")
+local hl = require("devil.shared.highlight")
 
 local function wide(min)
   min = min or 90

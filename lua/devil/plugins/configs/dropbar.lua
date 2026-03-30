@@ -14,7 +14,7 @@ return {
   icons = {
     enable = true,
     kinds = {
-      symbols = require("devil.utils").kind_icons,
+      symbols = require("devil.shared.icons"),
     },
     ui = {
       bar = {

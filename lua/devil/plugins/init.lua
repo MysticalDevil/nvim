@@ -1,13 +1,34 @@
 local status_ok, lazy = pcall(require, "lazy")
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 if not status_ok then
   notify.error("lazy.nvim is not installed")
   return
 end
 
-local settings = require("devil.core.settings")
+local plugin_settings = require("devil.config.plugins")
 
-local plugins_list = require("devil.plugins.specs")
+local modules = {
+  require("devil.plugins.foundation"),
+  require("devil.plugins.editor"),
+  require("devil.plugins.ui"),
+  require("devil.plugins.search"),
+  require("devil.plugins.git"),
+  require("devil.plugins.syntax"),
+  require("devil.plugins.coding"),
+  require("devil.plugins.testing"),
+  require("devil.plugins.lang.lua"),
+  require("devil.plugins.lang.rust"),
+  require("devil.plugins.lang.python"),
+  require("devil.plugins.lang.go"),
+  require("devil.plugins.lang.web"),
+  require("devil.plugins.lang.dart"),
+  require("devil.plugins.lang.misc"),
+}
+
+local plugins_list = {}
+for _, module_specs in ipairs(modules) do
+  vim.list_extend(plugins_list, module_specs)
+end
 
 local opts = {
   diff = {
@@ -21,16 +42,16 @@ local opts = {
   },
   checker = {
     -- automatically check for plugin updates
-    enabled = settings.plugins.lazy.checker.enabled,
+    enabled = plugin_settings.lazy.checker.enabled,
     concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-    notify = settings.plugins.lazy.checker.notify, -- get a notification when new updates are found
-    frequency = settings.plugins.lazy.checker.frequency, -- check for updates every hour
-    check_pinned = settings.plugins.lazy.checker.check_pinned, -- check for pinned packages that can't be updated
+    notify = plugin_settings.lazy.checker.notify,
+    frequency = plugin_settings.lazy.checker.frequency,
+    check_pinned = plugin_settings.lazy.checker.check_pinned,
   },
   change_detection = {
     -- automatically check for config file changes and reload the ui
-    enabled = settings.plugins.lazy.change_detection.enabled,
-    notify = settings.plugins.lazy.change_detection.notify, -- get a notification when changes are found
+    enabled = plugin_settings.lazy.change_detection.enabled,
+    notify = plugin_settings.lazy.change_detection.notify,
   },
   performance = {
     cache = {

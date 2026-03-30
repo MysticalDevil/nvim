@@ -1,5 +1,5 @@
 local telescope = require("telescope")
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 local mappings = {
   i = {
