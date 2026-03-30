@@ -28,7 +28,6 @@ end
 export_module("common", M.common)
 export_module("lsp_tool", M.lsp_tool)
 export_module("command", M.command)
-export_module("notify", M.notify)
 
 if #collisions > 0 then
   vim.schedule(function()

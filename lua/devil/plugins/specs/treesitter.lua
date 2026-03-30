@@ -131,28 +131,18 @@ return {
         "yaml",
         "zig",
       },
-      auto_install = true,
       max_highlight_lines = 10000,
     },
     config = function(_, opts)
       local ts = require("nvim-treesitter")
-      local parsers = require("nvim-treesitter.parsers")
 
       ts.setup()
-      if opts.ensure_installed and #opts.ensure_installed > 0 then
-        ts.install(opts.ensure_installed)
-      end
       require("nvim-treesitter.install").prefer_git = true
 
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("devil_treesitter_start", { clear = true }),
         callback = function(args)
           local filetype = vim.bo[args.buf].filetype
-          local lang = vim.treesitter.language.get_lang(filetype)
-
-          if opts.auto_install and lang and parsers[lang] and not vim.list_contains(ts.get_installed(), lang) then
-            ts.install(lang)
-          end
 
           if vim.api.nvim_buf_line_count(args.buf) <= opts.max_highlight_lines then
             pcall(vim.treesitter.start, args.buf)
