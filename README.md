@@ -82,7 +82,7 @@ nvim
 1. 检查 Neovim 版本门槛
 2. 安全加载核心模块并在失败时发出通知
 3. bootstrap 并加载插件系统
-4. 依次挂载 LSP、补全、格式化/Lint、DAP、命令与配色
+4. 依次挂载工具层、补全、命令与配色
 
 这意味着即使部分模块失效，Neovim 仍尽量可启动并给出错误提示。
 
@@ -94,14 +94,13 @@ nvim
 ├── ginit.vim
 ├── after/
 └── lua/devil/
+    ├── app/
     ├── core/
     ├── plugins/
-    ├── lsp/
     ├── complete/
-    ├── fmt-lint/
-    ├── dap/
+    ├── tools/
     ├── commands/
-    ├── utils/
+    ├── shared/
     └── health/
 ```
 
@@ -109,18 +108,18 @@ nvim
 
 - 改基础行为：
   `lua/devil/core/`
-- 改插件声明与加载顺序：
-  `lua/devil/plugins/specs/`
-- 改单插件行为：
+- 改插件声明与领域划分：
+  `lua/devil/plugins/*.lua`、`lua/devil/plugins/lang/*.lua`
+- 改单插件的大块配置：
   `lua/devil/plugins/configs/`
 - 改语言服务器：
-  `lua/devil/lsp/`
+  `lua/devil/tools/lsp/`
 - 改 formatter / linter：
-  `lua/devil/fmt-lint/`
+  `lua/devil/tools/format.lua`、`lua/devil/tools/lint.lua`
 - 改调试能力：
-  `lua/devil/dap/`
-- 改自定义命令或工具函数：
-  `lua/devil/commands/`、`lua/devil/utils/`
+  `lua/devil/tools/dap/`
+- 改自定义命令或共享 helper：
+  `lua/devil/commands/`、`lua/devil/shared/`
 
 ## 使用约定
 
@@ -153,7 +152,7 @@ nvim
 1. `:Lazy` 是否安装完整
 2. `:checkhealth` 是否有核心错误
 3. 报错里提到的模块属于哪一层
-   `core`、`plugins`、`lsp`、`fmt-lint` 或 `dap`
+   `core`、`plugins`、`tools` 或 `complete`
 
 `init.lua` 已做安全加载，因此部分插件失败时通常不会直接阻止启动。
 
@@ -163,8 +162,8 @@ nvim
 
 1. `:Mason` 中是否已安装对应工具
 2. `:echo exepath('tool')` 是否能找到外部命令
-3. 对应 filetype 的配置是否存在于 `lua/devil/lsp/`
-   或 `lua/devil/fmt-lint/`
+3. 对应 filetype 的配置是否存在于 `lua/devil/tools/lsp/`
+   或 `lua/devil/tools/`
 4. `:ConformInfo` 或相关 LSP 日志是否有明确错误
 
 ## 贡献

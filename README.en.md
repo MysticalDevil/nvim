@@ -84,8 +84,7 @@ The entrypoint is [`init.lua`](./init.lua). It is responsible for:
 1. enforcing the Neovim version floor
 2. safely loading core modules and reporting failures
 3. bootstrapping and loading the plugin system
-4. attaching LSP, completion, formatting/linting, DAP, commands,
-   and colors
+4. attaching tooling, completion, commands, and colors
 
 That design keeps startup resilient: if a non-critical module fails,
 Neovim should still start and surface the error.
@@ -98,14 +97,13 @@ Neovim should still start and surface the error.
 ├── ginit.vim
 ├── after/
 └── lua/devil/
+    ├── app/
     ├── core/
     ├── plugins/
-    ├── lsp/
     ├── complete/
-    ├── fmt-lint/
-    ├── dap/
+    ├── tools/
     ├── commands/
-    ├── utils/
+    ├── shared/
     └── health/
 ```
 
@@ -113,18 +111,18 @@ Neovim should still start and surface the error.
 
 - Base behavior:
   `lua/devil/core/`
-- Plugin declarations and load order:
-  `lua/devil/plugins/specs/`
-- Per-plugin behavior:
+- Plugin declarations and domain modules:
+  `lua/devil/plugins/*.lua`, `lua/devil/plugins/lang/*.lua`
+- Large per-plugin behavior blocks:
   `lua/devil/plugins/configs/`
 - Language servers:
-  `lua/devil/lsp/`
+  `lua/devil/tools/lsp/`
 - Formatters and linters:
-  `lua/devil/fmt-lint/`
+  `lua/devil/tools/format.lua`, `lua/devil/tools/lint.lua`
 - Debugging features:
-  `lua/devil/dap/`
-- Custom commands and helpers:
-  `lua/devil/commands/`, `lua/devil/utils/`
+  `lua/devil/tools/dap/`
+- Custom commands and shared helpers:
+  `lua/devil/commands/`, `lua/devil/shared/`
 
 ## Usage Conventions
 
@@ -158,7 +156,7 @@ Check these in order:
 1. whether `:Lazy` finished installation
 2. whether `:checkhealth` reports a core failure
 3. which layer the failing module belongs to:
-   `core`, `plugins`, `lsp`, `fmt-lint`, or `dap`
+   `core`, `plugins`, `tools`, or `complete`
 
 `init.lua` uses safe loading, so a missing plugin should usually report
 an error instead of killing startup outright.
@@ -169,8 +167,8 @@ Check these first:
 
 1. install state in `:Mason`
 2. `:echo exepath('tool')` for external executable discovery
-3. filetype-specific setup in `lua/devil/lsp/`
-   or `lua/devil/fmt-lint/`
+3. filetype-specific setup in `lua/devil/tools/lsp/`
+   or `lua/devil/tools/`
 4. explicit errors in `:ConformInfo` or LSP logs
 
 ## Contributing

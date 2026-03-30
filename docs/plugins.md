@@ -1,6 +1,6 @@
 # Neovim 插件总览
 
-这份文档总结了当前仓库在 `lua/devil/plugins/specs/` 中声明的插件结构，用来快速回答两个问题：
+这份文档总结了当前仓库在 `lua/devil/plugins/` 中声明的插件结构，用来快速回答两个问题：
 
 - 这个配置用了哪些插件
 - 每个插件大致负责什么职责
@@ -9,18 +9,21 @@
 
 - 本文以仓库直接声明的插件为主。
 - 对只作为依赖出现、但仍然很重要的插件，放在文末“依赖插件生态”里集中说明。
-- 细节配置通常位于 `lua/devil/plugins/configs/`、`lua/devil/lsp/`、`lua/devil/fmt-lint/`、`lua/devil/dap/`。
+- 细节配置通常位于 `lua/devil/plugins/configs/` 与 `lua/devil/tools/`。
 
 ## 总体结构
 
-插件规格按 6 个模块维护：
+插件规格按领域模块维护：
 
 - `foundation.lua`: 基础设施、主题、图标、通用库
-- `core.lua`: 编辑核心体验、界面增强、文件树、搜索替换
-- `treesitter.lua`: Treesitter、文本对象、折叠、上下文、任务辅助
-- `tools.lua`: 检索、工作区、注释导航、历史与剪贴板增强
+- `editor.lua`: 注释、文本编辑增强、Markdown 辅助、剪贴板增强
+- `ui.lua`: Buffer/UI/文件树/状态栏/滚动条/outline 等界面层
+- `search.lua`: Telescope、Trouble、workspace、sniprun、检索与导航工具
 - `git.lua`: Git 状态、Diff、Git UI
-- `prog.lua`: LSP、补全、格式化、DAP、测试和语言专项插件
+- `syntax.lua`: Treesitter、折叠、结构化编辑、任务与彩虹括号
+- `coding.lua`: LSP、补全、格式化、Lint、DAP 入口
+- `testing.lua`: 测试框架
+- `lang/*.lua`: 语言专项插件
 
 如果把依赖项一起算进来，这套配置覆盖的是一个 100+
 仓库的插件生态；如果只看仓库顶层直接声明，主体是“基础设施 +
@@ -28,7 +31,7 @@
 
 ## 基础设施与外观
 
-来源：`lua/devil/plugins/specs/foundation.lua`
+来源：`lua/devil/plugins/foundation.lua`
 
 - `folke/lazy.nvim`: 插件管理器，负责延迟加载、依赖解析和启动编排。
 - `nvim-lua/plenary.nvim`: Lua 工具库，很多插件的公共依赖。
@@ -40,7 +43,7 @@
 
 ## 核心编辑与界面增强
 
-来源：`lua/devil/plugins/specs/core.lua`
+来源：`lua/devil/plugins/editor.lua` 与 `lua/devil/plugins/ui.lua`
 
 - `akinsho/bufferline.nvim`: Buffer 标签页与缓冲区切换、排序、关闭入口。
 - `folke/ts-comments.nvim`: 基于 Treesitter 的注释体验增强。
@@ -70,7 +73,7 @@
 
 ## Treesitter 与结构感知
 
-来源：`lua/devil/plugins/specs/treesitter.lua`
+来源：`lua/devil/plugins/syntax.lua`
 
 - `nvim-treesitter/nvim-treesitter`: 语法树基础设施，负责高亮、缩进、结构分析。
 - `nvim-treesitter/nvim-treesitter-textobjects`: 基于语法节点的文本对象、跳转和参数交换。
@@ -80,7 +83,6 @@
 - `nvim-treesitter/nvim-treesitter-context`: 固定显示当前代码上下文。
 - `kevinhwang91/nvim-ufo`: 折叠增强。
 - `kevinhwang91/promise-async`: `ufo` 依赖。
-- `s1n7ax/nvim-window-picker`: 窗口选择器，给窗口级动作提供更可靠的目标选择。
 - `stevearc/overseer.nvim`: 任务执行与任务面板。
 - `HiPhish/rainbow-delimiters.nvim`: 彩虹括号，帮助识别嵌套层级。
 
@@ -88,7 +90,7 @@
 
 ## 检索、工具与工作流插件
 
-来源：`lua/devil/plugins/specs/tools.lua`
+来源：`lua/devil/plugins/search.lua`
 
 - `folke/snacks.nvim`: 一组通用增强组件，这份配置已经把它用于 buffer 删除、重命名联动等日常能力。
 - `m4xshen/smartcolumn.nvim`: 智能显示或隐藏 `colorcolumn`。
@@ -98,11 +100,9 @@
 - `nvim-telescope/telescope.nvim`: 全局检索和选择框架。
 - `johmsalas/text-case.nvim`: 文本大小写风格转换。
 - `folke/todo-comments.nvim`: 收集并高亮 TODO/FIXME/NOTE 等注释。
-- `Wansmer/treesj`: 结构化 split/join，例如参数列表、对象、数组。
 - `folke/trouble.nvim`: 统一展示诊断、引用、quickfix、location list。
 - `folke/which-key.nvim`: 按键提示面板。
 - `natecraddock/workspaces.nvim`: 工作区目录管理。
-- `gbprod/yanky.nvim`: yank/put 行为增强与历史处理。
 
 其中最核心的组合是：
 
@@ -114,7 +114,7 @@
 
 ## Git 工作流
 
-来源：`lua/devil/plugins/specs/git.lua`
+来源：`lua/devil/plugins/git.lua`
 
 - `sindrets/diffview.nvim`: Git diff 和文件历史视图。
 - `lewis6991/gitsigns.nvim`: 行级 Git 状态、hunk 操作、blame、预览。
@@ -128,7 +128,7 @@
 
 ## 开发工具链与语言支持
 
-来源：`lua/devil/plugins/specs/prog.lua`
+来源：`lua/devil/plugins/coding.lua`、`lua/devil/plugins/testing.lua`、`lua/devil/plugins/lang/*.lua`
 
 ### LSP、格式化、补全
 
@@ -248,7 +248,7 @@
 
 如果后续要继续维护这份配置，最值得优先查看的目录是：
 
-- `lua/devil/plugins/specs/`: 看插件声明与分组
-- `lua/devil/plugins/configs/`: 看每个插件的行为细节
+- `lua/devil/plugins/`: 看插件声明与领域划分
+- `lua/devil/plugins/configs/`: 看仍保留为独立文件的大块插件配置
 - `lua/devil/core/mappings.lua`: 看入口按键
-- `lua/devil/lsp/`、`lua/devil/dap/`、`lua/devil/fmt-lint/`: 看开发工具链细节
+- `lua/devil/tools/`: 看 LSP、格式化、Lint 与 DAP 细节

@@ -1,6 +1,6 @@
 # 外部工具清单
 
-本文档列出本配置集成的格式化与静态检查工具。
+本文档列出本配置通过 `lua/devil/tools/format.lua` 与 `lua/devil/tools/lint.lua` 集成的格式化与静态检查工具。
 
 ## 代码格式化
 

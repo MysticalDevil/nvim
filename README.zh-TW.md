@@ -82,7 +82,7 @@ nvim
 1. 檢查 Neovim 最低版本
 2. 安全載入核心模組並在失敗時回報
 3. bootstrap 並載入插件系統
-4. 依序掛載 LSP、補全、格式化/Lint、DAP、命令與配色
+4. 依序掛載工具層、補全、命令與配色
 
 這種設計讓啟動流程更有韌性：即使非關鍵模組失敗，
 Neovim 通常仍可啟動，並把錯誤直接暴露出來。
@@ -95,14 +95,13 @@ Neovim 通常仍可啟動，並把錯誤直接暴露出來。
 ├── ginit.vim
 ├── after/
 └── lua/devil/
+    ├── app/
     ├── core/
     ├── plugins/
-    ├── lsp/
     ├── complete/
-    ├── fmt-lint/
-    ├── dap/
+    ├── tools/
     ├── commands/
-    ├── utils/
+    ├── shared/
     └── health/
 ```
 
@@ -110,18 +109,18 @@ Neovim 通常仍可啟動，並把錯誤直接暴露出來。
 
 - 基礎行為：
   `lua/devil/core/`
-- 插件宣告與載入順序：
-  `lua/devil/plugins/specs/`
-- 單插件行為：
+- 插件宣告與領域模組：
+  `lua/devil/plugins/*.lua`、`lua/devil/plugins/lang/*.lua`
+- 單插件的大型配置：
   `lua/devil/plugins/configs/`
 - 語言伺服器：
-  `lua/devil/lsp/`
+  `lua/devil/tools/lsp/`
 - formatter 與 linter：
-  `lua/devil/fmt-lint/`
+  `lua/devil/tools/format.lua`、`lua/devil/tools/lint.lua`
 - 除錯能力：
-  `lua/devil/dap/`
-- 自訂命令與工具函式：
-  `lua/devil/commands/`、`lua/devil/utils/`
+  `lua/devil/tools/dap/`
+- 自訂命令與共享 helper：
+  `lua/devil/commands/`、`lua/devil/shared/`
 
 ## 使用約定
 
@@ -154,7 +153,7 @@ Neovim 通常仍可啟動，並把錯誤直接暴露出來。
 1. `:Lazy` 是否完成安裝
 2. `:checkhealth` 是否回報核心錯誤
 3. 失敗模組屬於哪一層：
-   `core`、`plugins`、`lsp`、`fmt-lint` 或 `dap`
+   `core`、`plugins`、`tools` 或 `complete`
 
 `init.lua` 使用安全載入，因此缺少插件時通常會回報錯誤，
 而不是直接讓啟動流程中止。
@@ -165,8 +164,8 @@ Neovim 通常仍可啟動，並把錯誤直接暴露出來。
 
 1. `:Mason` 安裝狀態
 2. `:echo exepath('tool')` 是否能找到外部命令
-3. 對應 filetype 的設定是否位於 `lua/devil/lsp/`
-   或 `lua/devil/fmt-lint/`
+3. 對應 filetype 的設定是否位於 `lua/devil/tools/lsp/`
+   或 `lua/devil/tools/`
 4. `:ConformInfo` 或 LSP 日誌中是否有明確錯誤
 
 ## 貢獻
