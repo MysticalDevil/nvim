@@ -24,6 +24,7 @@ local function brace_delta(line)
   local in_double = false
   local escaped = false
   local i = 1
+
   while i <= #line do
     local ch = line:sub(i, i)
     local next_ch = line:sub(i + 1, i + 1)
@@ -70,9 +71,9 @@ for idx, line in ipairs(lines) do
   if current_section and current_mode then
     local lhs = line:match('^%s*%["([^"]+)"%]%s*=')
     if lhs then
-      local k = current_mode .. "::" .. lhs
-      keys[k] = keys[k] or {}
-      table.insert(keys[k], { section = current_section, line = idx })
+      local key = current_mode .. "::" .. lhs
+      keys[key] = keys[key] or {}
+      table.insert(keys[key], { section = current_section, line = idx })
     end
   end
 
@@ -97,9 +98,9 @@ for idx, line in ipairs(lines) do
 end
 
 local allow = {
-  ["n::<leader>ca"] = true, -- intentionally repeated across LSP scopes
-  ["n::<C-h>"] = true, -- bufferline/smart-splits coexist by design
-  ["n::<C-l>"] = true, -- bufferline/smart-splits coexist by design
+  ["n::<leader>ca"] = true,
+  ["n::<C-h>"] = true,
+  ["n::<C-l>"] = true,
 }
 
 local conflicts = {}

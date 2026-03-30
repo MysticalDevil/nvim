@@ -9,14 +9,14 @@ This repository is a modular Neovim configuration.
 - Language tooling: `lua/devil/tools/`, `lua/devil/complete/`.
 - Custom commands/shared helpers: `lua/devil/commands/`, `lua/devil/shared/`, `lua/devil/health/`.
 - Filetype overrides: `after/ftplugin/`.
-- Helper script: `scripts/check_keymap_conflicts.lua`.
+- Helper check: `lua/devil/health/check_keymap_conflicts.lua`.
 
 ## Build, Test, and Development Commands
 - `nvim` launches the config and auto-installs missing plugins via `lazy.nvim`.
 - `nvim --headless "+lua assert(pcall(require, 'devil.core'))" "+qa"` runs the CI smoke test.
 - `stylua --check .` verifies Lua formatting.
 - `rg --files -g '*.lua' | xargs -r -n 1 luac5.1 -p` checks Lua syntax.
-- `lua5.1 scripts/check_keymap_conflicts.lua` detects unexpected leader/keymap collisions.
+- `lua5.1 lua/devil/health/check_keymap_conflicts.lua` detects unexpected leader/keymap collisions.
 - `pre-commit run --all-files` runs local hooks (whitespace, YAML, StyLua).
 
 ## Coding Style & Naming Conventions
@@ -29,7 +29,7 @@ This repository is a modular Neovim configuration.
 ## Testing Guidelines
 There is no dedicated unit-test suite in this repo; rely on static and smoke checks.
 - Run all validation commands above before opening a PR.
-- For keymap edits, always run `lua5.1 scripts/check_keymap_conflicts.lua`.
+- For keymap edits, always run `lua5.1 lua/devil/health/check_keymap_conflicts.lua`.
 - For startup/runtime changes, run the headless smoke test and `:checkhealth` in Neovim.
 
 ## Commit & Pull Request Guidelines
