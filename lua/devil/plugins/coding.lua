@@ -16,9 +16,17 @@ return {
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       {
-        "garymjr/nvim-snippets",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { create_cmp_source = true, friendly_snippets = true },
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          "saadparwaiz1/cmp_luasnip",
+          "rafamadriz/friendly-snippets",
+        },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_lua").lazy_load({
+            paths = { vim.fn.stdpath("config") .. "/lua/devil/complete/snippets" },
+          })
+        end,
       },
       {
         "windwp/nvim-autopairs",

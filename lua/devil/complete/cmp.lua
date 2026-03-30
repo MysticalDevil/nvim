@@ -5,6 +5,8 @@ if not status then
   return
 end
 
+local luasnip = require("luasnip")
+
 local util = require("devil.complete.util")
 
 local function border(hl_name)
@@ -24,7 +26,7 @@ cmp.setup({
   formatting = util.formatting,
   snippet = {
     expand = function(args)
-      vim.snippet.expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   window = {
@@ -40,7 +42,7 @@ cmp.setup({
   mapping = util.mapping,
   sources = cmp.config.sources({
     { name = "lazydev", group_index = 0 },
-    { name = "snippets", max_item_count = 10 },
+    { name = "luasnip", max_item_count = 10 },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "buffer", keywords = 3 },

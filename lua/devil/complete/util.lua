@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local luasnip = require("luasnip")
 local notify = require("devil.shared.notify")
 
 local status, lspkind = pcall(require, "lspkind")
@@ -38,7 +39,7 @@ M.formatting = {
         buffer = "[Buf]",
         nvim_lsp = "[LSP]",
         lazydev = "[Lua]",
-        snippets = "[Snip]",
+        luasnip = "[Snip]",
         nvim_lua = "[API]",
         latex_symbols = "[LaTeX]",
         path = "[Path]",
@@ -92,9 +93,9 @@ M.mapping = {
       cmp.select_next_item()
       -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
       -- that way you will only jump inside the snippet region
-    elseif vim.snippet.active({ direction = 1 }) then
+    elseif luasnip.expand_or_jumpable() then
       vim.schedule(function()
-        vim.snippet.jump(1)
+        luasnip.expand_or_jump()
       end)
     elseif has_words_before() then
       cmp.complete()
@@ -106,9 +107,9 @@ M.mapping = {
   ["<S-Tab>"] = cmp.mapping(function(fallback)
     if cmp.visible() then
       cmp.select_prev_item()
-    elseif vim.snippet.active({ direction = -1 }) then
+    elseif luasnip.jumpable(-1) then
       vim.schedule(function()
-        vim.snippet.jump(-1)
+        luasnip.jump(-1)
       end)
     else
       fallback()
