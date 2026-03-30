@@ -51,6 +51,3 @@ local app = safe_require("devil.app", vim.log.levels.ERROR)
 if app and type(app.setup) == "function" then
   app.setup()
 end
-
--- Playground code
--- require("devil.playground.setup")

@@ -15,7 +15,7 @@ vim.keymap.set("n", "[p", function()
   vim.fn.search(phases, "b")
 end, { buffer = true })
 
-local cmds = require("devil.utils.ebuild_cmds")
+local cmds = require("devil.commands.ebuild")
 
 vim.api.nvim_buf_create_user_command(0, "PkgManifest", function()
   cmds.pkg_manifest()
