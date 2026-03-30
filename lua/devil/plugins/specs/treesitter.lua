@@ -251,14 +251,6 @@ return {
       separator = nil,
     },
   },
-  -- nvim-ts-context-commentstring
-  -- Neovim treesitter plugin for setting the commentstring based on the cursor location in a file.
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    init = function()
-      vim.g.skip_ts_context_commentstring_module = true
-    end,
-  },
   -- nvim-ufo
   -- Not UFO in the sky, but an ultra fold in Neovim
   {
