@@ -1,5 +1,6 @@
 local gitsigns_keys = {
-  {"]c",
+  {
+    "]c",
     function()
       if vim.wo.diff then
         return "]c"

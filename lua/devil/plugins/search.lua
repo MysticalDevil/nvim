@@ -36,7 +36,11 @@ local trouble_keys = {
   { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
   { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
   { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-  { "<leader>cl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP Definitions / references / ... (Trouble)" },
+  {
+    "<leader>cl",
+    "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+    desc = "LSP Definitions / references / ... (Trouble)",
+  },
   { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
   { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
 }
@@ -169,18 +173,90 @@ return {
     build = "./kitty/install-kittens.bash",
     version = ">=1.0.0",
     keys = {
-      { "<A-h>", function() require("smart-splits").resize_left() end, desc = "Resize window left" },
-      { "<A-j>", function() require("smart-splits").resize_down() end, desc = "Resize window down" },
-      { "<A-k>", function() require("smart-splits").resize_up() end, desc = "Resize window up" },
-      { "<A-l>", function() require("smart-splits").resize_right() end, desc = "Resize window right" },
-      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move window left" },
-      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move window down" },
-      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Move window up" },
-      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move window right" },
-      { "<leader><leader>h", function() require("smart-splits").swap_buf_left() end, desc = "Swap buffer left" },
-      { "<leader><leader>j", function() require("smart-splits").swap_buf_down() end, desc = "Swap buffer down" },
-      { "<leader><leader>k", function() require("smart-splits").swap_buf_up() end, desc = "Swap buffer up" },
-      { "<leader><leader>l", function() require("smart-splits").swap_buf_right() end, desc = "Swap buffer right" },
+      {
+        "<A-h>",
+        function()
+          require("smart-splits").resize_left()
+        end,
+        desc = "Resize window left",
+      },
+      {
+        "<A-j>",
+        function()
+          require("smart-splits").resize_down()
+        end,
+        desc = "Resize window down",
+      },
+      {
+        "<A-k>",
+        function()
+          require("smart-splits").resize_up()
+        end,
+        desc = "Resize window up",
+      },
+      {
+        "<A-l>",
+        function()
+          require("smart-splits").resize_right()
+        end,
+        desc = "Resize window right",
+      },
+      {
+        "<C-h>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+        desc = "Move window left",
+      },
+      {
+        "<C-j>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+        desc = "Move window down",
+      },
+      {
+        "<C-k>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+        desc = "Move window up",
+      },
+      {
+        "<C-l>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+        desc = "Move window right",
+      },
+      {
+        "<leader><leader>h",
+        function()
+          require("smart-splits").swap_buf_left()
+        end,
+        desc = "Swap buffer left",
+      },
+      {
+        "<leader><leader>j",
+        function()
+          require("smart-splits").swap_buf_down()
+        end,
+        desc = "Swap buffer down",
+      },
+      {
+        "<leader><leader>k",
+        function()
+          require("smart-splits").swap_buf_up()
+        end,
+        desc = "Swap buffer up",
+      },
+      {
+        "<leader><leader>l",
+        function()
+          require("smart-splits").swap_buf_right()
+        end,
+        desc = "Swap buffer right",
+      },
     },
     opts = {
       ignored_filetypes = { "nofile", "quickfix", "prompt" },
@@ -221,10 +297,18 @@ return {
         display_options = { terminal_width = 45, notification_timeout = 5 },
         show_no_output = { "Classic", "TempFloatingWindow" },
         snipruncolors = {
-          SniprunVirtualTextOk = hl.style({ fg = { { "Normal", "bg" }, { "NormalFloat", "bg" }, { "Normal", "fg" } }, bg = { { "DiffAdd", "bg" }, { "String", "fg" }, { "MoreMsg", "fg" } } }),
+          SniprunVirtualTextOk = hl.style({
+            fg = { { "Normal", "bg" }, { "NormalFloat", "bg" }, { "Normal", "fg" } },
+            bg = { { "DiffAdd", "bg" }, { "String", "fg" }, { "MoreMsg", "fg" } },
+          }),
           SniprunFloatingWinOk = hl.style({ fg = { { "DiffAdd", "fg" }, { "String", "fg" }, { "MoreMsg", "fg" } } }),
-          SniprunVirtualTextErr = hl.style({ fg = { { "Normal", "bg" }, { "NormalFloat", "bg" }, { "Normal", "fg" } }, bg = { { "DiffDelete", "bg" }, { "DiagnosticError", "fg" }, { "ErrorMsg", "fg" } } }),
-          SniprunFloatingWinErr = hl.style({ fg = { { "DiagnosticError", "fg" }, { "DiffDelete", "fg" }, { "ErrorMsg", "fg" } } }),
+          SniprunVirtualTextErr = hl.style({
+            fg = { { "Normal", "bg" }, { "NormalFloat", "bg" }, { "Normal", "fg" } },
+            bg = { { "DiffDelete", "bg" }, { "DiagnosticError", "fg" }, { "ErrorMsg", "fg" } },
+          }),
+          SniprunFloatingWinErr = hl.style({
+            fg = { { "DiagnosticError", "fg" }, { "DiffDelete", "fg" }, { "ErrorMsg", "fg" } },
+          }),
         },
         live_mode_toggle = "off",
         inline_messages = 0,
@@ -323,8 +407,18 @@ return {
     "kevinhwang91/nvim-hlslens",
     init = function()
       local map_opts = { noremap = true, silent = true }
-      vim.keymap.set("n", "n", "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>", map_opts)
-      vim.keymap.set("n", "N", "<cmd>execute('normal! ' . v:count1 . 'N')<CR><cmd>lua require('hlslens').start()<CR>", map_opts)
+      vim.keymap.set(
+        "n",
+        "n",
+        "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>",
+        map_opts
+      )
+      vim.keymap.set(
+        "n",
+        "N",
+        "<cmd>execute('normal! ' . v:count1 . 'N')<CR><cmd>lua require('hlslens').start()<CR>",
+        map_opts
+      )
       vim.keymap.set("n", "*", "*<cmd>lua require('hlslens').start()<CR>", map_opts)
       vim.keymap.set("n", "#", "#<cmd>lua require('hlslens').start()<CR>", map_opts)
       vim.keymap.set("n", "g*", "g*<cmd>lua require('hlslens').start()<CR>", map_opts)

@@ -1,8 +1,32 @@
 local ufo_keys = {
-  { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
-  { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
-  { "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Open all folds except kinds" },
-  { "zm", function() require("ufo").closeFoldsWith() end, desc = "Close fold with" },
+  {
+    "zR",
+    function()
+      require("ufo").openAllFolds()
+    end,
+    desc = "Open all folds",
+  },
+  {
+    "zM",
+    function()
+      require("ufo").closeAllFolds()
+    end,
+    desc = "Close all folds",
+  },
+  {
+    "zr",
+    function()
+      require("ufo").openFoldsExceptKinds()
+    end,
+    desc = "Open all folds except kinds",
+  },
+  {
+    "zm",
+    function()
+      require("ufo").closeFoldsWith()
+    end,
+    desc = "Close fold with",
+  },
   {
     "zK",
     function()
@@ -35,12 +59,32 @@ return {
           require("nvim-treesitter-textobjects").setup(opts)
         end,
       },
-      { "windwp/nvim-ts-autotag", opts = { opts = { enable_close = true, enable_rename = true, enable_close_on_slash = true } } },
+      {
+        "windwp/nvim-ts-autotag",
+        opts = { opts = { enable_close = true, enable_rename = true, enable_close_on_slash = true } },
+      },
       "RRethy/nvim-treesitter-endwise",
     },
     opts = {
       ensure_installed = {
-        "c", "cpp", "dart", "go", "haskell", "java", "javascript", "kotlin", "lua", "python", "ruby", "rust", "sql", "tsx", "typescript", "vim", "yaml", "zig",
+        "c",
+        "cpp",
+        "dart",
+        "go",
+        "haskell",
+        "java",
+        "javascript",
+        "kotlin",
+        "lua",
+        "python",
+        "ruby",
+        "rust",
+        "sql",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
+        "zig",
       },
       max_highlight_lines = 10000,
     },
@@ -71,7 +115,15 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    opts = { enable = true, max_lines = 0, trim_scope = "outer", min_window_height = 0, zindex = 20, mode = "cursor", separator = nil },
+    opts = {
+      enable = true,
+      max_lines = 0,
+      trim_scope = "outer",
+      min_window_height = 0,
+      zindex = 20,
+      mode = "cursor",
+      separator = nil,
+    },
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -128,7 +180,19 @@ return {
   {
     "stevearc/overseer.nvim",
     cmd = {
-      "OverseerOpen", "OverseerClose", "OverseerToggle", "OverseerSaveBundle", "OverseerLoadBundle", "OverseerDeleteBundle", "OverseerRunCmd", "OverseerRun", "OverseerInfo", "OverseerBuild", "OverseerQuickAction", "OverseerTaskAction ", "OverseerClearCache",
+      "OverseerOpen",
+      "OverseerClose",
+      "OverseerToggle",
+      "OverseerSaveBundle",
+      "OverseerLoadBundle",
+      "OverseerDeleteBundle",
+      "OverseerRunCmd",
+      "OverseerRun",
+      "OverseerInfo",
+      "OverseerBuild",
+      "OverseerQuickAction",
+      "OverseerTaskAction ",
+      "OverseerClearCache",
     },
   },
   {
@@ -146,7 +210,13 @@ return {
           javascript = "rainbow-delimiters-react",
         },
         highlight = {
-          "RainbowDelimiterRed", "RainbowDelimiterYellow", "RainbowDelimiterBlue", "RainbowDelimiterOrange", "RainbowDelimiterGreen", "RainbowDelimiterViolet", "RainbowDelimiterCyan",
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
         },
       }
     end,

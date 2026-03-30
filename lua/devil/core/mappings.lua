@@ -98,12 +98,7 @@ function M.setup()
   set("c", "<C-k>", "<C-p>", "Previous line")
 
   set("t", "<ESC>", "<C-\\><C-n>", "Back to normal mode")
-  set(
-    "t",
-    "<C-x>",
-    vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
-    "Escape terminal mode"
-  )
+  set("t", "<C-x>", vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), "Escape terminal mode")
 end
 
 function M.setup_lsp(bufnr)
