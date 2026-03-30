@@ -7,7 +7,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     priority = 1000,
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
   },
 
   -- mason.nvim
