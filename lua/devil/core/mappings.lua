@@ -1,6 +1,13 @@
-local opts = { enable_magic_search = true, space_visible = false }
+local state = { enable_magic_search = true, space_visible = false }
 
----@param count integer
+local M = {}
+
+local function set(mode, lhs, rhs, desc, opts)
+  opts = vim.tbl_extend("force", { silent = true }, opts or {})
+  opts.desc = desc
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 local function jump_diag(count)
   vim.diagnostic.jump({
     count = count,
@@ -16,951 +23,127 @@ local function jump_diag(count)
   })
 end
 
-local function delete_current_buffer()
-  Snacks.bufdelete.delete()
-end
-
-local function delete_all_buffers()
-  Snacks.bufdelete.all()
-end
-
-local function delete_other_buffers()
-  Snacks.bufdelete.other()
-end
-
-local M = {}
-
 function M.setup_early_mappings()
-  local rhs = opts.enable_magic_search and "/\\v" or "/"
+  local rhs = state.enable_magic_search and "/\\v" or "/"
   vim.keymap.set({ "n", "v" }, "/", rhs, {
     remap = false,
     silent = false,
   })
 end
 
-M.general = {
-  i = {
-    ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
-    ["<C-e>"] = { "<End>", "End of line" },
-
-    ["<C-h>"] = { "<Left>", "Move left" },
-    ["<C-l>"] = { "<Right>", "Move right" },
-    ["<C-j>"] = { "<Down>", "Move down" },
-    ["<C-k>"] = { "<Up>", "Move up" },
-  },
-
-  n = {
-    ["<Esc>"] = { "<cmd> noh <CR>", "Clear highlight" },
-    ["<C-d>"] = { "10j", "Five lines down" },
-    ["<C-u>"] = { "10k", "Five lines up" },
-
-    -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
-    -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-    -- empty mode is same as using <cmd> :map
-    -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-
-    -- new buffer
-    ["<leader>bn"] = { "<cmd> enew <CR>", "New buffer" },
-    ["<leader>ch"] = { "<cmd> WhichKey <CR>", "Mapping cheatsheet" },
-
-    ["<leader>fm"] = {
-      function()
-        local ok, conform = pcall(require, "conform")
-        if ok then
-          conform.format({ async = true })
-        else
-          vim.notify("conform.nvim is unavailable", vim.log.levels.WARN)
-        end
-      end,
-      "Format buffer",
-    },
-
-    ["<Space>th"] = {
-      function()
-        if opts.space_visible then
-          vim.opt.listchars:remove("space:·")
-        else
-          vim.opt.listchars:append("space:·")
-        end
-
-        opts.space_visible = not opts.space_visible
-      end,
-      "Toggle space visible status",
-    },
-
-    -- s_windows
-    ["<leader>wv"] = { ":vsp<CR>", "Split window vertically" },
-    ["<leader>wh"] = { ":sp<CR>", "Split window horizontally" },
-    ["<leader>wc"] = { "<C-w>c", "Close picked split window" },
-    ["<leader>wo"] = { "<C-w>o", "Close other split window" },
-    ["<leader>w,"] = { ":vertical resize -10<CR>", "Reduce vertical window size" },
-    ["<leader>w."] = { ":vertical resize +10<CR>", "Increase vertical window size" },
-    ["<leader>wj"] = { ":horizontal resize -5<CR>", "Reduce horizontal window size" },
-    ["<leader>wk"] = { ":horizontal resize +5<CR>", "Increase vertical window size" },
-    ["<leader>w="] = { "<C-w>=", "Make split windows equal in size" },
-
-    -- tabs
-    ["<leader><Tab>s"] = { "<cmd>tab split<CR>", "Split window use tab" },
-    ["<leader><Tab>h"] = { "<cmd>tabprev<CR>", "Switch to previous tab" },
-    ["<leader><Tab>j"] = { "<cmd>tabnext<CR>", "Switch to next tab" },
-    ["<leader><Tab>f"] = { "<cmd>tabfirst<CR>", "Switch to first tab" },
-    ["<leader><Tab>l"] = { "<cmd>tablast<CR>", "Switch to last tab" },
-    ["<leader><Tab>c"] = { "<cmd>tabclose<CR>", "Close tab" },
-
-    ["zo"] = { "<CMD>foldopen<CR>", "Open fold" },
-    ["zc"] = { "<CMD>foldclose<CR>", "Close fold" },
-  },
-
-  v = {
-    ["<C-j>"] = { "5j", "Five lines down" },
-    ["<C-k>"] = { "5k", "Five lines up" },
-    ["<C-d>"] = { "10j", "Five lines down" },
-    ["<C-u>"] = { "10k", "Five lines up" },
-
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["<"] = { "<gv", "Indent line" },
-    [">"] = { ">gv", "Indent line" },
-  },
-
-  x = {
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    -- Don't copy the replaced text after pasting in visual mode
-    -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Do not copy replaced text", opts = { silent = true } },
-  },
-
-  c = {
-    ["<C-j>"] = { "<C-n>", "Next line" },
-    ["<C-k>"] = { "<C-p>", "Previous line" },
-  },
-
-  t = {
-    ["<ESC>"] = { "<C-\\><C-n>", "Back to normal mode" },
-    ["<C-x>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), "Escape terminal mode" },
-  },
-}
-
-M.comment = {
-  plugin = true,
-
-  -- toggle comment in both modes
-  n = {
-    ["<leader>/"] = {
-      function()
-        require("Comment.api").toggle.linewise.current()
-      end,
-      "Toggle comment",
-    },
-  },
-
-  v = {
-    ["<leader>/"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      "Toggle comment",
-    },
-  },
-}
-
-M.lspconfig = {
-  -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
-
-  n = {
-    ["gD"] = {
-      function()
-        vim.lsp.buf.declaration()
-      end,
-      "LSP declaration",
-    },
-
-    ["gd"] = {
-      function()
-        require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
-      end,
-      "LSP definition",
-    },
-
-    ["K"] = {
-      function()
-        vim.lsp.buf.hover()
-      end,
-      "LSP hover",
-    },
-
-    ["gi"] = {
-      function()
-        require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown())
-      end,
-      "LSP implementation",
-    },
-
-    ["<leader>ls"] = {
-      function()
-        vim.lsp.buf.signature_help()
-      end,
-      "LSP signature help",
-    },
-
-    ["<leader>D"] = {
-      function()
-        require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_dropdown())
-      end,
-      "LSP definition type",
-    },
-
-    ["<leader>ca"] = {
-      function()
-        vim.lsp.buf.code_action()
-      end,
-      "LSP code action",
-    },
-
-    ["gr"] = {
-      function()
-        -- vim.lsp.buf.references()
-        require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
-      end,
-      "LSP references",
-    },
-
-    ["<leader>lf"] = {
-      function()
-        vim.diagnostic.open_float({ border = "rounded" })
-      end,
-      "Floating diagnostic",
-    },
-
-    ["[d"] = {
-      function()
-        jump_diag(-1)
-      end,
-      "Goto prev",
-    },
-
-    ["]d"] = {
-      function()
-        jump_diag(1)
-      end,
-      "Goto next",
-    },
-
-    ["<leader>q"] = {
-      function()
-        vim.diagnostic.setloclist()
-      end,
-      "Diagnostic setloclist",
-    },
-
-    ["<leader>wa"] = {
-      function()
-        vim.lsp.buf.add_workspace_folder()
-      end,
-      "Add workspace folder",
-    },
-
-    ["<leader>wr"] = {
-      function()
-        vim.lsp.buf.remove_workspace_folder()
-      end,
-      "Remove workspace folder",
-    },
-
-    ["<leader>wl"] = {
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      "List workspace folders",
-    },
-
-    ["<leader>L"] = {
-      function()
-        local bufnr = 0
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
-      end,
-      "Toggle LSP inlay hints",
-    },
-  },
-
-  v = {
-    ["<leader>ca"] = {
-      function()
-        vim.lsp.buf.code_action()
-      end,
-      "LSP code action",
-    },
-  },
-}
-
-M.gitsigns = {
-  plugin = true,
-
-  n = {
-    -- Navigation through hunks
-    ["]c"] = {
-      function()
-        if vim.wo.diff then
-          return "]c"
-        end
-        vim.schedule(function()
-          require("gitsigns").nav_hunk("next")
-        end)
-        return "<Ignore>"
-      end,
-      "Jump to next hunk",
-      opts = { expr = true },
-    },
-
-    ["[c"] = {
-      function()
-        if vim.wo.diff then
-          return "[c"
-        end
-        vim.schedule(function()
-          require("gitsigns").nav_hunk("prev")
-        end)
-        return "<Ignore>"
-      end,
-      "Jump to prev hunk",
-      opts = { expr = true },
-    },
-
-    -- Actions
-    ["<leader>rh"] = {
-      function()
-        require("gitsigns").reset_hunk()
-      end,
-      "Reset hunk",
-    },
-
-    ["<leader>ph"] = {
-      function()
-        require("gitsigns").preview_hunk()
-      end,
-      "Preview hunk",
-    },
-
-    ["<leader>gb"] = {
-      function()
-        require("gitsigns").blame_line()
-      end,
-      "Blame line",
-    },
-
-    ["<leader>td"] = {
-      function()
-        require("gitsigns").preview_hunk_inline()
-      end,
-      "Toggle deleted",
-    },
-
-    ["<leader>tl"] = {
-      function()
-        require("gitsigns").toggle_numhl()
-        require("gitsigns").toggle_linehl()
-      end,
-      "Toggle line highlight",
-    },
-
-    ["<leader>tw"] = {
-      function()
-        require("gitsigns").toggle_word_diff()
-      end,
-      "Toggle word diff",
-    },
-  },
-}
-
-M.bufferline = {
-  plugin = true,
-
-  n = {
-    ["<C-h>"] = { "<CMD>BufferLineCyclePrev<CR>", "Cycle previous buffer" },
-    ["<C-l>"] = { "<CMD>BufferLineCycleNext<CR>", "Cycle next buffer" },
-    ["<A-<>"] = { "<CMD>BufferLineMovePrev<CR>", "Move buffer to previous" },
-    ["<A->>"] = { "<CMD>BufferLineMoveNext<CR>", "Move buffer to next" },
-    ["<A-1>"] = { "<CMD>BufferLineGoToBuffer 1<CR>", "Go to 1 buffer" },
-    ["<A-2>"] = { "<CMD>BufferLineGoToBuffer 2<CR>", "Go to 2 buffer" },
-    ["<A-3>"] = { "<CMD>BufferLineGoToBuffer 3<CR>", "Go to 3 buffer" },
-    ["<A-4>"] = { "<CMD>BufferLineGoToBuffer 4<CR>", "Go to 4 buffer" },
-    ["<A-5>"] = { "<CMD>BufferLineGoToBuffer 5<CR>", "Go to 5 buffer" },
-    ["<A-6>"] = { "<CMD>BufferLineGoToBuffer 6<CR>", "Go to 6 buffer" },
-    ["<A-7>"] = { "<CMD>BufferLineGoToBuffer 7<CR>", "Go to 7 buffer" },
-    ["<A-8>"] = { "<CMD>BufferLineGoToBuffer 8<CR>", "Go to 8 buffer" },
-    ["<A-9>"] = { "<CMD>BufferLineGoToBuffer 9<CR>", "Go to 9 buffer" },
-    ["<A-0>"] = { "<CMD>BufferLineGoToBuffer -1<CR>", "Go to first buffer" },
-    ["<A-p>"] = { "<CMD>BufferLineTogglePin<CR>", "Toggle pinned buffer" },
-    ["<Space>bt"] = { "<Cmd>BufferLineSortByTabs<CR>", "Sory buffers by tabs" },
-    ["<Space>bd"] = { "<Cmd>BufferLineSortByDirectory<CR>", "Sort buffers by directories" },
-    ["<Space>be"] = { "<Cmd>BufferLineSortByExtension<CR>", "Sort buffers by extensions" },
-    ["<leader>ba"] = { delete_all_buffers, "Close all buffers" },
-    ["<leader>bb"] = { "<cmd>b#<CR>", "Switch to alternate buffer" },
-    ["<leader>bc"] = { delete_current_buffer, "Close current buffer" },
-    ["<leader>bd"] = { "<CMD>BufferLinePickClose<CR>", "Pick and close buffer" },
-    ["<leader>bh"] = { "<CMD>BufferLineCloseLeft<CR>", "Close left buffer" },
-    ["<leader>bl"] = { "<CMD>BufferLineCloseRight<CR>", "Close right buffer" },
-    ["<leader>bo"] = { delete_other_buffers, "Close other buffers" },
-    ["<leader>bp"] = { "<CMD>BufferLinePick<CR>", "Pick buffer" },
-    ["<leader>bt"] = { "<CMD>BufferLineTogglePin<CR>", "Toggle pinned buffer" },
-  },
-}
-
-M.neo_tree = {
-  plugin = true,
-
-  n = {},
-}
-
-M.telescope = {
-  plugin = true,
-
-  n = {
-    ["<C-p>"] = {
-      function()
-        require("telescope").extensions.smart_open.smart_open()
-      end,
-      "Find files",
-    },
-
-    -- find
-    -- ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
-    ["<leader>ff"] = {
-      function()
-        require("telescope").extensions.smart_open.smart_open()
-      end,
-      "Find files",
-    },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
-    ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
-    ["<leader>fg"] = {
-      function()
-        require("telescope").extensions.live_grep_args.live_grep_args()
-      end,
-      "Live grep with args",
-    },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
-    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
-    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
-    ["<leader>fp"] = { "<cmd> Telescope project <CR>", "Find recently projects" },
-    ["<leader>fe"] = { "<cmd> Telescope file_browser <CR>", "Find recently projects" },
-  },
-}
-
-M.hlslens = {
-  plugin = true,
-
-  n = {
-    ["n"] = {
-      "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>",
-      "",
-      opts = { noremap = true, silent = true },
-    },
-    ["N"] = {
-      "<cmd>execute('normal! ' . v:count1 . 'N')<CR><cmd>lua require('hlslens').start()<CR>",
-      "",
-
-      opts = { noremap = true, silent = true },
-    },
-
-    ["*"] = {
-      "*<cmd>lua require('hlslens').start()<CR>",
-      "",
-      opts = { noremap = true, silent = true },
-    },
-    ["#"] = {
-      "#<cmd>lua require('hlslens').start()<CR>",
-      "",
-      opts = { noremap = true, silent = true },
-    },
-    ["g*"] = {
-      "g*<cmd>lua require('hlslens').start()<CR>",
-      "",
-      opts = { noremap = true, silent = true },
-    },
-    ["g#"] = {
-      "g#<cmd>lua require('hlslens').start()<CR>",
-      "",
-      opts = { noremap = true, silent = true },
-    },
-  },
-}
-
-M.smart_splits = {
-  plugin = true,
-
-  n = {
-    -- Resize (Alt + h/j/k/l)
-    ["<A-h>"] = {
-      function()
-        require("smart-splits").resize_left()
-      end,
-      "Resize window left",
-    },
-    ["<A-j>"] = {
-      function()
-        require("smart-splits").resize_down()
-      end,
-      "Resize window down",
-    },
-    ["<A-k>"] = {
-      function()
-        require("smart-splits").resize_up()
-      end,
-      "Resize window up",
-    },
-    ["<A-l>"] = {
-      function()
-        require("smart-splits").resize_right()
-      end,
-      "Resize window right",
-    },
-
-    -- Navigation (Ctrl + h/j/k/l)
-    ["<C-h>"] = {
-      function()
-        require("smart-splits").move_cursor_left()
-      end,
-      "Move window left",
-    },
-    ["<C-j>"] = {
-      function()
-        require("smart-splits").move_cursor_down()
-      end,
-      "Move window down",
-    },
-    ["<C-k>"] = {
-      function()
-        require("smart-splits").move_cursor_up()
-      end,
-      "Move window up",
-    },
-    ["<C-l>"] = {
-      function()
-        require("smart-splits").move_cursor_right()
-      end,
-      "Move window right",
-    },
-
-    -- Swapping Buffers (Leader + Leader + h/j/k/l)
-    ["<leader><leader>h"] = {
-      function()
-        require("smart-splits").swap_buf_left()
-      end,
-      "Swap buffer left",
-    },
-    ["<leader><leader>j"] = {
-      function()
-        require("smart-splits").swap_buf_down()
-      end,
-      "Swap buffer down",
-    },
-    ["<leader><leader>k"] = {
-      function()
-        require("smart-splits").swap_buf_up()
-      end,
-      "Swap buffer up",
-    },
-    ["<leader><leader>l"] = {
-      function()
-        require("smart-splits").swap_buf_right()
-      end,
-      "Swap buffer right",
-    },
-  },
-}
-
-M.trouble = {
-  plugin = true,
-  n = {
-    ["<leader>xx"] = {
-      "<cmd>Trouble diagnostics toggle<cr>",
-      "Diagnostics (Trouble)",
-    },
-    ["<leader>xX"] = {
-      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-      "Buffer Diagnostics (Trouble)",
-    },
-    ["<leader>cs"] = {
-      "<cmd>Trouble symbols toggle focus=false<cr>",
-      "Symbols (Trouble)",
-    },
-    ["<leader>cl"] = {
-      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-      "LSP Definitions / references / ... (Trouble)",
-    },
-
-    ["<leader>xL"] = {
-      "<cmd>Trouble loclist toggle<cr>",
-      "Location List (Trouble)",
-    },
-    ["<leader>xQ"] = {
-      "<cmd>Trouble qflist toggle<cr>",
-      "Quickfix List (Trouble)",
-    },
-  },
-}
-
-M.whichkey = {
-  plugin = true,
-
-  n = {
-    ["<leader>wK"] = {
-      function()
-        vim.cmd("WhichKey")
-      end,
-      "Which-key all keymaps",
-    },
-    ["<leader>w?"] = {
-      function()
-        local input = vim.fn.input("WhichKey: ")
-        vim.cmd("WhichKey " .. input)
-      end,
-      "Which-key query lookup",
-    },
-  },
-}
-
-M.yanky = {
-  plugin = true,
-
-  n = {
-    ["y"] = {
-      "<Plug>(YankyYank)",
-      "Yank text",
-    },
-    ["p"] = {
-      "<Plug>(YankyPutAfter)",
-      "Put yanked text after cursor",
-    },
-    ["P"] = {
-      "<Plug>(YankyPutBefore)",
-      "Put yanked text before cursor",
-    },
-    ["gp"] = {
-      "<Plug>(YankyGPutAfter)",
-      "Put yanked text after selection",
-    },
-    ["gP"] = {
-      "<Plug>(YankyGPutBefore)",
-      "Put yanked text before selection",
-    },
-    ["]y"] = {
-      "<Plug>(YankyCycleForward)",
-      "Cycle forward through yank history",
-    },
-    ["[y"] = {
-      "<Plug>(YankyCycleBackward)",
-      "Cycle backward through yank history",
-    },
-    ["]p"] = {
-      "<Plug>(YankyPutIndentAfterLinewise)",
-      "Put indented after cursor (linewise)",
-    },
-    ["[p"] = {
-      "<Plug>(YankyPutIndentBeforeLinewise)",
-      "Put indented before cursor (linewise)",
-    },
-    ["]P"] = {
-      "<Plug>(YankyPutIndentAfterLinewise)",
-      "Put indented after cursor (linewise)",
-    },
-    ["[P"] = {
-      "<Plug>(YankyPutIndentBeforeLinewise)",
-      "Put indented before cursor (linewise)",
-    },
-    [">p"] = {
-      "<Plug>(YankyPutIndentAfterShiftRight)",
-      "Put and indent right",
-    },
-    ["<p"] = {
-      "<Plug>(YankyPutIndentAfterShiftLeft)",
-      "Put and indent left",
-    },
-    [">P"] = {
-      "<Plug>(YankyPutIndentBeforeShiftRight)",
-      "Put before and indent right",
-    },
-    ["<P"] = {
-      "<Plug>(YankyPutIndentBeforeShiftLeft)",
-      "Put before and indent left",
-    },
-    ["=p"] = {
-      "<Plug>(YankyPutAfterFilter)",
-      "Put after applying a filter",
-    },
-    ["=P"] = {
-      "<Plug>(YankyPutBeforeFilter)",
-      "Put before applying a filter",
-    },
-    ["<leader>yp"] = {
-      function()
-        require("telescope").extensions.yank_history.yank_history({})
-      end,
-      "Open Yank History",
-    },
-  },
-
-  x = {
-    ["y"] = {
-      "<Plug>(YankyYank)",
-      "Yank text",
-    },
-    ["gp"] = {
-      "<Plug>(YankyGPutAfter)",
-      "Put yanked text after selection",
-    },
-    ["gP"] = {
-      "<Plug>(YankyGPutBefore)",
-      "Put yanked text before selection",
-    },
-  },
-}
-
-M.dap = {
-  plugin = true,
-
-  n = {
-    -- debug
-    ["de"] = {
-      function()
-        local dap = require("dap")
-        local dap_ui = require("dapui")
-        dap.close()
-        dap.terminate()
-        dap.repl.close()
-        dap_ui.close()
-        dap.clear_breakpoints()
-      end,
-      "End debugger",
-    },
-    ["dc"] = {
-      function()
-        require("dap").continue()
-      end,
-      "Continue debug",
-    },
-    ["dt"] = {
-      function()
-        require("dap").toggle_breakpoint()
-      end,
-      "Set breakpoint",
-    },
-    ["dT"] = {
-      function()
-        require("dap").clear_breakpoints()
-      end,
-      "Clear breakpoint",
-    },
-    ["dj"] = {
-      function()
-        require("dap").step_over()
-      end,
-      "Step over",
-    },
-    ["dk"] = {
-      function()
-        require("dap").step_out()
-      end,
-      "Step out",
-    },
-    ["dl"] = {
-      function()
-        require("dap").step_into()
-      end,
-      "Step into",
-    },
-    ["dh"] = {
-      function()
-        require("dapui").eval()
-      end,
-      "Popups dapUI eval",
-    },
-  },
-}
-
-M.ufo = {
-  plugin = true,
-  n = {
-    ["zR"] = {
-      function()
-        require("ufo").openAllFolds()
-      end,
-      "Open all folds",
-    },
-    ["zM"] = {
-      function()
-        require("ufo").closeAllFolds()
-      end,
-      "Close all folds",
-    },
-    ["zr"] = {
-      function()
-        require("ufo").openFoldsExceptKinds()
-      end,
-      "Open all folds except kinds",
-    },
-    ["zm"] = {
-      function()
-        require("ufo").closeFoldsWith()
-      end,
-      "Close fold with",
-    },
-    ["zK"] = {
-      function()
-        local winid = require("ufo").peekFoldedLinesUnderCursor()
-        if not winid then
-          vim.lsp.buf.hover()
-        end
-      end,
-      "Peek folded lines under cursor",
-    },
-  },
-}
-
-M.snacks = {
-  plugin = true,
-  n = {
-    ["<c-\\>"] = {
-      function()
-        Snacks.terminal.toggle()
-      end,
-      "Toggle Terminal",
-    },
-    ["<leader>cR"] = {
-      function()
-        Snacks.rename.rename_file()
-      end,
-      "Rename File",
-    },
-    ["<leader>z"] = {
-      function()
-        Snacks.zen()
-      end,
-      "Toggle Zen Mode",
-    },
-    ["<leader>Z"] = {
-      function()
-        Snacks.zen.zoom()
-      end,
-      "Toggle Zoom",
-    },
-    ["<leader>pS"] = {
-      function()
-        Snacks.profiler.startup({})
-      end,
-      "Startup Profiler",
-    },
-    ["<leader>n"] = {
-      function()
-        Snacks.notifier.show_history()
-      end,
-      "Notification History",
-    },
-    ["<leader>gB"] = {
-      function()
-        Snacks.git.blame_line()
-      end,
-      "Git Blame Line",
-    },
-    ["<leader>N"] = {
-      function()
-        Snacks.win({
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-          width = 0.6,
-          height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
-            conceallevel = 3,
-          },
-        })
-      end,
-      "Neovim News",
-    },
-  },
-  t = {
-    ["<c-\\>"] = {
-      function()
-        Snacks.terminal.toggle()
-      end,
-      "Toggle Terminal",
-    },
-  },
-}
-
-M.flash = {
-  plugin = true,
-  n = {
-    ["S"] = {
-      function()
-        require("flash").treesitter()
-      end,
-      "Flash Treesitter",
-    },
-  },
-  x = {
-    ["S"] = {
-      function()
-        require("flash").treesitter()
-      end,
-      "Flash Treesitter",
-    },
-    ["R"] = {
-      function()
-        require("flash").treesitter_search()
-      end,
-      "Treesitter Search",
-    },
-  },
-  o = {
-    ["S"] = {
-      function()
-        require("flash").treesitter()
-      end,
-      "Flash Treesitter",
-    },
-    ["r"] = {
-      function()
-        require("flash").remote()
-      end,
-      "Remote Flash",
-    },
-    ["R"] = {
-      function()
-        require("flash").treesitter_search()
-      end,
-      "Treesitter Search",
-    },
-  },
-  c = {
-    ["<c-s>"] = {
-      function()
-        require("flash").toggle()
-      end,
-      "Toggle Flash Search",
-    },
-  },
-}
-
-M.inc_rename = {
-  plugin = true,
-
-  n = {
-    ["<leader>rn"] = {
-      function()
-        return ":IncRename " .. vim.fn.expand("<cword>")
-      end,
-      "Incremental Rename",
-      opts = { expr = true },
-    },
-  },
-}
+function M.setup()
+  set("i", "<C-b>", "<ESC>^i", "Beginning of line")
+  set("i", "<C-e>", "<End>", "End of line")
+  set("i", "<C-h>", "<Left>", "Move left")
+  set("i", "<C-l>", "<Right>", "Move right")
+  set("i", "<C-j>", "<Down>", "Move down")
+  set("i", "<C-k>", "<Up>", "Move up")
+
+  set("n", "<Esc>", "<cmd> noh <CR>", "Clear highlight")
+  set("n", "<C-d>", "10j", "Five lines down")
+  set("n", "<C-u>", "10k", "Five lines up")
+  set("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", { expr = true })
+  set("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", { expr = true })
+  set("n", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", { expr = true })
+  set("n", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", { expr = true })
+  set("n", "<leader>bn", "<cmd> enew <CR>", "New buffer")
+  set("n", "<leader>fm", function()
+    local ok, conform = pcall(require, "conform")
+    if ok then
+      conform.format({ async = true })
+    else
+      vim.notify("conform.nvim is unavailable", vim.log.levels.WARN)
+    end
+  end, "Format buffer")
+  set("n", "<Space>th", function()
+    if state.space_visible then
+      vim.opt.listchars:remove("space:·")
+    else
+      vim.opt.listchars:append("space:·")
+    end
+    state.space_visible = not state.space_visible
+  end, "Toggle space visible status")
+  set("n", "<leader>wv", ":vsp<CR>", "Split window vertically")
+  set("n", "<leader>wh", ":sp<CR>", "Split window horizontally")
+  set("n", "<leader>wc", "<C-w>c", "Close picked split window")
+  set("n", "<leader>wo", "<C-w>o", "Close other split window")
+  set("n", "<leader>w,", ":vertical resize -10<CR>", "Reduce vertical window size")
+  set("n", "<leader>w.", ":vertical resize +10<CR>", "Increase vertical window size")
+  set("n", "<leader>wj", ":horizontal resize -5<CR>", "Reduce horizontal window size")
+  set("n", "<leader>wk", ":horizontal resize +5<CR>", "Increase vertical window size")
+  set("n", "<leader>w=", "<C-w>=", "Make split windows equal in size")
+  set("n", "<leader><Tab>s", "<cmd>tab split<CR>", "Split window use tab")
+  set("n", "<leader><Tab>h", "<cmd>tabprev<CR>", "Switch to previous tab")
+  set("n", "<leader><Tab>j", "<cmd>tabnext<CR>", "Switch to next tab")
+  set("n", "<leader><Tab>f", "<cmd>tabfirst<CR>", "Switch to first tab")
+  set("n", "<leader><Tab>l", "<cmd>tablast<CR>", "Switch to last tab")
+  set("n", "<leader><Tab>c", "<cmd>tabclose<CR>", "Close tab")
+  set("n", "zo", "<CMD>foldopen<CR>", "Open fold")
+  set("n", "zc", "<CMD>foldclose<CR>", "Close fold")
+
+  set("v", "<C-j>", "5j", "Five lines down")
+  set("v", "<C-k>", "5k", "Five lines up")
+  set("v", "<C-d>", "10j", "Five lines down")
+  set("v", "<C-u>", "10k", "Five lines up")
+  set("v", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", { expr = true })
+  set("v", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", { expr = true })
+  set("v", "<", "<gv", "Indent line")
+  set("v", ">", ">gv", "Indent line")
+
+  set("x", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", { expr = true })
+  set("x", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", { expr = true })
+  set("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', "Do not copy replaced text", { silent = true })
+
+  set("c", "<C-j>", "<C-n>", "Next line")
+  set("c", "<C-k>", "<C-p>", "Previous line")
+
+  set("t", "<ESC>", "<C-\\><C-n>", "Back to normal mode")
+  set(
+    "t",
+    "<C-x>",
+    vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
+    "Escape terminal mode"
+  )
+end
+
+function M.setup_lsp(bufnr)
+  local opts = { buffer = bufnr }
+
+  set("n", "gD", vim.lsp.buf.declaration, "LSP declaration", opts)
+  set("n", "gd", function()
+    require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
+  end, "LSP definition", opts)
+  set("n", "K", vim.lsp.buf.hover, "LSP hover", opts)
+  set("n", "gi", function()
+    require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown())
+  end, "LSP implementation", opts)
+  set("n", "<leader>ls", vim.lsp.buf.signature_help, "LSP signature help", opts)
+  set("n", "<leader>D", function()
+    require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_dropdown())
+  end, "LSP definition type", opts)
+  set("n", "<leader>ca", vim.lsp.buf.code_action, "LSP code action", opts)
+  set("v", "<leader>ca", vim.lsp.buf.code_action, "LSP code action", opts)
+  set("n", "gr", function()
+    require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
+  end, "LSP references", opts)
+  set("n", "<leader>lf", function()
+    vim.diagnostic.open_float({ border = "rounded" })
+  end, "Floating diagnostic", opts)
+  set("n", "[d", function()
+    jump_diag(-1)
+  end, "Goto prev", opts)
+  set("n", "]d", function()
+    jump_diag(1)
+  end, "Goto next", opts)
+  set("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostic setloclist", opts)
+  set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder", opts)
+  set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder", opts)
+  set("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, "List workspace folders", opts)
+  set("n", "<leader>L", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+  end, "Toggle LSP inlay hints", opts)
+end
 
 return M

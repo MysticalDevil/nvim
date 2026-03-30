@@ -1,10 +1,9 @@
 local M = {}
 
-local utils = require("devil.utils")
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 function M.key_attach(bufnr)
-  utils.load_mappings("lspconfig", { buffer = bufnr })
+  require("devil.core.mappings").setup_lsp(bufnr)
 end
 
 ---@return table
@@ -44,13 +43,7 @@ function M.set_inlay_hints(client, bufnr)
     return
   end
 
-  -- Filtering unstable LSPs
-  local blocker_lsps = {
-    ["null-ls"] = true,
-    ["phpactor"] = true,
-    ["zls"] = false,
-  }
-  if blocker_lsps[client.name] then
+  if client.name == "phpactor" then
     notify.debug("Skip inlay hints for LSP: " .. client.name)
     return
   end
@@ -89,7 +82,7 @@ function M.enable_inlay_hints_autocmd()
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      if client and require("devil.utils").not_proxy_lsp(client.name) then
+      if client then
         M.set_inlay_hints(client, bufnr)
       end
     end,

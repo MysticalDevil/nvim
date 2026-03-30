@@ -1,4 +1,4 @@
-local settings = require("devil.core.settings")
+local settings = require("devil.config.lsp")
 
 local function warn(msg)
   vim.schedule(function()
@@ -106,6 +106,6 @@ mason_lspconfig.setup({
 lsp_config.setup()
 require("devil.lsp.ui")
 
-if settings.lsp.inlay_hints.auto_enable then
+if settings.inlay_hints.auto_enable then
   util.enable_inlay_hints_autocmd()
 end

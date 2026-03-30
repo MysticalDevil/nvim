@@ -1,5 +1,5 @@
 local status, cmp = pcall(require, "cmp")
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 if not status then
   notify.error("nvim-cmp not found")
   return

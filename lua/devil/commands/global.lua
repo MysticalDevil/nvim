@@ -1,5 +1,5 @@
 local create_cmd = vim.api.nvim_create_user_command
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 create_cmd("BufOnly", function()
   local current_buf = vim.api.nvim_get_current_buf()

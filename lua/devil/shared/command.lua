@@ -1,12 +1,6 @@
----Background job utilities.
----@module devil.utils.command
-
 local M = {}
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
----Start an nREPL job once for the current project.
----@param command string
----@param flag_var string Global flag name to mark running state.
 function M.start_nrepl(command, flag_var)
   if vim.g[flag_var] then
     return
@@ -15,14 +9,12 @@ function M.start_nrepl(command, flag_var)
   local cwd = vim.fn.getcwd()
   local file_to_check = ""
 
-  -- Detect project marker based on launcher command.
   if string.match(command, "clj") then
     file_to_check = "deps.edn"
   elseif string.match(command, "lein") then
     file_to_check = "project.clj"
   end
 
-  -- Start only when the current working directory looks like a Clojure project.
   if vim.fn.filereadable(cwd .. "/" .. file_to_check) == 1 then
     local job_id = vim.fn.jobstart(command, {
       cwd = cwd,
@@ -38,8 +30,6 @@ function M.start_nrepl(command, flag_var)
   end
 end
 
----Stop the tracked nREPL background job.
----@param flag_var string Global flag name to mark running state.
 function M.stop_nrepl(flag_var)
   local job_id = vim.api.nvim_get_var("clj_background_pid")
 

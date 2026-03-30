@@ -1,10 +1,5 @@
----Highlight helpers for deriving plugin colors from the active colorscheme.
----@module devil.utils.highlight
-
 local M = {}
 
----@param value integer|string|nil
----@return string|nil
 local function to_hex(value)
   if type(value) == "number" then
     return ("#%06x"):format(value)
@@ -12,8 +7,6 @@ local function to_hex(value)
   return value
 end
 
----@param group string
----@return table
 function M.get(group)
   local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = true })
   if not ok or type(hl) ~= "table" then
@@ -27,16 +20,10 @@ function M.get(group)
   return normalized
 end
 
----@param group string
----@param attr string
----@return string|nil
 function M.attr(group, attr)
   return M.get(group)[attr]
 end
 
----@param specs table[]
----@param fallback? string
----@return string|nil
 function M.first(specs, fallback)
   for _, spec in ipairs(specs) do
     local group = spec[1]
@@ -49,8 +36,6 @@ function M.first(specs, fallback)
   return fallback
 end
 
----@param opts table
----@return table
 function M.style(opts)
   local style = vim.deepcopy(opts.extra or {})
 

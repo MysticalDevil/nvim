@@ -2,7 +2,7 @@
 ---@module devil.utils.ebuild_cmds
 
 local M = {}
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 ---Run a command and forward buffered output to quickfix.
 ---@param cmd string[]

@@ -1,6 +1,6 @@
 local notify = nil
 do
-  local ok, loaded = pcall(require, "devil.utils.notify")
+  local ok, loaded = pcall(require, "devil.shared.notify")
   if ok then
     notify = loaded
   end
@@ -38,38 +38,19 @@ local function safe_require(module, level)
   return loaded
 end
 
--- Core setup
 safe_require("devil.core", vim.log.levels.ERROR)
-
-safe_require("devil.core.bootstrap", vim.log.levels.ERROR)
-
--- Plugin manager setup
-safe_require("devil.plugins", vim.log.levels.ERROR)
-
-local mappings = safe_require("devil.core.mappings")
+local mappings = safe_require("devil.core.mappings", vim.log.levels.ERROR)
 if mappings and type(mappings.setup_early_mappings) == "function" then
   mappings.setup_early_mappings()
 end
 
--- Key mappings
-local utils = safe_require("devil.utils")
-if utils and type(utils.load_mappings) == "function" then
-  utils.load_mappings()
+safe_require("devil.core.bootstrap", vim.log.levels.ERROR)
+safe_require("devil.plugins", vim.log.levels.ERROR)
+
+local app = safe_require("devil.app", vim.log.levels.ERROR)
+if app and type(app.setup) == "function" then
+  app.setup()
 end
-
--- Language Server Protocol
-safe_require("devil.lsp")
--- Completion engine
-safe_require("devil.complete")
--- Formatter and linter
-safe_require("devil.fmt-lint")
--- Debug Adapter Protocol
-safe_require("devil.dap")
-
--- Custom commands
-safe_require("devil.commands")
-
-safe_require("devil.core.colorscheme")
 
 -- Playground code
 -- require("devil.playground.setup")

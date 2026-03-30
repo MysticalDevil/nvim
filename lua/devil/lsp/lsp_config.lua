@@ -1,7 +1,7 @@
 local M = {}
 local util = require("devil.lsp.util")
-local notify = require("devil.utils.notify")
-local settings = require("devil.core.settings")
+local notify = require("devil.shared.notify")
+local settings = require("devil.config.lsp")
 
 M.server_groups = {
   core = {
@@ -49,7 +49,7 @@ M.server_groups = {
 }
 
 local function enabled_groups()
-  local groups = settings.lsp.groups or {}
+  local groups = settings.groups or {}
   return {
     core = groups.core ~= false,
     web = groups.web ~= false,

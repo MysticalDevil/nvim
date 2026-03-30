@@ -1,5 +1,5 @@
 local create_user_command = vim.api.nvim_create_user_command
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 local ih = vim.lsp.inlay_hint
 

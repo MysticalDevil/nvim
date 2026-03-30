@@ -1,5 +1,5 @@
 local M = {}
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 function M.setup()
   local status_ok, dap = pcall(require, "dap")

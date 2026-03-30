@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 local status, lspkind = pcall(require, "lspkind")
 if not status then

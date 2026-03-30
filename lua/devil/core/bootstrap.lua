@@ -1,4 +1,4 @@
-local notify = require("devil.utils.notify")
+local notify = require("devil.shared.notify")
 
 -- Auto install lazy.nvim
 ---@param path string
