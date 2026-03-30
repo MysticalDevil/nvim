@@ -1,5 +1,21 @@
 local opts = { enable_magic_search = true, space_visible = false }
 
+---@param count integer
+local function jump_diag(count)
+  vim.diagnostic.jump({
+    count = count,
+    on_jump = function(diagnostic, bufnr)
+      if not diagnostic then
+        return
+      end
+      vim.diagnostic.open_float(bufnr, {
+        border = "rounded",
+        scope = "cursor",
+      })
+    end,
+  })
+end
+
 local M = {}
 
 function M.setup_early_mappings()
@@ -43,10 +59,10 @@ M.general = {
       function()
         local ok, conform = pcall(require, "conform")
         if ok then
-          conform.format({ async = true, lsp_format = "fallback" })
-          return
+          conform.format({ async = true })
+        else
+          vim.notify("conform.nvim is unavailable", vim.log.levels.WARN)
         end
-        vim.lsp.buf.format({ async = true })
       end,
       "Format buffer",
     },
@@ -209,14 +225,14 @@ M.lspconfig = {
 
     ["[d"] = {
       function()
-        vim.diagnostic.jump({ count = -1, float = { border = "rounded" } })
+        jump_diag(-1)
       end,
       "Goto prev",
     },
 
     ["]d"] = {
       function()
-        vim.diagnostic.jump({ count = 1, float = { border = "rounded" } })
+        jump_diag(1)
       end,
       "Goto next",
     },
