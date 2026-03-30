@@ -1,6 +1,6 @@
 ---@type vim.lsp.Config
 return {
-  setting = {
+  settings = {
     typescript = {
       inlayHints = {
         parameterNames = { enabled = "all" },

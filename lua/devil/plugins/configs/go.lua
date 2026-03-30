@@ -63,7 +63,7 @@ return {
   lsp_keymaps = true, -- set to false to disable gopls/lsp keymap
   lsp_codelens = true, -- set to false to disable codelens, true by default, you can use a function
   -- function(bufnr)
-  --    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>F", "<cmd>lua vim.lsp.buf.formatting()<CR>", {noremap=true, silent=true})
+  --    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>F", "<cmd>lua vim.lsp.buf.format()<CR>", {noremap=true, silent=true})
   -- end
   -- to setup a table of codelens
   diagnostic = false,
@@ -74,7 +74,7 @@ return {
     enable = true,
     -- Only show inlay hints for the current line
     only_current_line = false,
-    -- Event which triggers a refersh of the inlay hints.
+    -- Event that triggers a refresh of the inlay hints.
     -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
     -- not that this may cause higher CPU usage.
     -- This option is only respected when only_current_line and
@@ -88,7 +88,7 @@ return {
     show_parameter_hints = true,
     -- prefix for all the other hints (type, chaining)
     other_hints_prefix = "=> ",
-    -- whether to align to the lenght of the longest line in the file
+    -- whether to align to the length of the longest line in the file
     max_len_align = false,
     -- padding from the left if max_len_align is true
     max_len_align_padding = 1,
@@ -114,7 +114,7 @@ return {
   dap_timeout = 15, --  see dap option initialize_timeout_sec = 15,
   dap_retries = 20, -- see dap option max_retries
   build_tags = "tag1,tag2", -- set default build tags
-  textobjects = true, -- enable default text jobects through treesittter-text-objects
+  textobjects = true, -- enable default text objects through treesitter-text-objects
   test_runner = "go", -- one of {`go`, `richgo`, `dlv`, `ginkgo`, `gotestsum`}
   verbose_tests = true, -- set to add verbose flag to tests deprecated, see '-v' option
   run_in_floaterm = false, -- set to true to run in a float window. :GoTermClose closes the floatterm
@@ -127,5 +127,5 @@ return {
   },
   trouble = false, -- true: use trouble to open quickfix
   test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
-  iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the begining of if err statement
+  iferr_vertical_shift = 4, -- defines where the cursor will end up vertically from the beginning of if err statement
 }
