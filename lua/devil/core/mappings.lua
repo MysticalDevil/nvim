@@ -16,6 +16,18 @@ local function jump_diag(count)
   })
 end
 
+local function delete_current_buffer()
+  Snacks.bufdelete.delete()
+end
+
+local function delete_all_buffers()
+  Snacks.bufdelete.all()
+end
+
+local function delete_other_buffers()
+  Snacks.bufdelete.other()
+end
+
 local M = {}
 
 function M.setup_early_mappings()
@@ -369,12 +381,6 @@ M.bufferline = {
   n = {
     ["<C-h>"] = { "<CMD>BufferLineCyclePrev<CR>", "Cycle previous buffer" },
     ["<C-l>"] = { "<CMD>BufferLineCycleNext<CR>", "Cycle next buffer" },
-    ["<C-w>"] = {
-      function()
-        Snacks.bufdelete.delete()
-      end,
-      "Delete buffer",
-    },
     ["<A-<>"] = { "<CMD>BufferLineMovePrev<CR>", "Move buffer to previous" },
     ["<A->>"] = { "<CMD>BufferLineMoveNext<CR>", "Move buffer to next" },
     ["<A-1>"] = { "<CMD>BufferLineGoToBuffer 1<CR>", "Go to 1 buffer" },
@@ -391,11 +397,15 @@ M.bufferline = {
     ["<Space>bt"] = { "<Cmd>BufferLineSortByTabs<CR>", "Sory buffers by tabs" },
     ["<Space>bd"] = { "<Cmd>BufferLineSortByDirectory<CR>", "Sort buffers by directories" },
     ["<Space>be"] = { "<Cmd>BufferLineSortByExtension<CR>", "Sort buffers by extensions" },
+    ["<leader>ba"] = { delete_all_buffers, "Close all buffers" },
+    ["<leader>bb"] = { "<cmd>b#<CR>", "Switch to alternate buffer" },
+    ["<leader>bc"] = { delete_current_buffer, "Close current buffer" },
+    ["<leader>bd"] = { "<CMD>BufferLinePickClose<CR>", "Pick and close buffer" },
     ["<leader>bh"] = { "<CMD>BufferLineCloseLeft<CR>", "Close left buffer" },
     ["<leader>bl"] = { "<CMD>BufferLineCloseRight<CR>", "Close right buffer" },
+    ["<leader>bo"] = { delete_other_buffers, "Close other buffers" },
     ["<leader>bp"] = { "<CMD>BufferLinePick<CR>", "Pick buffer" },
-    ["<leader>bo"] = { "<CMD>BufferLineCloseRight<CR><CMD>BufferLineCloseLeft<CR>", "Close other buffer" },
-    ["<leader>bc"] = { "<CMD>BufferLinePickClose<CR>", "Close picked buffer" },
+    ["<leader>bt"] = { "<CMD>BufferLineTogglePin<CR>", "Toggle pinned buffer" },
   },
 }
 
