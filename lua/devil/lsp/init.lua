@@ -6,29 +6,43 @@ local function warn(msg)
   end)
 end
 
-local ok_mason, mason = pcall(require, "mason")
-if not ok_mason then
-  warn("LSP bootstrap skipped: mason.nvim is unavailable")
-  return
+local deps = {
+  {
+    key = "mason",
+    module = "mason",
+    error = "LSP bootstrap skipped: mason.nvim is unavailable",
+  },
+  {
+    key = "mason_lspconfig",
+    module = "mason-lspconfig",
+    error = "LSP bootstrap skipped: mason-lspconfig.nvim is unavailable",
+  },
+  {
+    key = "util",
+    module = "devil.lsp.util",
+    error = "LSP bootstrap skipped: devil.lsp.util failed to load",
+  },
+  {
+    key = "lsp_config",
+    module = "devil.lsp.lsp_config",
+    error = "LSP bootstrap skipped: devil.lsp.lsp_config failed to load",
+  },
+}
+
+local loaded = {}
+for _, dep in ipairs(deps) do
+  local ok, mod = pcall(require, dep.module)
+  if not ok then
+    warn(dep.error)
+    return
+  end
+  loaded[dep.key] = mod
 end
 
-local ok_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not ok_mason_lspconfig then
-  warn("LSP bootstrap skipped: mason-lspconfig.nvim is unavailable")
-  return
-end
-
-local ok_util, util = pcall(require, "devil.lsp.util")
-if not ok_util then
-  warn("LSP bootstrap skipped: devil.lsp.util failed to load")
-  return
-end
-
-local ok_lsp_config, lsp_config = pcall(require, "devil.lsp.lsp_config")
-if not ok_lsp_config then
-  warn("LSP bootstrap skipped: devil.lsp.lsp_config failed to load")
-  return
-end
+local mason = loaded.mason
+local mason_lspconfig = loaded.mason_lspconfig
+local util = loaded.util
+local lsp_config = loaded.lsp_config
 
 local function is_nixos()
   local f = io.open("/etc/NIXOS", "r")
@@ -85,11 +99,7 @@ end
 mason_lspconfig.setup({
   ensure_installed = {},
   automatic_installation = false,
-  automatic_enable = {
-    exclude = {
-      "rust_analyzer",
-    },
-  },
+  automatic_enable = false,
   handlers = disabled_handlers,
 })
 
