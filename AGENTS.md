@@ -3,10 +3,11 @@
 ## Project Structure & Module Organization
 This repository is a modular Neovim configuration.
 - Entry points: `init.lua`, `ginit.vim`.
-- Core runtime config: `lua/devil/core/` (`options.lua`, `autocmds.lua`, `mappings.lua`, bootstrap/settings).
-- Plugin definitions and plugin-specific setup: `lua/devil/plugins/specs/` and `lua/devil/plugins/configs/`.
-- Language tooling: `lua/devil/lsp/`, `lua/devil/complete/`, `lua/devil/fmt-lint/`, `lua/devil/dap/`.
-- Custom commands/utilities: `lua/devil/commands/`, `lua/devil/utils/`, `lua/devil/health/`.
+- Core runtime config: `lua/devil/core/` (`options.lua`, `autocmds.lua`, `mappings.lua`, bootstrap).
+- App/bootstrap wiring: `lua/devil/app/`.
+- Plugin definitions and plugin-specific setup: `lua/devil/plugins/*.lua`, `lua/devil/plugins/lang/*.lua`, and `lua/devil/plugins/configs/`.
+- Language tooling: `lua/devil/tools/`, `lua/devil/complete/`.
+- Custom commands/shared helpers: `lua/devil/commands/`, `lua/devil/shared/`, `lua/devil/health/`.
 - Filetype overrides: `after/ftplugin/`.
 - Helper script: `scripts/check_keymap_conflicts.lua`.
 
@@ -22,8 +23,8 @@ This repository is a modular Neovim configuration.
 - Indentation: 2 spaces, UTF-8, LF endings (`.editorconfig`).
 - Formatting: StyLua (`stylua.toml`, 120-column width).
 - Linting: Selene (`selene.toml`, `std = "neovim"`).
-- Module naming: lowercase snake_case files (for example `fmt-lint/conform.lua`).
-- Keep plugin specs in `plugins/specs/*.lua` (for example `plugins/specs/core.lua`); keep plugin behavior in `plugins/configs/*.lua`.
+- Module naming: lowercase snake_case files (for example `tools/format.lua`).
+- Keep plugin specs in `plugins/*.lua` and `plugins/lang/*.lua`; keep larger plugin behavior blocks in `plugins/configs/*.lua`.
 
 ## Testing Guidelines
 There is no dedicated unit-test suite in this repo; rely on static and smoke checks.
