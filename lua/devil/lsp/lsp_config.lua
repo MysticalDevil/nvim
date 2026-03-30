@@ -24,7 +24,6 @@ M.server_groups = {
   },
   systems = {
     clangd = true,
-    sourcekit = true,
     zls = true,
   },
   mobile = {
