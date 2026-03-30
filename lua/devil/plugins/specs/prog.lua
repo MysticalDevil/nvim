@@ -8,7 +8,6 @@ return {
     "neovim/nvim-lspconfig",
     priority = 1000,
     event = { "BufReadPost", "BufNewFile" },
-    cmd = { "LspInfo", "LspInstall", "LspStart" },
   },
 
   -- mason.nvim
