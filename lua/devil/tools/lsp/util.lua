@@ -29,7 +29,7 @@ function M.flags()
   }
 end
 
-function M.default_on_attach(client, bufnr)
+function M.default_on_attach(_client, bufnr)
   M.key_attach(bufnr)
 
   vim.api.nvim_set_option_value("formatexpr", "v:lua.vim.lsp.formatexpr()", { buf = bufnr })
