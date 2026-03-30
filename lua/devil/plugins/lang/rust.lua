@@ -4,7 +4,7 @@ return {
     version = "^7",
     ft = { "rust" },
     init = function()
-      local util = require("devil.lsp.util")
+      local util = require("devil.tools.lsp.util")
       local common_on_attach = util.default_on_attach
       local common_caps = util.common_capabilities()
       vim.g.rustaceanvim = {
@@ -13,7 +13,7 @@ return {
             common_on_attach(client, bufnr)
           end,
           capabilities = common_caps,
-          default_settings = require("devil.lsp.config.rust_analyzer"),
+          default_settings = require("devil.tools.lsp.servers.rust_analyzer"),
         },
       }
     end,

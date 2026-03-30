@@ -1,5 +1,3 @@
-local settings = require("devil.config.lsp")
-
 local function warn(msg)
   vim.schedule(function()
     vim.notify(msg, vim.log.levels.WARN)
@@ -19,13 +17,13 @@ local deps = {
   },
   {
     key = "util",
-    module = "devil.lsp.util",
-    error = "LSP bootstrap skipped: devil.lsp.util failed to load",
+    module = "devil.tools.lsp.util",
+    error = "LSP bootstrap skipped: devil.tools.lsp.util failed to load",
   },
   {
     key = "lsp_config",
-    module = "devil.lsp.lsp_config",
-    error = "LSP bootstrap skipped: devil.lsp.lsp_config failed to load",
+    module = "devil.tools.lsp.lsp_config",
+    error = "LSP bootstrap skipped: devil.tools.lsp.lsp_config failed to load",
   },
 }
 
@@ -104,8 +102,8 @@ mason_lspconfig.setup({
 })
 
 lsp_config.setup()
-require("devil.lsp.ui")
+require("devil.tools.lsp.ui")
 
-if settings.inlay_hints.auto_enable then
+if true then
   util.enable_inlay_hints_autocmd()
 end

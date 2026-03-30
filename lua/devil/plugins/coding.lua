@@ -47,19 +47,73 @@ return {
     "mfussenegger/nvim-dap",
     lazy = true,
     keys = {
-      { "de", function() local dap = require("dap"); local dap_ui = require("dapui"); dap.close(); dap.terminate(); dap.repl.close(); dap_ui.close(); dap.clear_breakpoints() end, desc = "End debugger" },
-      { "dc", function() require("dap").continue() end, desc = "Continue debug" },
-      { "dt", function() require("dap").toggle_breakpoint() end, desc = "Set breakpoint" },
-      { "dT", function() require("dap").clear_breakpoints() end, desc = "Clear breakpoint" },
-      { "dj", function() require("dap").step_over() end, desc = "Step over" },
-      { "dk", function() require("dap").step_out() end, desc = "Step out" },
-      { "dl", function() require("dap").step_into() end, desc = "Step into" },
-      { "dh", function() require("dapui").eval() end, desc = "Popups dapUI eval" },
+      {
+        "de",
+        function()
+          local dap = require("dap")
+          local dap_ui = require("dapui")
+          dap.close()
+          dap.terminate()
+          dap.repl.close()
+          dap_ui.close()
+          dap.clear_breakpoints()
+        end,
+        desc = "End debugger",
+      },
+      {
+        "dc",
+        function()
+          require("dap").continue()
+        end,
+        desc = "Continue debug",
+      },
+      {
+        "dt",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Set breakpoint",
+      },
+      {
+        "dT",
+        function()
+          require("dap").clear_breakpoints()
+        end,
+        desc = "Clear breakpoint",
+      },
+      {
+        "dj",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "Step over",
+      },
+      {
+        "dk",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "Step out",
+      },
+      {
+        "dl",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "Step into",
+      },
+      {
+        "dh",
+        function()
+          require("dapui").eval()
+        end,
+        desc = "Popups dapUI eval",
+      },
     },
     dependencies = { "rcarriga/nvim-dap-ui", "theHamsta/nvim-dap-virtual-text" },
     config = function()
       require("mason-nvim-dap").setup({ ensure_installed = {}, automatic_installation = true })
-      require("devil.dap").setup()
+      require("devil.tools").setup()
     end,
   },
   { "jbyuki/one-small-step-for-vimkind" },

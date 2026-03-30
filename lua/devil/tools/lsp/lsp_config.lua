@@ -1,7 +1,6 @@
 local M = {}
-local util = require("devil.lsp.util")
+local util = require("devil.tools.lsp.util")
 local notify = require("devil.shared.notify")
-local settings = require("devil.config.lsp")
 
 M.server_groups = {
   core = {
@@ -48,22 +47,18 @@ M.server_groups = {
   },
 }
 
-local function enabled_groups()
-  local groups = settings.groups or {}
-  return {
-    core = groups.core ~= false,
-    web = groups.web ~= false,
-    systems = groups.systems ~= false,
-    mobile = groups.mobile == true,
-    enterprise = groups.enterprise == true,
-    experimental = groups.experimental == true,
-  }
-end
+local enabled_groups = {
+  core = true,
+  web = true,
+  systems = true,
+  mobile = false,
+  enterprise = false,
+  experimental = false,
+}
 
 local function active_servers()
   local servers = {}
-  local groups = enabled_groups()
-  for group_name, is_enabled in pairs(groups) do
+  for group_name, is_enabled in pairs(enabled_groups) do
     if is_enabled and M.server_groups[group_name] then
       servers = vim.tbl_deep_extend("force", servers, M.server_groups[group_name])
     end
@@ -84,7 +79,7 @@ local function load_server_opts(server, selector)
   end
 
   local module_name = (selector == true) and server or selector
-  local config_path = ("devil.lsp.config.%s"):format(module_name)
+  local config_path = ("devil.tools.lsp.servers.%s"):format(module_name)
 
   local ok, opts = pcall(require, config_path)
   if not ok then

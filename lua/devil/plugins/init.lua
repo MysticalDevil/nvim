@@ -5,8 +5,6 @@ if not status_ok then
   return
 end
 
-local plugin_settings = require("devil.config.plugins")
-
 local modules = {
   require("devil.plugins.foundation"),
   require("devil.plugins.editor"),
@@ -42,16 +40,16 @@ local opts = {
   },
   checker = {
     -- automatically check for plugin updates
-    enabled = plugin_settings.lazy.checker.enabled,
+    enabled = true,
     concurrency = nil, ---@type number? set to 1 to check for updates very slowly
-    notify = plugin_settings.lazy.checker.notify,
-    frequency = plugin_settings.lazy.checker.frequency,
-    check_pinned = plugin_settings.lazy.checker.check_pinned,
+    notify = true,
+    frequency = 3600,
+    check_pinned = false,
   },
   change_detection = {
     -- automatically check for config file changes and reload the ui
-    enabled = plugin_settings.lazy.change_detection.enabled,
-    notify = plugin_settings.lazy.change_detection.notify,
+    enabled = true,
+    notify = true,
   },
   performance = {
     cache = {

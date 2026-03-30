@@ -1,10 +1,6 @@
 local M = {}
 
 local function min_level()
-  local ok, settings = pcall(require, "devil.config.notify")
-  if ok and settings.min_level then
-    return settings.min_level
-  end
   return vim.log.levels.INFO
 end
 

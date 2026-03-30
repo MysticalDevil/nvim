@@ -23,7 +23,7 @@ function M.setup()
     })
   end
 
-  require("devil.dap.ui").setup()
+  require("devil.tools.dap.ui").setup()
 
   local debug_configs = {
     "cxx",
@@ -32,7 +32,7 @@ function M.setup()
   }
 
   for _, name in ipairs(debug_configs) do
-    local ok, config = pcall(require, "devil.dap.config." .. name)
+    local ok, config = pcall(require, "devil.tools.dap.configs." .. name)
     if not ok then
       notify.error("DAP: Failed to load config for " .. name)
     else
