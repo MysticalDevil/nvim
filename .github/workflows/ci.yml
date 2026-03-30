@@ -1,11 +1,11 @@
-name: CI
+name: Quality
 
 on:
   push:
   pull_request:
 
 jobs:
-  static-and-smoke:
+  fmt-lint-and-smoke:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,12 +23,21 @@ jobs:
           token: ${{ github.token }}
           args: --check .
 
+      - name: Setup Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Selene
+        run: cargo install selene --locked --version 0.30.0
+
+      - name: Lua lint check
+        run: selene .
+
       - name: Lua syntax check
         run: |
           rg --files -g '*.lua' | xargs -r -n 1 luac5.1 -p
 
       - name: Keymap conflict check
-        run: lua5.1 scripts/check_keymap_conflicts.lua
+        run: lua5.1 lua/devil/health/check_keymap_conflicts.lua
 
       - name: Install Neovim (stable appimage)
         run: |
