@@ -3,6 +3,18 @@ local M = {}
 local notify = require("devil.shared.notify")
 local treesitter_foldexpr = "v:lua.vim.treesitter.foldexpr()"
 local lsp_foldexpr = "v:lua.vim.lsp.foldexpr()"
+local document_color_filetypes = {
+  css = true,
+  html = true,
+  json = true,
+  jsonc = true,
+  lua = true,
+  markdown = true,
+  scss = true,
+  toml = true,
+  typescriptreact = true,
+  yaml = true,
+}
 
 function M.key_attach(bufnr)
   require("devil.core.mappings").setup_lsp(bufnr)
@@ -79,6 +91,20 @@ function M.set_inlay_hints(client, bufnr)
   pcall(function()
     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end)
+end
+
+function M.configure_document_color(client, bufnr)
+  if not client then
+    return
+  end
+
+  if not client:supports_method("textDocument/documentColor") then
+    return
+  end
+
+  local ft = vim.bo[bufnr].filetype
+  local enable = document_color_filetypes[ft] == true
+  vim.lsp.document_color.enable(enable, bufnr)
 end
 
 function M.enable_inlay_hints_autocmd()
@@ -186,6 +212,7 @@ function M.enable_dynamic_capability_attach()
       M.default_on_attach(client, bufnr)
       M.set_lsp_foldexpr(client, bufnr)
       M.set_inlay_hints(client, bufnr)
+      M.configure_document_color(client, bufnr)
     end
 
     return result

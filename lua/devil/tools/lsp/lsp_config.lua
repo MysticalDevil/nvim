@@ -108,6 +108,7 @@ function M.setup()
     opts.on_attach = function(client, bufnr)
       util.default_on_attach(client, bufnr)
       util.set_lsp_foldexpr(client, bufnr)
+      util.configure_document_color(client, bufnr)
       if old_on_attach then
         old_on_attach(client, bufnr)
       end
