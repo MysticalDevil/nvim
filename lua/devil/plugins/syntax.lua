@@ -160,8 +160,14 @@ return {
 
       return {
         open_fold_hl_timeout = 400,
-        provider_selector = function()
-          return { "treesitter", "indent" }
+        provider_selector = function(_, filetype, buftype)
+          if buftype ~= "" then
+            return { "indent" }
+          end
+          if filetype == "gitcommit" or filetype == "markdown" then
+            return { "treesitter", "indent" }
+          end
+          return { "lsp", "indent" }
         end,
         close_fold_kinds = {},
         enable_get_fold_virt_text = false,

@@ -23,6 +23,18 @@ local function jump_diag(count)
   })
 end
 
+local function diagnostic_loclist()
+  vim.diagnostic.setloclist({
+    title = "Diagnostics",
+    format = function(diagnostic)
+      local message = diagnostic.message:gsub("%s+", " ")
+      local source = diagnostic.source and (" [" .. diagnostic.source .. "]") or ""
+      local code = diagnostic.code and (" (" .. tostring(diagnostic.code) .. ")") or ""
+      return message .. source .. code
+    end,
+  })
+end
+
 function M.setup_early_mappings()
   local rhs = state.enable_magic_search and "/\\v" or "/"
   vim.keymap.set({ "n", "v" }, "/", rhs, {
@@ -109,18 +121,25 @@ function M.setup_lsp(bufnr)
     require("telescope.builtin").lsp_definitions(require("telescope.themes").get_dropdown())
   end, "LSP definition", opts)
   set("n", "K", vim.lsp.buf.hover, "LSP hover", opts)
+  set("n", "gri", function()
+    require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown())
+  end, "LSP implementation", opts)
   set("n", "gi", function()
     require("telescope.builtin").lsp_implementations(require("telescope.themes").get_dropdown())
   end, "LSP implementation", opts)
   set("n", "<leader>ls", vim.lsp.buf.signature_help, "LSP signature help", opts)
+  set("n", "grt", function()
+    require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_dropdown())
+  end, "LSP definition type", opts)
   set("n", "<leader>D", function()
     require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_dropdown())
   end, "LSP definition type", opts)
   set("n", "<leader>ca", vim.lsp.buf.code_action, "LSP code action", opts)
   set("v", "<leader>ca", vim.lsp.buf.code_action, "LSP code action", opts)
-  set("n", "gr", function()
+  set("n", "grr", function()
     require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy())
   end, "LSP references", opts)
+  set("n", "grx", vim.lsp.codelens.run, "Run codelens", opts)
   set("n", "<leader>lf", function()
     vim.diagnostic.open_float({ border = "rounded" })
   end, "Floating diagnostic", opts)
@@ -130,7 +149,7 @@ function M.setup_lsp(bufnr)
   set("n", "]d", function()
     jump_diag(1)
   end, "Goto next", opts)
-  set("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostic setloclist", opts)
+  set("n", "<leader>q", diagnostic_loclist, "Diagnostic setloclist", opts)
   set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder", opts)
   set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder", opts)
   set("n", "<leader>wl", function()
