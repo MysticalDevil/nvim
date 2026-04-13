@@ -103,6 +103,8 @@ mason_lspconfig.setup({
 
 lsp_config.setup()
 require("devil.tools.lsp.ui")
+util.enable_dynamic_capability_attach()
+util.enable_lsp_folding_autocmd()
 
 if true then
   util.enable_inlay_hints_autocmd()

@@ -107,6 +107,7 @@ function M.setup()
     local old_on_attach = extra.on_attach
     opts.on_attach = function(client, bufnr)
       util.default_on_attach(client, bufnr)
+      util.set_lsp_foldexpr(client, bufnr)
       if old_on_attach then
         old_on_attach(client, bufnr)
       end
