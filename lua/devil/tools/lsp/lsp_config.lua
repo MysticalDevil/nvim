@@ -53,7 +53,7 @@ local enabled_groups = {
   systems = true,
   mobile = false,
   enterprise = false,
-  experimental = false,
+  experimental = true,
 }
 
 local function active_servers()
