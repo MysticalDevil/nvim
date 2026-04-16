@@ -8,12 +8,16 @@ end
 lint.linters_by_ft = {
   cmake = { "cmakelint" },
   go = { "golangcilint" },
+  javascript = { "oxlint" },
+  javascriptreact = { "oxlint" },
   json = { "jsonlint" },
   lua = { "selene" },
   markdown = { "rumdl" },
   php = { "mago_lint" },
   ruby = { "rubocop" },
   sh = { "shellcheck" },
+  typescript = { "oxlint" },
+  typescriptreact = { "oxlint" },
   vim = { "vint" },
   yaml = { "yamllint" },
 }

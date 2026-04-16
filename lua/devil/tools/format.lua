@@ -1,10 +1,11 @@
 local conform = require("conform")
 
 local function web_fmt(bufnr)
-  if conform.get_formatter_info("biome-check", bufnr).available then
-    return { "biome-check" }
+  if conform.get_formatter_info("oxfmt", bufnr).available then
+    return { "oxfmt" }
   end
-  return { "prettierd", "prettier", stop_after_first = true }
+
+  return {}
 end
 
 local function python_fmt(bufnr)
