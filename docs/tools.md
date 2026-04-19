@@ -1,49 +1,110 @@
 # 外部工具清单
 
-本文档列出本配置通过 `lua/devil/tools/format.lua` 与 `lua/devil/tools/lint.lua` 集成的格式化与静态检查工具。
+本文档描述当前配置在 `lua/devil/tools/format.lua` 与
+`lua/devil/tools/lint.lua` 中实际接入的外部工具，以及它们对应的文件类型。
 
-## 代码格式化
+## 说明
 
-以下工具通过 [conform.nvim](https://github.com/stevearc/conform.nvim) 调用：
+- 格式化由 [conform.nvim](https://github.com/stevearc/conform.nvim) 驱动。
+- Lint 由 [nvim-lint](https://github.com/mfussenegger/nvim-lint) 驱动。
+- 并非所有工具都会由 `mason.nvim` 统一安装，很多工具仍依赖系统包管理器或语言生态自行提供。
+- 有些 filetype 会走条件分支或 fallback，见下方“特殊规则”。
 
-- [beautysh](https://github.com/lovesegfault/beautysh) - A Bash beautifier for the masses.
-- [clang-format](https://clang.llvm.org/docs/ClangFormat.html) - Tool to format C/C++/… code according to a set of rules and heuristics.
-- [gersemi](https://github.com/BlankSpruce/gersemi) - A formatter to make your CMake code the real treasure.
-- [csharpier](https://github.com/belav/csharpier) - The opinionated C# code formatter.
-- [dart_format](https://dart.dev/tools/dart-format) - Replace the whitespace in your program with formatting that follows Dart guidelines.
-- [fish_indent](https://fishshell.com/docs/current/cmds/fish_indent.html) - Indent or otherwise prettify a piece of fish code.
-- [gofumpt](https://github.com/mvdan/gofumpt) - Enforce a stricter format than gofmt, while being backwards compatible.
-- [goimports-reviser](https://github.com/incu6us/goimports-reviser) - Right imports sorting & code formatting tool (goimports alternative).
-- [golines](https://github.com/segmentio/golines) - A golang formatter that fixes long lines.
-- [biome-check](https://biomejs.dev/reference/cli/#biome-check) - A toolchain for web projects, aimed to provide functionalities to maintain them.
-- [prettierd](https://github.com/fsouza/prettierd) - prettier, as a daemon, for ludicrous formatting speed.
-- [prettier](https://github.com/prettier/prettier) - Prettier is an opinionated code formatter.
-- [jq](https://github.com/stedolan/jq) - Command-line JSON processor.
-- [stylua](https://github.com/JohnnyMorganz/StyLua) - An opinionated code formatter for Lua.
-- [mago_format](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
-- [ruff_format](https://docs.astral.sh/ruff/) - An extremely fast Python linter, written in Rust. Formatter subcommand.
-- [isort](https://github.com/PyCQA/isort) - Python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
-- [black](https://github.com/psf/black) - The uncompromising Python code formatter.
-- [rubocop](https://github.com/rubocop/rubocop) - Ruby static code analyzer and formatter, based on the community Ruby style guide.
-- [rustfmt](https://github.com/rust-lang/rustfmt) - A tool for formatting rust code according to style guidelines.
-- [taplo](https://github.com/tamasfe/taplo) - A TOML toolkit written in Rust.
-- [xmlformatter](https://github.com/pamoller/xmlformatter) - xmlformatter is an Open Source Python package, which provides formatting of XML documents.
-- [yamlfmt](https://github.com/google/yamlfmt) - yamlfmt is an extensible command line tool or library to format yaml files.
-- [zigfmt](https://github.com/ziglang/zig) - Reformat Zig source into canonical form.
-- [codespell](https://github.com/codespell-project/codespell) - Check code for common misspellings.
-- [trim_whitespace](https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/trim_whitespace.lua) - Trim trailing whitespace (built-in formatter from conform.nvim).
+## 格式化工具
 
-## 静态检查
+| 文件类型 | 工具 |
+| --- | --- |
+| `bash`, `sh` | `beautysh` |
+| `c`, `cpp` | `clang-format` |
+| `cmake` | `gersemi` |
+| `cs` | `csharpier` |
+| `dart` | `dart_format` |
+| `fish` | `fish_indent` |
+| `go` | `gofumpt`, `goimports-reviser`, `golines` |
+| `javascript`, `typescript`, `javascriptreact`, `typescriptreact` | `oxfmt` |
+| `json` | `jq` |
+| `lua` | `stylua` |
+| `markdown` | `rumdl` |
+| `php` | `mago_format` |
+| `python` | `ruff_format`，fallback 为 `isort` + `black` |
+| `ruby` | `rubocop` |
+| `rust` | `rustfmt` |
+| `toml` | `taplo` |
+| `xml` | `xmlformatter` |
+| `yaml` | `yamlfmt` |
+| `zig` | `zigfmt` |
+| 任意文件 `*` | `codespell` |
+| 任意文件 `_` | `trim_whitespace` |
 
-以下工具通过 [nvim-lint](https://github.com/mfussenegger/nvim-lint) 调用：
+## 特殊规则
 
-- [cmakelint](https://github.com/cmake-lint/cmake-lint) - Static analysis tool for CMake scripts.
-- [golangci-lint](https://github.com/golangci/golangci-lint) - Fast linters runner for Go.
-- [jsonlint](https://github.com/zaach/jsonlint) - JSON syntax validator.
-- [selene](https://github.com/Kampfkarren/selene) - Lua static analysis tool written in Rust.
-- [markdownlint](https://github.com/DavidAnson/markdownlint) - A Node.js style checker and lint tool for Markdown/CommonMark files.
-- [mago_lint](https://github.com/carthage-software/mago) - Mago is a toolchain for PHP that aims to provide a set of tools to help developers write better code.
-- [rubocop](https://github.com/rubocop/rubocop) - Ruby static code analyzer and formatter, based on the community Ruby style guide.
-- [shellcheck](https://github.com/koalaman/shellcheck) - A static analysis tool for shell scripts.
-- [vint](https://github.com/Vimjas/vint) - Static analysis tool for Vim script.
-- [yamllint](https://github.com/adrienverge/yamllint) - A linter for YAML files.
+### Web 文件
+
+- `javascript`、`typescript`、`javascriptreact`、`typescriptreact` 只在 `oxfmt` 可用时格式化。
+- 如果当前环境没有 `oxfmt`，这几类文件会直接跳过 formatter，而不是退回到 `prettier`。
+
+### Python
+
+- 优先使用 `ruff_format`。
+- 若 `ruff_format` 不可用，则回退到 `isort` 与 `black` 组合。
+
+### YAML
+
+- 默认使用 `yamlfmt`。
+- `docker-compose.yml` 仍使用 `yamlfmt`。
+- `pubspec.yaml` 明确跳过格式化，避免与 Dart/Flutter 自身工具链冲突。
+
+### 全局后处理
+
+- `codespell` 会作为 `[*]` formatter 参与所有文件的格式化链。
+- `trim_whitespace` 会作为 `[_]` formatter 在最终阶段清理行尾空白。
+
+## 保存时格式化策略
+
+- 默认超时：`1000ms`
+- `ruby` 归类为慢 formatter，超时：`5000ms`
+- `lsp_format = "fallback"`，即优先使用显式 formatter，必要时退回 LSP 格式化
+
+## Lint 工具
+
+| 文件类型 | 工具 |
+| --- | --- |
+| `cmake` | `cmakelint` |
+| `go` | `golangcilint` |
+| `javascript`, `javascriptreact`, `typescript`, `typescriptreact` | `oxlint` |
+| `json` | `jsonlint` |
+| `lua` | `selene` |
+| `markdown` | `rumdl` |
+| `php` | `mago_lint` |
+| `ruby` | `rubocop` |
+| `sh` | `shellcheck` |
+| `vim` | `vint` |
+| `yaml` | `yamllint` |
+
+## Lint 触发时机
+
+以下事件会自动执行 `lint.try_lint()`：
+
+- `BufEnter`
+- `BufWritePost`
+- `InsertLeave`
+
+## 工具来源参考
+
+常见工具主页：
+
+- `oxfmt` / `oxlint`: <https://oxc.rs/>
+- `rumdl`: <https://github.com/rvben/rumdl>
+- `mago`: <https://github.com/carthage-software/mago>
+- `conform.nvim`: <https://github.com/stevearc/conform.nvim>
+- `nvim-lint`: <https://github.com/mfussenegger/nvim-lint>
+
+## 排障建议
+
+当 formatter 或 linter 没有运行时，优先检查：
+
+1. `:echo &filetype` 是否符合预期
+2. `:ConformInfo` 中是否识别到 formatter
+3. `:echo exepath('tool-name')` 是否能找到对应命令
+4. `:messages` 是否有执行错误
+5. 当前文件是否命中特殊跳过逻辑，例如 `pubspec.yaml` 或缺少 `oxfmt`

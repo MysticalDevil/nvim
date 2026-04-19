@@ -2,10 +2,14 @@
 
 [English](./README.en.md) | [繁體中文](./README.zh-TW.md)
 
-一份以日常开发和维护为中心的模块化 Neovim 配置。
-它基于 Lua 与 `lazy.nvim`，覆盖 LSP、补全、格式化、Lint、DAP
-以及现代 tree-sitter 工作流，但文档重点放在可安装、可排障、
-可维护，而不是堆砌插件列表。
+一份面向日常开发、排障和长期维护的模块化 Neovim 配置。
+它基于 Lua 与 `lazy.nvim`，围绕 LSP、补全、格式化、Lint、DAP、测试与
+Treesitter 建立了一套偏 IDE 化但仍可拆分维护的工作流。
+
+## 文档索引
+
+- 总体插件分层：[`docs/plugins.md`](./docs/plugins.md)
+- 外部工具与 formatter/linter 路由：[`docs/tools.md`](./docs/tools.md)
 
 ## 快速开始
 
@@ -13,7 +17,8 @@
 
 - Neovim `>= 0.11`
 - `git`
-- 推荐安装：`rg`、`fd`、`curl`、`unzip`
+- 强烈推荐：`rg`、`fd`、`curl`、`unzip`
+- 按需安装：各语言的 LSP、formatter、linter、DAP 适配器
 
 ### 安装
 
@@ -22,11 +27,11 @@ git clone https://github.com/MysticalDevil/nvim ~/.config/nvim
 nvim
 ```
 
-首次启动时会自动 bootstrap `lazy.nvim`，并安装缺失插件。
+首次启动会自动 bootstrap `lazy.nvim` 并安装缺失插件。
 
-### 首次验证
+### 首次检查
 
-进入 Neovim 后，优先检查这几项：
+进入 Neovim 后，建议先检查：
 
 ```vim
 :checkhealth
@@ -35,91 +40,90 @@ nvim
 :ConformInfo
 ```
 
-排查顺序建议固定为：
+推荐固定按这个顺序排查：
 
 1. `nvim --version`
-2. `:Lazy` 中的插件安装状态
-3. `:Mason` 中的语言工具状态
-4. 外部可执行程序是否在 `PATH` 中
+2. `:Lazy` 中插件是否安装完成
+3. `:Mason` 中语言工具是否可用
+4. 相关外部命令是否存在于 `PATH`
 
-## 运维与依赖
+## 校验命令
 
-### 日常维护入口
+仓库没有单独的单元测试套件，日常维护以静态检查和 smoke test 为主：
 
-- 插件同步、更新、状态检查：`:Lazy`
-- LSP 与外部工具安装状态：`:Mason`
-- 格式化器与 formatter 路由：`:ConformInfo`
-- 全局健康检查：`:checkhealth`
+```bash
+nvim --headless "+lua assert(pcall(require, 'devil.core'))" "+qa"
+stylua --check .
+rg --files -g '*.lua' | xargs -r -n 1 luac5.1 -p
+lua5.1 lua/devil/health/check_keymap_conflicts.lua
+pre-commit run --all-files
+```
 
-### 平台差异
+如果改动了启动流程、按键或工具层，至少运行其中最相关的一组命令。
 
-- Gentoo：
-  会保留 `/usr/share/vim/vimfiles` 在 `runtimepath` 中，
-  兼容系统级 Vim 脚本与插件。
-- NixOS：
-  Mason 侧使用 `PATH = "skip"`，避免覆盖系统包管理的工具链。
-
-### 依赖分层
-
-- 必需：
-  `git`
-- 强烈推荐：
-  `rg`、`fd`、`curl`、`unzip`
-- 按语言或功能启用：
-  formatter、linter、DAP 相关外部工具
-
-### 当前配置会使用到的外部工具
-
-完整工具清单及分类表格详见 [`docs/tools.md`](./docs/tools.md)。
-
-## 运行机制与仓库地图
+## 运行机制
 
 ### 启动流程
 
-启动入口是 [`init.lua`](./init.lua)。
-它主要负责四件事：
+入口是 [`init.lua`](./init.lua)。启动时会按这个顺序执行：
 
-1. 检查 Neovim 版本门槛
-2. 安全加载核心模块并在失败时发出通知
-3. bootstrap 并加载插件系统
-4. 依次挂载工具层、补全、命令与配色
+1. 检查 Neovim 版本
+2. 安全加载 `devil.core`
+3. 提前注册基础按键
+4. bootstrap `lazy.nvim`
+5. 加载插件规格
+6. 由 `devil.app` 挂载 mappings、tools、complete、commands、colorscheme
 
-这意味着即使部分模块失效，Neovim 仍尽量可启动并给出错误提示。
+启动阶段大量使用 `safe_require()`，因此非关键模块出错时通常仍能进入编辑器并看到错误提示。
 
-### 目录导航
+### 平台差异
+
+- Gentoo：保留 `/usr/share/vim/vimfiles` 在 `runtimepath` 中，兼容系统级 Vim 脚本。
+- 非 Gentoo：主动移除该路径，避免混用 Vim 与 Neovim 插件。
+- NixOS：`mason.nvim` 使用 `PATH = "skip"`，避免覆盖系统工具链。
+
+## 仓库结构
 
 ```text
 .
 ├── init.lua
 ├── ginit.vim
 ├── after/
+├── docs/
 └── lua/devil/
     ├── app/
-    ├── core/
-    ├── plugins/
-    ├── complete/
-    ├── tools/
     ├── commands/
+    ├── complete/
+    ├── core/
+    ├── health/
+    ├── plugins/
     ├── shared/
-    └── health/
+    └── tools/
 ```
 
-### 要改什么，该去哪里
+### 修改入口速查
 
-- 改基础行为：
-  `lua/devil/core/`
-- 改插件声明与领域划分：
-  `lua/devil/plugins/*.lua`、`lua/devil/plugins/lang/*.lua`
-- 改单插件的大块配置：
-  `lua/devil/plugins/configs/`
-- 改语言服务器：
-  `lua/devil/tools/lsp/`
-- 改 formatter / linter：
-  `lua/devil/tools/format.lua`、`lua/devil/tools/lint.lua`
-- 改调试能力：
-  `lua/devil/tools/dap/`
-- 改自定义命令或共享 helper：
-  `lua/devil/commands/`、`lua/devil/shared/`
+- 基础选项、autocmd、文件类型、配色：`lua/devil/core/`
+- 插件声明：`lua/devil/plugins/`、`lua/devil/plugins/lang/`
+- 大块插件配置：`lua/devil/plugins/configs/`
+- LSP、格式化、Lint、DAP：`lua/devil/tools/`
+- 补全与 snippets：`lua/devil/complete/`
+- 自定义命令：`lua/devil/commands/`
+- 健康检查：`lua/devil/health/`
+- filetype 覆盖：`after/ftplugin/`
+
+## 功能概览
+
+- 插件管理：`lazy.nvim`
+- 代码结构：`nvim-treesitter`、`nvim-ufo`、`rainbow-delimiters.nvim`
+- 检索与导航：`telescope.nvim`、`smart-open.nvim`、`flash.nvim`、`trouble.nvim`
+- 界面层：`bufferline.nvim`、`lualine.nvim`、`neo-tree.nvim`、`noice.nvim`、`snacks.nvim`
+- 代码智能：`nvim-lspconfig`、`mason.nvim`、`nvim-cmp`、`LuaSnip`
+- 代码质量：`conform.nvim`、`nvim-lint`
+- 调试与测试：`nvim-dap`、`nvim-dap-ui`、`neotest`、`vim-test`
+- 语言专项：Lua、Rust、Python、Go、Web、Dart、Java、CMake、xmake、Roslyn
+
+更完整的插件说明见 [`docs/plugins.md`](./docs/plugins.md)。
 
 ## 使用约定
 
@@ -127,47 +131,78 @@ nvim
 
 - `mapleader` 为 `Space`
 - 核心按键定义在 `lua/devil/core/mappings.lua`
-- LSP 相关按键在 attach 后加载
+- LSP 按键在语言服务器 attach 后加载
+- 早期搜索键会把 `/` 映射到 very magic 搜索模式
 
-### Leader 命名空间基线
-
-这不是完整快捷键手册，而是为了减少未来冲突的命名约定：
+### Leader 命名空间
 
 - `<leader>f*`：查找/检索
 - `<leader>w*`：窗口管理
 - `<leader>b*`：Buffer 管理
-- `<leader>g*`：Git 相关
+- `<leader>g*`：Git
 - `<leader>l*`：LSP / 诊断
-- `<leader>x*`：问题列表 / Trouble 视图
+- `<leader>x*`：Trouble / 列表视图
 - `<leader>t*`：开关 / 工具
 - `<leader>p*`：性能分析
-- `<leader>c*`：代码操作 / 重命名 / 配置命令
+- `<leader>c*`：代码动作 / 配置命令
+
+## 自定义命令
+
+全局命令：
+
+- `:BufOnly`：关闭当前 buffer 之外的已加载 buffer
+- `:CopyRelPath`：复制当前文件相对路径到系统剪贴板
+- `:ToggleDiagnostics`：全局开关诊断显示
+- `:FixIndent`：对当前文件执行 `retab` 和全量重新缩进
+- `:InlayHintsToggle` / `:InlayHintsEnable` / `:InlayHintsDisable`：控制当前 buffer 的 inlay hints
+
+filetype 局部命令：
+
+- `:PkgManifest`：在当前 ebuild 目录运行 `pkgdev manifest`
+- `:PkgCheck`：在当前 ebuild 目录运行 `pkgcheck scan`
+
+## 依赖与运维入口
+
+- 插件同步、更新、状态：`:Lazy`
+- LSP 与外部工具安装状态：`:Mason`
+- formatter 路由与保存格式化状态：`:ConformInfo`
+- 健康检查：`:checkhealth`
+- 按键冲突检查：`lua5.1 lua/devil/health/check_keymap_conflicts.lua`
+
+当前 formatter/linter 的完整清单与文件类型映射见 [`docs/tools.md`](./docs/tools.md)。
 
 ## 排障
 
-### 启动时提示缺少模块
+### 启动时报缺少模块
 
-先看：
+按顺序检查：
 
-1. `:Lazy` 是否安装完整
-2. `:checkhealth` 是否有核心错误
-3. 报错里提到的模块属于哪一层
-   `core`、`plugins`、`tools` 或 `complete`
-
-`init.lua` 已做安全加载，因此部分插件失败时通常不会直接阻止启动。
+1. `:Lazy` 是否已完成安装
+2. `:checkhealth` 是否出现核心错误
+3. 报错模块属于 `core`、`plugins`、`tools` 还是 `complete`
+4. 最近是否改动了 `init.lua`、`app/` 或 `plugins/init.lua`
 
 ### 语言工具不生效
 
 优先检查：
 
-1. `:Mason` 中是否已安装对应工具
-2. `:echo exepath('tool')` 是否能找到外部命令
-3. 对应 filetype 的配置是否存在于 `lua/devil/tools/lsp/`
-   或 `lua/devil/tools/`
-4. `:ConformInfo` 或相关 LSP 日志是否有明确错误
+1. `:Mason` 中对应工具是否已安装
+2. `:echo exepath('tool')` 能否找到外部命令
+3. 对应 filetype 是否在 `lua/devil/tools/format.lua`、`lua/devil/tools/lint.lua` 或 `lua/devil/tools/lsp/` 中声明
+4. `:ConformInfo`、LSP 日志或 `:messages` 是否有明确错误
+
+### 保存时没有格式化
+
+常见原因：
+
+1. 当前 filetype 没有 formatter 映射
+2. 目标 formatter 未安装
+3. 当前文件命中特殊分支，例如 Web 文件在未安装 `oxfmt` 时会直接跳过格式化
+4. LSP fallback 不可用或超时
 
 ## 贡献
 
 欢迎提交 issue 与 PR。
-如果要改动行为，请尽量同时更新对应 README 段落，
-避免文档与实现继续漂移。
+
+- 提交信息遵循 Conventional Commits，例如 `fix(mappings): correct toggle behavior`
+- 如果改动影响行为、依赖或维护方式，请同步更新对应 README 或 `docs/*.md`

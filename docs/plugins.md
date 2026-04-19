@@ -1,227 +1,166 @@
 # Neovim 插件总览
 
-这份文档总结了当前仓库在 `lua/devil/plugins/` 中声明的插件结构，用来快速回答两个问题：
+本文档基于 `lua/devil/plugins/` 与 `lua/devil/plugins/lang/` 的当前实现，概括这份配置的插件分层、职责边界和关键依赖关系。
 
-- 这个配置用了哪些插件
-- 每个插件大致负责什么职责
+## 加载结构
 
-说明：
+插件按领域拆分到这些模块：
 
-- 本文以仓库直接声明的插件为主。
-- 对只作为依赖出现、但仍然很重要的插件，放在文末“依赖插件生态”里集中说明。
-- 细节配置通常位于 `lua/devil/plugins/configs/` 与 `lua/devil/tools/`。
+- `foundation.lua`：插件管理、主题、图标、基础依赖
+- `editor.lua`：编辑增强、注释、文档注释、剪贴板与文本操作
+- `ui.lua`：Buffer/UI/文件树/状态栏/通知/面包屑/滚动条
+- `search.lua`：Telescope、Trouble、workspace、搜索替换与导航增强
+- `git.lua`：Git 状态、diff、Git UI
+- `syntax.lua`：Treesitter、折叠、任务、结构感知
+- `coding.lua`：LSP、补全、格式化、Lint、DAP
+- `testing.lua`：测试框架与适配器
+- `lang/*.lua`：语言专项插件
 
-## 总体结构
+入口在 `lua/devil/plugins/init.lua`，它会收集所有模块的插件规格并交给 `lazy.nvim`。
 
-插件规格按领域模块维护：
-
-- `foundation.lua`: 基础设施、主题、图标、通用库
-- `editor.lua`: 注释、文本编辑增强、Markdown 辅助、剪贴板增强
-- `ui.lua`: Buffer/UI/文件树/状态栏/滚动条/outline 等界面层
-- `search.lua`: Telescope、Trouble、workspace、sniprun、检索与导航工具
-- `git.lua`: Git 状态、Diff、Git UI
-- `syntax.lua`: Treesitter、折叠、结构化编辑、任务与彩虹括号
-- `coding.lua`: LSP、补全、格式化、Lint、DAP 入口
-- `testing.lua`: 测试框架
-- `lang/*.lua`: 语言专项插件
-
-如果把依赖项一起算进来，这套配置覆盖的是一个 100+
-仓库的插件生态；如果只看仓库顶层直接声明，主体是“基础设施 +
-编辑增强 + 检索工具 + 开发工具链”这四层组合。
-
-## 基础设施与外观
+## 基础设施
 
 来源：`lua/devil/plugins/foundation.lua`
 
-- `folke/lazy.nvim`: 插件管理器，负责延迟加载、依赖解析和启动编排。
-- `nvim-lua/plenary.nvim`: Lua 工具库，很多插件的公共依赖。
-- `MunifTanjim/nui.nvim`: UI 组件库，给浮窗、选择器、输入框等高级界面提供基础能力。
-- `kkharji/sqlite.lua`: SQLite 绑定，供剪贴板历史、智能打开等插件做本地索引或持久化。
-- `nvim-mini/mini.icons`: 图标提供器，同时兼容 `nvim-web-devicons` 调用接口。
-- `equalsraf/neovim-gui-shim`: GUI 兼容层，方便 `nvim-qt` 等图形客户端运行。
-- `folke/tokyonight.nvim`: 当前主题配色基础。
+- `folke/lazy.nvim`：插件管理器与加载编排中心
+- `nvim-lua/plenary.nvim`：Lua 工具库，多个插件的公共依赖
+- `MunifTanjim/nui.nvim`：通用 UI 组件库
+- `kkharji/sqlite.lua`：为索引、历史记录等插件提供 SQLite 能力
+- `nvim-mini/mini.icons`：图标提供器，并兼容 `nvim-web-devicons`
+- `equalsraf/neovim-gui-shim`：图形客户端兼容层
+- `folke/tokyonight.nvim`：当前默认主题
 
-## 核心编辑与界面增强
+## 编辑增强
 
-来源：`lua/devil/plugins/editor.lua` 与 `lua/devil/plugins/ui.lua`
+来源：`lua/devil/plugins/editor.lua`
 
-- `akinsho/bufferline.nvim`: Buffer 标签页与缓冲区切换、排序、关闭入口。
-- `folke/ts-comments.nvim`: 基于 Treesitter 的注释体验增强。
-- `monaqa/dial.nvim`: 扩展增减值能力，适合数字、日期、布尔值、枚举类文本。
-- `folke/flash.nvim`: 跳转增强，用标签式移动替代普通单字符查找。
-- `MeanderingProgrammer/render-markdown.nvim`: 在编辑区内更直观地渲染 Markdown。
-- `lukas-reineke/headlines.nvim`: 为 Markdown 等文档型文件增加更明显的标题分隔和层级视觉。
-- `smjonas/inc-rename.nvim`: LSP rename 的交互增强，边输入边预览。
-- `nvim-lualine/lualine.nvim`: 状态栏。
-- `danymat/neogen`: 为函数、类、模块生成文档注释模板。
-- `nvim-neo-tree/neo-tree.nvim`: 文件树和资源树浏览器。
-- `folke/noice.nvim`: 重做消息区、命令行和部分弹窗 UI。
-- `kevinhwang91/nvim-bqf`: Quickfix 窗口增强。
-- `catgoose/nvim-colorizer.lua`: 颜色值高亮，例如十六进制颜色。
-- `kevinhwang91/nvim-hlslens`: 搜索命中计数和定位增强。
-- `AckslD/nvim-neoclip.lua`: 剪贴板历史管理。
-- `bennypowers/nvim-regexplainer`: 光标下正则表达式解释器。
-- `petertriho/nvim-scrollbar`: 滚动条与诊断、Git 标记联动展示。
-- `nvim-pack/nvim-spectre`: 跨文件搜索替换。
-- `kylechui/nvim-surround`: 成对符号的增删改。
+- `folke/ts-comments.nvim`：基于 Treesitter 的注释体验
+- `monaqa/dial.nvim`：数字、日期、枚举文本增减
+- `folke/flash.nvim`：快速跳转与 Treesitter 结构跳转
+- `MeanderingProgrammer/render-markdown.nvim`：Markdown 即时渲染
+- `lukas-reineke/headlines.nvim`：Markdown 标题层级增强
+- `smjonas/inc-rename.nvim`：LSP rename 的增量交互界面
+- `danymat/neogen`：生成文档注释模板
+- `kevinhwang91/nvim-bqf`：Quickfix 增强
+- `kylechui/nvim-surround`：包围符增删改
+- `gbprod/yanky.nvim`：增强 yank/paste 工作流，并接入 yank history
 
-这一层决定的是“编辑手感”和“看见什么”。整体风格是：
+这一层主要改善“编辑动作本身”的效率与反馈。
 
-- 用 `bufferline`、`lualine`、`scrollbar`、`noice` 重建主界面
-- 用 `neo-tree`、`spectre`、`flash`、`surround` 提升常用编辑动作效率
-- 用 `neogen`、`regexplainer`、`colorizer` 补齐高频辅助动作
+## 界面层
 
-## Treesitter 与结构感知
+来源：`lua/devil/plugins/ui.lua`
 
-来源：`lua/devil/plugins/syntax.lua`
+- `akinsho/bufferline.nvim`：Buffer 标签、切换、关闭与排序
+- `folke/snacks.nvim`：dashboard、terminal、notifier、zen、rename、profiler 等综合能力
+- `m4xshen/smartcolumn.nvim`：按文件类型智能显示 `colorcolumn`
+- `nvim-lualine/lualine.nvim`：状态栏
+- `nvim-neo-tree/neo-tree.nvim`：文件树与资源浏览器
+- `folke/noice.nvim`：消息区、命令行与弹窗 UI 重构
+- `catgoose/nvim-colorizer.lua`：颜色值高亮
+- `hedyhli/outline.nvim`：符号侧栏
+- `Bekaboo/dropbar.nvim`：面包屑导航
+- `s1n7ax/nvim-window-picker`：窗口选择器
+- `petertriho/nvim-scrollbar`：滚动条，并与 Git/搜索标记联动
 
-- `nvim-treesitter/nvim-treesitter`: 语法树基础设施，负责高亮、缩进、结构分析。
-- `nvim-treesitter/nvim-treesitter-textobjects`: 基于语法节点的文本对象、跳转和参数交换。
-- `windwp/nvim-ts-autotag`: HTML/JSX/TSX 标签自动闭合与重命名。
-- `RRethy/nvim-treesitter-endwise`: 为某些语言自动补全 `end` 等闭合结构。
-- `MysticalDevil/ts-inject.nvim`: 给现代前端文件做更好的语言注入识别。
-- `nvim-treesitter/nvim-treesitter-context`: 固定显示当前代码上下文。
-- `kevinhwang91/nvim-ufo`: 折叠增强。
-- `kevinhwang91/promise-async`: `ufo` 依赖。
-- `stevearc/overseer.nvim`: 任务执行与任务面板。
-- `HiPhish/rainbow-delimiters.nvim`: 彩虹括号，帮助识别嵌套层级。
+其中 `snacks.nvim` 是这份配置里承担“胶水层”角色最多的 UI 插件之一：
 
-这一层的核心价值是“让编辑器理解代码结构，而不是只理解文本”。
+- buffer 删除
+- 文件重命名联动
+- 通知历史
+- zen / zoom
+- startup profiler
+- 内建 terminal
 
-## 检索、工具与工作流插件
+## 搜索、导航与工作流
 
 来源：`lua/devil/plugins/search.lua`
 
-- `folke/snacks.nvim`: 一组通用增强组件，这份配置已经把它用于 buffer 删除、重命名联动等日常能力。
-- `m4xshen/smartcolumn.nvim`: 智能显示或隐藏 `colorcolumn`。
-- `danielfalk/smart-open.nvim`: 借助索引做更智能的文件打开。
-- `mrjones2014/smart-splits.nvim`: 窗口移动与调整尺寸增强，并兼顾终端复用器场景。
-- `michaelb/sniprun`: 直接在编辑器里运行代码片段或代码块。
-- `nvim-telescope/telescope.nvim`: 全局检索和选择框架。
-- `johmsalas/text-case.nvim`: 文本大小写风格转换。
-- `folke/todo-comments.nvim`: 收集并高亮 TODO/FIXME/NOTE 等注释。
-- `folke/trouble.nvim`: 统一展示诊断、引用、quickfix、location list。
-- `folke/which-key.nvim`: 按键提示面板。
-- `natecraddock/workspaces.nvim`: 工作区目录管理。
+- `danielfalk/smart-open.nvim`：基于索引的智能打开文件
+- `mrjones2014/smart-splits.nvim`：窗口移动、缩放、buffer 交换，并兼容多路复用器场景
+- `michaelb/sniprun`：直接运行选中代码或代码块
+- `nvim-telescope/telescope.nvim`：统一选择器与检索入口
+- `johmsalas/text-case.nvim`：文本大小写转换
+- `folke/todo-comments.nvim`：TODO/FIX/WARN/NOTE 等注释高亮
+- `folke/trouble.nvim`：诊断、引用、loclist、qflist 统一视图
+- `folke/which-key.nvim`：按键提示与命名空间可发现性
+- `natecraddock/workspaces.nvim`：工作区目录管理
+- `bennypowers/nvim-regexplainer`：正则表达式解释器
+- `nvim-pack/nvim-spectre`：跨文件搜索替换
+- `kevinhwang91/nvim-hlslens`：搜索结果反馈增强
+- `AckslD/nvim-neoclip.lua`：剪贴板历史扩展，作为 Telescope 扩展加载
 
-其中最核心的组合是：
+### Telescope 生态
 
-- `telescope.nvim`: 找文件、找内容、找 buffer、找项目
-- `trouble.nvim`: 汇总诊断与导航结果
-- `which-key.nvim`: 暴露可发现的按键入口
-- `workspaces.nvim`: 在多个项目之间快速切换
-- `snacks.nvim`: 补足很多“看起来像内建，但其实更顺手”的细节能力
+以下扩展被显式接入：
+
+- `debugloop/telescope-undo.nvim`
+- `nvim-telescope/telescope-ui-select.nvim`
+- `nvim-telescope/telescope-file-browser.nvim`
+- `nvim-telescope/telescope-project.nvim`
+- `nvim-telescope/telescope-live-grep-args.nvim`
+- `desdic/agrolens.nvim`
+- `nvim-telescope/telescope-fzf-native.nvim`
+- `smart-open.nvim`
+- `nvim-neoclip.lua`
+- `workspaces.nvim`
+
+这意味着 Telescope 不只是“找文件”，也是本配置很多工作流的统一交互界面。
 
 ## Git 工作流
 
 来源：`lua/devil/plugins/git.lua`
 
-- `sindrets/diffview.nvim`: Git diff 和文件历史视图。
-- `lewis6991/gitsigns.nvim`: 行级 Git 状态、hunk 操作、blame、预览。
-- `NeogitOrg/neogit`: 类似 Magit 的 Git TUI。
+- `sindrets/diffview.nvim`：仓库 diff 与历史浏览
+- `lewis6991/gitsigns.nvim`：行级 Git 状态、hunk 导航、预览与 blame
+- `NeogitOrg/neogit`：Git TUI 入口
 
-这三者的分工比较清晰：
+职责分工：
 
-- `gitsigns` 负责“当前 buffer 的改动”
-- `diffview` 负责“多个文件、多个提交之间的差异浏览”
-- `neogit` 负责“提交、暂存、日志、分支等 Git 操作入口”
+- `gitsigns.nvim` 负责当前 buffer 的细粒度改动
+- `diffview.nvim` 负责跨文件或历史差异浏览
+- `neogit` 负责提交、暂存、日志与分支操作
 
-## 开发工具链与语言支持
+## Treesitter 与结构感知
 
-来源：`lua/devil/plugins/coding.lua`、`lua/devil/plugins/testing.lua`、`lua/devil/plugins/lang/*.lua`
+来源：`lua/devil/plugins/syntax.lua`
 
-### LSP、格式化、补全
+- `nvim-treesitter/nvim-treesitter`：高亮、缩进、结构分析基础设施
+- `nvim-treesitter/nvim-treesitter-textobjects`：语法节点文本对象与跳转
+- `windwp/nvim-ts-autotag`：标签自动闭合与重命名
+- `RRethy/nvim-treesitter-endwise`：自动补全 `end` 等闭合结构
+- `MysticalDevil/ts-inject.nvim`：前端与脚本语言注入增强
+- `nvim-treesitter/nvim-treesitter-context`：固定显示当前上下文
+- `kevinhwang91/nvim-ufo`：折叠增强
+- `kevinhwang91/promise-async`：`ufo` 依赖
+- `stevearc/overseer.nvim`：任务运行与任务面板
+- `HiPhish/rainbow-delimiters.nvim`：彩虹括号
 
-- `neovim/nvim-lspconfig`: LSP 基础配置入口。
-- `mason-org/mason.nvim`: 外部工具安装器。
-- `mason-org/mason-lspconfig.nvim`: `mason` 与 `lspconfig` 的桥接。
-- `jay-babu/mason-nvim-dap.nvim`: `mason` 与 DAP 的桥接。
-- `stevearc/conform.nvim`: 格式化框架。
-- `mfussenegger/nvim-lint`: lint 框架。
-- `hrsh7th/nvim-cmp`: 补全引擎。
-- `garymjr/nvim-snippets`: snippet 支持。
-- `rafamadriz/friendly-snippets`: 通用 snippet 集。
-- `windwp/nvim-autopairs`: 成对符号自动补全。
-- `onsails/lspkind.nvim`: completion item 图标与类型标签。
+这一层解决的是“让编辑器理解代码结构，而不是只理解文本”。
 
-### DAP 与调试
+## 代码智能与工具链
 
-- `mfussenegger/nvim-dap`: DAP 客户端。
-- `rcarriga/nvim-dap-ui`: 调试 UI 面板。
-- `theHamsta/nvim-dap-virtual-text`: 行内调试变量显示。
-- `mfussenegger/nvim-dap-python`: Python 调试支持。
-- `jbyuki/one-small-step-for-vimkind`: 调试 Neovim Lua 插件本身。
+来源：`lua/devil/plugins/coding.lua`
 
-### 语言专项增强
+### LSP、格式化、Lint
 
-- Lua
-  - `folke/lazydev.nvim`: 优化 LuaLS 对 Neovim、lazy.nvim、Snacks、xmake 等环境的识别。
-- JSON
-  - `b0o/schemastore.nvim`: JSON schema 来源。
-- Rust
-  - `mrcjkb/rustaceanvim`: Rust 专项体验增强。
-  - `saecki/crates.nvim`: `Cargo.toml` 依赖管理辅助。
-- Python
-  - `linux-cultist/venv-selector.nvim`: 虚拟环境切换。
-- Go
-  - `ray-x/go.nvim`: Go 开发增强。
-  - `ray-x/guihua.lua`: `go.nvim` 辅助 UI 依赖。
-- C/C++
-  - `Civitasv/cmake-tools.nvim`: CMake 工作流集成。
-  - `Mythos-404/xmake.nvim`: xmake 工作流集成。
-- Java
-  - `nvim-java/nvim-java`: Java 开发体验增强。
-- C#
-  - `seblyng/roslyn.nvim`: Roslyn 集成。
-- Flutter / Dart
-  - `nvim-flutter/flutter-tools.nvim`: Flutter 工具集成。
-- TypeScript / 前端依赖管理
-  - `vuki656/package-info.nvim`: `package.json` 依赖状态和操作增强。
+- `neovim/nvim-lspconfig`：LSP 基础接入
+- `mason-org/mason.nvim`：外部工具安装管理
+- `mason-org/mason-lspconfig.nvim`：Mason 与 LSP 桥接
+- `jay-babu/mason-nvim-dap.nvim`：Mason 与 DAP 桥接
+- `stevearc/conform.nvim`：格式化框架
+- `mfussenegger/nvim-lint`：Lint 框架
 
-### 结构视图、面包屑与代码动作
+### 补全
 
-- `hedyhli/outline.nvim`: LSP 符号侧栏。
-- `Bekaboo/dropbar.nvim`: 面包屑导航。
-- `aznhe21/actions-preview.nvim`: 带预览的 LSP code action 选择器。
+- `hrsh7th/nvim-cmp`：补全引擎
+- `L3MON4D3/LuaSnip`：snippet 引擎
+- `saadparwaiz1/cmp_luasnip`：LuaSnip 补全源
+- `rafamadriz/friendly-snippets`：通用 snippet 集合
+- `windwp/nvim-autopairs`：补全确认后的配对符处理
+- `onsails/lspkind.nvim`：补全项图标与类型标签
 
-### 测试
-
-- `vim-test/vim-test`: 通用测试命令后备方案。
-- `nvim-neotest/neotest`: 统一测试框架。
-- `nvim-neotest/nvim-nio`: `neotest` 基础依赖。
-- `nvim-neotest/neotest-python`: Python 适配器。
-- `nvim-neotest/neotest-go`: Go 适配器。
-- `nvim-neotest/neotest-plenary`: Plenary 测试适配器。
-- `marilari88/neotest-vitest`: Vitest 适配器。
-- `lawrence-laz/neotest-zig`: Zig 适配器。
-- `sidlatau/neotest-dart`: Dart 适配器。
-
-这一层说明这份配置不是“只负责写代码”，而是覆盖了：
-
-- 工具安装
-- LSP
-- 格式化
-- lint
-- 补全
-- 调试
-- 单元测试
-- 多语言专项工作流
-
-## Telescope 与补全生态中的依赖插件
-
-这些插件大多不直接暴露为一章配置，但在日常体验里非常关键。
-
-### Telescope 生态
-
-- `debugloop/telescope-undo.nvim`: 撤销历史选择器。
-- `nvim-telescope/telescope-ui-select.nvim`: 把 `vim.ui.select` 接入 Telescope。
-- `nvim-telescope/telescope-file-browser.nvim`: 文件浏览器扩展。
-- `nvim-telescope/telescope-project.nvim`: 项目列表扩展。
-- `nvim-telescope/telescope-live-grep-args.nvim`: 带参数的 live grep。
-- `desdic/agrolens.nvim`: 更好的 grep 结果预览。
-- `nvim-telescope/telescope-fzf-native.nvim`: FZF 原生排序器。
-
-### `nvim-cmp` 生态
+### `nvim-cmp` 补全源
 
 - `hrsh7th/cmp-nvim-lsp`
 - `hrsh7th/cmp-buffer`
@@ -234,21 +173,68 @@
 - `petertriho/cmp-git`
 - `ray-x/cmp-treesitter`
 
-这些补全源分别把 LSP、buffer、本地路径、命令行、计算器、Git、Treesitter 等信息接进统一补全入口。
+### DAP 与代码动作
 
-## 对这份配置的整体判断
+- `mfussenegger/nvim-dap`
+- `rcarriga/nvim-dap-ui`
+- `theHamsta/nvim-dap-virtual-text`
+- `jbyuki/one-small-step-for-vimkind`
+- `aznhe21/actions-preview.nvim`
 
-如果只用一句话概括，这是一份明显偏“IDE 化”的 Neovim 配置，特点是：
+## 测试层
 
-- 基础编辑体验完整，且偏重可视化和可发现性
-- Treesitter、LSP、Telescope、DAP、测试框架配套齐全
-- 多语言支持不是点状补丁，而是围绕 Rust、Go、Python、Java、
-  Flutter、TypeScript、C/C++ 做了专门补强
-- Git、搜索替换、工作区和任务系统都已经接入，不需要再从零搭骨架
+来源：`lua/devil/plugins/testing.lua`
 
-如果后续要继续维护这份配置，最值得优先查看的目录是：
+- `vim-test/vim-test`：经典测试命令后备入口
+- `nvim-neotest/neotest`：统一测试框架
+- `nvim-neotest/nvim-nio`：`neotest` 基础依赖
+- `nvim-neotest/neotest-python`
+- `nvim-neotest/neotest-go`
+- `nvim-neotest/neotest-plenary`
+- `marilari88/neotest-vitest`
+- `lawrence-laz/neotest-zig`
+- `sidlatau/neotest-dart`
 
-- `lua/devil/plugins/`: 看插件声明与领域划分
-- `lua/devil/plugins/configs/`: 看仍保留为独立文件的大块插件配置
-- `lua/devil/core/mappings.lua`: 看入口按键
-- `lua/devil/tools/`: 看 LSP、格式化、Lint 与 DAP 细节
+这表示配置已经把“运行测试”视为一等公民，而不是编辑器外部操作。
+
+## 语言专项插件
+
+来源：`lua/devil/plugins/lang/*.lua`
+
+- Lua
+  - `folke/lazydev.nvim`：补强 LuaLS 对 Neovim 与插件生态的识别
+- Python
+  - `linux-cultist/venv-selector.nvim`：虚拟环境切换
+  - `mfussenegger/nvim-dap-python`：Python 调试支持
+- Go
+  - `ray-x/go.nvim`
+  - `ray-x/guihua.lua`
+- Rust
+  - `mrcjkb/rustaceanvim`
+  - `saecki/crates.nvim`
+- Web / JSON
+  - `b0o/schemastore.nvim`
+  - `vuki656/package-info.nvim`
+- Dart / Flutter
+  - `nvim-flutter/flutter-tools.nvim`
+- Misc
+  - `nvim-java/nvim-java`
+  - `seblyng/roslyn.nvim`
+  - `Civitasv/cmake-tools.nvim`
+  - `Mythos-404/xmake.nvim`
+
+## 这份配置的整体特点
+
+如果只用几句话概括：
+
+- 它不是极简配置，而是一套偏 IDE 化的多语言开发环境
+- 插件声明按职责拆分，维护时不必在单一大文件中查找所有逻辑
+- Telescope、Trouble、Snacks、Treesitter、LSP 构成了最核心的交互骨架
+- Go、Rust、Python、Web、Dart、Java、C/C++ 等语言都有专项补强，而不是只停留在通用 LSP 层
+
+维护时最值得优先阅读的目录：
+
+- `lua/devil/plugins/`
+- `lua/devil/plugins/configs/`
+- `lua/devil/tools/`
+- `lua/devil/core/mappings.lua`
