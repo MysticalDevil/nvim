@@ -124,7 +124,6 @@ return {
       require("devil.tools").setup()
     end,
   },
-  { "jbyuki/one-small-step-for-vimkind" },
   {
     "onsails/lspkind.nvim",
     config = function()
