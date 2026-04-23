@@ -64,7 +64,6 @@ end
 return {
   {
     "akinsho/bufferline.nvim",
-    branch = "main",
     event = "VeryLazy",
     keys = bufferline_keys(),
     opts = function()
