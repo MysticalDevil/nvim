@@ -1,19 +1,5 @@
 return {
   {
-    "vim-test/vim-test",
-    cmd = {
-      "TestNearest",
-      "TestFile",
-      "TestSuite",
-      "TestLast",
-      "TestVisit",
-    },
-    init = function()
-      vim.g["test#strategy"] = "neovim"
-      vim.g["test#neovim#term_position"] = "vert botright"
-    end,
-  },
-  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
