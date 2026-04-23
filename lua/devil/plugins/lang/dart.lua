@@ -66,6 +66,15 @@ return {
           enableSnippets = true,
           updateImportsOnRename = true,
           enableSdkFormatter = true,
+          dart = {
+            inlayHints = {
+              parameterNames = { enabled = "all" },
+              parameterTypes = { enabled = true },
+              returnTypes = { enabled = true },
+              typeArguments = { enabled = true },
+              variableTypes = { enabled = true },
+            },
+          },
         },
         init_options = {
           closingLabels = true,
