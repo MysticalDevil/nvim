@@ -16,7 +16,7 @@ linting, DAP, testing, and Treesitter.
 
 ### Requirements
 
-- Neovim `>= 0.11`
+- Neovim `>= 0.12`
 - `git`
 - Strongly recommended: `rg`, `fd`, `curl`, `unzip`
 - Install language-specific LSP, formatter, linter, and DAP tools as needed

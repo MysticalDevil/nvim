@@ -15,7 +15,7 @@ Treesitter 建立了一套偏 IDE 化但仍可拆分维护的工作流。
 
 ### 环境要求
 
-- Neovim `>= 0.11`
+- Neovim `>= 0.12`
 - `git`
 - 强烈推荐：`rg`、`fd`、`curl`、`unzip`
 - 按需安装：各语言的 LSP、formatter、linter、DAP 适配器

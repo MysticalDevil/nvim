@@ -14,8 +14,8 @@ local function emit(msg, level)
   end
 end
 
-if vim.fn.has("nvim-0.11") ~= 1 then
-  emit("This config is only available on Neovim >= 0.11", vim.log.levels.ERROR)
+if vim.fn.has("nvim-0.12") ~= 1 then
+  emit("This config is only available on Neovim >= 0.12", vim.log.levels.ERROR)
   return
 end
 
