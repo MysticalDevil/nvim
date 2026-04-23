@@ -7,6 +7,7 @@ M.server_groups = {
     lua_ls = true,
     jsonls = false,
     rumdl = true,
+    ty = true,
     yamlls = true,
     taplo = false,
     bashls = false,
@@ -27,7 +28,6 @@ M.server_groups = {
     zls = true,
   },
   mobile = {
-    ty = true,
   },
   enterprise = {
     jdtls = true,
