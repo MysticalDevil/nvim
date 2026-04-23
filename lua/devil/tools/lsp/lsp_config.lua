@@ -27,8 +27,7 @@ M.server_groups = {
     clangd = true,
     zls = true,
   },
-  mobile = {
-  },
+  mobile = {},
   enterprise = {
     jdtls = true,
     roslyn = false,
