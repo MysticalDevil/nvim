@@ -17,6 +17,7 @@ M.server_groups = {
     denols = false,
     emmet_language_server = false,
     html = false,
+    phpantom_lsp = true,
     svelte = true,
     tsgo = true,
     vue_ls = false,
@@ -32,7 +33,6 @@ M.server_groups = {
     jdtls = true,
     roslyn = false,
     ruby_lsp = false,
-    phpactor = false,
   },
   experimental = {
     expert = false,
