@@ -1,7 +1,7 @@
 return {
   {
     "mrcjkb/rustaceanvim",
-    version = "^7",
+    version = "^9",
     ft = { "rust" },
     init = function()
       local util = require("devil.tools.lsp.util")
