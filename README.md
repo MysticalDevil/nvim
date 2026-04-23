@@ -120,7 +120,7 @@ pre-commit run --all-files
 - 界面层：`bufferline.nvim`、`lualine.nvim`、`neo-tree.nvim`、`noice.nvim`、`snacks.nvim`
 - 代码智能：`nvim-lspconfig`、`mason.nvim`、`nvim-cmp`、`LuaSnip`
 - 代码质量：`conform.nvim`、`nvim-lint`
-- 调试与测试：`nvim-dap`、`nvim-dap-ui`、`neotest`、`vim-test`
+- 调试与测试：`nvim-dap`、`nvim-dap-ui`、`neotest`
 - 语言专项：Lua、Rust、Python、Go、Web、Dart、Java、CMake、xmake、Roslyn
 
 更完整的插件说明见 [`docs/plugins.md`](./docs/plugins.md)。

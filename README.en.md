@@ -126,7 +126,7 @@ should usually surface as notifications instead of preventing startup.
 - UI layer: `bufferline.nvim`, `lualine.nvim`, `neo-tree.nvim`, `noice.nvim`, `snacks.nvim`
 - Code intelligence: `nvim-lspconfig`, `mason.nvim`, `nvim-cmp`, `LuaSnip`
 - Code quality: `conform.nvim`, `nvim-lint`
-- Debugging and testing: `nvim-dap`, `nvim-dap-ui`, `neotest`, `vim-test`
+- Debugging and testing: `nvim-dap`, `nvim-dap-ui`, `neotest`
 - Language-specific extras: Lua, Rust, Python, Go, Web, Dart, Java, CMake, xmake, Roslyn
 
 See [`docs/plugins.md`](./docs/plugins.md) for the full plugin overview.

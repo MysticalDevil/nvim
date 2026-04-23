@@ -38,7 +38,6 @@
 - `monaqa/dial.nvim`：数字、日期、枚举文本增减
 - `folke/flash.nvim`：快速跳转与 Treesitter 结构跳转
 - `MeanderingProgrammer/render-markdown.nvim`：Markdown 即时渲染
-- `lukas-reineke/headlines.nvim`：Markdown 标题层级增强
 - `smjonas/inc-rename.nvim`：LSP rename 的增量交互界面
 - `danymat/neogen`：生成文档注释模板
 - `kevinhwang91/nvim-bqf`：Quickfix 增强
@@ -85,10 +84,8 @@
 - `folke/trouble.nvim`：诊断、引用、loclist、qflist 统一视图
 - `folke/which-key.nvim`：按键提示与命名空间可发现性
 - `natecraddock/workspaces.nvim`：工作区目录管理
-- `bennypowers/nvim-regexplainer`：正则表达式解释器
 - `nvim-pack/nvim-spectre`：跨文件搜索替换
 - `kevinhwang91/nvim-hlslens`：搜索结果反馈增强
-- `AckslD/nvim-neoclip.lua`：剪贴板历史扩展，作为 Telescope 扩展加载
 
 ### Telescope 生态
 
@@ -102,7 +99,6 @@
 - `desdic/agrolens.nvim`
 - `nvim-telescope/telescope-fzf-native.nvim`
 - `smart-open.nvim`
-- `nvim-neoclip.lua`
 - `workspaces.nvim`
 
 这意味着 Telescope 不只是“找文件”，也是本配置很多工作流的统一交互界面。
@@ -178,14 +174,12 @@
 - `mfussenegger/nvim-dap`
 - `rcarriga/nvim-dap-ui`
 - `theHamsta/nvim-dap-virtual-text`
-- `jbyuki/one-small-step-for-vimkind`
 - `aznhe21/actions-preview.nvim`
 
 ## 测试层
 
 来源：`lua/devil/plugins/testing.lua`
 
-- `vim-test/vim-test`：经典测试命令后备入口
 - `nvim-neotest/neotest`：统一测试框架
 - `nvim-neotest/nvim-nio`：`neotest` 基础依赖
 - `nvim-neotest/neotest-python`
