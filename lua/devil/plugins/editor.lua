@@ -88,13 +88,6 @@ return {
     opts = {},
   },
   {
-    "lukas-reineke/headlines.nvim",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    opts = function()
-      return require("devil.plugins.configs.headlines")
-    end,
-  },
-  {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
     keys = {
