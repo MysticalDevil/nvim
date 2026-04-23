@@ -10,6 +10,7 @@ return {
       semantic_tokens = "full",
       enable_inlay_hints = true,
       inlay_hints_show_variable_type_hints = true,
+      inlay_hints_show_struct_literal_field_type = true,
       inlay_hints_show_parameter_name = true,
       inlay_hints_show_builtin = true,
       inlay_hints_exclude_single_argument = true,
