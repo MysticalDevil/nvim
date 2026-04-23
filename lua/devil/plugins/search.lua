@@ -82,7 +82,6 @@ local function telescope_opts()
     "agrolens",
     "file_browser",
     "fzf",
-    "neoclip",
     "project",
     "smart_open",
     "undo",
@@ -376,20 +375,6 @@ return {
     opts = { hooks = { open = { "Telescope find_files" } } },
   },
   {
-    "bennypowers/nvim-regexplainer",
-    cmd = { "RegexplainerShow", "RegexplainerToggle" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "MunifTanjim/nui.nvim" },
-    opts = {
-      mode = "narrative",
-      auto = false,
-      filetypes = { "html", "js", "cjs", "mjs", "ts", "jsx", "tsx", "cjsx", "mjsx" },
-      debug = false,
-      display = "popup",
-      mappings = { toggle = "gR" },
-      narrative = { separator = "\n" },
-    },
-  },
-  {
     "nvim-pack/nvim-spectre",
     cmd = "Spectre",
     opts = { open_cmd = "noswapfile vnew" },
@@ -429,9 +414,5 @@ return {
         require("scrollbar.handlers.search").handler.show(plist.start_pos)
       end,
     },
-  },
-  {
-    "AckslD/nvim-neoclip.lua",
-    dependencies = { { "kkharji/sqlite.lua", module = "sqlite" } },
   },
 }

@@ -22,7 +22,6 @@ local extensions_list = {
   "agrolens",
   "file_browser",
   "fzf",
-  "neoclip",
   "project",
   "smart_open",
   "undo",
