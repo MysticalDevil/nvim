@@ -40,7 +40,8 @@
 - `MeanderingProgrammer/render-markdown.nvim`：Markdown 即时渲染
 - `smjonas/inc-rename.nvim`：LSP rename 的增量交互界面
 - `danymat/neogen`：生成文档注释模板
-- `kevinhwang91/nvim-bqf`：Quickfix 增强
+- `kevinhwang91/nvim-bqf`：Quickfix 浮动预览窗口与 FZF 过滤
+- `stevearc/quicker.nvim`：改进的 Quickfix UI（上下文行、可编辑 buffer）
 - `kylechui/nvim-surround`：包围符增删改
 - `gbprod/yanky.nvim`：增强 yank/paste 工作流，并接入 yank history
 
