@@ -47,7 +47,6 @@ return {
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-path",
         "petertriho/cmp-git",
-        "ray-x/cmp-treesitter",
       },
     },
   },
